@@ -29,8 +29,6 @@
     [self.NewLightSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
     [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
-    
-    
     if (ON_IPAD) {
         self.supImageViewHeight.constant = 85;
         self.NewLightNameLabel.font = [UIFont systemFontOfSize:17];

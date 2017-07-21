@@ -525,22 +525,6 @@
             </objects>
             <point key="canvasLocation" x="2520.8000000000002" y="-185.75712143928038"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="X4F-6F-aZe">
-            <objects>
-                <navigationController id="kOT-MQ-xoI" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZLp-aK-Ql3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="VZn-ef-Zmv" kind="push" id="4zC-Nt-M0P"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c6X-5T-PHf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="929" y="-159"/>
-        </scene>
         <!--更改昵称-->
         <scene sceneID="pMd-Kc-wD9">
             <objects>
