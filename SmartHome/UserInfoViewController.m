@@ -42,13 +42,14 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-     [self addNotifications];
+    [super viewWillAppear:animated];
+    [self addNotifications];
     if (ON_IPAD) {
         self.UserinfoLeadingConstraint.constant = 20;
         self.UserinfoTrailingConstraint.constant = 20;
     }
 
-     [self.userinfoTableView reloadData];
+    [self.userinfoTableView reloadData];
 }
 
 - (UIView *)setupTableHeader {

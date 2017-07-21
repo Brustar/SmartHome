@@ -455,6 +455,8 @@
     [gifImageView setAnimationRepeatCount:1];
     [gifImageView startAnimating];
     [self.view addSubview:gifImageView];
+    
+    CFRelease(gifSource);
     [self performSelector:@selector(doOtherAction) withObject:nil afterDelay:ANIMATION_TIME];
 
 }

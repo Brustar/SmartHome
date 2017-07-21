@@ -212,7 +212,7 @@
 {
     if([keyPath isEqualToString:@"volume"])
     {
-        DeviceInfo *device=[DeviceInfo defaultManager];
+        //DeviceInfo *device=[DeviceInfo defaultManager];
         //self.volume.value=[[device valueForKey:@"volume"] floatValue];
         //[self changeVolume];
     }

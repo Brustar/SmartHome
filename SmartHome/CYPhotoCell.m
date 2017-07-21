@@ -55,8 +55,7 @@
         NSMutableArray * sceneArrID =[NSMutableArray array];
         NSArray * seceneArr = [SQLManager getScensByRoomId:self.roomID];
         for (int i = 0; i < seceneArr.count; i ++) {
-            Scene * scene = [[Scene alloc] init];
-            scene = seceneArr[i];
+            Scene * scene = seceneArr[i];
             NSString * sceneID = [NSString stringWithFormat:@"%d",scene.sceneID];
             [sceneArrID addObject:sceneID];
         }
