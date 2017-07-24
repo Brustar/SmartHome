@@ -145,7 +145,7 @@
         
         scene.devices = temp;
         
-        [[SceneManager defaultManager] editScene:_scene];
+        [[SceneManager defaultManager] editScene:scene];
     }else{
          _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         if (_scene.devices.count != 0) {
