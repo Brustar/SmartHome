@@ -112,7 +112,7 @@
      NSString *isDemo = [UD objectForKey:IsDemo];
     if ([isDemo isEqualToString:@"YES"]) {
         
-        [MBProgressHUD showError:@"登录之后才可以真正添加场景"];
+        [MBProgressHUD showError:@"真实用户才可以操作"];
         
     }else{
         
