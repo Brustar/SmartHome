@@ -103,7 +103,12 @@
         
         scene.devices = temp;
         
-        [[SceneManager defaultManager] editScene:scene];
+        NSString *isDemo = [UD objectForKey:IsDemo];
+        if ([isDemo isEqualToString:@"YES"]) {
+            [MBProgressHUD showSuccess:@"真实用户才可以操作"];
+        }else{
+            [[SceneManager defaultManager] editScene:scene];
+        }
         
     }else{
          _scene = self.rightVC.scene;

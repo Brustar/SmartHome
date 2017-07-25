@@ -10,4 +10,6 @@
 
 @interface CYLineLayout : UICollectionViewFlowLayout
 
+@property (nonatomic,assign) int itemS;
+
 @end

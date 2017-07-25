@@ -63,18 +63,16 @@
 //定时
 - (IBAction)timingBtn:(id)sender {
     
-    self.seleteSendPowBtn.selected = !self.seleteSendPowBtn.selected;
-    
-    if (self.seleteSendPowBtn.selected) {
-        [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateSelected];
-        
-    }else{
-        [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
-    }
     NSString *isDemo = [UD objectForKey:IsDemo];
     if ([isDemo isEqualToString:@"YES"]) {
         [MBProgressHUD showSuccess:@"真实用户才可以操作"];
     }else{
+        self.seleteSendPowBtn.selected = !self.seleteSendPowBtn.selected;
+        if (self.seleteSendPowBtn.selected) {
+            [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateSelected];
+        }else{
+            [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
+        }
         if (_delegate && [_delegate respondsToSelector:@selector(onTimingBtnClicked:sceneID:)]) {
             [_delegate onTimingBtnClicked:sender sceneID:self.sceneID];
         }
