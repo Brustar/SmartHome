@@ -43,11 +43,8 @@
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     // 设置内边距
     //CGFloat inset = (self.collectionView.frame.size.width - self.itemSize.width) * 0.5;
-    self.sectionInset = UIEdgeInsetsMake(10, 70, 10, 50);
-    if (ON_IPAD && self.itemS == 1) {
-//        self.sectionInset = UIEdgeInsetsMake(10, -180, 10, 10);
-        self.sectionInset = UIEdgeInsetsMake(10, 240, 10, 240);
-    }else{
+    self.sectionInset = UIEdgeInsetsMake(10, 50, 10, 50);
+    if (ON_IPAD) {
         self.sectionInset = UIEdgeInsetsMake(10, -180, 10, 10);
     }
     //  每个item在水平方向的最小间距
