@@ -674,12 +674,16 @@ static NSString * const CYPhotoId = @"photo";
          Scene *scene = self.scenes[indexPath.row];
          self.selectedSId = scene.sceneID;
          CYPhotoCell *cell = (CYPhotoCell*)[collectionView cellForItemAtIndexPath:indexPath];
-         if (scene.status == 0) {
-             [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
-             [[SceneManager defaultManager] startScene:scene.sceneID];
-             [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+         NSString *isDemo = [UD objectForKey:IsDemo];
+         if ([isDemo isEqualToString:@"YES"]) {
+             [MBProgressHUD showSuccess:@"真实用户才可以启动场景"];
+         }else{
+             if (scene.status == 0) {
+                 [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
+                 [[SceneManager defaultManager] startScene:scene.sceneID];
+                 [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+             }
          }
-         
          if (ON_IPAD) {
              IpadDeviceListViewController * listVC = [[IpadDeviceListViewController alloc] init];
              listVC.roomID = self.selectedRoomID;
