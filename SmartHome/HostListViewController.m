@@ -31,15 +31,15 @@
         [_hostArray addObjectsFromArray:array];
     }
     
-    if (_hostArray.count < 2) {
+   // if (_hostArray.count < 2) {
         [self.okBtn setEnabled:NO];
         [self.okBtn setBackgroundImage:[UIImage imageNamed:@"disable_btn"] forState:UIControlStateDisabled];
-        [self.okBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-    }else {
-        [self.okBtn setEnabled:YES];
-        [self.okBtn setBackgroundImage:[UIImage imageNamed:@"family_done"] forState:UIControlStateNormal];
-        [self.okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
+        [self.okBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    //}else {
+    //    [self.okBtn setEnabled:YES];
+    //    [self.okBtn setBackgroundImage:[UIImage imageNamed:@"family_done"] forState:UIControlStateNormal];
+    //    [self.okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //}
     
     NSArray *homeArray = [UD objectForKey:@"HomeNameList"];
     if ([homeArray isKindOfClass:[NSArray class]] && homeArray.count >0) {
@@ -114,7 +114,7 @@
     }else {
         [self.okBtn setEnabled:NO];
         [self.okBtn setBackgroundImage:[UIImage imageNamed:@"disable_btn"] forState:UIControlStateDisabled];
-        [self.okBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+        [self.okBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     }
 }
 
@@ -154,6 +154,12 @@
             //更新token
             [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];
             
+            //更新主机类型（0:Creston   1:C4）
+            [IOManager writeUserdefault:responseObject[@"hosttype"] forKey:@"HostType"];
+            
+            //更新家庭名
+            [IOManager writeUserdefault:responseObject[@"homename"] forKey:@"homename"];
+            
             //更新UD的@"HostID"， 更新DeviceInfo的 masterID
             [IOManager writeUserdefault:@([_selectedHost integerValue] )forKey:@"HostID"];
             DeviceInfo *info = [DeviceInfo defaultManager];
@@ -190,6 +196,10 @@
             [self gainHome_room_infoDataTo:responseObject[@"home_room_info"]];
             
             [MBProgressHUD showSuccess:@"切换成功"];
+            
+            [self.okBtn setEnabled:NO];
+            [self.okBtn setBackgroundImage:[UIImage imageNamed:@"disable_btn"] forState:UIControlStateDisabled];
+            [self.okBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
             
         }else{
             [MBProgressHUD showError:@"切换失败"];
