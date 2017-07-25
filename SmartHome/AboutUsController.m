@@ -29,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *HeadImageTopConstraint;//headImage到顶部的距离
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewConstraintTop;//tableview到headimage的距离
 @property (weak, nonatomic) IBOutlet UIView *View3;
+@property (weak, nonatomic) IBOutlet UILabel *label;//显示版权年限的label
+
 
 @end
 
