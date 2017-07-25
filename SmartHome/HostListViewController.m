@@ -131,7 +131,7 @@
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 1;
-    [http sendGet:url param:dict];
+    [http sendPost:url param:dict];
 }
 
 

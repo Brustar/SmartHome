@@ -93,6 +93,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _startDate = [NSDate date];
+    
     [self addNotifications];
     [self setupNaviBar];
     [self showNetStateView];
@@ -428,9 +430,11 @@
                     
                 }
                 if (proto.action.state==0x8A) { // 湿度
+                    NSLog(@"humidity_timeInterval: %f", [[NSDate date] timeIntervalSinceDate:_startDate]);
                     device.humidity = proto.action.RValue;
                 }
                 if (proto.action.state==0x7F) { // PM2.5
+                    NSLog(@"pm25_timeInterval: %f", [[NSDate date] timeIntervalSinceDate:_startDate]);
                     device.pm25 = proto.action.RValue;
                 }
                 
@@ -438,7 +442,10 @@
                     device.power = proto.action.state;
                 }
                 
-                [_deviceArray addObject:device];
+                 @synchronized (_deviceArray) {
+                
+                     [_deviceArray addObject:device];
+                 }
             }
             
         }
@@ -455,33 +462,38 @@
 - (void)handleData {
     [_roomArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
         Room *room = (Room *)obj;
-        [_deviceArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
-          
-            Device *device = (Device *)obj;
-            if (device.rID == room.rId) {
+        
+        @synchronized (_deviceArray) {
+            [_deviceArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
                 
-                if (device.actionState == 0x6A) {   //温度
-                    room.tempture = device.currTemp;
-                }else if (device.actionState == 0x8A) {   // 湿度
-                    room.humidity = device.humidity;
-                }else if (device.actionState == 0x7F) {   //PM2.5
-                    room.pm25 = device.pm25;
-                }else if (device.actionState == PROTOCOL_OFF) {  // 关
+                Device *device = (Device *)obj;
+                if (device.rID == room.rId) {
                     
-                }else if (device.actionState == PROTOCOL_ON) {   // 开
-                    if (device.subTypeId == 1) {   //灯光
-                        room.lightStatus = 1;
-                    }else if(device.subTypeId == 2) {   //空调
-                        room.airStatus = 1;
-                    }else if (device.subTypeId == 3) {    //影音
-                        room.avStatus = 1;
+                    if (device.actionState == 0x6A) {   //温度
+                        room.tempture = device.currTemp;
+                    }else if (device.actionState == 0x8A) {   // 湿度
+                        room.humidity = device.humidity;
+                    }else if (device.actionState == 0x7F) {   //PM2.5
+                        room.pm25 = device.pm25;
+                    }else if (device.actionState == PROTOCOL_OFF) {  // 关
+                        
+                    }else if (device.actionState == PROTOCOL_ON) {   // 开
+                        if (device.subTypeId == 1) {   //灯光
+                            room.lightStatus = 1;
+                        }else if(device.subTypeId == 2) {   //空调
+                            room.airStatus = 1;
+                        }else if (device.subTypeId == 3) {    //影音
+                            room.avStatus = 1;
+                        }
                     }
+                    
+                    
                 }
                 
-                
-            }
-            
-        }];
+            }];
+        }
+        
+        
     
     }];
 }

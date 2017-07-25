@@ -30,19 +30,13 @@
     self.TVSlider.continuous = NO;
     [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
     [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
-    
-    SocketManager *sock=[SocketManager defaultManager];
-    //sock.delegate=self;
-    //查询设备状态
-    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
-    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 -(void) query:(NSString *)deviceid
 {
     self.deviceid = deviceid;
     SocketManager *sock=[SocketManager defaultManager];
-    sock.delegate=self;
+    //sock.delegate=self;
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];

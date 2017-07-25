@@ -43,4 +43,6 @@
 @property (nonatomic, strong) NowMusicController * nowMusicController;
 @property (nonatomic, strong) NSMutableArray *deviceArray;
 @property (nonatomic, assign) NSInteger totalCmds;//指令总数
+@property (nonatomic, strong) NSDate *startDate;
+
 @end
