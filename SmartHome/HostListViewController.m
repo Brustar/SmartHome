@@ -134,6 +134,14 @@
     [http sendPost:url param:dict];
 }
 
+- (void)writeChatListConfigDataToSQL:(NSArray *)users
+{
+    if(users.count == 0 || users == nil)
+    {
+        return;
+    }
+    [SQLManager writeChats:users];
+}
 
 #pragma - mark http delegate
 - (void)httpHandler:(id) responseObject tag:(int)tag
@@ -164,6 +172,9 @@
             [IOManager writeUserdefault:@([_selectedHost integerValue] )forKey:@"HostID"];
             DeviceInfo *info = [DeviceInfo defaultManager];
             info.masterID = [_selectedHost integerValue];
+            
+            //更新主机用户列表
+            [self writeChatListConfigDataToSQL:responseObject[@"userlist"]];
             
             //请求配置信息
             [self sendRequestForGettingConfigInfos:@"Cloud/load_config_data.aspx" withTag:2];
