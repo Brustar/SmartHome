@@ -636,6 +636,8 @@
         NSArray *deviceIconPositionArray = [plistDic objectForKey:@"room_positions"];
         if ([deviceIconPositionArray isKindOfClass:[NSArray class]]) {
             
+            [self.planeGraph removeAllSubviews];
+            
             for (NSDictionary *dict in deviceIconPositionArray) {
                 
                 //roomID
