@@ -201,6 +201,9 @@
             [self.okBtn setBackgroundImage:[UIImage imageNamed:@"disable_btn"] forState:UIControlStateDisabled];
             [self.okBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
             
+            //发通知刷新设备，场景首页
+            [NC postNotificationName:@"ChangeHostRefreshUINotification" object:nil];
+            
         }else{
             [MBProgressHUD showError:@"切换失败"];
         }
