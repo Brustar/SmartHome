@@ -656,17 +656,14 @@
                             UIButton *lightIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, temp_origin_y, iconWidth, iconHeight)];
                             [lightIcon setBackgroundImage:[UIImage imageNamed:@"planeLightIcon"] forState:UIControlStateNormal];
                             //lightIcon.backgroundColor = [UIColor orangeColor];
-                            lightIcon.tag = 777;
-                            
-                            UIView *lastIcon = [self.planeGraph viewWithTag:777];
-                            [lastIcon removeFromSuperview];
+//                            lightIcon.tag = 777;
+//                            
+//                            UIView *lastIcon = [self.planeGraph viewWithTag:777];
+//                            [lastIcon removeFromSuperview];
                             
                             [self.planeGraph addSubview:lightIcon];
                             
                             temp_origin_x += (iconWidth + gap);
-                        }else {
-                            UIView *lastIcon = [self.planeGraph viewWithTag:777];
-                            [lastIcon removeFromSuperview];
                         }
                         
                         if (roomInfo.airStatus == 1) {
@@ -674,17 +671,14 @@
                             
                             [airIcon setBackgroundImage:[UIImage imageNamed:@"planeAirIcon"] forState:UIControlStateNormal];
                             //airIcon.backgroundColor = [UIColor blueColor];
-                            airIcon.tag = 888;
-                            
-                            UIView *lastIcon = [self.planeGraph viewWithTag:888];
-                            [lastIcon removeFromSuperview];
+//                            airIcon.tag = 888;
+//                            
+//                            UIView *lastIcon = [self.planeGraph viewWithTag:888];
+//                            [lastIcon removeFromSuperview];
                             
                             [self.planeGraph addSubview:airIcon];
                             
                             temp_origin_x += (iconWidth + gap);
-                        }else {
-                            UIView *lastIcon = [self.planeGraph viewWithTag:888];
-                            [lastIcon removeFromSuperview];
                         }
                         
                         if (roomInfo.avStatus == 1) {
@@ -692,18 +686,15 @@
                             
                             [mediaIcon setBackgroundImage:[UIImage imageNamed:@"planeMediaIcon"] forState:UIControlStateNormal];
                             //mediaIcon.backgroundColor = [UIColor redColor];
-                            mediaIcon.tag = 999;
-                            
-                            
-                            UIView *lastIcon = [self.planeGraph viewWithTag:999];
-                            [lastIcon removeFromSuperview];
+//                            mediaIcon.tag = 999;
+//                            
+//                            
+//                            UIView *lastIcon = [self.planeGraph viewWithTag:999];
+//                            [lastIcon removeFromSuperview];
                             
                             [self.planeGraph addSubview:mediaIcon];
                             
                             //temp_origin_x += (iconWidth + gap);
-                        }else {
-                            UIView *lastIcon = [self.planeGraph viewWithTag:999];
-                            [lastIcon removeFromSuperview];
                         }
                         
                         break;
