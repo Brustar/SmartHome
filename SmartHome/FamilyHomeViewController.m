@@ -93,6 +93,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _hostType = [[UD objectForKey:@"HostType"] integerValue];
+    
     _startDate = [NSDate date];
     
     [self addNotifications];
@@ -112,7 +114,12 @@
     self.airIcon.backgroundColor = RGB(0, 172, 151, 1);
     
     //获取房间状态
-    [self getRoomStateInfoByTcp];
+    if (_hostType == 0) {  //Creston
+        [self getRoomStateInfoByHttp];
+    }else if (_hostType == 1) {   //C4
+        [self getRoomStateInfoByTcp];
+    }
+    
     
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
@@ -121,10 +128,29 @@
     
 }
 
+- (void)getRoomStateInfoByHttp {
+    if (_roomArray == nil) {
+        _roomArray = [NSMutableArray array];
+    }
+    
+    [_roomArray removeAllObjects];
+    [self getFamilyRoomStatusFromPlist];//获取缓存数据
+    [self fetchRoomDeviceStatus];//获取房间设备状态，温度，湿度, PM2.5
+}
+
 - (void)getRoomStateInfoByTcp {
-    _deviceArray = [NSMutableArray array];
-    _roomArray = [NSMutableArray array];
-   [_roomArray addObjectsFromArray:[SQLManager getAllRoomsInfoWithoutIsAll]];
+    if (_deviceArray == nil) {
+        _deviceArray = [NSMutableArray array];
+    }
+    
+    [_deviceArray removeAllObjects];
+    
+    if (_roomArray == nil) {
+        _roomArray = [NSMutableArray array];
+    }
+    
+    [_roomArray removeAllObjects];
+    [_roomArray addObjectsFromArray:[SQLManager getAllRoomsInfoWithoutIsAll]];
     
     
     //查询所有房间的设备ID（灯，空调，影音）
@@ -249,7 +275,13 @@
 }
 
 - (void)refreshRoomDeviceStatus:(NSNotification *)noti {
-    [self getRoomStateInfoByTcp];//获取房间设备状态，温度，湿度, PM2.5
+    
+    //获取房间设备状态，温度，湿度, PM2.5
+    if (_hostType == 0) {  //Creston
+        [self getRoomStateInfoByHttp];
+    }else if (_hostType == 1) {   //C4
+        [self getRoomStateInfoByTcp];
+    }
 }
 
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
@@ -295,6 +327,7 @@
     return self.roomArray.count;
     
 }
+
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -342,24 +375,18 @@
         if (roomStatusList && [roomStatusList isKindOfClass:[NSArray class]]) {
             for (NSDictionary *roomStatus in roomStatusList) {
                 if ([roomStatus isKindOfClass:[NSDictionary class]]) {
-                    RoomStatus *roomStatusInfo = [[RoomStatus alloc] init];
-                    roomStatusInfo.roomId = [roomStatus[@"roomid"] integerValue];
-                    roomStatusInfo.roomName = roomStatus[@"roomname"];
-                    roomStatusInfo.temperature = roomStatus[@"temperature"];
-                    roomStatusInfo.humidity = roomStatus[@"humidity"];
-                    roomStatusInfo.pm25 = roomStatus[@"pm"];
+                    Room *roomStatusInfo = [[Room alloc] init];
+                    roomStatusInfo.rId = [roomStatus[@"roomid"] intValue];
+                    roomStatusInfo.rName = roomStatus[@"roomname"];
+                    roomStatusInfo.tempture = [roomStatus[@"temperature"] integerValue];
+                    roomStatusInfo.humidity = [roomStatus[@"humidity"] integerValue];
+                    roomStatusInfo.pm25 = [roomStatus[@"pm"] integerValue];
                     roomStatusInfo.lightStatus = [roomStatus[@"light"] integerValue];
-                    roomStatusInfo.curtainStatus = [roomStatus[@"curtain"] integerValue];
-                    roomStatusInfo.mediaStatus = [roomStatus[@"media"] integerValue];
-                    roomStatusInfo.airconditionerStatus = [roomStatus[@"aircondition"] integerValue];
+                    roomStatusInfo.avStatus = [roomStatus[@"media"] integerValue];
+                    roomStatusInfo.airStatus = [roomStatus[@"aircondition"] integerValue];
                     
-                    if ([[UD objectForKey:@"HostID"] intValue] == 258) { //九号大院(要过滤掉没有温湿度的房间)
-                        if (roomStatusInfo.roomId == 188  || roomStatusInfo.roomId == 190  ||roomStatusInfo.roomId == 191  ||roomStatusInfo.roomId == 193  ||roomStatusInfo.roomId == 196) {
-                            [_roomArray addObject:roomStatusInfo];
-                        }
-                    }else {
-                        [_roomArray addObject:roomStatusInfo];
-                    }
+                    [_roomArray addObject:roomStatusInfo];
+                    
                 }
             }
         }
@@ -377,25 +404,17 @@
             if ([roomStatusList isKindOfClass:[NSArray class]]) {
                 for (NSDictionary *roomStatus in roomStatusList) {
                     if ([roomStatus isKindOfClass:[NSDictionary class]]) {
-                        RoomStatus *roomStatusInfo = [[RoomStatus alloc] init];
-                        roomStatusInfo.roomId = [roomStatus[@"roomid"] integerValue];
-                        roomStatusInfo.roomName = roomStatus[@"roomname"];
-                        roomStatusInfo.temperature = roomStatus[@"temperature"];
-                        roomStatusInfo.humidity = roomStatus[@"humidity"];
-                        roomStatusInfo.pm25 = roomStatus[@"pm"];
+                        Room *roomStatusInfo = [[Room alloc] init];
+                        roomStatusInfo.rId = [roomStatus[@"roomid"] intValue];
+                        roomStatusInfo.rName = roomStatus[@"roomname"];
+                        roomStatusInfo.tempture = [roomStatus[@"temperature"] integerValue];
+                        roomStatusInfo.humidity = [roomStatus[@"humidity"] integerValue];
+                        roomStatusInfo.pm25 = [roomStatus[@"pm"] integerValue];
                         roomStatusInfo.lightStatus = [roomStatus[@"light"] integerValue];
-                        roomStatusInfo.curtainStatus = [roomStatus[@"curtain"] integerValue];
-                        roomStatusInfo.mediaStatus = [roomStatus[@"media"] integerValue];
-                        roomStatusInfo.airconditionerStatus = [roomStatus[@"aircondition"] integerValue];
+                        roomStatusInfo.avStatus = [roomStatus[@"media"] integerValue];
+                        roomStatusInfo.airStatus = [roomStatus[@"aircondition"] integerValue];
                         
-                        if ([[UD objectForKey:@"HostID"] intValue] == 258) { //九号大院(要过滤掉没有温湿度的房间)
-                            if (roomStatusInfo.roomId == 188  || roomStatusInfo.roomId == 190  ||roomStatusInfo.roomId == 191  ||roomStatusInfo.roomId == 193  ||roomStatusInfo.roomId == 196) {
-                                [_roomArray addObject:roomStatusInfo];
-                            }
-                        }else {
-                            [_roomArray addObject:roomStatusInfo];
-                        }
-                        
+                        [_roomArray addObject:roomStatusInfo];
                     }
                 }
                 

@@ -297,7 +297,14 @@ static NSString * const CYPhotoId = @"photo";
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
      [NC addObserver:self selector:@selector(SumNumber:) name:@"SumNumber" object:nil];
+    [NC addObserver:self selector:@selector(changeHostRefreshUINotification:) name:@"ChangeHostRefreshUINotification" object:nil];
 }
+
+- (void)changeHostRefreshUINotification:(NSNotification *)noti {
+    self.roomList = [SQLManager getAllRoomsInfo];
+    [self setUpRoomView];
+}
+
 -(void)SumNumber:(NSNotification *)no
 {
     NSString * sumNumber = no.object;

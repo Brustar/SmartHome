@@ -16,11 +16,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _hostType = [[UD objectForKey:@"HostType"] integerValue];//主机类型 0:Creston  1:C4
     
     [self initUI];
     [self getAllScenes];//获取所有场景
     [self getAllDevices];//获取所有设备
-    [self getDeviceStateInfoByTcp];//TCP 获取所有设备状态
+    
+    //获取房间状态
+    if (_hostType == 0) {  //Creston
+        [self getDeviceStateInfoByHttp];//Http获取所有设备的状态
+    }else if (_hostType == 1) {   //C4
+        [self getDeviceStateInfoByTcp];//TCP获取所有设备状态
+    }
+}
+
+- (void)getDeviceStateInfoByHttp {
+    [self fetchDevicesStatus];//Http获取所有设备的状态
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -744,9 +755,6 @@
         
         NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
         Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue];
-        
-        //Device *device = [[Device alloc] init];
-       // device.eID = [devID intValue];
         
         if (device) {
             device.actionState = proto.action.state;

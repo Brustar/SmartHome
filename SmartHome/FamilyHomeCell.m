@@ -70,10 +70,10 @@
     [self bringSubviewToFront:pm25Label];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-       [self addRingForDevice:info];
+        [self addRingForDevice:info];// 设备颜色圈(只iPhone显示)
     }
     
-    [self addRingForPM25:info];
+    [self addRingForPM25:info];//PM2.5圈
 }
 
 - (void)addRingForDevice:(Room *)info {

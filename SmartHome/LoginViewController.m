@@ -760,7 +760,6 @@ NSArray *array = [NSArray arrayWithObjects:
             }
             
             [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
-//            [IOManager writeUserdefault:responseObject[@"isplaying"] forKey:@"IsPlaying"];//正在播放标识
             [IOManager writeUserdefault:[self.pwdTextField.text encryptWithDes:DES_KEY] forKey:@"Password"];
             
             [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];
@@ -823,12 +822,15 @@ NSArray *array = [NSArray arrayWithObjects:
                     [UD removeObjectForKey:@"scence_version"];
                     [UD removeObjectForKey:@"tv_version"];
                     [UD removeObjectForKey:@"fm_version"];
+                    [UD synchronize];
                     //更新UD的@"HostID"， 更新DeviceInfo的 masterID
                     [IOManager writeUserdefault:@(mid) forKey:@"HostID"];
                     info.masterID = mid;
                 }
            // }
             
+            
+            [IOManager writeUserdefault:@([responseObject[@"hostid"] integerValue]) forKey:@"HostID"];
             [IOManager writeUserdefault:responseObject[@"rctoken"] forKey:@"rctoken"];
             [IOManager writeUserdefault:responseObject[@"homename"] forKey:@"homename"];
             [self writeChatListConfigDataToSQL:responseObject[@"userlist"]];

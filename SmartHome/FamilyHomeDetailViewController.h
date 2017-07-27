@@ -87,7 +87,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *normalBtnWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *brightBtnLeading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *brightBtnWidth;
-
+@property (nonatomic, assign) NSInteger hostType;//主机类型：0，creston   1, C4
 
 - (IBAction)softBtnClicked:(id)sender;
 - (IBAction)normalBtnClicked:(id)sender;
