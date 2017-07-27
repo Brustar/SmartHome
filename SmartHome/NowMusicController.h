@@ -23,10 +23,11 @@
 @property (nonatomic,strong) NSString * deviceName;
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,assign) NSString * roomName;
-@property (nonatomic,assign) NSInteger seleteSection;
+@property (nonatomic,assign) int seleteSection;
 @property (nonatomic,assign) NSInteger seleteRow;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,assign) BOOL isAddDevice;
+@property (nonatomic,strong) NSMutableArray * bgmusicIDarray;
 @property (nonatomic, assign) NSInteger playState;//播放状态： 0:停止 1:播放
 @property (nonatomic, assign) id<NowMusicControllerDelegate>delegate;
 - (IBAction)bgBtnClicked:(id)sender;

@@ -37,7 +37,7 @@
 @end
 
 @interface NowMusicController ()<UITableViewDataSource,UITableViewDelegate, HttpDelegate>
-@property (nonatomic,strong) NSArray * bgmusicIDS;
+@property (nonatomic,strong) NSMutableArray * bgmusicIDS;
 @property (nonatomic,strong) NSMutableArray * bgmusicNameS;
 @property (nonatomic,assign) int Volume;
 @property (nonatomic,strong) NSMutableArray * AllRooms;
@@ -47,14 +47,6 @@
 
 @implementation NowMusicController
 
--(NSArray *)dataArray
-{
-    if (!_bgmusicIDS) {
-        _bgmusicIDS = [NSArray array];
-    }
-
-    return _bgmusicIDS;
-}
 -(void)viewWillAppear:(BOOL)animated
 {
     
@@ -70,10 +62,25 @@
     [super viewDidLoad];
     _bgmusicNameS = [[NSMutableArray alloc] init];
      _AllRooms = [[NSMutableArray alloc] init];
-    self.roomID = [SQLManager getIsAllRoomIdByIsAll:1];
-    self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:self.roomID];
-    self.deviceName = [SQLManager deviceNameByDeviceID:[self.deviceid intValue]];
-    self.roomName = [SQLManager getRoomNameByDeviceID:[self.deviceid intValue]];
+    _bgmusicIDS = [[NSMutableArray alloc] init];
+    NSArray * roomArr = [SQLManager getAllRoomsInfo];
+    for (int i = 0; i < roomArr.count; i ++) {
+        Room * roomName = roomArr[i];
+        if (![SQLManager isWholeHouse:roomName.rId]) {
+             self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:roomName.rId];
+        }
+        if (self.deviceid.length != 0) {
+            [_bgmusicIDS addObject:self.deviceid];
+        }
+         self.deviceName = [SQLManager deviceNameByDeviceID:[self.deviceid intValue]];
+        if (self.deviceName.length != 0) {
+            [_bgmusicNameS addObject:self.deviceName];
+        }
+        if (self.deviceid.length != 0) {
+            [_AllRooms addObject:roomName.rName];
+        }
+      
+    }
 
     if (BLUETOOTH_MUSIC) {
         AudioManager *audio=[AudioManager defaultManager];
@@ -189,7 +196,7 @@
         _Volume -= 10;
         _loseBtn.titleLabel.text = [NSString stringWithFormat:@"%d",_Volume];
     }
-    NSData *data=[[DeviceInfo defaultManager] changeVolume:_Volume deviceID:self.deviceid];
+    NSData *data=[[DeviceInfo defaultManager] changeVolume:_Volume deviceID:[NSString stringWithFormat:@"%d",self.seleteDeviceId]];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
@@ -200,7 +207,7 @@
         _loseBtn.titleLabel.text = [NSString stringWithFormat:@"%d",_Volume];
     }
     
-    NSData *data=[[DeviceInfo defaultManager] changeVolume:_Volume deviceID:self.deviceid];
+    NSData *data=[[DeviceInfo defaultManager] changeVolume:_Volume deviceID:[NSString stringWithFormat:@"%d",self.seleteDeviceId]];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
@@ -213,14 +220,14 @@
         if (btn.isSelected) {
             [btn setImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
             //发送播放指令
-            NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
+            NSData *data=[[DeviceInfo defaultManager] play:[NSString stringWithFormat:@"%d",self.seleteDeviceId]];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
     
         }else{
             [btn setImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
             // 发送停止指令
-            NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
+            NSData *data=[[DeviceInfo defaultManager] pause:[NSString stringWithFormat:@"%d",self.seleteDeviceId]];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
     
@@ -237,18 +244,15 @@
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    return self.AllRooms.count;
-    return 1;
+    return self.AllRooms.count;
 
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    RoomModel *model = self.AllRooms[section];
-//    return  model.eqinfoList.count;
-    
-    
-    return 1;
+    NSMutableArray * de = [[NSMutableArray alloc] init];
+    [de addObject:self.bgmusicNameS[section]];
+    return de.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -261,12 +265,8 @@
     }
     cell.backgroundColor = [UIColor clearColor];
     [cell.textLabel setTextColor:[UIColor whiteColor]];
-//    RoomModel *model = self.AllRooms[indexPath.section];
-//    Device *devInfo = model.eqinfoList[indexPath.row];
-//    self.seleteSection = indexPath.section;
-//    self.seleteRow = indexPath.row;
-//    cell.textLabel.text = devInfo.name;
-     cell.textLabel.text = self.deviceName;
+    NSString * str = self.bgmusicNameS[indexPath.section];
+     cell.textLabel.text = str;
 //    cell.tag = devInfo.eID;
     //cell的点击颜色
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(100, 0, self.view.bounds.size.width, 0)];
@@ -280,12 +280,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-//     //UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-//     RoomModel *model = self.AllRooms[indexPath.section];
-//     Device *devInfo = model.eqinfoList[indexPath.row];
-//     self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
-     self.seleteSection = indexPath.section;
-     self.seleteRow = indexPath.row;
+    self.seleteDeviceId = [self.bgmusicIDS[indexPath.section] intValue];
+ 
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -295,9 +291,8 @@
     view.userInteractionEnabled = YES;
     UILabel * NameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 50)];
     NameLabel.textColor = [UIColor whiteColor];
-//    RoomModel *model = self.AllRooms[section];
-//    NameLabel.text =  model.roomname;
-    NameLabel.text = self.roomName;
+    NSString * str = self.AllRooms[section];
+    NameLabel.text = str;
     [view addSubview:NameLabel];
     //线
     UIView * view1;
@@ -346,13 +341,11 @@
 
 -(void)StopBtn:(UIButton *)bbt
 {
-
-        NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
+   
+    self.seleteSection = [self.bgmusicIDS[bbt.tag] intValue];
+        NSData *data=[[DeviceInfo defaultManager] pause:[NSString stringWithFormat:@"%d",self.seleteSection]];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
-      
-
-   
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {

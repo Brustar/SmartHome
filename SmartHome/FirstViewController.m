@@ -33,7 +33,8 @@
 @property (weak, nonatomic) IBOutlet UILabel * memberFamilyLabel;//家庭成员label
 @property (weak, nonatomic) IBOutlet UIImageView * numberLabelView;//未读消息的视图
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;//未读消息的个数
-
+@property (nonatomic,strong) NSMutableArray * bgmusicIDS;
+@property (nonatomic,strong) NSMutableArray * bgmusicIDArr;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem * playerBarBtn;//正在播放的按钮
 @property (weak, nonatomic) IBOutlet UIView * FourBtnView;
 @property (nonatomic,strong) NSArray * dataArr;
@@ -117,7 +118,7 @@
     self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",_userInfomation.nickName];
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     [self addNotifications];
-   
+   [_bgmusicIDArr removeAllObjects];
     self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
     
     if ([self.numberLabel.text isEqualToString:@"0"]) {
@@ -139,12 +140,23 @@
     [NC postNotificationName:@"SumNumber" object:[NSString stringWithFormat:@"%d",_sum]];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-    self.roomID = [SQLManager getIsAllRoomIdByIsAll:1];
-    self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:self.roomID];
+    _bgmusicIDS = [[NSMutableArray alloc] init];
+    NSArray * roomArr = [SQLManager getAllRoomsInfo];
+    for (int i = 0; i < roomArr.count; i ++) {
+        Room * roomName = roomArr[i];
+        if (![SQLManager isWholeHouse:roomName.rId]) {
+            self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:roomName.rId];
+        }
+        if (self.deviceid.length != 0) {
+            [_bgmusicIDS addObject:self.deviceid];
+        }
+        
+        //查询设备状态
+        NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        
+    }
     
-    //查询设备状态
-    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
-    [sock.socket writeData:data withTimeout:1 tag:1];
     if (unread>0){
         self.chatlabel.text =[NSString stringWithFormat:@"%@" , @"您有新消息"];
     }else{
@@ -279,7 +291,7 @@
     [super viewDidLoad];
     [self connect];
     
-   
+   _bgmusicIDArr = [[NSMutableArray alloc] init];
     [self showNetStateView];
 
     [self setUIMessage];
@@ -766,9 +778,11 @@
     
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     
+    
     if (_nowMusicController == nil) {
         _nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
         _nowMusicController.delegate = self;
+        _nowMusicController.bgmusicIDarray = _bgmusicIDArr;
         [self.view addSubview:_nowMusicController.view];
     }else {
         [_nowMusicController.view removeFromSuperview];
@@ -911,26 +925,32 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
+    
     Proto proto=protocolFromData(data);
     
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
-    
-    if (proto.cmd==0x01) {
-        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-        if ([devID intValue]==[self.deviceid intValue]) {
-            if (proto.action.state == PROTOCOL_VOLUME) {
-                NSLog(@"有音量");
-            }if (proto.action.state == PROTOCOL_ON) {
-                NSLog(@"开启状态");
-                [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
-            }if (proto.action.state == PROTOCOL_OFF) {
-                NSLog(@"关闭状态");
-                [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
+    for (int i = 0; i <self.bgmusicIDS.count; i ++) {
+        if (proto.cmd==0x01) {
+            NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+            if ([devID intValue]==[self.bgmusicIDS[i] intValue]) {
+                if (proto.action.state == PROTOCOL_VOLUME) {
+                    NSLog(@"有音量");
+                }if (proto.action.state == PROTOCOL_ON) {
+                    NSLog(@"开启状态");
+                    [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
+                    
+                     [_bgmusicIDArr addObject:devID];
+                    
+                }if (proto.action.state == PROTOCOL_OFF) {
+                    NSLog(@"关闭状态");
+                    [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
+                }
             }
         }
     }
+    
 }
 
 

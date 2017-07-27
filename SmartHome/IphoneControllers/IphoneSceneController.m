@@ -174,13 +174,11 @@ static NSString * const CYPhotoId = @"photo";
       [super viewDidLoad];
 //      [self addNotifications];
       self.automaticallyAdjustsScrollViewInsets = NO;
-    
       [self showNetStateView];
-//      [self showMassegeLabel];
       self.roomList = [SQLManager getAllRoomsInfo];
-      [self setUpRoomView];
-      [self reachNotification];
       [self setUI];
+      [self setUpRoomView];
+    
     self.arrayData = @[@"删除此场景",@"收藏",@"语音"];
     _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
     _AddSceneBtn.layer.masksToBounds = YES; //圆角
@@ -389,26 +387,6 @@ static NSString * const CYPhotoId = @"photo";
     [self performSegueWithIdentifier:@"roomListSegue" sender:self];
 }
 
-- (void)reachNotification
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subTypeNotification:) name:@"subType" object:nil];
-}
-- (void)subTypeNotification:(NSNotification *)notification
-{
-    NSDictionary *dict = notification.userInfo;
-    
-    self.roomID = [dict[@"subType"] intValue];
-//    self.scenes = [SQLManager getScensByRoomId:self.roomID];
-    NSArray *tmpArr = [SQLManager getScensByRoomId:self.roomID];
-    [self.scenes removeAllObjects];
-    [self.scenes addObjectsFromArray:tmpArr];
-    NSString *imageName = @"i-add";
-    [self.scenes addObject:imageName];
-//    [self setUpSceneButton];
-//    [self judgeScensCount:self.scenes];
-    
-}
-
 -(void)setUpRoomView
 {
     NSMutableArray *roomNames = [NSMutableArray array];
@@ -435,7 +413,7 @@ static NSString * const CYPhotoId = @"photo";
     self.selectedRoomID = room.rId;
     [self.scenes removeAllObjects];
     [self.scenes addObjectsFromArray:tmpArr];
-    NSString *imageName = @"i-add";
+    NSString *imageName = @"AddSceneBtn";
     [self.scenes addObject:imageName];
     ((CYLineLayout*)self.FirstCollectionView.collectionViewLayout).itemS = (int)self.scenes.count;
     [self.FirstCollectionView reloadData];
@@ -444,15 +422,6 @@ static NSString * const CYPhotoId = @"photo";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if ([self.roomList count]>0) {
-        Room *room = self.roomList[self.roomIndex];
-        
-        NSArray *tmpArr = [SQLManager getScensByRoomId:room.rId];
-        [self.scenes removeAllObjects];
-        [self.scenes addObjectsFromArray:tmpArr];
-        NSString *imageName = @"i-add";
-        [self.scenes addObject:imageName];
-    }
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
@@ -470,6 +439,17 @@ static NSString * const CYPhotoId = @"photo";
     }
     
      [self setupNaviBar];
+    //刷新collectionview
+
+    Room *room = self.roomList[self.roomIndex];
+    NSArray *tmpArr = [SQLManager getScensByRoomId:room.rId];
+    self.selectedRoomID = room.rId;
+    [self.scenes removeAllObjects];
+    [self.scenes addObjectsFromArray:tmpArr];
+    NSString *imageName = @"AddSceneBtn";
+    [self.scenes addObject:imageName];
+    [self.FirstCollectionView reloadData];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -701,12 +681,12 @@ static NSString * const CYPhotoId = @"photo";
          }else{
              [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
          }
-         NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
-         [self.scenes removeAllObjects];
-         [self.scenes addObjectsFromArray:tmpArr];
-         NSString *imageName = @"i-add";
-         [self.scenes addObject:imageName];
-         [self.FirstCollectionView reloadData];
+//         NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
+//         [self.scenes removeAllObjects];
+//         [self.scenes addObjectsFromArray:tmpArr];
+//         NSString *imageName = @"AddSceneBtn";
+//         [self.scenes addObject:imageName];
+//         [self.FirstCollectionView reloadData];
      }
   
 }
@@ -764,10 +744,8 @@ static NSString * const CYPhotoId = @"photo";
     NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
     [self.scenes removeAllObjects];
     [self.scenes addObjectsFromArray:tmpArr];
-    NSString *imageName = @"i-add";
-    [self.scenes addObject:imageName];
-    
-//    [self setUpRoomView];
+    NSString *imageName = @"AddSceneBtn";
+    [self.scenes addObject:imageName];    
     [self.FirstCollectionView reloadData];
 
 }
@@ -776,18 +754,6 @@ static NSString * const CYPhotoId = @"photo";
     if(tag == 1)
     {
         if([responseObject[@"result"] intValue] == 0)
-        {
-            [MBProgressHUD showSuccess:@"场景删除成功"];
-            Room *room = self.roomList[self.roomIndex];
-//            self.scenes = [SQLManager getScensByRoomId:room.rId];
-            NSArray *tmpArr = [SQLManager getScensByRoomId:room.rId];
-            [self.scenes removeAllObjects];
-            [self.scenes addObjectsFromArray:tmpArr];
-            NSString *imageName = @"i-add";
-            [self.scenes addObject:imageName];
-            [self.FirstCollectionView reloadData];
-            
-            if([responseObject[@"result"] intValue] == 0)
             {
                 //删除数据库记录
                 BOOL delSuccess = [SQLManager deleteScene:self.sceneID];
@@ -808,14 +774,8 @@ static NSString * const CYPhotoId = @"photo";
                     NSLog(@"数据库删除失败（场景表）");
                     [MBProgressHUD showSuccess:@"删除失败"];
                 }
-                
-            }else{
-                [MBProgressHUD showError:responseObject[@"msg"]];
-            }
-            
-            UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-            IphoneSceneController * iphonesceneVC = [storyBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
-            [self.navigationController pushViewController:iphonesceneVC animated:NO];
+        
+          [self.navigationController popToRootViewControllerAnimated:YES];
         }
     }else if (tag == 2) { //启动／停止 场景定时
         if([responseObject[@"result"] intValue] == 0) {
@@ -919,7 +879,7 @@ static NSString * const CYPhotoId = @"photo";
         NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
         [self.scenes removeAllObjects];
         [self.scenes addObjectsFromArray:tmpArr];
-        NSString *imageName = @"i-add";
+        NSString *imageName = @"AddSceneBtn";
         [self.scenes addObject:imageName];
         [self.FirstCollectionView reloadData];
     }else if (pageType == SceneHomeAdd) {
@@ -969,7 +929,7 @@ static NSString * const CYPhotoId = @"photo";
         NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
         [self.scenes removeAllObjects];
         [self.scenes addObjectsFromArray:tmpArr];
-        NSString *imageName = @"i-add";
+        NSString *imageName = @"AddSceneBtn";
         [self.scenes addObject:imageName];
         [self.FirstCollectionView reloadData];
     }else if (btn.tag == 2) { //添加场景
@@ -987,13 +947,5 @@ static NSString * const CYPhotoId = @"photo";
     }
     
 }
--(void)refreshSceneUI
-{
-   
-    self.roomList = [SQLManager getAllRoomsInfo];
-    [self setUpRoomView];
-    [self.FirstCollectionView reloadData];
-   
 
-}
 @end

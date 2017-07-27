@@ -27,7 +27,7 @@
     [self setNaviBarTitle:@"个人信息"];
 
     self.TitleArray = @[@"VIP会员",@"服务商城",@"我的订单",@"购物车",@"昵称",@"电话",@"逸云密码"];
-    self.DetialArray = @[@"/ui/Vip.aspx?user_id=%d",@"/ui/GoodsList.aspx?user_id=%d",@"/ui/OrderQuery.aspx?user_id=%d",@"/ui/Cart.aspx?user_id=%d"];
+    self.DetialArray = @[@"/ui/Vip.aspx?user_id=%d&hostid=%d",@"/ui/GoodsList.aspx?user_id=%d&hostid=%d",@"/ui/OrderQuery.aspx?user_id=%d&hostid=%d",@"/ui/Cart.aspx?user_id=%d&hostid=%d"];
     if (ON_IPAD) {
         [self adjustNaviBarFrameForSplitView];
         [self adjustTitleFrameForSplitView];
@@ -281,10 +281,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     int userID = [[UD objectForKey:@"UserID"] intValue];
+    int hostID =  [[UD objectForKey:@"HostID"] intValue];
     
     if (indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 3) {
         //VIP会员
-        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:self.DetialArray[indexPath.section], userID]] title:self.TitleArray[indexPath.section]];
+        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:self.DetialArray[indexPath.section], userID, hostID]] title:self.TitleArray[indexPath.section]];
         web.isShowInSplitView = YES;
         [self.navigationController pushViewController:web animated:YES];
     }

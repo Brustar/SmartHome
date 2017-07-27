@@ -126,9 +126,7 @@
                         {   [MBProgressHUD showSuccess:@"新增成功"];
                             NSLog(@"新增场景，入库成功！");
                              [IOManager removeTempFile];
-                            UIStoryboard * board = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-                            IphoneSceneController * sceneVC = [board instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
-                             [sceneVC refreshSceneUI];
+                           
                             
                         }else {
                             [MBProgressHUD showSuccess:@"新增失败"];
@@ -159,7 +157,125 @@
   }
     
 }
-
+- (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive block:(SaveOK )block{
+    self.block = block;
+    
+    if (name.length >0) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *imgFileName = [NSString stringWithFormat:@"%@.png", str];
+        
+        //同步云端
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+        NSString *scenePath = [[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        
+        NSString *URL = [NSString stringWithFormat:@"%@Cloud/scene_add.aspx",[IOManager httpAddr]];
+        NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
+        NSDictionary *parameter;
+        int isplan;
+        
+        NSMutableArray *schedulesTemp = [NSMutableArray array];
+        
+        for (NSDictionary *dict in scene.schedules) {
+            Schedule *schedule = [[Schedule alloc] initWhithoutSchedule];
+            
+            [schedule setValuesForKeysWithDictionary:dict];
+            
+            [schedulesTemp addObject:schedule];
+        }
+        
+        scene.schedules = [schedulesTemp copy];
+        if(scene.schedules.count > 0)
+        {
+            parameter = @{
+                          @"token":[UD objectForKey:@"AuthorToken"],
+                          @"optype":@(0),
+                          @"scencename":name,
+                          @"imgname":imgFileName,
+                          @"scencefile":scenePath,
+                          @"isplan":@(1),
+                          @"roomid":@(scene.roomID),
+                          @"isactive":@(isactive)
+                          };
+            isplan = 1;
+        }else {
+            parameter = @{
+                          @"token":[UD objectForKey:@"AuthorToken"],
+                          @"optype":@(0),
+                          @"scencename":name,
+                          @"imgname":imgFileName,
+                          @"scencefile":scenePath,
+                          @"isplan":@(0),
+                          @"roomid":@(scene.roomID),
+                          @"isactive":@(isactive)
+                          };
+            isplan = 0;
+        }
+        NSData *imgData = UIImageJPEGRepresentation(image, 0.5);
+        NSLog(@"imgDataSize: %.2f M", (float)imgData.length/1024/1024);
+        
+        NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
+        
+        [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:imgFileName completion:^(id responseObject) {
+            
+            NSNumber *result = [responseObject objectForKey:@"result"];
+            NSString *msg = [responseObject objectForKey:@"msg"];
+            
+            if(result.integerValue == 0) { //成功
+                
+                NSDictionary *sceneDict = [responseObject objectForKey:@"scene"];
+                if ([sceneDict isKindOfClass:[NSDictionary class]] && sceneDict.count >0) {
+                    scene.sceneID = [[sceneDict objectForKey:@"scence_id"] intValue];
+                    scene.sceneName = name;
+                    
+                    [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID]  scene:scene];
+                    NSString *roomName = [SQLManager getRoomNameByRoomID:(int)scene.roomID];
+                    
+                    //插入数据库
+                    FMDatabase *db = [SQLManager connetdb];
+                    if([db open])
+                    {
+                        NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,'%ld','%d','%d','%ld')",scene.sceneID,name,roomName,[sceneDict objectForKey:@"image_url"],(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID],0,isplan,isactive];
+                        BOOL result = [db executeUpdate:sql];
+                        if(result)
+                        {   [MBProgressHUD showSuccess:@"新增成功"];
+                            NSLog(@"新增场景，入库成功！");
+                            [IOManager removeTempFile];
+                            if (self.block) {
+                                self.block(YES);
+                            }
+                            
+                        }else {
+                            [MBProgressHUD showSuccess:@"新增失败"];
+                            NSLog(@"新增场景，入库失败！");
+                            [IOManager removeTempFile];
+                        }
+                    }
+                    [db close];
+                }else {
+                    [MBProgressHUD showSuccess:@"新增失败"];
+                    NSLog(@"ERROR: sceneDict 为 null 或 不是NSDictionary类型");
+                }
+                
+                
+            }else { //失败
+                [MBProgressHUD showError:msg];
+                NSLog(@"ERROR :%@", msg);
+            }
+            
+            
+        }];
+        
+        return;
+        
+    }else {
+        //编辑设备时，修改本地plist文件
+        [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
+    }
+    
+}
 //另存为(保存为一个新的场景）
 - (void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(UIImage *)image
 {
