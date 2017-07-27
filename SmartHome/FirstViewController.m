@@ -4,7 +4,7 @@
 //
 //  Created by zhaona on 2017/3/17.
 //
-//
+//iphone首页
 
 #import "FirstViewController.h"
 #import "AppDelegate.h"
@@ -118,7 +118,7 @@
     self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",_userInfomation.nickName];
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     [self addNotifications];
-   [_bgmusicIDArr removeAllObjects];
+    [_bgmusicIDArr removeAllObjects];
     self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
     
     if ([self.numberLabel.text isEqualToString:@"0"]) {

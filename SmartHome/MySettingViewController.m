@@ -15,7 +15,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "AppDelegate.h"
 #import "SocketManager.h"
-#import "WelcomeController.h"
+//#import "WelcomeController.h"
 #import "PushSettingController.h"
 #import "SystemSettingViewController.h"
 #import "SystemInfomationController.h"
@@ -469,8 +469,8 @@
 {
     if([segue.identifier isEqualToString:@"goWelcomeSegue"])
     {
-        WelcomeController *welcomeVC = segue.destinationViewController;
-        welcomeVC.coverView.hidden = YES;
+//        WelcomeController *welcomeVC = segue.destinationViewController;
+//        welcomeVC.coverView.hidden = YES;
     }
 }
 -(void) httpHandler:(id) responseObject tag:(int)tag
