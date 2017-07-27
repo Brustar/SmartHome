@@ -4,7 +4,7 @@
 //
 //  Created by 逸云科技 on 16/9/19.
 //  Copyright © 2016年 Brustar. All rights reserved.
-//
+//iphone和ipad场景首页
 
 
 #define cellWidth self.collectionView.frame.size.width/2  - 20
@@ -415,6 +415,7 @@ static NSString * const CYPhotoId = @"photo";
     [self.scenes addObjectsFromArray:tmpArr];
     NSString *imageName = @"AddSceneBtn";
     [self.scenes addObject:imageName];
+    ((CYLineLayout*)self.FirstCollectionView.collectionViewLayout).itemS = (int)self.scenes.count;
     [self.FirstCollectionView reloadData];
 }
 
@@ -550,6 +551,11 @@ static NSString * const CYPhotoId = @"photo";
         }else if (scene.status == 1) {
             [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
         }
+//        if (scene.isactive == 0) {
+//            [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
+//        }else if (scene.isactive == 1){
+//             [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateNormal];
+//        }
 
         return cell;
        

@@ -420,6 +420,7 @@ static NSString * const CYPhotoId = @"photo";
             [MBProgressHUD showError:@"该房间没有设备"];
             return;
         }
+        ((CYLineLayout*)self.FirstCollectionView.collectionViewLayout).itemS = (int)self.devices.count;
         [self.FirstCollectionView reloadData];
     }
     

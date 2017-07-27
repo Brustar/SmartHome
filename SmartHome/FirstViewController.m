@@ -4,7 +4,7 @@
 //
 //  Created by zhaona on 2017/3/17.
 //
-//
+//iphone首页
 
 #import "FirstViewController.h"
 #import "AppDelegate.h"
@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView * numberLabelView;//未读消息的视图
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;//未读消息的个数
 @property (nonatomic,strong) NSMutableArray * bgmusicIDS;
+@property (nonatomic,strong) NSMutableArray * bgmusicIDArr;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem * playerBarBtn;//正在播放的按钮
 @property (weak, nonatomic) IBOutlet UIView * FourBtnView;
 @property (nonatomic,strong) NSArray * dataArr;
@@ -123,7 +124,7 @@
     self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",_userInfomation.nickName];
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     [self addNotifications];
-   
+    [_bgmusicIDArr removeAllObjects];
     self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
     
     if ([self.numberLabel.text isEqualToString:@"0"]) {
@@ -296,7 +297,7 @@
     [super viewDidLoad];
     [self connect];
     
-   
+   _bgmusicIDArr = [[NSMutableArray alloc] init];
     [self showNetStateView];
 
     [self setUIMessage];
@@ -775,17 +776,19 @@
 
 - (void)rightBtnClicked:(UIButton *)btn {
     
-//    NSInteger isPlaying = [[UD objectForKey:@"IsPlaying"] integerValue];
-//    if (isPlaying == 0) {
-//        [MBProgressHUD showError:@"没有正在播放的设备"];
-//        return;
-//    }
+    NSInteger isPlaying = [[UD objectForKey:@"IsPlaying"] integerValue];
+    if (isPlaying == 0) {
+        [MBProgressHUD showError:@"没有正在播放的设备"];
+        return;
+    }
     
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    
     
     if (_nowMusicController == nil) {
         _nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
         _nowMusicController.delegate = self;
+        _nowMusicController.bgmusicIDarray = _bgmusicIDArr;
         [self.view addSubview:_nowMusicController.view];
     }else {
         [_nowMusicController.view removeFromSuperview];
@@ -928,6 +931,7 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
+    
     Proto proto=protocolFromData(data);
     
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
@@ -942,6 +946,9 @@
                 }if (proto.action.state == PROTOCOL_ON) {
                     NSLog(@"开启状态");
                     [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
+                    
+                     [_bgmusicIDArr addObject:devID];
+                    
                 }if (proto.action.state == PROTOCOL_OFF) {
                     NSLog(@"关闭状态");
                     [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
