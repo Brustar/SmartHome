@@ -11,7 +11,6 @@
 #import "Room.h"
 #import "SQLManager.h"
 #import "MBProgressHUD+NJ.h"
-#import "IphoneNewAddSceneCell.h"
 #import "IphoneSaveNewSceneController.h"
 #import "LightCell.h"
 #import "CurtainTableViewCell.h"

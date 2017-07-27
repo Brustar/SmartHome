@@ -23,7 +23,7 @@
 @property (nonatomic,strong) NSString * deviceName;
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,assign) NSString * roomName;
-@property (nonatomic,assign) NSInteger seleteSection;
+@property (nonatomic,assign) int seleteSection;
 @property (nonatomic,assign) NSInteger seleteRow;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,assign) BOOL isAddDevice;

@@ -67,7 +67,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-      [self getUI];
       self.tableView.tableFooterView = [UIView new];
     _isGloom = NO;
     _isRomantic = NO;
@@ -75,11 +74,6 @@
     [self.gentleBtn setBackgroundImage:[UIImage imageNamed:@"ipad-btn_choose_prd"] forState:UIControlStateSelected];
     [self.normalBtn setBackgroundImage:[UIImage imageNamed:@"ipad-btn_choose_prd"] forState:UIControlStateSelected];
     [self.brightBtn setBackgroundImage:[UIImage imageNamed:@"ipad-btn_choose_prd"] forState:UIControlStateSelected];
-//    if (_lightArray.count == 0 && _SwitchLightArr.count == 0 && _ColourLightArr.count == 0) {
-//        self.patternView.hidden = YES;
-//        self.TableViewConstraint.constant = 44;
-//        
-//    }
     
 }
 
@@ -88,6 +82,14 @@
     
     self.deviceIdArr = data;
     [self getUI];
+    if (_lightArray.count == 0 && _SwitchLightArr.count == 0 && _ColourLightArr.count == 0) {
+        self.patternView.hidden = YES;
+        self.TableViewConstraint.constant = 44;
+        
+    }else{
+        self.patternView.hidden = NO;
+        self.TableViewConstraint.constant = 106;
+    }
     [self.tableView reloadData];
     
 }
