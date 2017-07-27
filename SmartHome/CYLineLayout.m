@@ -42,7 +42,7 @@
     // 水平滚动
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 
-    self.sectionInset = UIEdgeInsetsMake(10, 50, 10, 50);
+    self.sectionInset = UIEdgeInsetsMake(10, 70, 10, 70);
     if (ON_IPAD) {
         if (_itemS == 2) {
             self.sectionInset = UIEdgeInsetsMake(10, 50, 10, 50);
