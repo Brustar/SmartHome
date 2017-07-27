@@ -437,6 +437,7 @@ static NSString * const CYPhotoId = @"photo";
     [self.scenes addObjectsFromArray:tmpArr];
     NSString *imageName = @"i-add";
     [self.scenes addObject:imageName];
+    ((CYLineLayout*)self.FirstCollectionView.collectionViewLayout).itemS = (int)self.scenes.count;
     [self.FirstCollectionView reloadData];
 }
 

@@ -41,11 +41,16 @@
 //    self.itemSize = CGSizeMake(ACTIVE_DISTANCE, self.view.frame.size.height-300);
     // 水平滚动
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    // 设置内边距
-    //CGFloat inset = (self.collectionView.frame.size.width - self.itemSize.width) * 0.5;
+
     self.sectionInset = UIEdgeInsetsMake(10, 50, 10, 50);
     if (ON_IPAD) {
-        self.sectionInset = UIEdgeInsetsMake(10, -180, 10, 10);
+        if (_itemS == 2) {
+            self.sectionInset = UIEdgeInsetsMake(10, 50, 10, 50);
+        }else if (_itemS == 1) {
+                self.sectionInset = UIEdgeInsetsMake(10, 250, 10, 250);
+        }else{
+            self.sectionInset = UIEdgeInsetsMake(10, -180, 10, 10);
+        }
     }
     //  每个item在水平方向的最小间距
     self.minimumLineSpacing = 0;
@@ -69,7 +74,7 @@
     
     // 获得super已经计算好的布局属性
     NSArray *array = [super layoutAttributesForElementsInRect:rect] ;
-    
+
     // 计算collectionView最中心点的x值
     CGFloat centerX = self.collectionView.contentOffset.x + self.collectionView.frame.size.width * 0.5;
     
