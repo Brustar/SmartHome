@@ -141,7 +141,6 @@
 		2E12CC121E7F5E3000C7D006 /* CYPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */; };
 		2E12CC161E7FC04800C7D006 /* IphoneNewEditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */; };
 		2E1495101DE474EF00141629 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
-		2E192CA71EBB2D3F00458541 /* CKCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E192CA61EBB2D3F00458541 /* CKCircleView.m */; };
 		2E2D92CE1EF1067C0007B90A /* PowerLightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D92CC1EF1067C0007B90A /* PowerLightCell.m */; };
 		2E2D92CF1EF1067C0007B90A /* PowerLightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E2D92CD1EF1067C0007B90A /* PowerLightCell.xib */; };
 		2E2EA7871EFCBE0C0030EB46 /* ChangeNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2EA7861EFCBE0C0030EB46 /* ChangeNameViewController.m */; };
@@ -154,7 +153,6 @@
 		2E6A065B1EA743B50022B681 /* NewColourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6A06591EA743B50022B681 /* NewColourCell.m */; };
 		2E6A065C1EA743B50022B681 /* NewColourCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E6A065A1EA743B50022B681 /* NewColourCell.xib */; };
 		2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */; };
-		2E7B64B81E9B3188001F7469 /* IphoneNewAddSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B64B71E9B3188001F7469 /* IphoneNewAddSceneCell.m */; };
 		2E7B64BF1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B64BE1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m */; };
 		2E7B64C21E9B6ABC001F7469 /* WeekDaysCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B64C11E9B6ABC001F7469 /* WeekDaysCell.m */; };
 		2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E801EFE1E262B0B0039A6D9 /* WeekdaysVC.m */; };
@@ -728,8 +726,6 @@
 		2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CYPhotoCell.xib; sourceTree = "<group>"; };
 		2E12CC141E7FC04800C7D006 /* IphoneNewEditSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNewEditSceneController.h; sourceTree = "<group>"; };
 		2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNewEditSceneController.m; sourceTree = "<group>"; };
-		2E192CA51EBB2D3F00458541 /* CKCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCircleView.h; sourceTree = "<group>"; };
-		2E192CA61EBB2D3F00458541 /* CKCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCircleView.m; sourceTree = "<group>"; };
 		2E2D92CB1EF1067C0007B90A /* PowerLightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerLightCell.h; sourceTree = "<group>"; };
 		2E2D92CC1EF1067C0007B90A /* PowerLightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerLightCell.m; sourceTree = "<group>"; };
 		2E2D92CD1EF1067C0007B90A /* PowerLightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PowerLightCell.xib; sourceTree = "<group>"; };
@@ -752,8 +748,6 @@
 		2E6A065A1EA743B50022B681 /* NewColourCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewColourCell.xib; sourceTree = "<group>"; };
 		2E6CEDBD1DE5DE8B000979BE /* DetailMSGViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailMSGViewController.h; sourceTree = "<group>"; };
 		2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailMSGViewController.m; sourceTree = "<group>"; };
-		2E7B64B61E9B3188001F7469 /* IphoneNewAddSceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNewAddSceneCell.h; sourceTree = "<group>"; };
-		2E7B64B71E9B3188001F7469 /* IphoneNewAddSceneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNewAddSceneCell.m; sourceTree = "<group>"; };
 		2E7B64BD1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNewAddSceneTimerVC.h; sourceTree = "<group>"; };
 		2E7B64BE1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNewAddSceneTimerVC.m; sourceTree = "<group>"; };
 		2E7B64C01E9B6ABC001F7469 /* WeekDaysCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekDaysCell.h; sourceTree = "<group>"; };
@@ -2027,12 +2021,8 @@
 		2E7B64BB1E9B66A9001F7469 /* SceneAddVC */ = {
 			isa = PBXGroup;
 			children = (
-				2E192CA51EBB2D3F00458541 /* CKCircleView.h */,
-				2E192CA61EBB2D3F00458541 /* CKCircleView.m */,
 				2EEFF7481E9649A0008F2C7F /* IphoneNewAddSceneVC.h */,
 				2EEFF7491E9649A0008F2C7F /* IphoneNewAddSceneVC.m */,
-				2E7B64B61E9B3188001F7469 /* IphoneNewAddSceneCell.h */,
-				2E7B64B71E9B3188001F7469 /* IphoneNewAddSceneCell.m */,
 				2E7B64BD1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.h */,
 				2E7B64BE1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m */,
 				2E08EFC11EBC668A007F9FE1 /* PhotoGraphViewConteoller.h */,
@@ -3282,7 +3272,6 @@
 				0F6ADFE31E7136C500BFF67F /* ConversationViewController.m in Sources */,
 				CD7863B31E84D2A800F42AC0 /* RegistSecondStepViewController.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
-				2E7B64B81E9B3188001F7469 /* IphoneNewAddSceneCell.m in Sources */,
 				CD75CC9E1F13308800917D40 /* UIView+SetRect.m in Sources */,
 				0F4B3C001D2A13870002E75E /* MSGController.m in Sources */,
 				0F6183FA1EA9A24600000EAD /* NewLightCell.m in Sources */,
@@ -3312,7 +3301,6 @@
 				2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */,
 				2EF75C7C1EB2CAE00055147D /* ShortcutKeyCell.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
-				2E192CA71EBB2D3F00458541 /* CKCircleView.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */,
 				2E08EFC41EBC668A007F9FE1 /* PhotoGraphViewConteoller.m in Sources */,

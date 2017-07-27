@@ -18,11 +18,18 @@
 #import "BgMusic.h"
 #import "Amplifier.h"
 
+typedef void(^SaveOK)(BOOL flag);
+
 @interface SceneManager : NSObject
+
+@property (nonatomic,copy)SaveOK  block;
+
 
 + (instancetype) defaultManager;
 
 - (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive;
+
+- (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive block:(SaveOK )block;
 
 - (void) delScene:(Scene *)scene;
 

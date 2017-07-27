@@ -116,12 +116,12 @@
         
     }else{
         
-        [[SceneManager defaultManager] addScene:_scene withName:self.sceneName.text withImage:self.selectSceneImg withiSactive:_isActive];
+        [[SceneManager defaultManager] addScene:_scene withName:self.sceneName.text withImage:self.selectSceneImg withiSactive:_isActive block:^(BOOL flag) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            });
+        }];
     }
-    
-        UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-        IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
-        [self.navigationController pushViewController:iphoneSceneVC animated:YES];
 
 }
 
