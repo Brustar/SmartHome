@@ -402,8 +402,6 @@
     newScene.sceneName = [SQLManager getSceneName:newScene.sceneID];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:fileName];
     NSDictionary *parameter;
-//    if(newScene.schedules.count > 0) //有定时
-//    {
         for (Schedule *schedule in newScene.schedules) {
             parameter = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
@@ -416,24 +414,7 @@
                           @"sceneid":@(newScene.sceneID)
                           };
         }
-//    }
-//    else{ //没有定时
-//        
-//        if (newScene.sceneName && newScene.picName && fileName && newScene.roomID) {
-//            
-//            parameter = @{
-//                          @"token":[UD objectForKey:@"AuthorToken"],
-//                          @"optype":@(7),
-//                          @"scenceid":@(newScene.sceneID),
-//                          @"scencename":newScene.sceneName,
-//                          @"roomid":@(newScene.roomID),
-//                          @"isplan":@(0),
-//                          @"plistname":fileName,
-//                          @"scencefile":scenePath
-//                          };
-//        }
-//        
-//    }
+
     
     NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
     NSString *URL = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];

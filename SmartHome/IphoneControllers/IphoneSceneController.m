@@ -527,7 +527,7 @@ static NSString * const CYPhotoId = @"photo";
         if (self.scenes.count == 0) {
             [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
         }
-        //是场景否有定时
+        //场景是否有定时
         if (cell.isplan == 0) {
             cell.seleteSendPowBtn.hidden = YES;
             cell.PowerBtnCenterContraint.constant = 35;
@@ -553,12 +553,12 @@ static NSString * const CYPhotoId = @"photo";
         }else if (scene.status == 1) {
             [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
         }
-//        //场景定时是否启动
-//        if (scene.isactive == 0) {
-//            [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateNormal];
-//        }else if (scene.isactive == 1){
-//             [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
-//        }
+        //场景定时是否启动
+        if (scene.isactive == 0) {
+            [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
+        }else if (scene.isactive == 1){
+             [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateNormal];
+        }
         //是否是系统场景：是的话不允许删除场景，按钮为禁止状态
         if([SQLManager sceneBySceneID:cell.sceneID].readonly == YES)
         {
@@ -836,7 +836,13 @@ static NSString * const CYPhotoId = @"photo";
 #pragma mark - CYPhotoCellDelegate
 - (void)onTimingBtnClicked:(UIButton *)sender sceneID:(int)sceneID {
     
-    _isActive = @(sender.selected);
+//    _isActive = @(sender.selected);
+    Scene * scene = [SQLManager sceneBySceneID:sceneID];
+    if (scene.isactive == 0) {
+        _isActive = [NSNumber numberWithInt:1];
+    }else{
+        _isActive = [NSNumber numberWithInt:0];
+    }
     _timeSceneID = sceneID;
     
     NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
