@@ -146,7 +146,7 @@
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     
     self.messageLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
-    self.FamilyMenberLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",[[NSUserDefaults standardUserDefaults] objectForKey:@"familyNum"]];
+    self.FamilyMenberLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",[UD objectForKey:@"familyNum"]];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     _bgmusicIDS = [[NSMutableArray alloc] init];

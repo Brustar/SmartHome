@@ -90,6 +90,12 @@
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
     [NC addObserver:self selector:@selector(SumNumber:) name:@"SumNumber" object:nil];
+    [NC addObserver:self selector:@selector(changeHostRefreshFamilyNumNotification:) name:@"ChangeHostRefreshUINotification" object:nil];//  切换主机，刷新家庭成员数量
+}
+
+//  切换主机，刷新家庭成员数量
+- (void)changeHostRefreshFamilyNumNotification:(NSNotification *)noti {
+    self.memberFamilyLabel.text = [NSString stringWithFormat:@"家庭成员（%@）", [UD objectForKey:@"familyNum"]];
 }
 
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
@@ -315,7 +321,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap:)];
     UITapGestureRecognizer *Headtap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadDoTap:)];
     _HeadImageView.userInteractionEnabled = YES;
-    _familyNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"familyNum"];
+    _familyNum = [UD objectForKey:@"familyNum"];
     self.memberFamilyLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",_familyNum];
 //    self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]];
    
@@ -641,7 +647,7 @@
      }else{
          self.socialView.hidden = YES;
         _baseTabbarController.tabbarPanel.hidden = NO;
-         self.chatlabel.text = @"456";
+         self.chatlabel.text = @"暂无新消息";
     }
     
 }
