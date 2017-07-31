@@ -364,7 +364,7 @@ static NSString * const CYPhotoId = @"photo";
     [self.FirstCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CYPhotoCell class]) bundle:nil] forCellWithReuseIdentifier:CYPhotoId];
     
     if (ON_IPAD) {
-        layout.itemSize = CGSizeMake(450, 540);
+        layout.itemSize = CGSizeMake(320, 540);
         self.menuRight.constant = 100;
         self.switcher.hidden = NO;
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"IPadDevices" owner:self options:nil];

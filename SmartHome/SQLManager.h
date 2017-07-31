@@ -72,6 +72,8 @@
 //智能单品菜单
 +(NSArray *)singleProductByRoom:(int)roomID;
 
++(BOOL) isIR:(int) deviceId;
+
 + (NSArray *)getLightTypeNameWithRoomID:(NSInteger)roomID;
 + (NSArray *)getLightWithTypeName:(NSString *)typeName roomID:(NSInteger)roomID;
 

@@ -45,11 +45,11 @@
     self.sectionInset = UIEdgeInsetsMake(10, 70, 10, 70);
     if (ON_IPAD) {
         if (_itemS == 2) {
-            self.sectionInset = UIEdgeInsetsMake(10, 50, 10, 50);
+            self.sectionInset = UIEdgeInsetsMake(10, 200, 10, 50);
         }else if (_itemS == 1) {
-                self.sectionInset = UIEdgeInsetsMake(10, 250, 10, 250);
+                self.sectionInset = UIEdgeInsetsMake(10, 350, 10, 250);
         }else{
-            self.sectionInset = UIEdgeInsetsMake(10, -180, 10, 10);
+            self.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
         }
     }
     //  每个item在水平方向的最小间距

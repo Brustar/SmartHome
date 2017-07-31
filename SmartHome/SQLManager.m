@@ -2064,7 +2064,7 @@
         
         NSString *sqlRoom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER, \"imgUrl\" TEXT,\"ibeacon\" INTEGER,\"totalVisited\" INTEGER,\"masterID\" TEXT,\"openforcurrentuser\" INTEGER,\"isAll\" INTEGER)";
         NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE ,\"eqId\" INTEGER,\"channelValue\" INTEGER,\"cNumber\" INTEGER, \"Channel_name\" TEXT,\"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0, \"eqNumber\" TEXT,\"masterID\" TEXT)";
-        NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" INTEGER, \"temperature\" INTEGER, \"fanspeed\" INTEGER, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"bright\" INTEGER, \"color\" TEXT, \"position\" INTEGER, \"volume\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"htypeID\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"icon_url\" TEXT, \"camera_url\" TEXT, \"UITypeOfLight\" INTEGER)";
+        NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" INTEGER, \"temperature\" INTEGER, \"fanspeed\" INTEGER, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"bright\" INTEGER, \"color\" TEXT, \"position\" INTEGER, \"volume\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"htypeID\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"icon_url\" TEXT, \"camera_url\" TEXT, \"UITypeOfLight\" INTEGER, \"isIR\" BOOL DEFAULT 0)";
         NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT ,\"status\" INTEGER DEFAULT (0), \"isplan\" INTEGER, \"isactive\" INTEGER)";
         NSString *sqlChat = @"CREATE TABLE IF NOT EXISTS chats(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,nickname varchar(20),portrait varchar(100),username varchar(20),user_id integer)";
         NSString *sqlCatalog = @"CREATE TABLE IF NOT EXISTS catalog(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,catalogName varchar(20))";
@@ -2668,6 +2668,25 @@
     return isSuccess;
 }
 
++(BOOL) isIR:(int) deviceId
+{
+    FMDatabase *db = [self connetdb];
+    int ret = NO;
+    if([db open])
+    {
+        long masterID =  [[DeviceInfo defaultManager] masterID];
+        NSString *sql = [NSString stringWithFormat:@"select isIR from devices where ID = %ld and masterID = '%ld'",(long)deviceId,masterID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            ret = [resultSet boolForColumn:@"isIR"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return ret;
+}
+
 +(NSArray *)getDetailListWithID:(NSInteger)ID
 {
     FMDatabase *db = [SQLManager connetdb];
@@ -2784,7 +2803,7 @@
                 NSString *masterID = [NSString stringWithFormat:@"%ld", [[DeviceInfo defaultManager] masterID]];
                 int subtypeID = [equip[@"subtype_id"] intValue];
                 
-                NSString *sql = [NSString stringWithFormat:@"insert into Devices values(%d, '%@', '%@', '%@', '%@', %d, %d, %d, %d, %f, '%@', '%@', '%@', %d, %d, '%@', %d, %f, %d, '%@', '%ld', '%@', '%@', '%d', '%@', '%@', '%@', '%@', '%@',%d)",[equip[@"equipment_id"] intValue], equip[@"name"], NULL, NULL, NULL,0,25, 0, 0, 1005.5, NULL, NULL, NULL, 0, 0, @"FFFF", 0, 0.1, 220, @"none",(long)rId, equip[@"number"], equip[@"htype_id"], subtypeID, equip[@"type_name"], equip[@"subtype_name"], masterID, equip[@"imgurl"], equip[@"cameraurl"],[equip[@"display_type"] intValue]];
+                NSString *sql = [NSString stringWithFormat:@"insert into Devices values(%d, '%@', '%@', '%@', '%@', %d, %d, %d, %d, %f, '%@', '%@', '%@', %d, %d, '%@', %d, %f, %d, '%@', '%ld', '%@', '%@', '%d', '%@', '%@', '%@', '%@', '%@',%d,%i)",[equip[@"equipment_id"] intValue], equip[@"name"], NULL, NULL, NULL,0,25, 0, 0, 1005.5, NULL, NULL, NULL, 0, 0, @"FFFF", 0, 0.1, 220, @"none",(long)rId, equip[@"number"], equip[@"htype_id"], subtypeID, equip[@"type_name"], equip[@"subtype_name"], masterID, equip[@"imgurl"], equip[@"cameraurl"],[equip[@"display_type"] intValue],[equip[@"ir"] boolValue]];
                 
                 BOOL result = [db executeUpdate:sql];
                 if(result)
