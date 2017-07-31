@@ -40,7 +40,8 @@
 
 @property (nonatomic, assign) int sceneStatus;//场景状态
 @property (nonatomic, assign) int isplan;//是否有定时
-@property (nonatomic, assign) int isactive;
+@property (nonatomic, assign) int sType;//是否系统场景
+@property (nonatomic, assign) int isactive;//是否启动定时
 @property (weak, nonatomic) IBOutlet UIImageView *subImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *SceneNameTopConstraint;

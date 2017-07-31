@@ -26,12 +26,7 @@
 //删除
 - (IBAction)doDeleteBtn:(id)sender {
     
-    self.deleteBtn.selected = !self.deleteBtn.selected;
-    if (self.deleteBtn.selected) {
-         [self.deleteBtn setBackgroundImage:[UIImage imageNamed:@"delete_white"] forState:UIControlStateSelected];
-    }else{
-         [self.deleteBtn setBackgroundImage:[UIImage imageNamed:@"delete_white"] forState:UIControlStateSelected];
-    }
+   
     if (_delegate && [_delegate respondsToSelector:@selector(sceneDeleteAction:)]) {
           [self.delegate sceneDeleteAction:self];
     }
@@ -45,12 +40,12 @@
         [MBProgressHUD showSuccess:@"真实用户才可以操作"];
     }else{
        if (self.sceneStatus == 0) { //点击前，场景是关闭状态，需打开场景
-            [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
+//            [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
                 [[SceneManager defaultManager] startScene:self.sceneID];//打开场景
                 [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
             
         }else if (self.sceneStatus == 1) { //点击前，场景是打开状态，需关闭场景
-            [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
+//            [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
             [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];//关闭场景
             [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
         }
@@ -77,8 +72,6 @@
             [_delegate onTimingBtnClicked:sender sceneID:self.sceneID];
         }
     }
-    
-    
 }
 
 @end

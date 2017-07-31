@@ -4,7 +4,7 @@
 //
 //  Created by zhaona on 2017/5/22.
 //  Copyright © 2017年 Brustar. All rights reserved.
-//
+// ipad的首页
 
 #import "IpadFirstViewController.h"
 #import "BaseTabBarController.h"
@@ -146,7 +146,7 @@
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     
     self.messageLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
-    self.FamilyMenberLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",[[NSUserDefaults standardUserDefaults] objectForKey:@"familyNum"]];
+    self.FamilyMenberLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",[UD objectForKey:@"familyNum"]];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     _bgmusicIDS = [[NSMutableArray alloc] init];
@@ -158,11 +158,10 @@
         }
         if (self.deviceid.length != 0) {
             [_bgmusicIDS addObject:self.deviceid];
+            //查询设备状态
+            NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
         }
-        
-        //查询设备状态
-        NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
-        [sock.socket writeData:data withTimeout:1 tag:1];
         
     }
     

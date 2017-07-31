@@ -4,7 +4,7 @@
 //
 //  Created by zhaona on 2017/3/17.
 //
-//
+//iphone首页
 
 #import "FirstViewController.h"
 #import "AppDelegate.h"
@@ -90,6 +90,12 @@
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
     [NC addObserver:self selector:@selector(SumNumber:) name:@"SumNumber" object:nil];
+    [NC addObserver:self selector:@selector(changeHostRefreshFamilyNumNotification:) name:@"ChangeHostRefreshUINotification" object:nil];//  切换主机，刷新家庭成员数量
+}
+
+//  切换主机，刷新家庭成员数量
+- (void)changeHostRefreshFamilyNumNotification:(NSNotification *)noti {
+    self.memberFamilyLabel.text = [NSString stringWithFormat:@"家庭成员（%@）", [UD objectForKey:@"familyNum"]];
 }
 
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
@@ -118,7 +124,7 @@
     self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",_userInfomation.nickName];
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     [self addNotifications];
-   [_bgmusicIDArr removeAllObjects];
+    [_bgmusicIDArr removeAllObjects];
     self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
     
     if ([self.numberLabel.text isEqualToString:@"0"]) {
@@ -149,12 +155,11 @@
         }
         if (self.deviceid.length != 0) {
             [_bgmusicIDS addObject:self.deviceid];
+            //查询设备状态
+            NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            
         }
-        
-        //查询设备状态
-        NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-        
     }
     
     if (unread>0){
@@ -316,7 +321,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap:)];
     UITapGestureRecognizer *Headtap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadDoTap:)];
     _HeadImageView.userInteractionEnabled = YES;
-    _familyNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"familyNum"];
+    _familyNum = [UD objectForKey:@"familyNum"];
     self.memberFamilyLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",_familyNum];
 //    self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]];
    
@@ -642,7 +647,7 @@
      }else{
          self.socialView.hidden = YES;
         _baseTabbarController.tabbarPanel.hidden = NO;
-         self.chatlabel.text = @"456";
+         self.chatlabel.text = @"暂无新消息";
     }
     
 }
