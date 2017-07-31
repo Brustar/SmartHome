@@ -338,7 +338,7 @@ static NSString * const CYPhotoId = @"photo";
         layout.itemSize = CGSizeMake(collectionW-140, collectionH-20);
     }
     if (ON_IPAD) {
-        layout.itemSize = CGSizeMake(450, 540);
+        layout.itemSize = CGSizeMake(320, 540);
     }
     self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     self.FirstCollectionView.backgroundColor = [UIColor clearColor];
