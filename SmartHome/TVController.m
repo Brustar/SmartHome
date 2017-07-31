@@ -64,7 +64,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *unstoreLabel;
 
 @property (weak, nonatomic) IBOutlet UISlider *volume;
-
+@property (weak, nonatomic) IBOutlet UILabel *voiceValue;
 @property (weak, nonatomic) IBOutlet UICollectionView *tvLogoCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *numbersCollectionView;
 
@@ -80,6 +80,7 @@
 @property (nonatomic,strong) NSString *chooseImg;
 @property (nonatomic,strong) UIImage *chooseImage;
 @property (nonatomic,strong) NSArray *menus;
+@property (weak, nonatomic) IBOutlet UIView *IRContainer;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnMenu;
 @property (weak, nonatomic) IBOutlet UIButton *btnUP;
@@ -99,6 +100,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cRight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mButtonLeft;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mButtonTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *IRLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *IRight;
 @property (weak, nonatomic) IBOutlet UIButton *keypad;
 @property (weak, nonatomic) IBOutlet UIButton *btnHome;
 @property (weak, nonatomic) IBOutlet UIButton *btnBack;
@@ -187,6 +190,15 @@
         case 11:
             data=[device back:self.deviceid];
             break;
+            
+        case 15:
+            self.voiceValue.text = [NSString stringWithFormat:@"%d%%",[self.voiceValue.text intValue]-1];
+            data=[device volumeDown:self.deviceid];
+            break;
+        case 16:
+            self.voiceValue.text = [NSString stringWithFormat:@"%d%%",[self.voiceValue.text intValue]+1];
+            data=[device volumeUp:self.deviceid];
+            break;
 
         default:
             break;
@@ -270,17 +282,10 @@
     self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-    if ([self.sceneid intValue]>0) {
-        for(int i=0;i<[_scene.devices count];i++)
-        {
-            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[TV class]]) {
-                self.volume.value=((TV *)[_scene.devices objectAtIndex:i]).volume/100.0;
-            }
-        }
+    if ([SQLManager isIR:[self.deviceid intValue]]) {
+        self.IRContainer.hidden = NO;
     }
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
@@ -289,12 +294,12 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
     if (ON_IPAD) {
         self.menuTop.constant = self.cLeft.constant = 0;
-        self.vLeft.constant = self.vRight.constant = 100;
+        self.vLeft.constant = self.vRight.constant = self.IRLeft.constant = self.IRight.constant =  100;
         self.mButtonLeft.constant = 530;
         self.cRight.constant = -200;
         self.mButtonTop.constant =40;
         self.cBottom.constant = 440;
-        self.keypad.hidden = self.btnHome.hidden = self.btnBack.hidden = self.btnSwitch.hidden = self.CHUP.hidden = self.CHDown.hidden = self.ear.hidden = NO;
+        self.keypad.hidden = self.btnHome.hidden = self.btnBack.hidden = self.btnSwitch.hidden = self.CHUP.hidden = self.CHDown.hidden = self.ear.hidden = self.IRContainer.hidden = NO;
         [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
 }
@@ -334,26 +339,6 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
--(IBAction)save:(id)sender
-{
-    TV *device=[[TV alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setVolume:self.volume.value*100];
-    
-    
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-    
-}
-
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
@@ -368,6 +353,7 @@
         if ([devID intValue]==[self.deviceid intValue]) {
             if (proto.action.state == PROTOCOL_VOLUME) {
                 self.volume.value=proto.action.RValue/100.0;
+                self.voiceValue.text = [NSString stringWithFormat:@"%d%%",proto.action.RValue];
             }
             if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
                 self.btnSwitch.selected = proto.action.state;
