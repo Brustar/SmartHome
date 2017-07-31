@@ -4,7 +4,8 @@
 //
 //  Created by zhaona on 2017/6/1.
 //  Copyright © 2017年 Brustar. All rights reserved.
-//Ipad添加设备界面
+//
+// SplitViewController 右边视图控制器 Ipad添加设备界面
 
 #import "IpadAddDeviceTypeVC.h"
 #import "NewLightCell.h"

@@ -321,10 +321,9 @@ static NSString * const CYPhotoId = @"photo";
 - (void)removeNotifications {
     [NC removeObserver:self];
 }
-
+  // 创建CollectionView
 -(void)setUI
 {
-    // 创建CollectionView
     CGFloat collectionW = self.view.frame.size.width;
     CGFloat collectionH = self.view.frame.size.height-200;
     CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
@@ -386,7 +385,7 @@ static NSString * const CYPhotoId = @"photo";
 {
     [self performSegueWithIdentifier:@"roomListSegue" sender:self];
 }
-
+//切换房间的视图
 -(void)setUpRoomView
 {
     NSMutableArray *roomNames = [NSMutableArray array];
@@ -523,10 +522,12 @@ static NSString * const CYPhotoId = @"photo";
         cell.sceneStatus = scene.status;
         cell.isplan = scene.isplan;
         cell.isactive = scene.isactive;
+        cell.sType = scene.readonly;
         cell.SceneNameTopConstraint.constant = 5;
         if (self.scenes.count == 0) {
             [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
         }
+        //是场景否有定时
         if (cell.isplan == 0) {
             cell.seleteSendPowBtn.hidden = YES;
             cell.PowerBtnCenterContraint.constant = 35;
@@ -546,23 +547,35 @@ static NSString * const CYPhotoId = @"photo";
         [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
         cell.deleteBtn.hidden = NO;
         cell.powerBtn.hidden = NO;
+        //场景是否开启
         if (scene.status == 0) {
             [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
         }else if (scene.status == 1) {
             [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
         }
+//        //场景定时是否启动
 //        if (scene.isactive == 0) {
-//            [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
+//            [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateNormal];
 //        }else if (scene.isactive == 1){
-//             [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateNormal];
+//             [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
 //        }
-
+        //是否是系统场景：是的话不允许删除场景，按钮为禁止状态
+        if([SQLManager sceneBySceneID:cell.sceneID].readonly == YES)
+        {
+            [cell.deleteBtn setEnabled:NO];
+//            cell.deleteBtn.hidden = YES;
+            
+        }else{
+            
+            [cell.deleteBtn setEnabled:YES];
+//            cell.deleteBtn.hidden = NO;
+        }
         return cell;
        
     }
     
 }
-
+//长按cell可以更换场景的图片
 -(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
 {
     NSIndexPath *indexPath = [self.FirstCollectionView indexPathForItemAtPoint:[lgr locationInView:self.FirstCollectionView]];
@@ -649,6 +662,7 @@ static NSString * const CYPhotoId = @"photo";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    //最后一个cell是添加场景的
      if (indexPath.row+1 >= self.scenes.count) {
         
          if (ON_IPAD) {
@@ -664,7 +678,7 @@ static NSString * const CYPhotoId = @"photo";
          }
          
      }else{
-        
+        //其他的点击是进入场景详情
          Scene *scene = self.scenes[indexPath.row];
          self.selectedSId = scene.sceneID;
          CYPhotoCell *cell = (CYPhotoCell*)[collectionView cellForItemAtIndexPath:indexPath];
@@ -672,7 +686,7 @@ static NSString * const CYPhotoId = @"photo";
          if ([isDemo isEqualToString:@"YES"]) {
              [MBProgressHUD showSuccess:@"真实用户才可以启动场景"];
          }else{
-             if (scene.status == 0) {
+            if (scene.status == 0) {
                  [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
                  [[SceneManager defaultManager] startScene:scene.sceneID];
                  [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];

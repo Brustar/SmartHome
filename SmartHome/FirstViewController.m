@@ -149,12 +149,11 @@
         }
         if (self.deviceid.length != 0) {
             [_bgmusicIDS addObject:self.deviceid];
+            //查询设备状态
+            NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            
         }
-        
-        //查询设备状态
-        NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-        
     }
     
     if (unread>0){

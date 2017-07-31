@@ -4,7 +4,7 @@
 //
 //  Created by zhaona on 2017/5/25.
 //  Copyright © 2017年 Brustar. All rights reserved.
-//
+//ipad的场景详情的 SplitViewController
 
 #import "IpadDeviceListViewController.h"
 #import "IpadSceneDetailVC.h"

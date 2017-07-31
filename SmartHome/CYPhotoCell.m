@@ -72,8 +72,6 @@
             [_delegate onTimingBtnClicked:sender sceneID:self.sceneID];
         }
     }
-    
-    
 }
 
 @end

@@ -4,7 +4,7 @@
 //
 //  Created by zhaona on 2017/6/1.
 //  Copyright © 2017年 Brustar. All rights reserved.
-//
+//SplitViewController 左边视图控制器选择展示
 
 #import "IpadAddDeviceVC.h"
 #import "IpadDeviceTypeCell.h"

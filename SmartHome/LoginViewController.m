@@ -700,8 +700,15 @@ NSArray *array = [NSArray arrayWithObjects:
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:filePath]==NO) {
         [array writeToFile:filePath atomically:YES];
+    }else{
+        
+        //删除文件夹
+        [fileManager removeItemAtPath:filePath error:nil];
+        
+        [array writeToFile:filePath atomically:YES];
+
     }
-    
+
 }
 //保存每日提醒
 -(void)remindListTo:(NSArray *)dic
