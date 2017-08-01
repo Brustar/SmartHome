@@ -484,7 +484,25 @@
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
     [NC addObserver:self selector:@selector(SumNumber:) name:@"SumNumber" object:nil];
+    [NC addObserver:self selector:@selector(loginExpiredNotification:) name:@"LoginExpiredNotification" object:nil];//登录过期的通知
 }
+
+- (void)loginExpiredNotification:(NSNotification *)noti {
+    [UD removeObjectForKey:@"AuthorToken"];
+    [UD synchronize];
+    [[SocketManager defaultManager] cutOffSocket];
+    
+    [self gotoLoginViewController];
+}
+
+- (void)gotoLoginViewController {
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"loginNavController"];//进入登录页面
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.window.rootViewController = vc;
+    [appDelegate.window makeKeyAndVisible];
+}
+
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
     [self refreshUI];
 }

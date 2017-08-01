@@ -745,7 +745,7 @@ NSArray *array = [NSArray arrayWithObjects:
 #pragma mark -  http delegate
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
-    DeviceInfo *info=[DeviceInfo defaultManager];
+    DeviceInfo *info = [DeviceInfo defaultManager];
     
     if(tag == 1)
     {
@@ -813,9 +813,7 @@ NSArray *array = [NSArray arrayWithObjects:
             }
             
             
-            //if (!_isTheSameUser) { //如果不是同一个用户, 或者是同一个用户，但卸载重装了App
                 if ([self.hostIDS count] >0) {
-                    int mid = [self.hostIDS[0] intValue];
                     
                     [UD removeObjectForKey:@"room_version"];
                     [UD removeObjectForKey:@"equipment_version"];
@@ -823,14 +821,15 @@ NSArray *array = [NSArray arrayWithObjects:
                     [UD removeObjectForKey:@"tv_version"];
                     [UD removeObjectForKey:@"fm_version"];
                     [UD synchronize];
-                    //更新UD的@"HostID"， 更新DeviceInfo的 masterID
-                    [IOManager writeUserdefault:@(mid) forKey:@"HostID"];
-                    info.masterID = mid;
                 }
-           // }
+           
             
             
+            
+            //更新UD的@"HostID"， 更新DeviceInfo的 masterID
             [IOManager writeUserdefault:@([responseObject[@"hostid"] integerValue]) forKey:@"HostID"];
+            info.masterID = [responseObject[@"hostid"] integerValue];
+            
             [IOManager writeUserdefault:responseObject[@"rctoken"] forKey:@"rctoken"];
             [IOManager writeUserdefault:responseObject[@"homename"] forKey:@"homename"];
             [self writeChatListConfigDataToSQL:responseObject[@"userlist"]];
