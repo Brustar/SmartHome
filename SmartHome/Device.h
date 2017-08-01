@@ -79,6 +79,7 @@ typedef NS_ENUM(NSUInteger, catalog) {
 @property (nonatomic,strong) NSString *typeName;
 @property (nonatomic,strong) NSString *subTypeName;
 @property (nonatomic, assign) uint8_t actionState;
+@property (nonatomic, assign) BOOL isIR;
 
 + (instancetype)deviceWithDict:(NSDictionary *)dict;
 @end

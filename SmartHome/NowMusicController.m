@@ -81,6 +81,11 @@
         }
       
     }
+//    for (int i =0; i < self.bgmusicIDarray.count; i ++) {
+//        self.deviceName = [SQLManager deviceNameByDeviceID:[self.bgmusicIDarray[i] intValue]];
+//         [_bgmusicNameS addObject:self.deviceName];
+//        
+//    }
 
     if (BLUETOOTH_MUSIC) {
         AudioManager *audio=[AudioManager defaultManager];

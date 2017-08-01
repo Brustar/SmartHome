@@ -37,12 +37,15 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceLeft;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceRight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *IRLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *IRight;
 @property (weak, nonatomic) IBOutlet UIImageView *ear;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) IBOutlet UIButton *prevoius;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *shuffleRight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *shuffleTop;
 @property (weak, nonatomic) IBOutlet UIButton *ipadPlay;
+@property (weak, nonatomic) IBOutlet UIView *IRContainer;
 
 @end
 
@@ -138,6 +141,9 @@ BOOL animating;
 
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
+    if ([SQLManager isIR:[self.deviceid intValue]]) {
+        self.IRContainer.hidden = NO;
+    }
 
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
@@ -153,7 +159,7 @@ BOOL animating;
     [sock.socket writeData:data withTimeout:1 tag:1];
     if (ON_IPAD) {
         self.menuTop.constant = 0;
-        self.voiceLeft.constant = self.voiceRight.constant = 100;
+        self.voiceLeft.constant = self.voiceRight.constant = self.IRLeft.constant = self.IRight.constant = 100;
         self.shuffleTop.constant = 40;
         self.shuffleRight.constant = 600;
         self.ear.hidden = self.btnNext.hidden = self.prevoius.hidden = self.ipadPlay.hidden = NO;
@@ -182,6 +188,7 @@ BOOL animating;
         if ([devID intValue]==[self.deviceid intValue]) {
             if (proto.action.state == PROTOCOL_VOLUME) {
                 self.volume.value=proto.action.RValue/100.0;
+                self.voiceValue.text = [NSString stringWithFormat:@"%d%%",proto.action.RValue];
             }
             if (proto.action.state == PROTOCOL_ON || proto.action.state == PROTOCOL_OFF) {
                 self.ipadPlay.selected = proto.action.state;
@@ -243,6 +250,20 @@ BOOL animating;
     NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (IBAction)volumeUP:(id)sender {
+    NSData *data=[[DeviceInfo defaultManager] volumeUp:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    self.voiceValue.text = [NSString stringWithFormat:@"%d%%",[self.voiceValue.text intValue]+1];
+}
+
+- (IBAction)volumeDown:(id)sender {
+    NSData *data=[[DeviceInfo defaultManager] volumeDown:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    self.voiceValue.text = [NSString stringWithFormat:@"%d%%",[self.voiceValue.text intValue]-1];
 }
 
 - (IBAction)playMusic:(id)sender {

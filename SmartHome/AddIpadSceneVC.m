@@ -4,7 +4,7 @@
 //
 //  Created by zhaona on 2017/6/1.
 //  Copyright © 2017年 Brustar. All rights reserved.
-//
+//ipad添加场景
 
 #import "AddIpadSceneVC.h"
 #import "IpadAddDeviceVC.h"
@@ -128,6 +128,7 @@
     }
 
 }
+// SplitViewController 左边视图控制器的点击cell的事件
 -(void)IpadAddDeviceVC:(IpadAddDeviceVC *)centerListVC selected:(NSInteger)row
 {
 

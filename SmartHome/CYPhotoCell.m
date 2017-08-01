@@ -40,12 +40,10 @@
         [MBProgressHUD showSuccess:@"真实用户才可以操作"];
     }else{
        if (self.sceneStatus == 0) { //点击前，场景是关闭状态，需打开场景
-//            [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
                 [[SceneManager defaultManager] startScene:self.sceneID];//打开场景
                 [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
             
         }else if (self.sceneStatus == 1) { //点击前，场景是打开状态，需关闭场景
-//            [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
             [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];//关闭场景
             [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
         }
@@ -58,22 +56,20 @@
 //定时
 - (IBAction)timingBtn:(id)sender {
     
+    Scene * scene = [SQLManager sceneBySceneID:self.sceneID];
     NSString *isDemo = [UD objectForKey:IsDemo];
     if ([isDemo isEqualToString:@"YES"]) {
         [MBProgressHUD showSuccess:@"真实用户才可以操作"];
     }else{
-        self.seleteSendPowBtn.selected = !self.seleteSendPowBtn.selected;
-        if (self.seleteSendPowBtn.selected) {
-            [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateSelected];
-        }else{
+        if (scene.isactive == 0) {
+            [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateNormal];
+        }else if (scene.isactive == 1) {
             [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
         }
         if (_delegate && [_delegate respondsToSelector:@selector(onTimingBtnClicked:sceneID:)]) {
             [_delegate onTimingBtnClicked:sender sceneID:self.sceneID];
         }
     }
-    
-    
 }
 
 @end

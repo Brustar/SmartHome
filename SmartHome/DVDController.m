@@ -18,12 +18,12 @@
 #import "Light.h"
 #import "UIViewController+Navigator.h"
 
-@interface DVDController ()<UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate>
+@interface DVDController ()<IphoneRoomViewDelegate>
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightViewHight;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (nonatomic,strong) NSArray *dvImages;
+@property (weak, nonatomic) IBOutlet UILabel *voiceValue;
 @property (nonatomic,strong) NSArray *menus;
 @property (weak, nonatomic) IBOutlet UIButton *btnMenu;
 @property (weak, nonatomic) IBOutlet UIButton *btnPop;
@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnDown;
 @property (weak, nonatomic) IBOutlet UIButton *btnOK;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
+@property (weak, nonatomic) IBOutlet UIView *IRContainer;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnPrevoius;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
@@ -43,19 +44,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *controlLeft;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *controlRight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *controlBottom;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *IRLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *IRight;
 @end
 
 @implementation DVDController
-
--(NSArray *)dvImages
-{
-    if(!_dvImages)
-    {
-        _dvImages = @[@"rewind",@"broadcast",@"fastForward",@"last",@"pause",@"next",@"stop",@"up",@"house"];
-    }
-    return _dvImages;
-}
 
 - (void)setRoomID:(int)roomID
 {
@@ -123,6 +116,9 @@
     
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
+    if ([SQLManager isIR:[self.deviceid intValue]]) {
+        self.IRContainer.hidden = NO;
+    }
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     DeviceInfo *device=[DeviceInfo defaultManager];
@@ -145,6 +141,7 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
     if (ON_IPAD) {
         self.menuTop.constant = 0;
+        self.IRContainer.hidden = NO;
         self.voiceLeft.constant = self.voiceRight.constant = 100;
         self.controlLeft.constant = self.controlRight.constant = 150;
         self.controlBottom.constant = 160;
@@ -203,6 +200,7 @@
         if ([devID intValue]==[self.deviceid intValue]) {
             if (proto.action.state == PROTOCOL_VOLUME) {
                 self.volume.value=proto.action.RValue/100.0;
+                self.voiceValue.text = [NSString stringWithFormat:@"%d%%",proto.action.RValue];
             }
         }
     }
@@ -216,25 +214,6 @@
         //self.volume.value=[[device valueForKey:@"volume"] floatValue];
         //[self changeVolume];
     }
-}
-
-#pragma mark - UICollectionViewDelegate
--(NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return 9;
-}
-
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *collectionCellID = @"collectionCell";
-    DVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionCellID forIndexPath:indexPath];
-
-    NSString *imageName = [NSString stringWithFormat:@"%@",self.dvImages[indexPath.row]];
-    [cell.btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    cell.btn.tag=indexPath.row;
-    [cell.btn addTarget:self action:@selector(control:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return cell;
 }
 
 -(IBAction)control:(id)sender
@@ -296,6 +275,14 @@
             break;
         case 14:
             data=[device sweepRight:self.deviceid];
+            break;
+        case 15:
+            self.voiceValue.text = [NSString stringWithFormat:@"%d%%",[self.voiceValue.text intValue]-1];
+            data=[device volumeDown:self.deviceid];
+            break;
+        case 16:
+            self.voiceValue.text = [NSString stringWithFormat:@"%d%%",[self.voiceValue.text intValue]+1];
+            data=[device volumeUp:self.deviceid];
             break;
             
         default:

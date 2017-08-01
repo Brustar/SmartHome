@@ -39,12 +39,14 @@
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 @property (nonatomic,strong) NSString *eNumber;
 @property (weak, nonatomic) IBOutlet UIButton *power;
+@property (weak, nonatomic) IBOutlet UIView *IRContainer;
 
 @property (nonatomic,strong) FMCollectionViewCell *cell;
 @property (weak, nonatomic) IBOutlet UILabel *voiceValue;
 @property (weak, nonatomic) IBOutlet UIStackView *channelContainer;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *IRLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *IRight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceLeft;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceRight;
 @property (weak, nonatomic) IBOutlet UIImageView *ear;
@@ -133,23 +135,15 @@
     [self.ipadPower setImage:[UIImage imageNamed:@"TV_on"] forState:UIControlStateSelected];
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
-    
+    if ([SQLManager isIR:[self.deviceid intValue]]) {
+        self.IRContainer.hidden = NO;
+    }
     self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:nil];
-    // Do any additional setup after loading the view.
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-    if ([self.sceneid intValue]>0) {
-        for(int i=0;i<[_scene.devices count];i++)
-        {
-            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Radio class]]) {
-                self.volume.value=((Radio*)[_scene.devices objectAtIndex:i]).rvolume/100.0;
-                self.numberOfChannel.text=  [NSString stringWithFormat:@"%.1f", ((Radio*)[_scene.devices objectAtIndex:i]).channel];
-            }
-        }
-    }
+
     [self setUpPageController];
     
     SocketManager *sock=[SocketManager defaultManager];
@@ -159,9 +153,9 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
     if (ON_IPAD) {
         self.menuTop.constant = 0;
-        self.voiceLeft.constant = self.voiceRight.constant = 100;
+        self.voiceLeft.constant = self.voiceRight.constant = self.IRLeft.constant = self.IRight.constant = 100;
         [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
-        self.ear.hidden = self.btnNext.hidden = self.prevoius.hidden = self.ipadPower.hidden = NO;
+        self.ear.hidden = self.btnNext.hidden = self.prevoius.hidden = self.ipadPower.hidden = self.IRContainer.hidden = NO;
     }
 }
 
@@ -226,6 +220,14 @@
             break;
         case 2:
             data = [[DeviceInfo defaultManager] next:self.deviceid];
+            break;
+        case 15:
+            self.voiceValue.text = [NSString stringWithFormat:@"%d%%",[self.voiceValue.text intValue]-1];
+            data = [[DeviceInfo defaultManager] volumeDown:self.deviceid];
+            break;
+        case 16:
+            self.voiceValue.text = [NSString stringWithFormat:@"%d%%",[self.voiceValue.text intValue]+1];
+            data = [[DeviceInfo defaultManager] volumeUp:self.deviceid];
             break;
         default:
             break;
@@ -349,27 +351,6 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
--(IBAction)save:(id)sender
-{
-    self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
-    
-    Radio *device=[[Radio alloc] init];
-    [device setDeviceID:6];
-    [device setRvolume:self.volume.value*100];
-    [device setChannel:[self.numberOfChannel.text floatValue]];
-    
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-    
-}
 //收藏当前频道
 - (IBAction)storeFMChannel:(id)sender {
     self.editView.hidden = NO;
@@ -490,6 +471,7 @@
         if ([devID intValue]==[self.deviceid intValue]) {
             if (proto.action.state == PROTOCOL_VOLUME) {
                 self.volume.value=proto.action.RValue/100.0;
+                self.voiceValue.text = [NSString stringWithFormat:@"%d%%",proto.action.RValue];
             }
         }
     }
