@@ -256,14 +256,23 @@ BOOL animating;
     NSData *data=[[DeviceInfo defaultManager] volumeUp:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    self.voiceValue.text = [NSString stringWithFormat:@"%d%%",[self.voiceValue.text intValue]+1];
+    
+    int value = [self.voiceValue.text intValue]+1;
+    if (value<=100) {
+        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",value];
+    }
+    
 }
 
 - (IBAction)volumeDown:(id)sender {
     NSData *data=[[DeviceInfo defaultManager] volumeDown:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    self.voiceValue.text = [NSString stringWithFormat:@"%d%%",[self.voiceValue.text intValue]-1];
+    
+    int value = [self.voiceValue.text intValue]-1;
+    if (value>=0) {
+        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",value];
+    }
 }
 
 - (IBAction)playMusic:(id)sender {

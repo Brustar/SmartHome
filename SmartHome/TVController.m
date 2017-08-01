@@ -192,14 +192,24 @@
             break;
             
         case 15:
-            self.voiceValue.text = [NSString stringWithFormat:@"%d%%",[self.voiceValue.text intValue]-1];
+        {
+            int value = [self.voiceValue.text intValue]-1;
+            if (value>=0) {
+                self.voiceValue.text = [NSString stringWithFormat:@"%d%%",value];
+            }
             data=[device volumeDown:self.deviceid];
             break;
+        }
         case 16:
-            self.voiceValue.text = [NSString stringWithFormat:@"%d%%",[self.voiceValue.text intValue]+1];
+        {
+            int value = [self.voiceValue.text intValue]+1;
+            if (value<=100) {
+                self.voiceValue.text = [NSString stringWithFormat:@"%d%%",value];
+            }
+
             data=[device volumeUp:self.deviceid];
             break;
-
+        }
         default:
             break;
     }
