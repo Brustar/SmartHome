@@ -91,6 +91,23 @@
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
     [NC addObserver:self selector:@selector(SumNumber:) name:@"SumNumber" object:nil];
     [NC addObserver:self selector:@selector(changeHostRefreshFamilyNumNotification:) name:@"ChangeHostRefreshUINotification" object:nil];//  切换主机，刷新家庭成员数量
+    [NC addObserver:self selector:@selector(loginExpiredNotification:) name:@"LoginExpiredNotification" object:nil];//登录过期的通知
+}
+
+- (void)loginExpiredNotification:(NSNotification *)noti {
+    [UD removeObjectForKey:@"AuthorToken"];
+    [UD synchronize];
+    [[SocketManager defaultManager] cutOffSocket];
+    
+    [self gotoLoginViewController];
+}
+
+- (void)gotoLoginViewController {
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"loginNavController"];//进入登录页面
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.window.rootViewController = vc;
+    [appDelegate.window makeKeyAndVisible];
 }
 
 //  切换主机，刷新家庭成员数量

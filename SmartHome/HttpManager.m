@@ -40,6 +40,13 @@
     [mgr POST:url parameters:params progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         [MBProgressHUD hideHUD];
         NSLog(@"success:%@",responseObject);
+        
+        if ([responseObject[@"result"] intValue] == 10086 || [responseObject[@"result"] intValue] == 10087) {  // 处理10086（token错误）， 10087（token过期）的情况
+            [MBProgressHUD showError:@"登录已过期，请重新登录"];
+            [NC postNotificationName:@"LoginExpiredNotification" object:nil];
+            return;
+        }
+        
         if (self.tag>0) {
             [self.delegate httpHandler:responseObject tag:self.tag];
         }else{
@@ -75,6 +82,14 @@
     [mgr POST:url parameters:params progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         [MBProgressHUD hideHUD];
         NSLog(@"success:%@",responseObject);
+        
+        if ([responseObject[@"result"] intValue] == 10086 || [responseObject[@"result"] intValue] == 10087) {  // 处理10086（token错误）， 10087（token过期）的情况
+            [MBProgressHUD showError:@"登录已过期，请重新登录"];
+            [NC postNotificationName:@"LoginExpiredNotification" object:nil];
+            return;
+        }
+        
+        
         if (self.tag>0) {
             [self.delegate httpHandler:responseObject tag:self.tag];
         }else{
@@ -101,6 +116,13 @@
     [mgr GET:url parameters:params progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         [MBProgressHUD hideHUD];
         NSLog(@"success:%@",responseObject);
+        
+        if ([responseObject[@"result"] intValue] == 10086 || [responseObject[@"result"] intValue] == 10087) {  // 处理10086（token错误）， 10087（token过期）的情况
+            [MBProgressHUD showError:@"登录已过期，请重新登录"];
+            [NC postNotificationName:@"LoginExpiredNotification" object:nil];
+            return;
+        }
+        
         if (self.tag>0) {
             [self.delegate httpHandler:responseObject tag:self.tag];
         }else{
@@ -131,6 +153,13 @@
     [mgr GET:url parameters:params progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         [MBProgressHUD hideHUD];
         NSLog(@"success:%@",responseObject);
+        
+        if ([responseObject[@"result"] intValue] == 10086 || [responseObject[@"result"] intValue] == 10087) {  // 处理10086（token错误）， 10087（token过期）的情况
+            [MBProgressHUD showError:@"登录已过期，请重新登录"];
+            [NC postNotificationName:@"LoginExpiredNotification" object:nil];
+            return;
+        }
+        
         if (self.tag>0) {
             [self.delegate httpHandler:responseObject tag:self.tag];
         }else{
