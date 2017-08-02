@@ -782,6 +782,10 @@
             
             else if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
                 device.power = proto.action.state;
+                
+//                if (proto.deviceType == 0x14) {
+//                    NSLog(@"背景音乐---开关---  %d", proto.action.state);
+//                }
             }
             
             [SQLManager updateDeviceStatus:device];
