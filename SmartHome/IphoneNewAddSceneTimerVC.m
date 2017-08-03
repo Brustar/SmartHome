@@ -327,15 +327,22 @@
 }
 
 - (IBAction)updateTexts:(id)sender {
+    
+    _dateFormatter = [[NSDateFormatter alloc] init];
+    NSTimeZone* localzone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+    [_dateFormatter setTimeZone:localzone];
+    [_dateFormatter setDateFormat:@"HH:mm"];
+    
     self.rangClock.startPointValue = [self adjustValue:self.rangClock.startPointValue];
     self.rangClock.endPointValue = [self adjustValue:self.rangClock.endPointValue];
-    
     NSDate *bedtimeDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:self.rangClock.startPointValue];
 
-    self.starTimeLabel.text = [self tranDate:bedtimeDate];
+//    self.starTimeLabel.text = [self tranDate:bedtimeDate];
+    self.starTimeLabel.text = [_dateFormatter stringFromDate:bedtimeDate];
     
     NSDate *wakeDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:self.rangClock.endPointValue];
-    self.endTimeLabel.text = [self tranDate:wakeDate];
+//    self.endTimeLabel.text = [self tranDate:wakeDate];
+    self.endTimeLabel.text = [_dateFormatter stringFromDate:wakeDate];
 }
 
 -(NSString *) tranDate:(NSDate*) date
@@ -366,8 +373,10 @@
 #pragma mark -- lazy load
 -(NSDateFormatter  *)dateFormatter{
     if (!_dateFormatter) {
-        
         _dateFormatter = [[NSDateFormatter alloc] init];
+        NSTimeZone* localzone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+        [_dateFormatter setTimeZone:localzone];
+        
         // hh:mm a
         [_dateFormatter setDateFormat:@"HH:mm"];
     }
