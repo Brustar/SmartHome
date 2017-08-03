@@ -29,10 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *timingImage;
 @property (nonatomic,strong) NSArray * viewControllerArrs;
 @property (nonatomic,strong) NSDateFormatter  *dateFormatter;
-
 @property (weak, nonatomic) IBOutlet RangeCircularSlider *rangClock;
-
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *TimViewLeadingConstraint;//到父视图左边的距离
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *TimeViewTrailingConstraint;//到父视图右边的距离
 @property (weak, nonatomic) IBOutlet UIView *SupView;
@@ -100,7 +97,6 @@
         self.RepetitionLable.text = self.repeatitionStr;
     }
     
-    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         
         self.TimViewLeadingConstraint.constant = 200;
@@ -125,7 +121,7 @@
     self.RepetitionLable.text = @"永不";
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(iphoneSelectWeek:) name:@"SelectWeek" object:nil];
 
-    CGFloat dayInSeconds = 12 * 60 * 60;
+    CGFloat dayInSeconds = 24 * 60 * 60;
     self.rangClock.maximumValue = dayInSeconds;
     self.rangClock.startThumbImage = [UIImage imageNamed:@"ipad-sss"];
     self.rangClock.endThumbImage = [UIImage imageNamed:@"ipad-END"];
@@ -134,7 +130,6 @@
     self.rangClock.alpha = 0.8;
     
     [self updateTexts:self.rangClock];
-    
 
 }
 
@@ -336,30 +331,10 @@
     self.rangClock.startPointValue = [self adjustValue:self.rangClock.startPointValue];
     self.rangClock.endPointValue = [self adjustValue:self.rangClock.endPointValue];
     NSDate *bedtimeDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:self.rangClock.startPointValue];
-
-//    self.starTimeLabel.text = [self tranDate:bedtimeDate];
     self.starTimeLabel.text = [_dateFormatter stringFromDate:bedtimeDate];
     
     NSDate *wakeDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:self.rangClock.endPointValue];
-//    self.endTimeLabel.text = [self tranDate:wakeDate];
     self.endTimeLabel.text = [_dateFormatter stringFromDate:wakeDate];
-}
-
--(NSString *) tranDate:(NSDate*) date
-{
-    _dateFormatter = [[NSDateFormatter alloc] init];
-    // hh:mm a
-    [_dateFormatter setDateFormat:@"HH:mm"];
-    NSTimeZone* localzone = [NSTimeZone localTimeZone];
-    NSTimeZone* GTMzone = [NSTimeZone timeZoneForSecondsFromGMT:0];
-    
-    [_dateFormatter setTimeZone:GTMzone];
-    
-    NSDate *day = [NSDate dateWithTimeInterval:-8*3600 sinceDate:date];
-    
-    [_dateFormatter setTimeZone:localzone];
-    
-    return [_dateFormatter stringFromDate:day];
 }
 
 -(CGFloat)adjustValue:(CGFloat)value
@@ -370,18 +345,7 @@
     return adjustedMinutes * 60;
 
 }
-#pragma mark -- lazy load
--(NSDateFormatter  *)dateFormatter{
-    if (!_dateFormatter) {
-        _dateFormatter = [[NSDateFormatter alloc] init];
-        NSTimeZone* localzone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
-        [_dateFormatter setTimeZone:localzone];
-        
-        // hh:mm a
-        [_dateFormatter setDateFormat:@"HH:mm"];
-    }
-    return  _dateFormatter;
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -28,7 +28,7 @@ target 'SmartHome' do
     pod 'ContextMenu.iOS', '~> 1.1.0'
     pod 'PopupKit'
     pod 'STColorPicker', '~> 1.0.0'
-    pod 'HGCircularSlider', '~> 1.0.3'
+    pod 'HGCircularSlider', '~> 2.0.0'
     
 use_frameworks!
 end

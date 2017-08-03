@@ -369,6 +369,9 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="startThumbStrokeHighlightedColor">
                                         <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="numberOfRounds">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="updateTexts:" destination="4ax-xN-Wrx" eventType="valueChanged" id="RSx-qM-2ON"/>

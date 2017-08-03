@@ -220,6 +220,7 @@
 //开关
 - (IBAction)switchPower:(id)sender {
     
+    
         UIButton *btn = (UIButton *)sender;
         [btn setSelected:!btn.isSelected];
         if (btn.isSelected) {

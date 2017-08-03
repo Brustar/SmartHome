@@ -85,7 +85,8 @@
                             <constraint firstAttribute="height" constant="50" id="bAL-Kc-n0O"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" image="ipad-icon_st_nol" backgroundImage="ipad-btn_selete_nol"/>
+                        <state key="normal" image="ipad-DVD_toogle" backgroundImage="ipad-btn_selete_nol"/>
+                        <state key="highlighted" image="ipad-DVD_toogle_red"/>
                         <connections>
                             <action selector="stopBtn:" destination="qUV-tO-R3I" eventType="touchUpInside" id="QT5-rP-PvF"/>
                         </connections>
@@ -170,12 +171,13 @@
         <image name="bd_icon_voi_high" width="11" height="9"/>
         <image name="dvd_btn_switch_off" width="34" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
+        <image name="ipad-DVD_toogle" width="20" height="20"/>
+        <image name="ipad-DVD_toogle_red" width="20" height="20"/>
         <image name="ipad-btn_selete_nol" width="45" height="21"/>
         <image name="ipad-frm_adjust_nol" width="337" height="33"/>
         <image name="ipad-frm_adjustt_nol" width="209" height="10"/>
         <image name="ipad-icon_add_nol" width="19" height="19"/>
         <image name="ipad-icon_lt_nol" width="19" height="20"/>
         <image name="ipad-icon_rt_nol" width="20" height="20"/>
-        <image name="ipad-icon_st_nol" width="7" height="19"/>
     </resources>
 </document>
