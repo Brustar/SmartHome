@@ -111,7 +111,7 @@
     [self.btnPop setImage:[UIImage imageNamed:@"DVD_pop_red"] forState:UIControlStateHighlighted];
     
     [self.btnPrevoius setImage:[UIImage imageNamed:@"DVD_previous_red"] forState:UIControlStateHighlighted];
-    [self.btnPlay setImage:[UIImage imageNamed:@"DVD_pause"] forState:UIControlStateSelected];
+    //[self.btnPlay setImage:[UIImage imageNamed:@"DVD_pause"] forState:UIControlStateSelected];
     [self.btnNext setImage:[UIImage imageNamed:@"DVD_next_red"] forState:UIControlStateHighlighted];
     
     self.volume.continuous = NO;

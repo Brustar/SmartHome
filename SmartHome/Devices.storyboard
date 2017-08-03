@@ -1421,7 +1421,8 @@
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkp-hZ-I2O">
                                 <rect key="frame" x="136" y="604" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" image="DVD_play" backgroundImage="control_button"/>
+                                <state key="normal" image="DVD_toogle" backgroundImage="control_button"/>
+                                <state key="highlighted" image="DVD_toogle_red"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="hEB-Iu-b73"/>
                                 </connections>
@@ -2664,6 +2665,8 @@
         <image name="DVD_play" width="9" height="10"/>
         <image name="DVD_pop" width="12" height="12"/>
         <image name="DVD_previous" width="10" height="10"/>
+        <image name="DVD_toogle" width="14" height="10"/>
+        <image name="DVD_toogle_red" width="14" height="10"/>
         <image name="TV_back" width="10" height="11"/>
         <image name="TV_home" width="13" height="12"/>
         <image name="TV_menu" width="11" height="10"/>
