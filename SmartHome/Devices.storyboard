@@ -550,9 +550,9 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_hight" translatesAutoresizingMaskIntoConstraints="NO" id="C8v-xy-K9n">
-                                        <rect key="frame" x="161.5" y="18" width="12" height="10"/>
+                                        <rect key="frame" x="181" y="18" width="12" height="10"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnT-d6-cor">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnT-d6-cor">
                                         <rect key="frame" x="194" y="16" width="26.5" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -561,7 +561,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="C8v-xy-K9n" firstAttribute="centerX" secondItem="MSi-Vz-6oe" secondAttribute="centerX" constant="-20" id="0kw-eX-bCe"/>
+                                    <constraint firstItem="C8v-xy-K9n" firstAttribute="centerX" secondItem="MSi-Vz-6oe" secondAttribute="centerX" id="0kw-eX-bCe"/>
                                     <constraint firstItem="MSi-Vz-6oe" firstAttribute="centerX" secondItem="2gv-1A-X8q" secondAttribute="centerX" id="8aB-yy-3Jf"/>
                                     <constraint firstItem="MSi-Vz-6oe" firstAttribute="centerY" secondItem="2gv-1A-X8q" secondAttribute="centerY" id="BFq-R7-fVD"/>
                                     <constraint firstItem="a9s-uu-U4g" firstAttribute="centerY" secondItem="MSi-Vz-6oe" secondAttribute="centerY" id="KGY-AQ-9iC"/>
@@ -1130,9 +1130,9 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_hight" translatesAutoresizingMaskIntoConstraints="NO" id="Lu8-sP-hvB">
-                                        <rect key="frame" x="162" y="18" width="12" height="10"/>
+                                        <rect key="frame" x="181.5" y="18" width="12" height="10"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTM-Gz-sPV">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTM-Gz-sPV">
                                         <rect key="frame" x="194.5" y="16" width="26.5" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1141,7 +1141,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Lu8-sP-hvB" firstAttribute="centerX" secondItem="x3L-Na-wGg" secondAttribute="centerX" constant="-20" id="5j6-rI-8sS"/>
+                                    <constraint firstItem="Lu8-sP-hvB" firstAttribute="centerX" secondItem="x3L-Na-wGg" secondAttribute="centerX" id="5j6-rI-8sS"/>
                                     <constraint firstItem="x3L-Na-wGg" firstAttribute="leading" secondItem="r4O-xb-iAk" secondAttribute="leading" id="7L8-J4-SxT"/>
                                     <constraint firstAttribute="trailing" secondItem="x3L-Na-wGg" secondAttribute="trailing" id="7fZ-j7-Edr"/>
                                     <constraint firstItem="x3L-Na-wGg" firstAttribute="centerX" secondItem="r4O-xb-iAk" secondAttribute="centerX" id="Ebq-wT-4dt"/>
@@ -1325,9 +1325,9 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_hight" translatesAutoresizingMaskIntoConstraints="NO" id="ylP-xo-beK">
-                                        <rect key="frame" x="161.5" y="18" width="12" height="10"/>
+                                        <rect key="frame" x="181.5" y="18" width="12" height="10"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7G-8o-fSB">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7G-8o-fSB">
                                         <rect key="frame" x="194.5" y="15.5" width="26.5" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1336,7 +1336,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="ylP-xo-beK" firstAttribute="centerX" secondItem="XtL-uc-HIF" secondAttribute="centerX" constant="-20" id="7uD-EG-eCq"/>
+                                    <constraint firstItem="ylP-xo-beK" firstAttribute="centerX" secondItem="XtL-uc-HIF" secondAttribute="centerX" id="7uD-EG-eCq"/>
                                     <constraint firstItem="z7G-8o-fSB" firstAttribute="centerY" secondItem="XtL-uc-HIF" secondAttribute="centerY" id="9C3-aH-v3F"/>
                                     <constraint firstItem="z7G-8o-fSB" firstAttribute="centerX" secondItem="XtL-uc-HIF" secondAttribute="centerX" constant="20" id="H7y-B5-SAq"/>
                                     <constraint firstItem="jXL-bb-56R" firstAttribute="trailing" secondItem="XtL-uc-HIF" secondAttribute="trailing" constant="-30" id="RDk-g4-X1A"/>
@@ -1596,9 +1596,9 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_hight" translatesAutoresizingMaskIntoConstraints="NO" id="3fE-ma-reu">
-                                        <rect key="frame" x="161.5" y="18" width="12" height="10"/>
+                                        <rect key="frame" x="181.5" y="18" width="12" height="10"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMo-7p-DLv">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMo-7p-DLv">
                                         <rect key="frame" x="194.5" y="15.5" width="26.5" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1617,7 +1617,7 @@
                                     <constraint firstItem="mJc-H4-aij" firstAttribute="leading" secondItem="2pG-hH-ITr" secondAttribute="leading" id="QEB-zy-P4W"/>
                                     <constraint firstItem="Ucc-b3-fcN" firstAttribute="centerY" secondItem="mJc-H4-aij" secondAttribute="centerY" id="kBF-uc-8QY"/>
                                     <constraint firstItem="mJc-H4-aij" firstAttribute="centerY" secondItem="2pG-hH-ITr" secondAttribute="centerY" id="n8b-77-joP"/>
-                                    <constraint firstItem="3fE-ma-reu" firstAttribute="centerX" secondItem="mJc-H4-aij" secondAttribute="centerX" constant="-20" id="oaW-Yd-hC9"/>
+                                    <constraint firstItem="3fE-ma-reu" firstAttribute="centerX" secondItem="mJc-H4-aij" secondAttribute="centerX" id="oaW-Yd-hC9"/>
                                     <constraint firstItem="GMo-7p-DLv" firstAttribute="centerX" secondItem="mJc-H4-aij" secondAttribute="centerX" constant="20" id="szq-ul-96I"/>
                                 </constraints>
                             </view>
