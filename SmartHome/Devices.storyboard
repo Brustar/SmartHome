@@ -500,6 +500,7 @@
                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxk-X8-miD">
                                 <rect key="frame" x="165" y="604" width="46" height="46"/>
                                 <state key="normal" image="TV_off" backgroundImage="music_button_control"/>
+                                <state key="highlighted" image="TV_on"/>
                                 <connections>
                                     <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="CyS-LQ-Gri"/>
                                 </connections>
@@ -1544,6 +1545,7 @@
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWJ-x8-d54">
                                 <rect key="frame" x="164.5" y="604" width="46" height="46"/>
                                 <state key="normal" image="TV_off" backgroundImage="music_button_control"/>
+                                <state key="highlighted" image="TV_on"/>
                                 <connections>
                                     <action selector="control:" destination="C1t-VG-vPd" eventType="touchUpInside" id="WDM-kd-3v0"/>
                                 </connections>
@@ -2666,6 +2668,7 @@
         <image name="TV_home" width="13" height="12"/>
         <image name="TV_menu" width="11" height="10"/>
         <image name="TV_off" width="12" height="12"/>
+        <image name="TV_on" width="12" height="12"/>
         <image name="air_base" width="326" height="326"/>
         <image name="air_dot_blue" width="6" height="6"/>
         <image name="air_dot_red" width="6" height="6"/>
