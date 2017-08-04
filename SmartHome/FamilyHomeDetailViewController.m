@@ -736,10 +736,21 @@
     SocketManager *sock = [SocketManager defaultManager];
     sock.delegate = self;
     
+    __block float timeInterval = 0.2;
+    
     [deviceIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        NSData *data = [[DeviceInfo defaultManager] query:[obj stringValue]];
-        [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            NSData *data = [[DeviceInfo defaultManager] query:[obj stringValue]];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            
+        });
+        
+        timeInterval += 0.2;
+        
     }];
 }
 

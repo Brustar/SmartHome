@@ -171,15 +171,27 @@
         [deviceIDs addObjectsFromArray:avIDs];
     }
     
-    //_totalCmds = deviceIDs.count + _roomArray.count*3;
     
     SocketManager *sock = [SocketManager defaultManager];
     sock.delegate = self;
     
+    _startDate = [NSDate date];
+    
+    __block float timeInterval = 0.2;
+    
     [deviceIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            NSData *data = [[DeviceInfo defaultManager] query:[obj stringValue]];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            
+        });
+        
+        timeInterval += 0.2;
 
-       NSData *data = [[DeviceInfo defaultManager] query:[obj stringValue]];
-       [sock.socket writeData:data withTimeout:1 tag:1];
     }];
     
     
@@ -188,20 +200,32 @@
     
         Room *room = (Room *)obj;
         
-        NSData *data = nil;
-        
         //  PM2.5
         NSString *pmID = [SQLManager singleDeviceWithCatalogID:55 byRoom:room.rId];
         if (pmID.length >0) {
-            data = [[DeviceInfo defaultManager] query:pmID];
-            [sock.socket writeData:data withTimeout:1 tag:1];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                NSData *data = [[DeviceInfo defaultManager] query:pmID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+                
+            });
+            
+            timeInterval += 0.2;
         }
+        
         
         //  湿度
         NSString *humidityID = [SQLManager singleDeviceWithCatalogID:50 byRoom:room.rId];
         if (humidityID.length >0) {
-            data = [[DeviceInfo defaultManager] query:humidityID];
-            [sock.socket writeData:data withTimeout:1 tag:1];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                NSData *data = [[DeviceInfo defaultManager] query:humidityID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+                
+            });
+            
+            timeInterval += 0.2;
         }
         
     }];
@@ -469,9 +493,30 @@
                 if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
                     device.power = proto.action.state;
                     
-                    if (proto.deviceType == 0x14) {
-                                           NSLog(@"背景音乐---开关---  %d", proto.action.state);
+                    /*if (proto.deviceType == 0x14) {
+                        NSDate *endDate  =  [NSDate date];
+                        NSLog(@"背景音乐  时间： %f", [endDate timeIntervalSinceDate:_startDate]);
+                        NSLog(@"背景音乐---开关---  %d", proto.action.state);
+                        
                    }
+                    
+                    if (proto.deviceType == 0x11) {
+                        NSDate *endDate  =  [NSDate date];
+                        NSLog(@"电视  时间： %f", [endDate timeIntervalSinceDate:_startDate]);
+                        NSLog(@"电视---开关---  %d", proto.action.state);
+                    }
+                    
+                    if (proto.deviceType == 0x13) {
+                        NSDate *endDate  =  [NSDate date];
+                        NSLog(@"DVD  时间： %f", [endDate timeIntervalSinceDate:_startDate]);
+                        NSLog(@"DVD---开关---  %d", proto.action.state);
+                    }
+                    
+                    if (proto.deviceType == 0x18) {
+                        NSDate *endDate  =  [NSDate date];
+                        NSLog(@"功放  时间： %f", [endDate timeIntervalSinceDate:_startDate]);
+                        NSLog(@"功放---开关---  %d", proto.action.state);
+                    }*/
                     
                 }
                 
