@@ -141,7 +141,6 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
     if (ON_IPAD) {
         self.menuTop.constant = 0;
-        self.IRContainer.hidden = NO;
         self.voiceLeft.constant = self.voiceRight.constant = 100;
         self.controlLeft.constant = self.controlRight.constant = 150;
         self.controlBottom.constant = 160;
