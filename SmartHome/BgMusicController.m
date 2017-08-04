@@ -51,10 +51,6 @@
 
 @implementation BgMusicController
 
-
-// an ivar for your class:
-BOOL animating;
-
 - (void) spinWithOptions: (UIViewAnimationOptions) options {
     // this spin completes 360 degrees every 2 seconds
     [UIView animateWithDuration: 1.0f
@@ -65,7 +61,7 @@ BOOL animating;
                      }
                      completion: ^(BOOL finished) {
                          if (finished) {
-                             if (animating) {
+                             if (self.animating) {
                                  // if flag still set, keep spinning with constant speed
                                  [self spinWithOptions: UIViewAnimationOptionCurveLinear];
                              } else if (options != UIViewAnimationOptionCurveEaseOut) {
@@ -77,15 +73,15 @@ BOOL animating;
 }
 
 - (void) startSpin {
-    if (!animating) {
-        animating = YES;
+    if (!self.animating) {
+        self.animating = YES;
         [self spinWithOptions: UIViewAnimationOptionCurveEaseIn];
     }
 }
 
 - (void) stopSpin {
     // set the flag to stop spinning after one last 90 degree increment
-    animating = NO;
+    self.animating = NO;
 }
 
 -(void) initSlider

@@ -31,6 +31,7 @@
     [self.DVDSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
     [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+     [self.stopBtn setImage:[UIImage imageNamed:@"DVD_toogle_red"] forState:UIControlStateHighlighted];
 }
 -(void) query:(NSString *)deviceid
 {
@@ -136,12 +137,12 @@
     NSData *data=nil;
     self.stopBtn.selected = !self.stopBtn.selected;
     if (self.stopBtn.selected) {
-        [self.stopBtn setImage:[UIImage imageNamed:@"DVD_pause"] forState:UIControlStateNormal];
+//        [self.stopBtn setImage:[UIImage imageNamed:@"DVD_pause"] forState:UIControlStateNormal];
         data=[[DeviceInfo defaultManager] pause:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }else{
-        [self.stopBtn setImage:[UIImage imageNamed:@"DVD_play"] forState:UIControlStateNormal];
+//        [self.stopBtn setImage:[UIImage imageNamed:@"DVD_play"] forState:UIControlStateNormal];
         data=[[DeviceInfo defaultManager] play:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];

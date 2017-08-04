@@ -2521,10 +2521,10 @@
 				0F032D421CC9B12700D1920D /* Resources */,
 				9C97EFC5A754784A9B85D9D0 /* [CP] Embed Pods Frameworks */,
 				901B98770BA9652E39727DC8 /* [CP] Copy Pods Resources */,
-				96D783ECF2FC5954ED57287C /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Embed Pods Frameworks */,
-				4ABB1A0B0312B56BE2774A85 /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Copy Pods Resources */,
-				4E52A7E76F61C3C8884FFFFE /* üì¶ Embed Pods Frameworks */,
-				F169192FBFAB7CFE1569E0C4 /* üì¶ Copy Pods Resources */,
+				96D783ECF2FC5954ED57287C /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Embed Pods Frameworks */,
+				4ABB1A0B0312B56BE2774A85 /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Copy Pods Resources */,
+				4E52A7E76F61C3C8884FFFFE /* üì¶ Embed Pods Frameworks */,
+				F169192FBFAB7CFE1569E0C4 /* üì¶ Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2789,7 +2789,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		4ABB1A0B0312B56BE2774A85 /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Copy Pods Resources */ = {
+		4ABB1A0B0312B56BE2774A85 /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2819,7 +2819,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		4E52A7E76F61C3C8884FFFFE /* üì¶ Embed Pods Frameworks */ = {
+		4E52A7E76F61C3C8884FFFFE /* üì¶ Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2909,7 +2909,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7B4EC63A298C6E6A66AD1643 /* [CP] Check Pods Manifest.lock */ = {
@@ -2950,7 +2950,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		96D783ECF2FC5954ED57287C /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Embed Pods Frameworks */ = {
+		96D783ECF2FC5954ED57287C /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3062,7 +3062,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F169192FBFAB7CFE1569E0C4 /* üì¶ Copy Pods Resources */ = {
+		F169192FBFAB7CFE1569E0C4 /* üì¶ Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

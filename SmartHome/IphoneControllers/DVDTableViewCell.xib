@@ -78,7 +78,8 @@
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75B-Ud-NQ6">
                         <rect key="frame" x="136.5" y="57" width="102" height="43.5"/>
-                        <state key="normal" image="DVD_play" backgroundImage="dvd_btn_adjust_normal"/>
+                        <state key="normal" image="DVD_toogle" backgroundImage="dvd_btn_adjust_normal"/>
+                        <state key="highlighted" image="DVD_toogle_red"/>
                         <connections>
                             <action selector="stopBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8SS-Fi-bUT"/>
                         </connections>
@@ -151,8 +152,9 @@
     </objects>
     <resources>
         <image name="DVD_next" width="10" height="10"/>
-        <image name="DVD_play" width="9" height="10"/>
         <image name="DVD_previous" width="10" height="10"/>
+        <image name="DVD_toogle" width="14" height="10"/>
+        <image name="DVD_toogle_red" width="14" height="10"/>
         <image name="bd_icon_voi_high" width="11" height="9"/>
         <image name="dvd_btn_adjust_normal" width="91" height="38"/>
         <image name="dvd_btn_switch_off" width="34" height="23"/>
