@@ -651,11 +651,10 @@ static NSString * const CYPhotoId = @"photo";
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
     self.selectSceneImg = info[UIImagePickerControllerOriginalImage];
     
-    Scene *scene = [[Scene alloc] initWhithoutSchedule];
-    scene.sceneID = self.currentCell.sceneID;
+    //场景ID不变
+    Scene *scene = [[SceneManager defaultManager] readSceneByID:self.currentCell.sceneID];
     scene.roomID = self.roomID;
     [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
-    
     [self.currentCell.imageView setImage:self.selectSceneImg];
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
     [[SDImageCache sharedImageCache] clearMemory];
@@ -667,8 +666,8 @@ static NSString * const CYPhotoId = @"photo";
     self.selectSceneImg = [UIImage imageNamed:imgName];
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
     [self.currentCell.imageView setImage:self.selectSceneImg];
-    Scene *scene = [[Scene alloc] initWhithoutSchedule];
-    scene.sceneID = self.currentCell.sceneID;
+    //场景ID不变
+    Scene *scene = [[SceneManager defaultManager] readSceneByID:self.currentCell.sceneID];
     scene.roomID = self.roomID;
     [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
