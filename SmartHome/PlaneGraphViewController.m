@@ -102,14 +102,21 @@
     [_roomArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
         Room *room = (Room *)obj;
+        NSData *data = nil;
+        
         //  PM2.5
         NSString *pmID = [SQLManager singleDeviceWithCatalogID:55 byRoom:room.rId];
-        NSData *data = [[DeviceInfo defaultManager] query:pmID];
-        [sock.socket writeData:data withTimeout:1 tag:1];
+        if (pmID.length >0) {
+            data = [[DeviceInfo defaultManager] query:pmID];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+        }
+        
         //  湿度
         NSString *humidityID = [SQLManager singleDeviceWithCatalogID:50 byRoom:room.rId];
-        data = [[DeviceInfo defaultManager] query:humidityID];
-        [sock.socket writeData:data withTimeout:1 tag:1];
+        if (humidityID.length >0) {
+           data = [[DeviceInfo defaultManager] query:humidityID];
+           [sock.socket writeData:data withTimeout:1 tag:1];
+        }
     }];
     
     

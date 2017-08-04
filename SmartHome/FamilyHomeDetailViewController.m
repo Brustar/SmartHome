@@ -786,6 +786,14 @@
 //                if (proto.deviceType == 0x14) {
 //                    NSLog(@"背景音乐---开关---  %d", proto.action.state);
 //                }
+                
+//                if (proto.deviceType == 0x13) {
+//                    NSLog(@"DVD---开关---  %d", proto.action.state);
+//                }
+                
+//                if (proto.deviceType == 0x11) {
+//                    NSLog(@"电视---开关---  %d", proto.action.state);
+//                }
             }
             
             [SQLManager updateDeviceStatus:device];
