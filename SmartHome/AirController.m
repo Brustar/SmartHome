@@ -140,7 +140,7 @@ static NSString *const airCellIdentifier = @"airCell";
         if (proto.action.state==0x6A) { //温度
             self.currentTemp.text = [NSString stringWithFormat:@"Current:%d°C",proto.action.RValue];
             self.currentDegree = proto.action.RValue;
-            
+            self.tempreturePan.transform = CGAffineTransformMakeRotation(self.currentDegree*MIX_TEMP_ROTATE_DEGREE/16);
             for (int i=1; i<16; i++) {
                 UIView *viewblue = [self.view viewWithTag:i+100];
                 viewblue.hidden = self.currentDegree - i<=16 || self.airMode == 1;

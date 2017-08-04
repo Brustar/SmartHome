@@ -29,35 +29,6 @@
 #import "UIViewController+Navigator.h"
 #import "KeypadView.h"
 
-@interface UIImagePickerController (LandScapeImagePicker)
-
-- (UIStatusBarStyle)preferredStatusBarStyle;
-- (NSUInteger)supportedInterfaceOrientations;
-- (BOOL)prefersStatusBarHidden;
-@end
-
-@implementation UIImagePickerController (LandScapeImagePicker)
-
-- (NSUInteger) supportedInterfaceOrientations
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-        return UIInterfaceOrientationMaskLandscape;
-    else
-        return UIInterfaceOrientationMaskPortrait;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleDefault;
-}
-
-- (BOOL)prefersStatusBarHidden
-{
-    return NO;
-}
-
-@end
-
 
 @interface TVController ()<UIScrollViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,IphoneRoomViewDelegate>
 
