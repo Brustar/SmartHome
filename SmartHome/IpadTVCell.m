@@ -44,15 +44,10 @@
 - (IBAction)save:(id)sender {
      _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     TV *device=[[TV alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    //    [device setIsPoweron:device.poweron];
-    [device setPoweron:self.TVSwitchBtn.selected];
-    [device setVolume:self.TVSlider.value*100];
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
     if (sender == self.TVSwitchBtn) {
-        
+        [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+        self.AddTvDeviceBtn.selected = YES;
         self.TVSwitchBtn.selected = !self.TVSwitchBtn.selected;
         if (self.TVSwitchBtn.selected) {
             [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
@@ -78,33 +73,18 @@
         self.AddTvDeviceBtn.selected = !self.AddTvDeviceBtn.selected;
         if (self.AddTvDeviceBtn.selected) {
             [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
-            
-            [_scene setSceneID:[self.sceneid intValue]];
-            [_scene setRoomID:self.roomID];
-            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-            
-            [_scene setReadonly:NO];
-         
-            
         }else{
 //              [IOManager removeTempFile];
             [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
             
-            [_scene setSceneID:[self.sceneid intValue]];
-            [_scene setRoomID:self.roomID];
-            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-            
-            [_scene setReadonly:NO];
-            
             //删除当前场景的当前硬件
             NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
-            
             [_scene setDevices:devices];
-//            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-            
         }
         
     }else if (sender == self.TVSlider){
+           [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+        self.AddTvDeviceBtn.selected = YES;
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.TVSlider.value*100 deviceID:self.deviceid];
         //        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
         SocketManager *sock=[SocketManager defaultManager];
@@ -115,7 +95,16 @@
         }
     }
     
-    
+    [device setDeviceID:[self.deviceid intValue]];
+    //    [device setIsPoweron:device.poweron];
+    [device setPoweron:self.TVSwitchBtn.selected];
+    [device setVolume:self.TVSlider.value*100];
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    [_scene setReadonly:NO];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
     
 }

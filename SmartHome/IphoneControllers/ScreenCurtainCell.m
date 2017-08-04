@@ -57,11 +57,13 @@
 - (IBAction)save:(id)sender {
      _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         Amplifier *device=[[Amplifier alloc] init];
-        [device setDeviceID:[self.deviceid intValue]];
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-        [device setWaiting: self.ScreenCurtainBtn.selected];
     if (sender == self.ScreenCurtainBtn) {
+        if (ON_IPAD) {
+            [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+        }else{
+            [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+        }
+        self.ScreenCurtainBtn.selected = YES;
         self.ScreenCurtainBtn.selected = !self.ScreenCurtainBtn.selected;
         if (self.ScreenCurtainBtn.selected) {
             [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
@@ -80,16 +82,6 @@
             }else{
                  [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
             }
-           
-            [_scene setSceneID:[self.sceneid intValue]];
-            [_scene setRoomID:self.roomID];
-            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-            
-            [_scene setReadonly:NO];
-            
-         
-            
-            
         }else{
            
             if (ON_IPAD) {
@@ -97,20 +89,20 @@
             }else{
                 [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
             }
-         
-            [_scene setSceneID:[self.sceneid intValue]];
-            [_scene setRoomID:self.roomID];
-            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-            
-            [_scene setReadonly:NO];
             //删除当前场景的当前硬件
             NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
             [_scene setDevices:devices];
-//            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
     }
     
-  
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setWaiting: self.ScreenCurtainBtn.selected];
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    [_scene setReadonly:NO];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
   

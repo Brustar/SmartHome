@@ -72,13 +72,14 @@
 - (IBAction)save:(id)sender {
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         Radio *device=[[Radio alloc] init];
-        [device setDeviceID:[self.deviceid intValue]];
-        [device setRvolume:device.rvolume];
-        [device setChannel:device.channel];
-
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
+    
     if (sender == self.FMSwitchBtn) {
+        if (ON_IPAD) {
+            [self.AddFmBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+        }else{
+            [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+        }
+        self.AddFmBtn.selected = YES;
          NSData *data=nil;
         self.FMSwitchBtn.selected = !self.FMSwitchBtn.selected;
         if (self.FMSwitchBtn.selected) {
@@ -106,15 +107,6 @@
             }else{
                 [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
             }
-            
-            [_scene setSceneID:[self.sceneid intValue]];
-            [_scene setRoomID:self.roomID];
-            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-            
-            [_scene setReadonly:NO];
-            
-     
-            
         }else{
           
             if (ON_IPAD) {
@@ -122,20 +114,18 @@
             }else{
                  [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
             }
-           
-            [_scene setSceneID:[self.sceneid intValue]];
-            [_scene setRoomID:self.roomID];
-            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-            
-            [_scene setReadonly:NO];
-
-            //删除当前场景的当前硬件
+        //删除当前场景的当前硬件
             NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
             [_scene setDevices:devices];
-//            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
         
     }else if (sender == self.FMSlider){
+        if (ON_IPAD) {
+            [self.AddFmBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+        }else{
+            [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+        }
+        self.AddFmBtn.selected = YES;
         //音量
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.FMSlider.value*100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
@@ -146,6 +136,12 @@
         }
         
     }else if (sender == self.FMChannelSlider){
+        if (ON_IPAD) {
+            [self.AddFmBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+        }else{
+            [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+        }
+        self.AddFmBtn.selected = YES;
         //频道
         self.FMChannelLabel.text = [NSString stringWithFormat:@"%.1fFM",80+self.FMChannelSlider.value*40];
         float frequence = 80+self.FMChannelSlider.value*40;// frequence取整后，作为高字节
@@ -158,9 +154,15 @@
             [_delegate onFMChannelSliderValueChanged:sender];
         }
     }
-    
-   
-    
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setRvolume:device.rvolume];
+    [device setChannel:device.channel];
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    [_scene setReadonly:NO];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
   
 }

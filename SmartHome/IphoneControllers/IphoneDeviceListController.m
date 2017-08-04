@@ -30,6 +30,8 @@
 #import "CYPhotoCell.h"
 #import "IPadDevicesView.h"
 #import "GuardController.h"
+#import "SocketManager.h"
+#import "PackManager.h"
 
 static NSString * const CYPhotoId = @"photo";
 @interface IphoneDeviceListController ()<IphoneRoomViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -42,11 +44,12 @@ static NSString * const CYPhotoId = @"photo";
 @property (nonatomic,strong) UIButton *typeSelectedBtn;
 @property (nonatomic,strong) UIButton *selectedRoomBtn;
 @property (nonatomic,strong) NSArray *rooms;
-
+@property (nonatomic,weak) NSString *deviceid;
 @property (weak, nonatomic) UIViewController *currentViewController;
 @property (weak, nonatomic) IBOutlet IphoneRoomView *iphoneRoomView;
 @property (nonatomic, assign) int roomIndex;
-
+@property (nonatomic,strong) NSMutableArray * bgmusicIDS;
+@property (nonatomic,strong) NSMutableArray * bgmusicIDArr;
 @property (nonatomic,strong)UICollectionView * FirstCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *DeviceNameLabel;
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
@@ -66,7 +69,27 @@ static NSString * const CYPhotoId = @"photo";
     _baseTabbarController.tabBar.hidden = YES;
     [self addNotifications];
     [LoadMaskHelper showMaskWithType:DeviceHome onView:self.tabBarController.view delay:0.5 delegate:self];
+      [_bgmusicIDArr removeAllObjects];
      [self setupNaviBar];
+    
+    
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
+    _bgmusicIDS = [[NSMutableArray alloc] init];
+    NSArray * roomArr = [SQLManager getAllRoomsInfo];
+    for (int i = 0; i < roomArr.count; i ++) {
+        Room * roomName = roomArr[i];
+        if (![SQLManager isWholeHouse:roomName.rId]) {
+            self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:roomName.rId];
+        }
+        if (self.deviceid.length != 0) {
+            [_bgmusicIDS addObject:self.deviceid];
+            //查询设备状态
+            NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            
+        }
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -93,7 +116,7 @@ static NSString * const CYPhotoId = @"photo";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    _bgmusicIDArr = [[NSMutableArray alloc] init];
     self.automaticallyAdjustsScrollViewInsets = NO;
    
     [self showNetStateView];
@@ -620,7 +643,35 @@ static NSString * const CYPhotoId = @"photo";
 - (void)dealloc {
     [self removeNotifications];
 }
-
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    for (int i = 0; i <self.bgmusicIDS.count; i ++) {
+        if (proto.cmd==0x01) {
+            NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+            if ([devID intValue]==[self.bgmusicIDS[i] intValue]) {
+                if (proto.action.state == PROTOCOL_VOLUME) {
+                    NSLog(@"有音量");
+                }if (proto.action.state == PROTOCOL_ON) {
+                    NSLog(@"开启状态");
+                    [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
+                    
+                    [_bgmusicIDArr addObject:devID];
+                    
+                }if (proto.action.state == PROTOCOL_OFF) {
+                    NSLog(@"关闭状态");
+                    [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
+                }
+            }
+        }
+    }
+    
+}
 #pragma mark - SingleMaskViewDelegate
 - (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
     Device *device = self.devices[1];

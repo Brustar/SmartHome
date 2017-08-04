@@ -63,6 +63,8 @@
     _bgmusicNameS = [[NSMutableArray alloc] init];
      _AllRooms = [[NSMutableArray alloc] init];
     _bgmusicIDS = [[NSMutableArray alloc] init];
+    self.powerBtn.selected = YES;
+     [self.powerBtn setImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
     NSArray * roomArr = [SQLManager getAllRoomsInfo];
     for (int i = 0; i < roomArr.count; i ++) {
         Room * roomName = roomArr[i];

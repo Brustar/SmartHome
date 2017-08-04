@@ -46,13 +46,10 @@
 - (IBAction)save:(id)sender {
      _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         DVD *device=[[DVD alloc] init];
-        [device setDeviceID:[self.deviceid intValue]];
-        [device setPoweron:self.DVDSwitchBtn.selected];
-        [device setDvolume:self.DVDSlider.value * 100];
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
     
     if (sender == self.DVDSwitchBtn) {
+        [self.AddDvdBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+        self.AddDvdBtn.selected = YES;
         NSData *data=nil;
         self.DVDSwitchBtn.selected = !self.DVDSwitchBtn.selected;
         if (self.DVDSwitchBtn.selected) {
@@ -78,33 +75,17 @@
         if (self.AddDvdBtn.selected) {
             [self.AddDvdBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
             
-            [_scene setSceneID:[self.sceneid intValue]];
-            [_scene setRoomID:self.roomID];
-            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-            
-            [_scene setReadonly:NO];
-          
-            
         }else{
             
-          
             [self.AddDvdBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
-            
-            [_scene setSceneID:[self.sceneid intValue]];
-            [_scene setRoomID:self.roomID];
-            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-            
-            [_scene setReadonly:NO];
-
             //删除当前场景的当前硬件
             NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
-            
             [_scene setDevices:devices];
-//            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
         
     }else if (sender == self.DVDSlider){
-        
+          [self.AddDvdBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+        self.AddDvdBtn.selected = YES;
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.DVDSlider.value*100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
@@ -114,7 +95,15 @@
         }
     }
     
-
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setPoweron:self.DVDSwitchBtn.selected];
+    [device setDvolume:self.DVDSlider.value * 100];
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    [_scene setReadonly:NO];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 //上一曲

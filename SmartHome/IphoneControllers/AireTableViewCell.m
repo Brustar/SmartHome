@@ -50,15 +50,14 @@
 }
 - (IBAction)save:(id)sender {
      _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        Aircon *device=[[Aircon alloc] init];
-        [device setDeviceID:[self.deviceid intValue]];
-        [device setPoweron:self.AireSwitchBtn.selected];
-//    [NSString stringWithFormat:@"%ld°C", lroundf(self.AireSlider.value)]
-        [device setTemperature:(int)lroundf(self.AireSlider.value)];
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    
+      Aircon *device=[[Aircon alloc] init];
     if (sender == self.AireSwitchBtn) {
+        if (ON_IPAD) {
+            [self.AddAireBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+        }else{
+            [self.AddAireBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+        }
+        self.AddAireBtn.selected = YES;
         self.AireSwitchBtn.selected = !self.AireSwitchBtn.selected;
         if (self.AireSwitchBtn.selected) {
             [self.AireSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
@@ -82,14 +81,6 @@
             }else{
                  [self.AddAireBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
             }
-            
-            [_scene setSceneID:[self.sceneid intValue]];
-            [_scene setRoomID:self.roomID];
-            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-            
-            [_scene setReadonly:NO];
-           
-            
         }else{
             
             if (ON_IPAD) {
@@ -97,21 +88,19 @@
             }else{
                 [self.AddAireBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
             }
-            
-            [_scene setSceneID:[self.sceneid intValue]];
-            [_scene setRoomID:self.roomID];
-            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-            
-            [_scene setReadonly:NO];
             //删除当前场景的当前硬件
             NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
             [_scene setDevices:devices];
-//            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
        
     }else if (sender == self.AireSlider){
-        
-        self.temperatureLabel.text = [NSString stringWithFormat:@"%ld°C", lroundf(self.AireSlider.value)];        
+        if (ON_IPAD) {
+            [self.AddAireBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+        }else{
+            [self.AddAireBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+        }
+        self.AddAireBtn.selected = YES;
+        self.temperatureLabel.text = [NSString stringWithFormat:@"%ld°C", lroundf(self.AireSlider.value)];
         NSData *data=[[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:lroundf(self.AireSlider.value)];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
@@ -121,7 +110,16 @@
         }
     }
 
-    
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setPoweron:self.AireSwitchBtn.selected];
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    [_scene setReadonly:NO];
+    //    [NSString stringWithFormat:@"%ld°C", lroundf(self.AireSlider.value)]
+    [device setTemperature:(int)lroundf(self.AireSlider.value)];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
    
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
