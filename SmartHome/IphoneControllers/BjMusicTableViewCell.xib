@@ -60,15 +60,17 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RA2-wl-P6n">
-                        <rect key="frame" x="285" y="13" width="22" height="22"/>
+                        <rect key="frame" x="263" y="8" width="44" height="38"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="22" id="BYs-ib-3Rb"/>
-                            <constraint firstAttribute="height" constant="22" id="oVA-Xe-abl"/>
+                            <constraint firstAttribute="width" constant="44" id="BYs-ib-3Rb"/>
+                            <constraint firstAttribute="height" constant="38" id="oVA-Xe-abl"/>
                         </constraints>
                         <state key="normal" image="music_white"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNv-h0-wW4">
                         <rect key="frame" x="329" y="8" width="30" height="30"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="VW2-U1-igE"/>
                             <constraint firstAttribute="height" constant="30" id="VYA-uL-hUG"/>
@@ -95,7 +97,7 @@
                     <constraint firstItem="qeP-Gt-Xg0" firstAttribute="leading" secondItem="GSf-bm-sEA" secondAttribute="trailing" constant="15" id="kZK-nw-TnI"/>
                     <constraint firstItem="gcs-pi-ibs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="nMb-Qi-tg5"/>
                     <constraint firstAttribute="trailingMargin" secondItem="j8h-xl-mRj" secondAttribute="trailing" constant="10" id="qPC-xZ-v3x"/>
-                    <constraint firstItem="RA2-wl-P6n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="uxw-Ke-zSi"/>
+                    <constraint firstItem="RA2-wl-P6n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="uxw-Ke-zSi"/>
                     <constraint firstAttribute="trailing" secondItem="46X-Zw-9GZ" secondAttribute="trailing" id="yLL-QI-Ze1"/>
                 </constraints>
             </tableViewCellContentView>

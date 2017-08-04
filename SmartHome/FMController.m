@@ -155,7 +155,7 @@
         self.menuTop.constant = 0;
         self.voiceLeft.constant = self.voiceRight.constant = self.IRLeft.constant = self.IRight.constant = 100;
         [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
-        self.ear.hidden = self.btnNext.hidden = self.prevoius.hidden = self.ipadPower.hidden = self.IRContainer.hidden = NO;
+        self.ear.hidden = self.btnNext.hidden = self.prevoius.hidden = self.ipadPower.hidden = NO;
     }
 }
 

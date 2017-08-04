@@ -400,8 +400,23 @@
     //同步云端
     NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,newScene.sceneID];
     newScene.sceneName = [SQLManager getSceneName:newScene.sceneID];
+    newScene.isplan =  [SQLManager sceneBySceneID:newScene.sceneID].isplan;
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:fileName];
     NSDictionary *parameter;
+    if (newScene.isplan == 0) {
+        for (Schedule *schedule in newScene.schedules) {
+            parameter = @{
+                          @"token":[UD objectForKey:@"AuthorToken"],
+                          @"optype":@(6),
+                          @"scencefile":scenePath,
+                          @"starttime":schedule.startTime,
+                          @"endtime":schedule.endTime,
+                          @"weekvalue":schedule.weekDays,
+                          @"isactive":@(newScene.isactive),
+                          @"sceneid":@(newScene.sceneID)
+                          };
+        }
+    }else{
         for (Schedule *schedule in newScene.schedules) {
             parameter = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
@@ -414,8 +429,7 @@
                           @"sceneid":@(newScene.sceneID)
                           };
         }
-
-    
+    }
     NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
     NSString *URL = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
     [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:nil imgFileName:@"" completion:^(id responseObject) {

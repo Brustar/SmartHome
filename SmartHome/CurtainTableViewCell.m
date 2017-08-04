@@ -55,12 +55,13 @@
 {
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     Curtain *device=[[Curtain alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setOpenvalue:self.slider.value * 100];
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    
     if ([sender isEqual:self.slider]) {
+        if (ON_IPAD) {
+            [self.AddcurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+        }else{
+            [self.AddcurtainBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+        }
+        self.AddcurtainBtn.selected = YES;
         if (self.slider.value > 0) {
             self.open.selected = YES;
         }else{
@@ -76,7 +77,12 @@
     }
     
     if ([sender isEqual:self.open]) {
-        
+        if (ON_IPAD) {
+            [self.AddcurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+        }else{
+            [self.AddcurtainBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+        }
+        self.AddcurtainBtn.selected = YES;
         self.open.selected = !self.open.selected;
         if (self.open.selected) {
             self.slider.value=1;
@@ -110,11 +116,6 @@
             }else{
                 [self.AddcurtainBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
             }
-            [_scene setSceneID:[self.sceneid intValue]];
-            [_scene setRoomID:self.roomID];
-            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-            [_scene setReadonly:NO];
-           
            
         }else{
             
@@ -123,12 +124,6 @@
             }else{
                  [self.AddcurtainBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
             }
-          
-            [_scene setSceneID:[self.sceneid intValue]];
-            [_scene setRoomID:self.roomID];
-            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-            
-            [_scene setReadonly:NO];
             
             //删除当前场景的当前硬件
             NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
@@ -137,7 +132,14 @@
         }
       
     }
-    
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setOpenvalue:self.slider.value * 100];
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    [_scene setReadonly:NO];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
   
 }

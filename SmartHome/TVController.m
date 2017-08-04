@@ -29,35 +29,6 @@
 #import "UIViewController+Navigator.h"
 #import "KeypadView.h"
 
-@interface UIImagePickerController (LandScapeImagePicker)
-
-- (UIStatusBarStyle)preferredStatusBarStyle;
-- (NSUInteger)supportedInterfaceOrientations;
-- (BOOL)prefersStatusBarHidden;
-@end
-
-@implementation UIImagePickerController (LandScapeImagePicker)
-
-- (NSUInteger) supportedInterfaceOrientations
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-        return UIInterfaceOrientationMaskLandscape;
-    else
-        return UIInterfaceOrientationMaskPortrait;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleDefault;
-}
-
-- (BOOL)prefersStatusBarHidden
-{
-    return NO;
-}
-
-@end
-
 
 @interface TVController ()<UIScrollViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,IphoneRoomViewDelegate>
 
@@ -309,7 +280,7 @@
         self.cRight.constant = -200;
         self.mButtonTop.constant =40;
         self.cBottom.constant = 440;
-        self.keypad.hidden = self.btnHome.hidden = self.btnBack.hidden = self.btnSwitch.hidden = self.CHUP.hidden = self.CHDown.hidden = self.ear.hidden = self.IRContainer.hidden = NO;
+        self.keypad.hidden = self.btnHome.hidden = self.btnBack.hidden = self.btnSwitch.hidden = self.CHUP.hidden = self.CHDown.hidden = self.ear.hidden = NO;
         [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
 }
