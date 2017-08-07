@@ -140,18 +140,18 @@ static NSString *const airCellIdentifier = @"airCell";
         if (proto.action.state==0x6A) { //温度
             self.currentTemp.text = [NSString stringWithFormat:@"Current:%d°C",proto.action.RValue];
             self.currentDegree = proto.action.RValue;
-            
+            self.tempreturePan.transform = CGAffineTransformMakeRotation(self.currentDegree*MAX_TEMP_ROTATE_DEGREE/30);
             for (int i=1; i<16; i++) {
-                UIView *viewblue = [self.view viewWithTag:i+100];
+                UIView *viewblue = [self.view viewWithTag:i+100+1];
                 viewblue.hidden = self.currentDegree - i<=16 || self.airMode == 1;
-                UIView *viewred = [self.view viewWithTag:i+200];
+                UIView *viewred = [self.view viewWithTag:i+200+1];
                 viewred.hidden = self.currentDegree - i<=16 || self.airMode == 0;
             }
         }
         if (proto.action.state==0x8A) { // 湿度
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
             self.wetLabel.text = valueString;
-            [self.humidity_hand rotate:30+proto.action.RValue*100/300];
+            [self.humidity_hand rotate:30+proto.action.RValue*300/100];
         }
         if (proto.action.state==0x7F) { // PM2.5
             NSString *valueString = [NSString stringWithFormat:@"%d",proto.action.RValue];
