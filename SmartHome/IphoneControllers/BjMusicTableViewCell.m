@@ -65,9 +65,8 @@
         self.AddBjmusicBtn.selected = YES;
         self.BjPowerButton.selected = !self.BjPowerButton.selected;
         if (self.BjPowerButton.selected) {
-            [self.BjPowerButton setImage:[UIImage imageNamed:@"music-red"] forState:UIControlStateSelected];
-            //发送停止指令
-//            NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
+            //[self.BjPowerButton setImage:[UIImage imageNamed:@"music-red"] forState:UIControlStateSelected];
+            //发送播放指令
              NSData * data = [[DeviceInfo defaultManager] ON:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
@@ -78,9 +77,8 @@
             
         }else{
             
-            [self.BjPowerButton setImage:[UIImage imageNamed:@"music_white"] forState:UIControlStateNormal];
-            //发送播放指令
-//            NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
+            //[self.BjPowerButton setImage:[UIImage imageNamed:@"music_white"] forState:UIControlStateNormal];
+            //发送停止指令
               NSData * data = [[DeviceInfo defaultManager] OFF:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];

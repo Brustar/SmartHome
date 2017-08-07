@@ -95,7 +95,6 @@
     
     _hostType = [[UD objectForKey:@"HostType"] integerValue];
     
-    _startDate = [NSDate date];
     
     [self addNotifications];
     [self setupNaviBar];
@@ -177,7 +176,7 @@
     
     _startDate = [NSDate date];
     
-    __block float timeInterval = 0.2;
+    __block float timeInterval = 0.15;
     
     [deviceIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
@@ -190,7 +189,7 @@
             
         });
         
-        timeInterval += 0.2;
+        timeInterval += 0.15;
 
     }];
     
@@ -211,7 +210,7 @@
                 
             });
             
-            timeInterval += 0.2;
+            timeInterval += 0.15;
         }
         
         
@@ -225,7 +224,7 @@
                 
             });
             
-            timeInterval += 0.2;
+            timeInterval += 0.15;
         }
         
     }];
@@ -493,14 +492,14 @@
                 if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
                     device.power = proto.action.state;
                     
-                    /*if (proto.deviceType == 0x14) {
+                    if (proto.deviceType == 0x14) {
                         NSDate *endDate  =  [NSDate date];
                         NSLog(@"背景音乐  时间： %f", [endDate timeIntervalSinceDate:_startDate]);
                         NSLog(@"背景音乐---开关---  %d", proto.action.state);
                         
                    }
                     
-                    if (proto.deviceType == 0x11) {
+                    /*if (proto.deviceType == 0x11) {
                         NSDate *endDate  =  [NSDate date];
                         NSLog(@"电视  时间： %f", [endDate timeIntervalSinceDate:_startDate]);
                         NSLog(@"电视---开关---  %d", proto.action.state);

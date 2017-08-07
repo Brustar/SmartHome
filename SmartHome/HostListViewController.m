@@ -298,7 +298,7 @@
 -(void)gainHome_room_infoDataTo:(NSDictionary *)responseObject
 {
     self.home_room_infoArr = [NSMutableArray array];
-    NSInteger home_id  = [responseObject[@"home_id"] integerValue];
+    NSInteger home_id  = [responseObject[@"hostid"] integerValue];
     NSString * hostbrand = responseObject[@"hostbrand"];
     NSString * host_brand_number = responseObject[@"host_brand_number"];
     NSString * homename = responseObject[@"homename"];
@@ -333,8 +333,16 @@
     
     NSString *filePath = [docDir stringByAppendingPathComponent:@"gainHome.plist"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
+    
     if ([fileManager fileExistsAtPath:filePath]==NO) {
         [array writeToFile:filePath atomically:YES];
+    }else{
+        
+        //删除文件夹
+        [fileManager removeItemAtPath:filePath error:nil];
+        
+        [array writeToFile:filePath atomically:YES];
+        
     }
     
 }
