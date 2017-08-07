@@ -458,8 +458,12 @@ static NSString * const CYPhotoId = @"photo";
         }
     }
      [self setupNaviBar];
+ 
+    [self freshUICollectionViewCell];
+}
+-(void)freshUICollectionViewCell
+{
     //刷新collectionview
-
     Room *room = self.roomList[self.roomIndex];
     NSArray *tmpArr = [SQLManager getScensByRoomId:room.rId];
     self.selectedRoomID = room.rId;
@@ -468,9 +472,7 @@ static NSString * const CYPhotoId = @"photo";
     NSString *imageName = @"AddSceneBtn";
     [self.scenes addObject:imageName];
     [self.FirstCollectionView reloadData];
-
 }
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
@@ -654,7 +656,11 @@ static NSString * const CYPhotoId = @"photo";
     //场景ID不变
     Scene *scene = [[SceneManager defaultManager] readSceneByID:self.currentCell.sceneID];
     scene.roomID = self.roomID;
-    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
+    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg block:^(BOOL flag) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self freshUICollectionViewCell];
+        });
+    }];
     [self.currentCell.imageView setImage:self.selectSceneImg];
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
     [[SDImageCache sharedImageCache] clearMemory];
@@ -669,7 +675,11 @@ static NSString * const CYPhotoId = @"photo";
     //场景ID不变
     Scene *scene = [[SceneManager defaultManager] readSceneByID:self.currentCell.sceneID];
     scene.roomID = self.roomID;
-    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
+    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg block:^(BOOL flag) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self freshUICollectionViewCell];
+        });
+    }];
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
     [[SDImageCache sharedImageCache] clearMemory];
     [self.currentCell.imageView setImage:self.selectSceneImg];
@@ -778,7 +788,7 @@ static NSString * const CYPhotoId = @"photo";
 
 -(void)refreshTableView:(CYPhotoCell *)cell
 {
-    
+
     NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
     [self.scenes removeAllObjects];
     [self.scenes addObjectsFromArray:tmpArr];
