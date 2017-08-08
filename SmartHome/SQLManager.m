@@ -772,7 +772,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = '%ld' and masterID = '%ld'", rId, [[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = '%ld' and isIR = 0 and masterID = '%ld'", rId, [[DeviceInfo defaultManager] masterID]];
         
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
@@ -792,7 +792,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where subTypeId = '%d' and masterID = '%ld'", subTypeId, [[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where subTypeId = '%d' and isIR = 0 and masterID = '%ld'", subTypeId, [[DeviceInfo defaultManager] masterID]];
         
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])

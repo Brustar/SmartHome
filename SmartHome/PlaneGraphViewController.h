@@ -47,5 +47,6 @@
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 @property (nonatomic, strong) NSMutableArray *deviceArray;
 @property (nonatomic, assign) NSInteger hostType;//主机类型：0，creston   1, C4
+@property (nonatomic, strong) NSDate *startDate;
 
 @end

@@ -87,22 +87,16 @@
         [deviceIDs addObjectsFromArray:avIDs];
     }
     
+    _startDate = [NSDate date];
     
     SocketManager *sock = [SocketManager defaultManager];
     sock.delegate = self;
     
-    __block float timeInterval = 0.15;
     
     [deviceIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
             NSData *data = [[DeviceInfo defaultManager] query:[obj stringValue]];
             [sock.socket writeData:data withTimeout:1 tag:1];
-            
-        });
-        
-        timeInterval += 0.15;
         
     }];
     
@@ -115,29 +109,16 @@
         //  PM2.5
         NSString *pmID = [SQLManager singleDeviceWithCatalogID:55 byRoom:room.rId];
         if (pmID.length >0) {
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                NSData *data = [[DeviceInfo defaultManager] query:pmID];
-                [sock.socket writeData:data withTimeout:1 tag:1];
-                
-            });
-            
-            timeInterval += 0.15;
+            NSData *data = [[DeviceInfo defaultManager] query:pmID];
+            [sock.socket writeData:data withTimeout:1 tag:1];
         }
         
         
         //  湿度
         NSString *humidityID = [SQLManager singleDeviceWithCatalogID:50 byRoom:room.rId];
         if (humidityID.length >0) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                NSData *data = [[DeviceInfo defaultManager] query:humidityID];
-                [sock.socket writeData:data withTimeout:1 tag:1];
-                
-            });
-            
-            timeInterval += 0.15;
+            NSData *data = [[DeviceInfo defaultManager] query:humidityID];
+            [sock.socket writeData:data withTimeout:1 tag:1];
         }
     }];
     
@@ -471,7 +452,7 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    Proto proto=protocolFromData(data);
+    Proto proto = protocolFromData(data);
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
@@ -484,20 +465,32 @@
         if (device) {
             device.actionState = proto.action.state;
             
-            if (proto.action.state==0x6A) { //温度
+            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
+                device.power = proto.action.state;
+                
+                if (proto.deviceType == 0x14) {
+                    NSDate *endDate  =  [NSDate date];
+                    NSLog(@"背景音乐 --- 返回时间： %f", [endDate timeIntervalSinceDate:_startDate]);
+                    NSLog(@"背景音乐 --- 开关 ---  %d", proto.action.state);
+                    
+                }
+                
+            }
+            
+            else if (proto.action.state == 0x6A) { //温度
                 device.currTemp  = proto.action.RValue;
                 
             }
-            if (proto.action.state==0x8A) { // 湿度
+            
+            else if (proto.action.state == 0x8A) { // 湿度
                 device.humidity = proto.action.RValue;
             }
-            if (proto.action.state==0x7F) { // PM2.5
+            
+            else if (proto.action.state == 0x7F) { // PM2.5
                 device.pm25 = proto.action.RValue;
             }
             
-            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
-                device.power = proto.action.state;
-            }
+            
             
             @synchronized (_deviceArray) {
                 [_deviceArray addObject:device];

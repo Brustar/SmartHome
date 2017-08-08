@@ -30,6 +30,11 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self performSelector:@selector(refreshDeviceTableView) withObject:nil afterDelay:3];
+}
+
 - (void)getDeviceStateInfoByHttp {
     [self fetchDevicesStatus];//Http获取所有设备的状态
 }
@@ -141,7 +146,7 @@
     //获取设备类型数量
     [self countOfDeviceType];
     
-    //if (_deviceType_count >0) {
+    
         //所有设备ID
         NSArray *devIDArray = [SQLManager deviceIdsByRoomId:(int)self.roomID];
         _deviceIDArray = [NSMutableArray array];
@@ -185,10 +190,7 @@
                 [_otherTypeArray addObject:_deviceIDArray[i]];
             }
         }
-        
-        
-        [self.deviceTableView reloadData];
-    //}
+    
 }
 
 - (void)getAllScenes {
@@ -736,21 +738,9 @@
     SocketManager *sock = [SocketManager defaultManager];
     sock.delegate = self;
     
-    __block float timeInterval = 0.15;
-    
     [deviceIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
-        
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            NSData *data = [[DeviceInfo defaultManager] query:[obj stringValue]];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-            
-        });
-        
-        timeInterval += 0.15;
-        
+        NSData *data = [[DeviceInfo defaultManager] query:[obj stringValue]];
+        [sock.socket writeData:data withTimeout:1 tag:1];
     }];
 }
 
@@ -809,11 +799,17 @@
             
             [SQLManager updateDeviceStatus:device];
             
-            [self.deviceTableView reloadData];//刷新UI
+            
         }
         
     }
 }
+
+
+- (void)refreshDeviceTableView {
+    [self.deviceTableView reloadData];//刷新UI
+}
+
 
 #pragma mark - Http Delegate
 - (void)httpHandler:(id)responseObject tag:(int)tag
