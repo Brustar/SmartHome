@@ -215,7 +215,7 @@
             }
         }
     }
-     [self setupNaviBar];
+//     [self setupNaviBar];
 }
 -(void)creatItemID
 {
@@ -312,12 +312,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self connect];
-      _startDate = [NSDate date];
    _bgmusicIDArr = [[NSMutableArray alloc] init];
     [self showNetStateView];
-
+    [self setupNaviBar];
     [self setUIMessage];
-   
+
     [self chatConnect];
     [self getScenesFromPlist];
     //[self setBtn];
@@ -965,10 +964,6 @@
                     
                      [_bgmusicIDArr addObject:devID];
                     
-                    NSDate *endDate  =  [NSDate date];
-                    NSLog(@"背景音乐  时间： %f", [endDate timeIntervalSinceDate:_startDate]);
-                    NSLog(@"背景音乐---开关---  %d", proto.action.state);
-                    
                 }if (proto.action.state == PROTOCOL_OFF) {
                     NSLog(@"关闭状态");
                     [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
@@ -976,7 +971,7 @@
             }
         }
     }
-    
+      [self setupNaviBar];
 }
 
 

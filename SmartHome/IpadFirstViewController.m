@@ -244,7 +244,7 @@
             }
         }
     }
-     [self setupNaviBar];
+//     [self setupNaviBar];
 }
 
 -(void)getWeather
@@ -1062,7 +1062,7 @@
             }
         }
     }
-   
+      [self setupNaviBar];
 }
 
 

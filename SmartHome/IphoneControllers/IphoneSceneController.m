@@ -459,7 +459,7 @@ static NSString * const CYPhotoId = @"photo";
             
         }
     }
-     [self setupNaviBar];
+//     [self setupNaviBar];
     NSInteger IsAddSceneVC = [[UD objectForKey:@"IsAddSceneVC"] integerValue];
     if (IsAddSceneVC) {
       [self freshUICollectionViewCell];
@@ -930,7 +930,7 @@ static NSString * const CYPhotoId = @"photo";
             }
         }
     }
-    
+      [self setupNaviBar];
 }
 #pragma mark - SingleMaskViewDelegate
 - (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {

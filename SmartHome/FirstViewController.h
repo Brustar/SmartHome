@@ -23,7 +23,6 @@
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,assign) BOOL isAddDevice;
-@property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
 @property (nonatomic, readonly) UIButton *naviMiddletBtn;
