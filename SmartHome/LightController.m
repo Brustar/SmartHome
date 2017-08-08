@@ -462,6 +462,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [[SocketManager defaultManager].socket writeData:data withTimeout:1 tag:1];
     [tableView dismisWithIndexPath:indexPath];
+    self.contextMenuTableView = nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
