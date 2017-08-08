@@ -21,6 +21,10 @@
     
 //      [IOManager removeTempFile];
    
+    
+    if ([SQLManager isIR:[self.deviceid intValue]]) {
+        self.IRContainerView.hidden = NO;
+    }
      [self.PreviousBtn setImage:[UIImage imageNamed:@"DVD_previous_red"] forState:UIControlStateHighlighted];
      [self.nextBtn setImage:[UIImage imageNamed:@"DVD_next_red"] forState:UIControlStateHighlighted];
      [self.DVDSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
@@ -32,6 +36,7 @@
     [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
     [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
      [self.stopBtn setImage:[UIImage imageNamed:@"DVD_toogle_red"] forState:UIControlStateHighlighted];
+  
 }
 -(void) query:(NSString *)deviceid
 {
@@ -138,6 +143,24 @@
     }
   
 }
+//音量减
+- (IBAction)voice_downBtn:(id)sender {
+    NSData *data=nil;
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    data=[device volumeDown:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+//音量加
+- (IBAction)voice_upBtn:(id)sender {
+    NSData *data=nil;
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    data=[device volumeUp:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {

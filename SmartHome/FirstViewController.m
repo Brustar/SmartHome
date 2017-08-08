@@ -312,7 +312,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self connect];
-    
+      _startDate = [NSDate date];
    _bgmusicIDArr = [[NSMutableArray alloc] init];
     [self showNetStateView];
 
@@ -964,6 +964,10 @@
                     [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
                     
                      [_bgmusicIDArr addObject:devID];
+                    
+                    NSDate *endDate  =  [NSDate date];
+                    NSLog(@"背景音乐  时间： %f", [endDate timeIntervalSinceDate:_startDate]);
+                    NSLog(@"背景音乐---开关---  %d", proto.action.state);
                     
                 }if (proto.action.state == PROTOCOL_OFF) {
                     NSLog(@"关闭状态");

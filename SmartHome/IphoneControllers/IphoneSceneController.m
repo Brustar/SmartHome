@@ -38,6 +38,7 @@
 #import "AddIpadSceneVC.h"
 #import "IpadDeviceListViewController.h"
 #import "PackManager.h"
+#import "IphoneSaveNewSceneController.h"
 
 #define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)  
 
@@ -301,6 +302,7 @@ static NSString * const CYPhotoId = @"photo";
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
      [NC addObserver:self selector:@selector(SumNumber:) name:@"SumNumber" object:nil];
     [NC addObserver:self selector:@selector(changeHostRefreshUINotification:) name:@"ChangeHostRefreshUINotification" object:nil];
+   
 }
 
 - (void)changeHostRefreshUINotification:(NSNotification *)noti {
@@ -458,8 +460,11 @@ static NSString * const CYPhotoId = @"photo";
         }
     }
      [self setupNaviBar];
- 
-    [self freshUICollectionViewCell];
+    NSInteger IsAddSceneVC = [[UD objectForKey:@"IsAddSceneVC"] integerValue];
+    if (IsAddSceneVC) {
+      [self freshUICollectionViewCell];
+      [IOManager writeUserdefault:@"0" forKey:@"IsAddSceneVC"];
+    }
 }
 -(void)freshUICollectionViewCell
 {
@@ -656,14 +661,12 @@ static NSString * const CYPhotoId = @"photo";
     //场景ID不变
     Scene *scene = [[SceneManager defaultManager] readSceneByID:self.currentCell.sceneID];
     scene.roomID = self.roomID;
-    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg block:^(BOOL flag) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self freshUICollectionViewCell];
-        });
-    }];
-    [self.currentCell.imageView setImage:self.selectSceneImg];
+    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
+  
+   
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
     [[SDImageCache sharedImageCache] clearMemory];
+    [self.currentCell.imageView setImage:self.selectSceneImg];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -675,11 +678,7 @@ static NSString * const CYPhotoId = @"photo";
     //场景ID不变
     Scene *scene = [[SceneManager defaultManager] readSceneByID:self.currentCell.sceneID];
     scene.roomID = self.roomID;
-    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg block:^(BOOL flag) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self freshUICollectionViewCell];
-        });
-    }];
+    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
     [[SDImageCache sharedImageCache] clearMemory];
     [self.currentCell.imageView setImage:self.selectSceneImg];

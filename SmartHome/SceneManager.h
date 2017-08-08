@@ -39,7 +39,7 @@ typedef void(^SaveOK)(BOOL flag);
 -(void)deleteFavoriteScene:(Scene *)scene withName:(NSString *)name;
 - (Scene *)readSceneByID:(int)sceneid;
 -(void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(UIImage *)image;
-- (void)editScene:(Scene *)newScene newSceneImage:(UIImage *)newSceneImage block:(SaveOK )block;//给场景换图
+- (void)editScene:(Scene *)newScene newSceneImage:(UIImage *)newSceneImage;//给场景换图
 //保证newScene的ID不变只改变场景定时
 - (void)editSceneTimer:(Scene *)newScene;
 -(NSArray*)allDeviceIDs:(int)sceneid;

@@ -513,9 +513,8 @@
 }
 
 //保证newScene的ID不变只改变场景图片
-- (void)editScene:(Scene *)newScene newSceneImage:(UIImage *)newSceneImage block:(SaveOK )block
+- (void)editScene:(Scene *)newScene newSceneImage:(UIImage *)newSceneImage
 {
-     self.block = block;
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, newScene.sceneID ] scene:newScene];
     //同步云端
     NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,newScene.sceneID];
@@ -544,13 +543,11 @@
         if(result.integerValue == 0) { //成功
             
             [SQLManager updateScenePic:[NSString stringWithFormat:@"%@UploadFiles/images/scene/scene_%d.png",[IOManager httpAddr],newScene.sceneID] sceneID:newScene.sceneID];
-            [MBProgressHUD showSuccess:@"更换图片成功"];
-            if (self.block) {
-                self.block(YES);
-
-            }
+             [MBProgressHUD showSuccess:@"更换图片成功"];
             
-        }else { //失败            [MBProgressHUD showError:msg];
+        }else {
+            //失败
+            [MBProgressHUD showError:msg];
         }
     }];
 }

@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *AddDvdBtn;
 @property (weak, nonatomic) IBOutlet UIButton *stopBtn;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+@property (weak, nonatomic) IBOutlet UIView *IRContainerView;
 
 @property (weak, nonatomic) IBOutlet UIButton *PreviousBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *DVDConstraint;
