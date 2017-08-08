@@ -18,7 +18,7 @@
 
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
 @property (nonatomic,strong) NSString * shortcutName;
-
+@property (nonatomic, strong) NSDate *startDate;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;

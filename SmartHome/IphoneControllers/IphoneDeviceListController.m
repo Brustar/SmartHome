@@ -70,7 +70,7 @@ static NSString * const CYPhotoId = @"photo";
     [self addNotifications];
     [LoadMaskHelper showMaskWithType:DeviceHome onView:self.tabBarController.view delay:0.5 delegate:self];
       [_bgmusicIDArr removeAllObjects];
-     [self setupNaviBar];
+//     [self setupNaviBar];
     
     
     SocketManager *sock=[SocketManager defaultManager];
@@ -125,7 +125,7 @@ static NSString * const CYPhotoId = @"photo";
     
     [self setUpRoomScrollerView];
     [self getUI];
-    
+     [self setupNaviBar];
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
 }
@@ -670,7 +670,7 @@ static NSString * const CYPhotoId = @"photo";
             }
         }
     }
-    
+      [self setupNaviBar];
 }
 #pragma mark - SingleMaskViewDelegate
 - (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {

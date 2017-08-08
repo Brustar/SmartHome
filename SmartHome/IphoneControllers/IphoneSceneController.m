@@ -38,6 +38,7 @@
 #import "AddIpadSceneVC.h"
 #import "IpadDeviceListViewController.h"
 #import "PackManager.h"
+#import "IphoneSaveNewSceneController.h"
 
 #define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)  
 
@@ -181,7 +182,7 @@ static NSString * const CYPhotoId = @"photo";
       self.roomList = [SQLManager getAllRoomsInfo];
       [self setUI];
       [self setUpRoomView];
-    
+     [self setupNaviBar];
     self.arrayData = @[@"删除此场景",@"收藏",@"语音"];
     _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
     _AddSceneBtn.layer.masksToBounds = YES; //圆角
@@ -301,6 +302,7 @@ static NSString * const CYPhotoId = @"photo";
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
      [NC addObserver:self selector:@selector(SumNumber:) name:@"SumNumber" object:nil];
     [NC addObserver:self selector:@selector(changeHostRefreshUINotification:) name:@"ChangeHostRefreshUINotification" object:nil];
+   
 }
 
 - (void)changeHostRefreshUINotification:(NSNotification *)noti {
@@ -457,9 +459,16 @@ static NSString * const CYPhotoId = @"photo";
             
         }
     }
-     [self setupNaviBar];
+//     [self setupNaviBar];
+    NSInteger IsAddSceneVC = [[UD objectForKey:@"IsAddSceneVC"] integerValue];
+    if (IsAddSceneVC) {
+      [self freshUICollectionViewCell];
+      [IOManager writeUserdefault:@"0" forKey:@"IsAddSceneVC"];
+    }
+}
+-(void)freshUICollectionViewCell
+{
     //刷新collectionview
-
     Room *room = self.roomList[self.roomIndex];
     NSArray *tmpArr = [SQLManager getScensByRoomId:room.rId];
     self.selectedRoomID = room.rId;
@@ -468,9 +477,7 @@ static NSString * const CYPhotoId = @"photo";
     NSString *imageName = @"AddSceneBtn";
     [self.scenes addObject:imageName];
     [self.FirstCollectionView reloadData];
-
 }
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
@@ -655,9 +662,11 @@ static NSString * const CYPhotoId = @"photo";
     Scene *scene = [[SceneManager defaultManager] readSceneByID:self.currentCell.sceneID];
     scene.roomID = self.roomID;
     [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
-    [self.currentCell.imageView setImage:self.selectSceneImg];
+  
+   
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
     [[SDImageCache sharedImageCache] clearMemory];
+    [self.currentCell.imageView setImage:self.selectSceneImg];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -778,7 +787,7 @@ static NSString * const CYPhotoId = @"photo";
 
 -(void)refreshTableView:(CYPhotoCell *)cell
 {
-    
+
     NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
     [self.scenes removeAllObjects];
     [self.scenes addObjectsFromArray:tmpArr];
@@ -921,7 +930,7 @@ static NSString * const CYPhotoId = @"photo";
             }
         }
     }
-    
+      [self setupNaviBar];
 }
 #pragma mark - SingleMaskViewDelegate
 - (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {

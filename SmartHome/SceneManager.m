@@ -543,9 +543,10 @@
         if(result.integerValue == 0) { //成功
             
             [SQLManager updateScenePic:[NSString stringWithFormat:@"%@UploadFiles/images/scene/scene_%d.png",[IOManager httpAddr],newScene.sceneID] sceneID:newScene.sceneID];
-            [MBProgressHUD showSuccess:@"保存成功"];
+             [MBProgressHUD showSuccess:@"更换图片成功"];
             
-        }else { //失败
+        }else {
+            //失败
             [MBProgressHUD showError:msg];
         }
     }];

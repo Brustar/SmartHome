@@ -118,6 +118,7 @@
         
         [[SceneManager defaultManager] addScene:_scene withName:self.sceneName.text withImage:self.selectSceneImg withiSactive:_isActive block:^(BOOL flag) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                  [IOManager writeUserdefault:@"1" forKey:@"IsAddSceneVC"];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
         }];

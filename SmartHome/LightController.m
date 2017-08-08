@@ -26,7 +26,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 @property (nonatomic,assign) CGFloat brightValue;
 @property (nonatomic,strong) NSMutableArray *lIDs;
 @property (nonatomic,strong) NSMutableArray *lNames;
-@property (nonatomic,strong) UIImageView *tranformView;
+@property (nonatomic,strong) IBOutlet UIImageView *tranformView;
 
 @property (weak, nonatomic) IBOutlet UIView *base;
 @property (weak, nonatomic) IBOutlet UIButton *btnPen;
@@ -367,20 +367,13 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 -(void) initSwitch
 {
     self.base.layer.cornerRadius = 120;
-    self.tranformView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 240, 240)];
-    
-    self.tranformView.image = [UIImage imageNamed:@"glory"];
-    self.tranformView.hidden = YES;
     
     self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:nil inactiveBackgroundImage:[UIImage imageNamed:@"lighting_off"] activeBackgroundImage:[UIImage imageNamed:@"lighting_on"] frame:CGRectMake(0, 0, 194, 194)];
     
     self.switcher.knobRelativeHeight = 1.0f;
     self.switcher.delegate = self;
     [self.view addSubview:self.switcher];
-
-    [self.view addSubview:self.tranformView];
     
-    [self.tranformView constraintToCenter:240];
     [self.switcher constraintToCenter:194];
 }
 
@@ -469,6 +462,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [[SocketManager defaultManager].socket writeData:data withTimeout:1 tag:1];
     [tableView dismisWithIndexPath:indexPath];
+    self.contextMenuTableView = nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
