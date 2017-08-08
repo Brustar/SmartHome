@@ -736,7 +736,7 @@
     SocketManager *sock = [SocketManager defaultManager];
     sock.delegate = self;
     
-    __block float timeInterval = 0.2;
+    __block float timeInterval = 0.15;
     
     [deviceIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
@@ -749,7 +749,7 @@
             
         });
         
-        timeInterval += 0.2;
+        timeInterval += 0.15;
         
     }];
 }

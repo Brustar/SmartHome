@@ -896,10 +896,10 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light_title" translatesAutoresizingMaskIntoConstraints="NO" id="UJW-1t-4Xd">
-                                <rect key="frame" x="100.5" y="603" width="174" height="39"/>
+                                <rect key="frame" x="101" y="603" width="174" height="39"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lighting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ejp-Uz-H6K">
-                                <rect key="frame" x="165.5" y="615" width="45" height="16"/>
+                                <rect key="frame" x="166" y="615" width="45" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -936,7 +936,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cNa-Uw-OPg">
-                                <rect key="frame" x="67.5" y="213.5" width="240" height="240"/>
+                                <rect key="frame" x="68" y="214" width="240" height="240"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="0b4-hQ-v52"/>
@@ -944,8 +944,22 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light_base" translatesAutoresizingMaskIntoConstraints="NO" id="QDy-Gl-oNw">
-                                <rect key="frame" x="24.5" y="170.5" width="326" height="326"/>
+                                <rect key="frame" x="25" y="171" width="326" height="326"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y76-Gw-rE2" userLabel="pan">
+                                <rect key="frame" x="68" y="214" width="239" height="239"/>
+                                <subviews>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="glory" translatesAutoresizingMaskIntoConstraints="NO" id="k3c-R3-iSW">
+                                        <rect key="frame" x="0.0" y="0.0" width="239" height="239"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="239" id="9fQ-76-v83"/>
+                                    <constraint firstAttribute="height" constant="239" id="kgJ-O6-s1c"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -960,10 +974,12 @@
                             <constraint firstItem="Ejp-Uz-H6K" firstAttribute="centerY" secondItem="UJW-1t-4Xd" secondAttribute="centerY" id="S50-3u-1F9"/>
                             <constraint firstItem="QGa-1P-CGE" firstAttribute="leading" secondItem="DoF-Wk-GOP" secondAttribute="trailing" id="TaH-Rt-4lC"/>
                             <constraint firstItem="DoF-Wk-GOP" firstAttribute="leading" secondItem="UIl-39-dXr" secondAttribute="trailing" id="Tgq-qq-tm0"/>
+                            <constraint firstItem="Y76-Gw-rE2" firstAttribute="top" secondItem="cNa-Uw-OPg" secondAttribute="top" id="UJR-0t-UMr"/>
                             <constraint firstItem="UIl-39-dXr" firstAttribute="centerY" secondItem="DoF-Wk-GOP" secondAttribute="centerY" id="UoT-MP-Q9f"/>
                             <constraint firstItem="QDy-Gl-oNw" firstAttribute="centerX" secondItem="Q6h-VV-4Jh" secondAttribute="centerX" id="XoJ-9w-REN"/>
                             <constraint firstItem="UIl-39-dXr" firstAttribute="width" secondItem="DoF-Wk-GOP" secondAttribute="width" id="Ytn-i2-eyR"/>
                             <constraint firstItem="qrA-IG-Hl6" firstAttribute="top" secondItem="GfI-0o-EXN" secondAttribute="bottom" id="ZOP-hc-7Jd"/>
+                            <constraint firstItem="Y76-Gw-rE2" firstAttribute="leading" secondItem="cNa-Uw-OPg" secondAttribute="leading" id="ZOR-vV-srb"/>
                             <constraint firstAttribute="trailing" secondItem="QGa-1P-CGE" secondAttribute="trailing" id="hMH-gR-972"/>
                             <constraint firstItem="QGa-1P-CGE" firstAttribute="centerY" secondItem="DoF-Wk-GOP" secondAttribute="centerY" id="lxX-1j-L1E"/>
                             <constraint firstItem="cNa-Uw-OPg" firstAttribute="centerY" secondItem="Q6h-VV-4Jh" secondAttribute="centerY" id="pI5-y0-t0w"/>
@@ -980,6 +996,7 @@
                         <outlet property="btnPen" destination="qbi-rs-2ri" id="s4T-3i-QaA"/>
                         <outlet property="lightName" destination="Ejp-Uz-H6K" id="7bh-0o-kDI"/>
                         <outlet property="top" destination="Pbb-Ct-zjz" id="KYS-xf-1Dq"/>
+                        <outlet property="tranformView" destination="k3c-R3-iSW" id="yVK-bE-VKg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZg-pE-92P" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2694,6 +2711,7 @@
         <image name="dvd_btn_switch_off" width="34" height="23"/>
         <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="fm_pad" width="326" height="326"/>
+        <image name="glory" width="239" height="239"/>
         <image name="heat" width="11" height="11"/>
         <image name="humidity" width="141" height="141"/>
         <image name="icon_start" width="16" height="15"/>
