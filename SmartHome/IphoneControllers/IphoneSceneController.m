@@ -182,7 +182,7 @@ static NSString * const CYPhotoId = @"photo";
       self.roomList = [SQLManager getAllRoomsInfo];
       [self setUI];
       [self setUpRoomView];
-    
+     [self setupNaviBar];
     self.arrayData = @[@"删除此场景",@"收藏",@"语音"];
     _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
     _AddSceneBtn.layer.masksToBounds = YES; //圆角

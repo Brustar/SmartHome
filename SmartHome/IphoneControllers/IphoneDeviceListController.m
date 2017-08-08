@@ -125,7 +125,7 @@ static NSString * const CYPhotoId = @"photo";
     
     [self setUpRoomScrollerView];
     [self getUI];
-    
+     [self setupNaviBar];
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
 }

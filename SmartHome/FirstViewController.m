@@ -316,7 +316,7 @@
     [self showNetStateView];
     [self setupNaviBar];
     [self setUIMessage];
-
+    [self setupNaviBar];
     [self chatConnect];
     [self getScenesFromPlist];
     //[self setBtn];
@@ -946,7 +946,6 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    
     Proto proto=protocolFromData(data);
     
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
