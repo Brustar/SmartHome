@@ -727,12 +727,12 @@ static NSString * const CYPhotoId = @"photo";
          }else{
              [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
          }
-//         NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
-//         [self.scenes removeAllObjects];
-//         [self.scenes addObjectsFromArray:tmpArr];
-//         NSString *imageName = @"AddSceneBtn";
-//         [self.scenes addObject:imageName];
-//         [self.FirstCollectionView reloadData];
+         NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
+         [self.scenes removeAllObjects];
+         [self.scenes addObjectsFromArray:tmpArr];
+         NSString *imageName = @"AddSceneBtn";
+         [self.scenes addObject:imageName];
+         [self.FirstCollectionView reloadData];
      }
   
 }
