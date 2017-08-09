@@ -215,7 +215,7 @@
             }
         }
     }
-//     [self setupNaviBar];
+     [self setupNaviBar];
 }
 -(void)creatItemID
 {
@@ -314,9 +314,7 @@
     [self connect];
    _bgmusicIDArr = [[NSMutableArray alloc] init];
     [self showNetStateView];
-    [self setupNaviBar];
     [self setUIMessage];
-    [self setupNaviBar];
     [self chatConnect];
     [self getScenesFromPlist];
     //[self setBtn];
@@ -678,10 +676,11 @@
 }
 
 - (void)setupNaviBar {
-//    [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
+    [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
+    
     _naviMiddletBtn = [[UIButton alloc] init];
-    [_naviMiddletBtn setTitle:[UD objectForKey:@"homename"] forState:UIControlStateNormal];
-    [_naviMiddletBtn addTarget:self action:@selector(MiddleBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [_naviMiddletBtn setTitle:[UD objectForKey:@"homename"] forState:UIControlStateNormal];
+//    [_naviMiddletBtn addTarget:self action:@selector(MiddleBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
     
     NSString *music_icon = nil;
