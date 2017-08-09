@@ -32,7 +32,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self performSelector:@selector(refreshDeviceTableView) withObject:nil afterDelay:3];
 }
 
 - (void)getDeviceStateInfoByHttp {
@@ -798,7 +797,7 @@
             }
             
             [SQLManager updateDeviceStatus:device];
-            
+            [self refreshDeviceTableView];
             
         }
         
