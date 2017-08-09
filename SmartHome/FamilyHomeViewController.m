@@ -99,7 +99,6 @@
     [self addNotifications];
     [self setupNaviBar];
     [self showNetStateView];
-    
     self.lightIcon.layer.cornerRadius =  self.lightIcon.frame.size.width/2;
     self.lightIcon.layer.masksToBounds = YES;
     self.lightIcon.backgroundColor = RGB(243, 152, 0, 1);

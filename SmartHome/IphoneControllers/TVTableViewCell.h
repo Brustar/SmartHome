@@ -16,12 +16,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *TVSwitchBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *TVConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *AddTvDeviceBtn;
+@property (weak, nonatomic) IBOutlet UIView *IRContainerView;
+
 @property(nonatomic, strong)NSString * deviceid;
 @property (nonatomic,weak) NSString *sceneid;
 //房间id
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic, assign) id<TVTableViewCellDelegate>delegate;
+-(void)initWithFrame;
 -(void) query:(NSString *)deviceid;
 
 @end

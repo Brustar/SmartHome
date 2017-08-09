@@ -32,7 +32,13 @@
     [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
     [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
 }
-
+-(void)initWithFrame
+{
+    if ([SQLManager isIR:[self.deviceid intValue]]) {
+        self.IRContainerView.hidden = NO;
+        
+    }
+}
 -(void) query:(NSString *)deviceid
 {
     self.deviceid = deviceid;
@@ -136,6 +142,23 @@
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
     
+}
+//音量减
+- (IBAction)voice_downBtn:(id)sender {
+    NSData *data=nil;
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    data=[device volumeDown:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+//音量加
+- (IBAction)voice_upBtn:(id)sender {
+    NSData *data=nil;
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    data=[device volumeUp:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag

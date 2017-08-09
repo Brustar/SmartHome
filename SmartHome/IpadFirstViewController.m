@@ -74,7 +74,6 @@
     self.messageLabel.layer.masksToBounds = YES;
      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap:)];
     [self.imageView addGestureRecognizer:tap];
-    [self setupNaviBar];
     [self showNetStateView];
 //    [self showMassegeLabel];
     [self setTimer];
@@ -244,7 +243,7 @@
             }
         }
     }
-//     [self setupNaviBar];
+     [self setupNaviBar];
 }
 
 -(void)getWeather
@@ -612,7 +611,7 @@
     
    [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
     _naviMiddletBtn = [[UIButton alloc] init];
-    [_naviMiddletBtn setTitle:[UD objectForKey:@"homename"] forState:UIControlStateNormal];
+//    [_naviMiddletBtn setTitle:[UD objectForKey:@"homename"] forState:UIControlStateNormal];
 //    [_naviMiddletBtn addTarget:self action:@selector(MiddleBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
     

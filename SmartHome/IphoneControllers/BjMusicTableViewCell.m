@@ -37,12 +37,25 @@
     if (ON_IPAD) {
         self.BjmusicHeightConstraint.constant = 85;
         self.bdIconLeadingConstraint.constant = 33;
+        self.IRContainerHeight.constant = 85;
+        self.IRContainerSubViewHeight.constant = 85;
         self.bgIconTadilingConst.constant = 33;
         self.BjMusicNameLb.font = [UIFont systemFontOfSize:17];
            [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
     }
 }
-
+-(void)initWithFrame
+{
+    if ([SQLManager isIR:[self.deviceid intValue]]) {
+        self.IRContainerView.hidden = NO;
+        self.BjSlider.hidden = YES;
+        self.bgmusicBackgView.hidden = YES;
+        self.bgSliderView.hidden = YES;
+        self.YLDimageview.hidden  = YES;
+        self.YLXimageview.hidden = YES;
+       
+    }
+}
 -(void) query:(NSString *)deviceid
 {
     self.deviceid = deviceid;
@@ -143,7 +156,23 @@
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
     
 }
+//音量减
+- (IBAction)voice_downBtn:(id)sender {
+    NSData *data=nil;
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    data=[device volumeDown:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 
+//音量加
+- (IBAction)voice_upBtn:(id)sender {
+    NSData *data=nil;
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    data=[device volumeUp:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {

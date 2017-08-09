@@ -21,10 +21,6 @@
     
 //      [IOManager removeTempFile];
    
-    
-    if ([SQLManager isIR:[self.deviceid intValue]]) {
-        self.IRContainerView.hidden = NO;
-    }
      [self.PreviousBtn setImage:[UIImage imageNamed:@"DVD_previous_red"] forState:UIControlStateHighlighted];
      [self.nextBtn setImage:[UIImage imageNamed:@"DVD_next_red"] forState:UIControlStateHighlighted];
      [self.DVDSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
@@ -37,6 +33,16 @@
     [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
      [self.stopBtn setImage:[UIImage imageNamed:@"DVD_toogle_red"] forState:UIControlStateHighlighted];
   
+}
+
+-(void)initWithFrame
+{
+    if ([SQLManager isIR:[self.deviceid intValue]]) {
+        self.IRContainerView.hidden = NO;
+        self.LYSimageview.hidden = YES;
+        self.DVDsliderImageview.hidden = YES;
+        self.YLImageView.hidden = YES;
+    }
 }
 -(void) query:(NSString *)deviceid
 {
