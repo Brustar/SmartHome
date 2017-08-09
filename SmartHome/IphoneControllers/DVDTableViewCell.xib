@@ -101,63 +101,70 @@
                         <state key="normal" image="icon_add_normal"/>
                     </button>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5yW-aq-htO">
-                        <rect key="frame" x="1" y="99" width="373" height="50"/>
+                        <rect key="frame" x="0.0" y="97" width="375" height="52"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="voice_banner_ir" translatesAutoresizingMaskIntoConstraints="NO" id="Vc1-pZ-4We">
-                                <rect key="frame" x="0.0" y="0.0" width="373" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dvd_frm_choice__normal" translatesAutoresizingMaskIntoConstraints="NO" id="Vc1-pZ-4We">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="BTG-l9-fh8"/>
+                                </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qe4-kn-2L5">
-                                <rect key="frame" x="293" y="11" width="50" height="22"/>
+                                <rect key="frame" x="295" y="8" width="50" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="erV-7i-M73"/>
+                                    <constraint firstAttribute="height" constant="30" id="erV-7i-M73"/>
                                     <constraint firstAttribute="width" constant="50" id="uHb-2E-B24"/>
                                 </constraints>
                                 <state key="normal" image="voice_up"/>
+                                <state key="highlighted" image="voice_up_red"/>
                                 <connections>
                                     <action selector="voice_upBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="u10-No-YHg"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_hight" translatesAutoresizingMaskIntoConstraints="NO" id="OXz-2F-hRr">
-                                <rect key="frame" x="180.5" y="17" width="12" height="10"/>
+                                <rect key="frame" x="181.5" y="18" width="12" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="Iev-In-wOK"/>
                                     <constraint firstAttribute="width" constant="12" id="tb5-hi-2xH"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7WS-mA-I6S">
-                                <rect key="frame" x="30" y="11" width="50" height="22"/>
+                                <rect key="frame" x="30" y="8" width="50" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="j6E-M8-2vX"/>
+                                    <constraint firstAttribute="height" constant="30" id="j6E-M8-2vX"/>
                                     <constraint firstAttribute="width" constant="50" id="r8h-0B-53q"/>
                                 </constraints>
                                 <state key="normal" image="voice_down"/>
+                                <state key="highlighted" image="voice_down_red"/>
                                 <connections>
                                     <action selector="voice_downBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ZgV-rF-ozB"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="OXz-2F-hRr" firstAttribute="centerY" secondItem="5yW-aq-htO" secondAttribute="centerY" constant="-3" id="1Sz-Mf-NpY"/>
-                            <constraint firstAttribute="height" constant="50" id="CQn-Wo-s3B"/>
+                            <constraint firstAttribute="height" constant="52" id="CQn-Wo-s3B"/>
                             <constraint firstItem="7WS-mA-I6S" firstAttribute="leading" secondItem="5yW-aq-htO" secondAttribute="leading" constant="30" id="Ck4-ep-pRl"/>
+                            <constraint firstItem="Vc1-pZ-4We" firstAttribute="leading" secondItem="5yW-aq-htO" secondAttribute="leading" id="KS1-o7-Scf"/>
                             <constraint firstAttribute="trailing" secondItem="Qe4-kn-2L5" secondAttribute="trailing" constant="30" id="MwV-Tm-YIG"/>
+                            <constraint firstAttribute="bottom" secondItem="Vc1-pZ-4We" secondAttribute="bottom" id="PaS-Fe-shQ"/>
                             <constraint firstItem="OXz-2F-hRr" firstAttribute="centerX" secondItem="5yW-aq-htO" secondAttribute="centerX" id="TI8-9x-xct"/>
                             <constraint firstItem="7WS-mA-I6S" firstAttribute="centerY" secondItem="5yW-aq-htO" secondAttribute="centerY" constant="-3" id="Y3S-5p-cJ6"/>
+                            <constraint firstAttribute="trailing" secondItem="Vc1-pZ-4We" secondAttribute="trailing" id="jNa-Qv-iiK"/>
                             <constraint firstItem="Qe4-kn-2L5" firstAttribute="centerY" secondItem="5yW-aq-htO" secondAttribute="centerY" constant="-3" id="l46-7G-Tve"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="5yW-aq-htO" secondAttribute="trailing" constant="1" id="6s3-h8-XwX"/>
+                    <constraint firstAttribute="trailing" secondItem="5yW-aq-htO" secondAttribute="trailing" id="6s3-h8-XwX"/>
                     <constraint firstAttribute="trailing" secondItem="M28-8e-zHA" secondAttribute="trailing" id="9zL-Me-m6e"/>
                     <constraint firstItem="F7B-y2-2nU" firstAttribute="centerX" secondItem="M28-8e-zHA" secondAttribute="centerX" id="Dkt-2h-gDx"/>
                     <constraint firstItem="F7B-y2-2nU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-7" id="Gww-il-19j"/>
                     <constraint firstItem="UYH-Br-BuW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="49" id="IVS-ad-rDR"/>
                     <constraint firstItem="je0-2Y-f1l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="JEE-OA-GAo"/>
                     <constraint firstItem="NYR-NW-O6b" firstAttribute="top" secondItem="F7B-y2-2nU" secondAttribute="bottom" constant="2" id="K8h-9C-4eR"/>
-                    <constraint firstItem="5yW-aq-htO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="1" id="La4-vm-0pG"/>
+                    <constraint firstItem="5yW-aq-htO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="La4-vm-0pG"/>
                     <constraint firstItem="wYW-1Y-DcS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="Lj8-Z5-Put"/>
                     <constraint firstItem="aQ4-Nq-8mW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="LpR-Wf-r8M"/>
                     <constraint firstAttribute="trailingMargin" secondItem="UYH-Br-BuW" secondAttribute="trailing" constant="6" id="MAC-pY-5LJ"/>
@@ -193,7 +200,9 @@
                 <outlet property="DVDNameLabel" destination="je0-2Y-f1l" id="X7K-XD-4TD"/>
                 <outlet property="DVDSlider" destination="NYR-NW-O6b" id="JzR-gz-1wV"/>
                 <outlet property="DVDSwitchBtn" destination="wYW-1Y-DcS" id="1nS-vW-gWz"/>
+                <outlet property="DVDsliderImageview" destination="M28-8e-zHA" id="Huv-mM-DUl"/>
                 <outlet property="IRContainerView" destination="5yW-aq-htO" id="c9n-9x-Swp"/>
+                <outlet property="LYSimageview" destination="RxL-mC-ARL" id="zRI-Ur-14n"/>
                 <outlet property="PreviousBtn" destination="aQ4-Nq-8mW" id="uOg-s9-ONv"/>
                 <outlet property="YLImageView" destination="ZRr-fE-u93" id="BO5-6B-eDO"/>
                 <outlet property="nextBtn" destination="UYH-Br-BuW" id="fKy-j0-MSh"/>
@@ -213,9 +222,10 @@
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
         <image name="icon_add_normal" width="15" height="15"/>
         <image name="lv_fm_adjust_normal" width="336" height="47"/>
-        <image name="voice_banner_ir" width="335" height="47"/>
         <image name="voice_down" width="54" height="24"/>
+        <image name="voice_down_red" width="54" height="24"/>
         <image name="voice_hight" width="12" height="10"/>
         <image name="voice_up" width="54" height="24"/>
+        <image name="voice_up_red" width="54" height="24"/>
     </resources>
 </document>

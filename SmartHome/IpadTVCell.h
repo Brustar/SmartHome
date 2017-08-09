@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *AddTvDeviceBtn;
 @property(nonatomic, strong)NSString * deviceid;
 @property (nonatomic,weak) NSString *sceneid;
+@property (weak, nonatomic) IBOutlet UIView *IRContainerView;
 
 @property (weak, nonatomic) IBOutlet UIButton *channelReduceBtn;
 
@@ -28,6 +29,7 @@
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic, assign) id<IpadTVCellDelegate>delegate;
 -(void) query:(NSString *)deviceid;
+-(void)initWithFrame;
 
 @end
 

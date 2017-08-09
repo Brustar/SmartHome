@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *AddDvdBtn;
 @property (weak, nonatomic) IBOutlet UIButton *stopBtn;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+@property (weak, nonatomic) IBOutlet UIView *IRContainerView;
 
 @property (weak, nonatomic) IBOutlet UIButton *PreviousBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *DVDConstraint;
@@ -28,6 +29,7 @@
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic, assign) id<IpadDVDTableViewCellDelegate>delegate;
 -(void) query:(NSString *)deviceid;
+-(void)initWithFrame;
 
 @end
 

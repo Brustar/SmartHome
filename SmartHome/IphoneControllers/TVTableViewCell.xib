@@ -116,6 +116,61 @@
                         </constraints>
                         <state key="normal" image="icon_add_normal"/>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dlf-1O-P0P">
+                        <rect key="frame" x="0.0" y="101" width="375" height="50"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dvd_frm_choice__normal" translatesAutoresizingMaskIntoConstraints="NO" id="C5b-hf-pHk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="uUB-Vg-3NC"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_hight" translatesAutoresizingMaskIntoConstraints="NO" id="YeU-Rl-VIc">
+                                <rect key="frame" x="181.5" y="20" width="12" height="10"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="12" id="PxR-YR-XL3"/>
+                                    <constraint firstAttribute="height" constant="10" id="Qlk-k0-HlO"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdh-aW-9LJ">
+                                <rect key="frame" x="30" y="10" width="52" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="65b-ui-ei3"/>
+                                    <constraint firstAttribute="width" constant="52" id="uDY-wA-hxA"/>
+                                </constraints>
+                                <state key="normal" image="voice_down"/>
+                                <state key="highlighted" image="voice_down_red"/>
+                                <connections>
+                                    <action selector="voice_downBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YcH-bS-Rwc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ky-LT-0eJ">
+                                <rect key="frame" x="293" y="10" width="52" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Bx3-hf-snH"/>
+                                    <constraint firstAttribute="width" constant="52" id="oqu-zE-pIi"/>
+                                </constraints>
+                                <state key="normal" image="voice_up"/>
+                                <state key="highlighted" image="voice_up_red"/>
+                                <connections>
+                                    <action selector="voice_upBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lzP-Zl-fvr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YeU-Rl-VIc" firstAttribute="centerX" secondItem="dlf-1O-P0P" secondAttribute="centerX" id="0jG-RR-Uzd"/>
+                            <constraint firstItem="YeU-Rl-VIc" firstAttribute="centerY" secondItem="dlf-1O-P0P" secondAttribute="centerY" id="1k1-KT-w4y"/>
+                            <constraint firstAttribute="trailing" secondItem="4Ky-LT-0eJ" secondAttribute="trailing" constant="30" id="2zO-rX-Qts"/>
+                            <constraint firstAttribute="height" constant="50" id="9V6-cI-2oq"/>
+                            <constraint firstItem="tdh-aW-9LJ" firstAttribute="centerY" secondItem="dlf-1O-P0P" secondAttribute="centerY" id="Fle-jo-XHU"/>
+                            <constraint firstAttribute="trailing" secondItem="C5b-hf-pHk" secondAttribute="trailing" id="Lpw-rH-mYN"/>
+                            <constraint firstItem="4Ky-LT-0eJ" firstAttribute="centerY" secondItem="dlf-1O-P0P" secondAttribute="centerY" id="VN7-ik-827"/>
+                            <constraint firstAttribute="bottom" secondItem="C5b-hf-pHk" secondAttribute="bottom" id="ekU-sR-2GN"/>
+                            <constraint firstItem="C5b-hf-pHk" firstAttribute="leading" secondItem="dlf-1O-P0P" secondAttribute="leading" id="uZe-U4-Hub"/>
+                            <constraint firstItem="tdh-aW-9LJ" firstAttribute="leading" secondItem="dlf-1O-P0P" secondAttribute="leading" constant="30" id="yXP-Fo-Fda"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="OYh-IL-rXK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="0c3-Kc-0yI"/>
@@ -128,6 +183,8 @@
                     <constraint firstAttribute="trailing" secondItem="pnd-J7-sYa" secondAttribute="trailing" id="BIR-Hn-7t4"/>
                     <constraint firstItem="pnd-J7-sYa" firstAttribute="top" secondItem="7DU-dS-c5S" secondAttribute="bottom" constant="3" id="E9D-ro-I0P"/>
                     <constraint firstAttribute="trailing" secondItem="e3e-Vd-xcZ" secondAttribute="trailing" id="FQs-X1-xCK"/>
+                    <constraint firstAttribute="bottom" secondItem="dlf-1O-P0P" secondAttribute="bottom" constant="-1.5" id="Gra-B4-R9D"/>
+                    <constraint firstItem="dlf-1O-P0P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="HJ3-a3-LdK"/>
                     <constraint firstAttribute="trailingMargin" secondItem="OYh-IL-rXK" secondAttribute="trailing" constant="10" id="J2D-Og-j6A"/>
                     <constraint firstAttribute="trailingMargin" secondItem="7DU-dS-c5S" secondAttribute="trailing" constant="5" id="JVo-2Q-qNm"/>
                     <constraint firstItem="lJq-tW-lxt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="50" id="LVb-ib-Ifs"/>
@@ -139,6 +196,7 @@
                     <constraint firstItem="pnd-J7-sYa" firstAttribute="top" secondItem="e3e-Vd-xcZ" secondAttribute="bottom" constant="-5" id="V6y-HA-0VI"/>
                     <constraint firstItem="tWF-t6-Y9g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="WGu-O8-Y4E"/>
                     <constraint firstItem="dKl-4X-Ia9" firstAttribute="leading" secondItem="68P-ou-Xax" secondAttribute="trailing" constant="20" id="cYc-U1-OUK"/>
+                    <constraint firstAttribute="trailing" secondItem="dlf-1O-P0P" secondAttribute="trailing" id="dJy-ps-ptm"/>
                     <constraint firstItem="pnd-J7-sYa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fg7-ef-5DE"/>
                     <constraint firstAttribute="bottomMargin" secondItem="dKl-4X-Ia9" secondAttribute="bottom" constant="4.5" id="hPk-PN-XdR"/>
                     <constraint firstAttribute="trailingMargin" secondItem="iTa-SA-Jqr" secondAttribute="trailing" constant="50" id="kY2-0p-eYv"/>
@@ -150,12 +208,13 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="AddTvDeviceBtn" destination="OYh-IL-rXK" id="m4F-kI-eKg"/>
+                <outlet property="IRContainerView" destination="dlf-1O-P0P" id="xSL-WC-RN2"/>
                 <outlet property="TVConstraint" destination="4p4-j9-COc" id="91m-pY-B0J"/>
                 <outlet property="TVNameLabel" destination="tWF-t6-Y9g" id="TRf-sJ-vTB"/>
                 <outlet property="TVSlider" destination="dKl-4X-Ia9" id="rB4-Qv-6yn"/>
                 <outlet property="TVSwitchBtn" destination="xOF-yf-IDB" id="aXY-Vz-M9m"/>
             </connections>
-            <point key="canvasLocation" x="-119.5" y="75.5"/>
+            <point key="canvasLocation" x="-119.5" y="75"/>
         </tableViewCell>
     </objects>
     <resources>
@@ -167,5 +226,10 @@
         <image name="icon_reduce_normal" width="14" height="1"/>
         <image name="lv_fm_adjust_normal" width="336" height="47"/>
         <image name="tv_btn_adjust_normal" width="311" height="38"/>
+        <image name="voice_down" width="54" height="24"/>
+        <image name="voice_down_red" width="54" height="24"/>
+        <image name="voice_hight" width="12" height="10"/>
+        <image name="voice_up" width="54" height="24"/>
+        <image name="voice_up_red" width="54" height="24"/>
     </resources>
 </document>

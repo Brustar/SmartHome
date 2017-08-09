@@ -477,6 +477,7 @@
         TVCell.deviceid = _TVArray[indexPath.row];
          _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         [TVCell query:[NSString stringWithFormat:@"%d", device.eID]];
+        [TVCell initWithFrame];
         TVCell.scene = _scene;
         
         return TVCell;
@@ -491,6 +492,7 @@
         DVDCell.DVDNameLabel.text = device.name;
          _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         [DVDCell query:[NSString stringWithFormat:@"%d", device.eID]];
+        [DVDCell initWithFrame];
         DVDCell.scene = _scene;
         
         return DVDCell;
@@ -556,6 +558,7 @@
         BjMusicCell.BjMusicNameLb.text = device.name;
          _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         [BjMusicCell query:[NSString stringWithFormat:@"%d", device.eID]];
+        [BjMusicCell initWithFrame];
         BjMusicCell.scene = _scene;
         
         return BjMusicCell;
