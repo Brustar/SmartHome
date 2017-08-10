@@ -48,6 +48,8 @@ typedef void(^SaveOK)(BOOL flag);
 -(void) startScene:(int)sceneid;
 -(void) poweroffAllDevice:(int)sceneid;
 
+-(void) saveDeviceSchedule:(NSString *)plistName;
+
 //调整场景氛围
 -(void) dimingScene:(int)sceneid brightness:(int)bright;
 //明快
