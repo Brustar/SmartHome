@@ -397,10 +397,10 @@
 -(void) saveDeviceSchedule:(NSString *)plistName
 {
     NSString *plistPath=[[IOManager scenesPath] stringByAppendingPathComponent:plistName];
-    NSDictionary *parameter = @{};
+    NSDictionary *parameter = @{@"plist_file":plistPath,@"token":[UD objectForKey:@"AuthorToken"]};
 
     NSData *fileData = [NSData dataWithContentsOfFile:plistPath];
-    NSString *URL = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+    NSString *URL = [NSString stringWithFormat:@"%@Cloud/upload_plist.aspx",[IOManager httpAddr]];
     [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:plistName imgData:nil imgFileName:@"" completion:^(id responseObject) {
         NSNumber *result = [responseObject objectForKey:@"result"];
         NSString *msg = [responseObject objectForKey:@"msg"];
