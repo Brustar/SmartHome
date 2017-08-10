@@ -276,6 +276,7 @@
     }
     
 }
+
 //另存为(保存为一个新的场景）
 - (void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(UIImage *)image
 {
@@ -391,6 +392,26 @@
         }
        
     }
+}
+
+-(void) saveDeviceSchedule:(NSString *)plistName
+{
+    NSString *plistPath=[[IOManager scenesPath] stringByAppendingPathComponent:plistName];
+    NSDictionary *parameter = @{};
+
+    NSData *fileData = [NSData dataWithContentsOfFile:plistPath];
+    NSString *URL = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+    [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:plistName imgData:nil imgFileName:@"" completion:^(id responseObject) {
+        NSNumber *result = [responseObject objectForKey:@"result"];
+        NSString *msg = [responseObject objectForKey:@"msg"];
+        
+        if(result.integerValue == 0) { //成功
+            [MBProgressHUD showSuccess:@"保存成功"];
+            
+        }else { //失败
+            [MBProgressHUD showError:msg];
+        }
+    }];
 }
 
 //保证newScene的ID不变修改定时
@@ -749,13 +770,6 @@
     }
     
     [[[AudioManager defaultManager] musicPlayer] stop];
-}
-
-- (void)getRealSceneAllDevicesStatusData {
-    NSData *data = nil;
-    SocketManager *sock = [SocketManager defaultManager];
-    data = [[DeviceInfo defaultManager] getRealSceneData];
-    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 -(void) dimingRoom:(int)roomid brightness:(int)bright

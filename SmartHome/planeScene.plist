@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC " -//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict><key>rooms</key><array><dict><key>roomID</key><integer>3</integer><key>rect</key><string>{{133, 81}, {403, 425}}</string></dict><dict><key>roomID</key><integer>14</integer><key>rect</key><string>{{410, 84}, {691, 382}}</string></dict></array><key>devices</key><array><dict><key>deviceID</key><integer>66</integer><key>rect</key><string>{{364, 237}, {427, 281}}</string></dict><dict><key>deviceID</key><integer>67</integer><key>rect</key><string>{{275, 166}, {325, 208}}</string></dict><dict><key>deviceID</key><integer>65</integer><key>rect</key><string>{{328, 349}, {379, 396}}</string></dict></array></dict></plist>

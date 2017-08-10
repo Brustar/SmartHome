@@ -101,7 +101,6 @@ enum{
 
 -(NSData *)startScenenAtMaster:(int)sceneid;
 -(NSData *)query:(NSString *)deviceID;
-- (NSData *)getRealSceneData;
 
 //TV,DVD,NETV,BGMusic
 -(NSData *) previous:(NSString *)deviceID;
@@ -177,6 +176,8 @@ enum{
 -(NSData *) repeat:(NSString *)deviceID;
 -(NSData *) shuffle:(NSString *)deviceID;
 
-- (NSData *)getRoomStateData;//获取房间状态信息（灯，影音，空调，温度，湿度，PM2.5）
+#pragma mark - Scheduler CALL PUBLIC
+-(NSData *) scheduleScene:(uint8_t)action sceneID:(NSString *)sceneID;
+-(NSData *) scheduleDevice:(uint8_t)action deviceID:(NSString *)deviceID;
 
 @end

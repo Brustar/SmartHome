@@ -15,6 +15,7 @@
 #import "SQLManager.h"
 #import "UIViewController+Navigator.h"
 #import "UIView+Popup.h"
+#import "SceneManager.h"
 
 @interface WettingController ()
 
@@ -29,7 +30,7 @@
 @property (nonatomic,assign) NSTimer *scheculer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
 @property (weak, nonatomic) IBOutlet UIButton *btnCmd;
-@property(nonatomic) int interval;
+@property (nonatomic) int interval;
 
 @property (weak, nonatomic) IBOutlet UILabel *schduleLbl;
 @property (weak, nonatomic) IBOutlet UILabel *immediateLbl;
@@ -129,10 +130,12 @@
     }
     
     Schedule *sch = [[Schedule alloc] initWhithoutSchedule];
-    //sch.deviceID = [self.deviceid intValue];
     sch.startTime = self.HLabel.text;
     sch.interval = [self.SLabel.text intValue];
-    [IOManager writeScene:[NSString stringWithFormat:@"schedule_%@.plist",self.deviceid] scene:sch];
+    
+    NSString *plistFile = [NSString stringWithFormat:@"schedule_%ld_%@.plist",[[DeviceInfo defaultManager] masterID],self.deviceid];
+    [IOManager writeScene:plistFile scene:@{@"schedules":@[sch]}];
+    [[SceneManager defaultManager] saveDeviceSchedule:plistFile];
 }
 
 -(IBAction)timing:(id)sender

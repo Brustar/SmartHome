@@ -272,31 +272,29 @@
     return dataFromProtocol(proto);
 }
 
-//获取房间状态信息（灯，影音，空调，温度，湿度，PM2.5）
-- (NSData *)getRoomStateData {
-    uint8_t cmd = 0x8A;
-    Proto proto = createProto();
-    proto.cmd = cmd;
-    proto.action.state = 0x00;
-    proto.action.RValue = 0x00;
-    proto.action.G = 0x00;
-    proto.action.B = 0x00;
-    proto.deviceID = 0x00;
-    proto.deviceType = 0x8A;
-    return dataFromProtocol(proto);
+-(NSData *) scheduleScene:(uint8_t)action sceneID:(NSString *)sceneID
+{
+    return [self schedule:action dID:[sceneID intValue] type:0x60];
 }
 
-//获取实景数据（温度，湿度，PM2.5，噪音）
-- (NSData *)getRealSceneData{
-    uint8_t cmd = 0x8A;
+-(NSData *) scheduleDevice:(uint8_t)action deviceID:(NSString *)deviceID
+{
+    NSString *enumber=[SQLManager getENumber:[deviceID integerValue]];
+    uint16_t dID = CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
+    return [self schedule:action dID:dID type:0x61];
+}
+
+-(NSData *) schedule:(uint8_t)action dID:(uint16_t)dID type:(uint8_t)dtype
+{
     Proto proto = createProto();
-    proto.cmd = cmd;
-    proto.action.state = 0x00;
+    proto.cmd = 0x8A;
+    proto.action.state = action;
     proto.action.RValue = 0x00;
     proto.action.G = 0x00;
     proto.action.B = 0x00;
-    proto.deviceID = 0x00;
-    proto.deviceType = 0x8A;
+    
+    proto.deviceID = dID;
+    proto.deviceType = dtype;
     return dataFromProtocol(proto);
 }
 

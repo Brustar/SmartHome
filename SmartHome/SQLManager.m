@@ -1922,8 +1922,6 @@
 //根据场景ID得到改场景下的所有的设备ID
 +(NSArray *)getDeviceIDsBySeneId:(int)SceneId
 {
-    //NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"255_216" ofType:@"plist"]];
-    
     NSString *hostID = SCENE_FILE_NAME;
     
     //读取场景文件
