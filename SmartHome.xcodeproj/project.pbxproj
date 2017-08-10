@@ -16,7 +16,6 @@
 		0F094AC31E94CD3A00977123 /* Keypad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F094AC21E94CD3A00977123 /* Keypad.m */; };
 		0F094AC61E94CDC100977123 /* Key.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F094AC51E94CDC100977123 /* Key.m */; };
 		0F0A40141ED2EAD8002003C4 /* DeviceTimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0A40131ED2EAD8002003C4 /* DeviceTimerCell.m */; };
-		0F0A40171ED2EBA6002003C4 /* FixTimeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0A40161ED2EBA6002003C4 /* FixTimeListCell.m */; };
 		0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F11654E1D7418EE00A01B8F /* Amplifier.m */; };
 		0F180FC61D0E4E5000392F4C /* FMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC51D0E4E5000392F4C /* FMController.m */; };
 		0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC81D0E4E6500392F4C /* GuardController.m */; };
@@ -133,7 +132,6 @@
 		2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0C1E7F5E3000C7D006 /* CYLineLayout.m */; };
 		2E12CC111E7F5E3000C7D006 /* CYPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0E1E7F5E3000C7D006 /* CYPhotoCell.m */; };
 		2E12CC121E7F5E3000C7D006 /* CYPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */; };
-		2E12CC161E7FC04800C7D006 /* IphoneNewEditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */; };
 		2E1495101DE474EF00141629 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
 		2E2D92CE1EF1067C0007B90A /* PowerLightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D92CC1EF1067C0007B90A /* PowerLightCell.m */; };
 		2E2D92CF1EF1067C0007B90A /* PowerLightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E2D92CD1EF1067C0007B90A /* PowerLightCell.xib */; };
@@ -189,7 +187,6 @@
 		2ED49A881F3BF171006A5F15 /* SceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED49A871F3BF171006A5F15 /* SceneCell.m */; };
 		2ED49A8B1F3BF1E4006A5F15 /* EditSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED49A8A1F3BF1E4006A5F15 /* EditSceneCell.m */; };
 		2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */; };
-		2EEE536B1E3061930026F97D /* IphoneDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536A1E3061930026F97D /* IphoneDetailViewController.m */; };
 		2EEFF74A1E9649A0008F2C7F /* IphoneNewAddSceneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEFF7491E9649A0008F2C7F /* IphoneNewAddSceneVC.m */; };
 		2EF5B0241F02517C00C369C6 /* ipadFirstViewVC.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B0231F02517C00C369C6 /* ipadFirstViewVC.gif */; };
 		2EF5B0261F0251EF00C369C6 /* night.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B0251F0251EF00C369C6 /* night.gif */; };
@@ -197,8 +194,6 @@
 		2EF5B02A1F02523E00C369C6 /* rain.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B0291F02523E00C369C6 /* rain.gif */; };
 		2EF5B02C1F02525300C369C6 /* cloudy.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B02B1F02525300C369C6 /* cloudy.gif */; };
 		2EF5B02E1F02657700C369C6 /* haze.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B02D1F02657700C369C6 /* haze.gif */; };
-		2EF75C7C1EB2CAE00055147D /* ShortcutKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C791EB2CAE00055147D /* ShortcutKeyCell.m */; };
-		2EF75C7D1EB2CAE00055147D /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C7B1EB2CAE00055147D /* ShortcutKeyViewController.m */; };
 		2EF75C811EB32D390055147D /* DeviceTimingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C801EB32D390055147D /* DeviceTimingViewController.m */; };
 		39951F658604DC8E80FE9361 /* Pods_SmartHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB719EB6AD94BADA3066D54C /* Pods_SmartHome.framework */; };
 		CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12431EB316EF00E0B301 /* DeliveryAddressViewController.m */; };
@@ -270,10 +265,8 @@
 		CDF90B411E1E425D009043B9 /* RoomDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */; };
 		CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB9DF71E641F8E00BFECCE /* DeviceTimerInfo.m */; };
 		F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60E71C91D796BE6008863DB /* AmplifierController.m */; };
-		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
 		F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */; };
 		F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */; };
-		F617771D1DCC23AC00B382D4 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F617771C1DCC23AC00B382D4 /* CollectionViewCell.m */; };
 		F618141D1DB5B0C7003B0741 /* PushSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F618141C1DB5B0C7003B0741 /* PushSettingController.m */; };
 		F61896381D87B06300DBE6CD /* ScreenCurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = F61896371D87B06300DBE6CD /* ScreenCurtainController.m */; };
 		F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = F618963A1D87B08300DBE6CD /* ProjectController.m */; };
@@ -283,12 +276,9 @@
 		F6251F771D542508000A5A47 /* SQLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F761D542508000A5A47 /* SQLManager.m */; };
 		F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA401DAC699D006410F7 /* IphoneTypeView.m */; };
 		F62CFA441DAC90DD006410F7 /* IphoneSaveNewSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA431DAC90DD006410F7 /* IphoneSaveNewSceneController.m */; };
-		F62CFA4A1DAC952F006410F7 /* IphoneRoomListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA491DAC952F006410F7 /* IphoneRoomListController.m */; };
 		F62E05661DAB68620096BF00 /* IphoneEditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62E05651DAB68620096BF00 /* IphoneEditSceneController.m */; };
 		F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C35E1D38B4FF008880BB /* AccessSettingController.m */; };
 		F630C3621D38C3E5008880BB /* AreaSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C3611D38C3E5008880BB /* AreaSettingCell.m */; };
-		F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */; };
-		F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */; };
 		F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */; };
 		F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */; };
 		F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */; };
@@ -306,7 +296,6 @@
 		F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F731D3C6AA200F2B7E5 /* SystemCell.m */; };
 		F67F1F771D3C719D00F2B7E5 /* SystemInfomationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F761D3C719D00F2B7E5 /* SystemInfomationController.m */; };
 		F67F1F811D3CC46C00F2B7E5 /* AboutUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F801D3CC46C00F2B7E5 /* AboutUsController.m */; };
-		F680AAB71DD94565001D1807 /* FamilyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F680AAB61DD94565001D1807 /* FamilyCell.m */; };
 		F68A5DD81D782D8400601612 /* ECSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = F68A5DD71D782D8400601612 /* ECSearchView.m */; };
 		F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82321D363376002DE6D7 /* ServiceRecordViewController.m */; };
 		F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */; };
@@ -354,10 +343,8 @@
 		0F094AC21E94CD3A00977123 /* Keypad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keypad.m; sourceTree = "<group>"; };
 		0F094AC41E94CDC100977123 /* Key.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		0F094AC51E94CDC100977123 /* Key.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Key.m; sourceTree = "<group>"; };
-		0F0A40121ED2EAD8002003C4 /* DeviceTimerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTimerCell.h; sourceTree = "<group>"; };
-		0F0A40131ED2EAD8002003C4 /* DeviceTimerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTimerCell.m; sourceTree = "<group>"; };
-		0F0A40151ED2EBA6002003C4 /* FixTimeListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeListCell.h; sourceTree = "<group>"; };
-		0F0A40161ED2EBA6002003C4 /* FixTimeListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixTimeListCell.m; sourceTree = "<group>"; };
+		0F0A40121ED2EAD8002003C4 /* DeviceTimerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceTimerCell.h; path = IphoneControllers/DeviceTimerCell.h; sourceTree = "<group>"; };
+		0F0A40131ED2EAD8002003C4 /* DeviceTimerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceTimerCell.m; path = IphoneControllers/DeviceTimerCell.m; sourceTree = "<group>"; };
 		0F11654D1D7418EE00A01B8F /* Amplifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Amplifier.h; sourceTree = "<group>"; };
 		0F11654E1D7418EE00A01B8F /* Amplifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Amplifier.m; sourceTree = "<group>"; };
 		0F180FC41D0E4E5000392F4C /* FMController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMController.h; sourceTree = "<group>"; };
@@ -662,8 +649,6 @@
 		2E12CC0D1E7F5E3000C7D006 /* CYPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYPhotoCell.h; sourceTree = "<group>"; };
 		2E12CC0E1E7F5E3000C7D006 /* CYPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYPhotoCell.m; sourceTree = "<group>"; };
 		2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CYPhotoCell.xib; sourceTree = "<group>"; };
-		2E12CC141E7FC04800C7D006 /* IphoneNewEditSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNewEditSceneController.h; sourceTree = "<group>"; };
-		2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNewEditSceneController.m; sourceTree = "<group>"; };
 		2E2D92CB1EF1067C0007B90A /* PowerLightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerLightCell.h; sourceTree = "<group>"; };
 		2E2D92CC1EF1067C0007B90A /* PowerLightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerLightCell.m; sourceTree = "<group>"; };
 		2E2D92CD1EF1067C0007B90A /* PowerLightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PowerLightCell.xib; sourceTree = "<group>"; };
@@ -756,10 +741,8 @@
 		2ED49A871F3BF171006A5F15 /* SceneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneCell.m; sourceTree = "<group>"; };
 		2ED49A891F3BF1E4006A5F15 /* EditSceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSceneCell.h; sourceTree = "<group>"; };
 		2ED49A8A1F3BF1E4006A5F15 /* EditSceneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSceneCell.m; sourceTree = "<group>"; };
-		2EDC0E8E1DEC072700F95BE0 /* IPhoneRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneRoom.h; sourceTree = "<group>"; };
-		2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPhoneRoom.m; sourceTree = "<group>"; };
-		2EEE53691E3061930026F97D /* IphoneDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneDetailViewController.h; sourceTree = "<group>"; };
-		2EEE536A1E3061930026F97D /* IphoneDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneDetailViewController.m; sourceTree = "<group>"; };
+		2EDC0E8E1DEC072700F95BE0 /* IPhoneRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPhoneRoom.h; path = IphoneControllers/IPhoneRoom.h; sourceTree = "<group>"; };
+		2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPhoneRoom.m; path = IphoneControllers/IPhoneRoom.m; sourceTree = "<group>"; };
 		2EEFF7481E9649A0008F2C7F /* IphoneNewAddSceneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNewAddSceneVC.h; sourceTree = "<group>"; };
 		2EEFF7491E9649A0008F2C7F /* IphoneNewAddSceneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNewAddSceneVC.m; sourceTree = "<group>"; };
 		2EF5B0231F02517C00C369C6 /* ipadFirstViewVC.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ipadFirstViewVC.gif; sourceTree = "<group>"; };
@@ -768,10 +751,6 @@
 		2EF5B0291F02523E00C369C6 /* rain.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = rain.gif; sourceTree = "<group>"; };
 		2EF5B02B1F02525300C369C6 /* cloudy.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cloudy.gif; sourceTree = "<group>"; };
 		2EF5B02D1F02657700C369C6 /* haze.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = haze.gif; sourceTree = "<group>"; };
-		2EF75C781EB2CAE00055147D /* ShortcutKeyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyCell.h; sourceTree = "<group>"; };
-		2EF75C791EB2CAE00055147D /* ShortcutKeyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyCell.m; sourceTree = "<group>"; };
-		2EF75C7A1EB2CAE00055147D /* ShortcutKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyViewController.h; sourceTree = "<group>"; };
-		2EF75C7B1EB2CAE00055147D /* ShortcutKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyViewController.m; sourceTree = "<group>"; };
 		2EF75C7F1EB32D390055147D /* DeviceTimingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTimingViewController.h; sourceTree = "<group>"; };
 		2EF75C801EB32D390055147D /* DeviceTimingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTimingViewController.m; sourceTree = "<group>"; };
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
@@ -895,13 +874,9 @@
 		CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
 		F60E71C81D796BE6008863DB /* AmplifierController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmplifierController.h; sourceTree = "<group>"; };
 		F60E71C91D796BE6008863DB /* AmplifierController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmplifierController.m; sourceTree = "<group>"; };
-		F60FDB401D00029900AB04BE /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		F60FDB411D00029900AB04BE /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		F60FDB431D003FD500AB04BE /* CurtainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainTableViewCell.h; sourceTree = "<group>"; };
 		F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainTableViewCell.m; sourceTree = "<group>"; };
 		F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurtainTableViewCell.xib; sourceTree = "<group>"; };
-		F617771B1DCC23AC00B382D4 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
-		F617771C1DCC23AC00B382D4 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		F618141B1DB5B0C7003B0741 /* PushSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingController.h; sourceTree = "<group>"; };
 		F618141C1DB5B0C7003B0741 /* PushSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingController.m; sourceTree = "<group>"; };
 		F61896361D87B06300DBE6CD /* ScreenCurtainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenCurtainController.h; sourceTree = "<group>"; };
@@ -915,31 +890,26 @@
 		F6251F721D541D8A000A5A47 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
 		F6251F731D541D8A000A5A47 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		F6251F761D542508000A5A47 /* SQLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLManager.m; sourceTree = "<group>"; };
-		F62CFA3F1DAC699D006410F7 /* IphoneTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneTypeView.h; sourceTree = "<group>"; };
-		F62CFA401DAC699D006410F7 /* IphoneTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneTypeView.m; sourceTree = "<group>"; };
-		F62CFA421DAC90DD006410F7 /* IphoneSaveNewSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneSaveNewSceneController.h; sourceTree = "<group>"; };
-		F62CFA431DAC90DD006410F7 /* IphoneSaveNewSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneSaveNewSceneController.m; sourceTree = "<group>"; };
-		F62CFA481DAC952F006410F7 /* IphoneRoomListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneRoomListController.h; sourceTree = "<group>"; };
-		F62CFA491DAC952F006410F7 /* IphoneRoomListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneRoomListController.m; sourceTree = "<group>"; };
-		F62E05641DAB68620096BF00 /* IphoneEditSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneEditSceneController.h; sourceTree = "<group>"; };
-		F62E05651DAB68620096BF00 /* IphoneEditSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneEditSceneController.m; sourceTree = "<group>"; };
+		F62CFA3F1DAC699D006410F7 /* IphoneTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IphoneTypeView.h; path = IphoneControllers/IphoneTypeView.h; sourceTree = "<group>"; };
+		F62CFA401DAC699D006410F7 /* IphoneTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IphoneTypeView.m; path = IphoneControllers/IphoneTypeView.m; sourceTree = "<group>"; };
+		F62CFA421DAC90DD006410F7 /* IphoneSaveNewSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IphoneSaveNewSceneController.h; path = IphoneControllers/IphoneSaveNewSceneController.h; sourceTree = "<group>"; };
+		F62CFA431DAC90DD006410F7 /* IphoneSaveNewSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IphoneSaveNewSceneController.m; path = IphoneControllers/IphoneSaveNewSceneController.m; sourceTree = "<group>"; };
+		F62E05641DAB68620096BF00 /* IphoneEditSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IphoneEditSceneController.h; path = IphoneControllers/IphoneEditSceneController.h; sourceTree = "<group>"; };
+		F62E05651DAB68620096BF00 /* IphoneEditSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IphoneEditSceneController.m; path = IphoneControllers/IphoneEditSceneController.m; sourceTree = "<group>"; };
 		F630C35D1D38B4FF008880BB /* AccessSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessSettingController.h; sourceTree = "<group>"; };
 		F630C35E1D38B4FF008880BB /* AccessSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessSettingController.m; sourceTree = "<group>"; };
 		F630C3611D38C3E5008880BB /* AreaSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaSettingCell.m; sourceTree = "<group>"; };
-		F6359AF81CFFBC910035EB31 /* DetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewCell.h; sourceTree = "<group>"; };
-		F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewCell.m; sourceTree = "<group>"; };
-		F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailTableViewCell.xib; sourceTree = "<group>"; };
-		F6359AFD1CFFC4DC0035EB31 /* ColourTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColourTableViewCell.h; sourceTree = "<group>"; };
-		F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColourTableViewCell.m; sourceTree = "<group>"; };
+		F6359AFD1CFFC4DC0035EB31 /* ColourTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColourTableViewCell.h; path = ../ColourTableViewCell.h; sourceTree = "<group>"; };
+		F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColourTableViewCell.m; path = ../ColourTableViewCell.m; sourceTree = "<group>"; };
 		F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColourTableViewCell.xib; sourceTree = "<group>"; };
 		F63AE0011D11319C00BE17DC /* FMCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCollectionViewCell.h; sourceTree = "<group>"; };
 		F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCollectionViewCell.m; sourceTree = "<group>"; };
-		F646C0B71D91173000DF1728 /* IphoneRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneRoomView.h; sourceTree = "<group>"; };
-		F646C0B81D91173000DF1728 /* IphoneRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneRoomView.m; sourceTree = "<group>"; };
-		F64EF7FC1D8FBCC1003C1C48 /* IphoneSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneSceneController.h; sourceTree = "<group>"; };
-		F64EF7FD1D8FBCC1003C1C48 /* IphoneSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneSceneController.m; sourceTree = "<group>"; };
-		F64EF7FF1D8FDCE7003C1C48 /* IphoneDeviceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneDeviceListController.h; sourceTree = "<group>"; };
-		F64EF8001D8FDCE7003C1C48 /* IphoneDeviceListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneDeviceListController.m; sourceTree = "<group>"; };
+		F646C0B71D91173000DF1728 /* IphoneRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IphoneRoomView.h; path = IphoneControllers/IphoneRoomView.h; sourceTree = "<group>"; };
+		F646C0B81D91173000DF1728 /* IphoneRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IphoneRoomView.m; path = IphoneControllers/IphoneRoomView.m; sourceTree = "<group>"; };
+		F64EF7FC1D8FBCC1003C1C48 /* IphoneSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IphoneSceneController.h; path = IphoneControllers/IphoneSceneController.h; sourceTree = "<group>"; };
+		F64EF7FD1D8FBCC1003C1C48 /* IphoneSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IphoneSceneController.m; path = IphoneControllers/IphoneSceneController.m; sourceTree = "<group>"; };
+		F64EF7FF1D8FDCE7003C1C48 /* IphoneDeviceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IphoneDeviceListController.h; path = IphoneControllers/IphoneDeviceListController.h; sourceTree = "<group>"; };
+		F64EF8001D8FDCE7003C1C48 /* IphoneDeviceListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IphoneDeviceListController.m; path = IphoneControllers/IphoneDeviceListController.m; sourceTree = "<group>"; };
 		F65164121D3780C500A6F5FA /* TVLogoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVLogoCell.h; sourceTree = "<group>"; };
 		F65164131D3780C500A6F5FA /* TVLogoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVLogoCell.m; sourceTree = "<group>"; };
 		F65838D81D3A2A43004210AC /* MsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgCell.h; sourceTree = "<group>"; };
@@ -962,8 +932,6 @@
 		F67F1F761D3C719D00F2B7E5 /* SystemInfomationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemInfomationController.m; sourceTree = "<group>"; };
 		F67F1F7F1D3CC46C00F2B7E5 /* AboutUsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsController.h; sourceTree = "<group>"; };
 		F67F1F801D3CC46C00F2B7E5 /* AboutUsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsController.m; sourceTree = "<group>"; };
-		F680AAB51DD94565001D1807 /* FamilyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyCell.h; sourceTree = "<group>"; };
-		F680AAB61DD94565001D1807 /* FamilyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyCell.m; sourceTree = "<group>"; };
 		F68A5DD61D782D8400601612 /* ECSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSearchView.h; sourceTree = "<group>"; };
 		F68A5DD71D782D8400601612 /* ECSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSearchView.m; sourceTree = "<group>"; };
 		F69C82311D363376002DE6D7 /* ServiceRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceRecordViewController.h; sourceTree = "<group>"; };
@@ -980,8 +948,8 @@
 		F6DC641A1DEBC2250056EC00 /* RoomDeviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomDeviceCell.m; sourceTree = "<group>"; };
 		F6DC641C1DEC17710056EC00 /* RoomDeviceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomDeviceController.h; sourceTree = "<group>"; };
 		F6DC641D1DEC17710056EC00 /* RoomDeviceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomDeviceController.m; sourceTree = "<group>"; };
-		F6FD00A01DDDD470009ABA64 /* TouchSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchSubViewController.h; sourceTree = "<group>"; };
-		F6FD00A11DDDD470009ABA64 /* TouchSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchSubViewController.m; sourceTree = "<group>"; };
+		F6FD00A01DDDD470009ABA64 /* TouchSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchSubViewController.h; path = IphoneControllers/TouchSubViewController.h; sourceTree = "<group>"; };
+		F6FD00A11DDDD470009ABA64 /* TouchSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TouchSubViewController.m; path = IphoneControllers/TouchSubViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1118,37 +1086,13 @@
 			isa = PBXGroup;
 			children = (
 				0F6ADFD81E7133BB00BFF67F /* UI3.0 */,
-				0F6ADFD71E71329400BFF67F /* Libs */,
-				F6DC64181DEBC1710056EC00 /* iPadControllers */,
-				0F43B0FE1CF3E93700F3D9F0 /* storeboard */,
 				0F032D471CC9B12700D1920D /* Supporting Files */,
-				F64EF7F81D8FB710003C1C48 /* IphoneControllers */,
 				0F032D4A1CC9B12700D1920D /* AppDelegate.h */,
 				0F032D4B1CC9B12700D1920D /* AppDelegate.m */,
 				0F43B1011CF4055300F3D9F0 /* IATConfig.h */,
 				0F43B1021CF4055300F3D9F0 /* IATConfig.m */,
-				F60FDB401D00029900AB04BE /* DetailViewController.h */,
-				F60FDB411D00029900AB04BE /* DetailViewController.m */,
-				F6359AF81CFFBC910035EB31 /* DetailTableViewCell.h */,
-				F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */,
-				F6359AFD1CFFC4DC0035EB31 /* ColourTableViewCell.h */,
-				F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */,
-				0FB42E1C1CF681A7007DE64F /* planeScene.h */,
-				0FB42E1D1CF681A7007DE64F /* planeScene.m */,
-				0FC0FFDB1CF57E58000F71D5 /* TouchImage.h */,
-				0FC0FFDC1CF57E58000F71D5 /* TouchImage.m */,
-				2E03E2FE1ECAD57E00487319 /* ECMessage.h */,
-				2E03E2FF1ECAD57E00487319 /* ECMessage.m */,
-				F69C82341D363A4D002DE6D7 /* ServiceRecordCell.h */,
-				F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */,
-				2ED49A861F3BF171006A5F15 /* SceneCell.h */,
-				2ED49A871F3BF171006A5F15 /* SceneCell.m */,
-				2ED49A891F3BF1E4006A5F15 /* EditSceneCell.h */,
-				2ED49A8A1F3BF1E4006A5F15 /* EditSceneCell.m */,
-				0FA1E09C1D533BFA001CA819 /* PluginCell.h */,
-				0FA1E09D1D533BFA001CA819 /* PluginCell.m */,
-				F6BF2AEB1D86556500A3C9D5 /* HostIDSController.h */,
-				F6BF2AEC1D86556500A3C9D5 /* HostIDSController.m */,
+				0F0A40121ED2EAD8002003C4 /* DeviceTimerCell.h */,
+				0F0A40131ED2EAD8002003C4 /* DeviceTimerCell.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1214,17 +1158,16 @@
 			name = frameworks;
 			sourceTree = "<group>";
 		};
-		0F43B0FE1CF3E93700F3D9F0 /* storeboard */ = {
+		0F43B0FE1CF3E93700F3D9F0 /* OldStoreboard */ = {
 			isa = PBXGroup;
 			children = (
 				F668AF241D53413B0079587F /* Main.storyboard */,
-				F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */,
 				F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */,
 				F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */,
 				2E9EA8801E8D0DC200A1AA63 /* iPhone.storyboard */,
 				0F020A221DE3D9330034869F /* LaunchScreen.storyboard */,
 			);
-			name = storeboard;
+			name = OldStoreboard;
 			sourceTree = "<group>";
 		};
 		0F49CB691E7A1CC300D46ECC /* iPad */ = {
@@ -1484,15 +1427,17 @@
 		0F6ADFD81E7133BB00BFF67F /* UI3.0 */ = {
 			isa = PBXGroup;
 			children = (
+				0F6ADFD71E71329400BFF67F /* Libs */,
+				F6DC64181DEBC1710056EC00 /* iPadPlaneControllers */,
+				2ED49A8D1F3C3052006A5F15 /* SceneController */,
 				CDF157351E7AACE600499AC5 /* CustomTabbarController */,
 				CDF78C521E9CA80A00F8B20C /* CustomNavigationBar */,
 				2ED49A851F3BEF2D006A5F15 /* AllDeviceViewController */,
 				2EBABC6F1E835E950093EF3A /* AllDeviceTableViewCell */,
 				2ED49A8C1F3BF560006A5F15 /* AllProfile */,
 				CD75CC911F132F3A00917D40 /* MaskView */,
-				2ECD5B101ED276480091880D /* ipadControllers */,
 				0F6ADFDC1E7134ED00BFF67F /* Resource */,
-				0F6ADFDA1E71343600BFF67F /* Controllers */,
+				0F6ADFDA1E71343600BFF67F /* OtherVC */,
 				0F6ADFD91E71341F00BFF67F /* Storyboards */,
 			);
 			name = UI3.0;
@@ -1501,26 +1446,25 @@
 		0F6ADFD91E71341F00BFF67F /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				0F43B0FE1CF3E93700F3D9F0 /* OldStoreboard */,
 				0F49CB6A1E7A1CCE00D46ECC /* iPhone */,
 				0F49CB691E7A1CC300D46ECC /* iPad */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
-		0F6ADFDA1E71343600BFF67F /* Controllers */ = {
+		0F6ADFDA1E71343600BFF67F /* OtherVC */ = {
 			isa = PBXGroup;
 			children = (
 				CD8CFCCC1ED6829A00B49712 /* PlaneGraph */,
 				CDEE5E9E1EC2A7DD00A5779D /* LaunchingViewController */,
-				0FF5CD4E1EA7695E0027E2DC /* Devices */,
 				CDEC868F1E9A1CBB009EC245 /* FamilyViewController */,
 				CD7863B41E8CF13A00F42AC0 /* MyInfoViewController */,
 				CD7DDA101E825E3E00638DB3 /* RegistViewController */,
 				CD93E3A71E807740003CCAA9 /* LoginViewController */,
 				2E20EBB21E8A325900891828 /* My */,
-				2E12CC131E7FC00A00C7D006 /* SceneViewController */,
 			);
-			name = Controllers;
+			name = OtherVC;
 			sourceTree = "<group>";
 		};
 		0F6ADFDB1E71349500BFF67F /* IM */ = {
@@ -1686,25 +1630,10 @@
 			name = Devices;
 			sourceTree = "<group>";
 		};
-		2E12CC131E7FC00A00C7D006 /* SceneViewController */ = {
-			isa = PBXGroup;
-			children = (
-				2EEFF7471E96495D008F2C7F /* Controller */,
-				2EEFF7461E96494C008F2C7F /* View */,
-			);
-			name = SceneViewController;
-			sourceTree = "<group>";
-		};
 		2E20EBB21E8A325900891828 /* My */ = {
 			isa = PBXGroup;
 			children = (
 				CD9F0AB91EB861F5007B0CF7 /* AddressPickerView */,
-				2EF75C781EB2CAE00055147D /* ShortcutKeyCell.h */,
-				2EF75C791EB2CAE00055147D /* ShortcutKeyCell.m */,
-				2EF75C7A1EB2CAE00055147D /* ShortcutKeyViewController.h */,
-				2EF75C7B1EB2CAE00055147D /* ShortcutKeyViewController.m */,
-				CDB8B8511EB1D550003AA894 /* SceneShortcutsViewController.h */,
-				CDB8B8521EB1D550003AA894 /* SceneShortcutsViewController.m */,
 				CDB8B84E1EB1D4B4003AA894 /* UserInfoViewController.h */,
 				CDB8B84F1EB1D4B4003AA894 /* UserInfoViewController.m */,
 				CDB8B84B1EB1D421003AA894 /* MonitorViewController.h */,
@@ -1736,13 +1665,13 @@
 			name = ipadTableViewCell;
 			sourceTree = "<group>";
 		};
-		2E7B64B91E9B666A001F7469 /* FirstVC */ = {
+		2E7B64B91E9B666A001F7469 /* iphoneFirstVC */ = {
 			isa = PBXGroup;
 			children = (
 				2E8AC52D1E7BAE350002E717 /* FirstViewController.h */,
 				2E8AC52E1E7BAE350002E717 /* FirstViewController.m */,
 			);
-			name = FirstVC;
+			name = iphoneFirstVC;
 			sourceTree = "<group>";
 		};
 		2E7B64BB1E9B66A9001F7469 /* SceneAddVC */ = {
@@ -1750,21 +1679,10 @@
 			children = (
 				2EEFF7481E9649A0008F2C7F /* IphoneNewAddSceneVC.h */,
 				2EEFF7491E9649A0008F2C7F /* IphoneNewAddSceneVC.m */,
-				2E7B64BD1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.h */,
-				2E7B64BE1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m */,
 				2E08EFC11EBC668A007F9FE1 /* PhotoGraphViewConteoller.h */,
 				2E08EFC21EBC668A007F9FE1 /* PhotoGraphViewConteoller.m */,
 			);
 			name = SceneAddVC;
-			sourceTree = "<group>";
-		};
-		2E7B64BC1E9B66FA001F7469 /* SceneEditVC */ = {
-			isa = PBXGroup;
-			children = (
-				2E12CC141E7FC04800C7D006 /* IphoneNewEditSceneController.h */,
-				2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */,
-			);
-			name = SceneEditVC;
 			sourceTree = "<group>";
 		};
 		2E801EF91E2621C70039A6D9 /* fixTimer */ = {
@@ -1867,19 +1785,11 @@
 				2E2D92CB1EF1067C0007B90A /* PowerLightCell.h */,
 				2E2D92CC1EF1067C0007B90A /* PowerLightCell.m */,
 				2E2D92CD1EF1067C0007B90A /* PowerLightCell.xib */,
+				F6359AFD1CFFC4DC0035EB31 /* ColourTableViewCell.h */,
+				F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */,
 			);
 			name = AllDeviceTableViewCell;
 			path = IphoneControllers;
-			sourceTree = "<group>";
-		};
-		2ECD5B101ED276480091880D /* ipadControllers */ = {
-			isa = PBXGroup;
-			children = (
-				CDEE58CE1EEE89910023C669 /* iPadMyVC */,
-				2ECD5B171ED28D530091880D /* ipadSceneVC */,
-				2ECD5B111ED276710091880D /* ipadFirstVC */,
-			);
-			name = ipadControllers;
 			sourceTree = "<group>";
 		};
 		2ECD5B111ED276710091880D /* ipadFirstVC */ = {
@@ -1927,6 +1837,9 @@
 		2ED49A851F3BEF2D006A5F15 /* AllDeviceViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0FF5CD4E1EA7695E0027E2DC /* Devices */,
+				F64EF7FF1D8FDCE7003C1C48 /* IphoneDeviceListController.h */,
+				F64EF8001D8FDCE7003C1C48 /* IphoneDeviceListController.m */,
 				0FAF74AB1CEE9A9600432713 /* LightController.h */,
 				0FAF74AC1CEE9A9600432713 /* LightController.m */,
 				0F4B497E1CFEB13500D93DD2 /* CurtainController.h */,
@@ -1982,6 +1895,8 @@
 				2EC9B8271EB1BFE500F382AD /* PushSettingCell.m */,
 				0F4B3BFE1D2A13870002E75E /* MSGController.h */,
 				0F4B3BFF1D2A13870002E75E /* MSGController.m */,
+				2E03E2FE1ECAD57E00487319 /* ECMessage.h */,
+				2E03E2FF1ECAD57E00487319 /* ECMessage.m */,
 				F65838D81D3A2A43004210AC /* MsgCell.h */,
 				F65838D91D3A2A43004210AC /* MsgCell.m */,
 				2E6CEDBD1DE5DE8B000979BE /* DetailMSGViewController.h */,
@@ -2010,11 +1925,66 @@
 				2E2EA7861EFCBE0C0030EB46 /* ChangeNameViewController.m */,
 				2E2EA7881EFD0EC70030EB46 /* ChangePassWordVC.h */,
 				2E2EA7891EFD0EC70030EB46 /* ChangePassWordVC.m */,
+				CDB8B8511EB1D550003AA894 /* SceneShortcutsViewController.h */,
+				CDB8B8521EB1D550003AA894 /* SceneShortcutsViewController.m */,
 			);
 			name = AllProfile;
 			sourceTree = "<group>";
 		};
-		2EEFF7461E96494C008F2C7F /* View */ = {
+		2ED49A8D1F3C3052006A5F15 /* SceneController */ = {
+			isa = PBXGroup;
+			children = (
+				2ED49A901F3C33F0006A5F15 /* iphone\ipad-public */,
+				2EEFF7461E96494C008F2C7F /* SceneView */,
+				2ED49A8F1F3C33A5006A5F15 /* ipadSceneController */,
+				2ED49A8E1F3C3301006A5F15 /* iphoneSceneController */,
+			);
+			name = SceneController;
+			sourceTree = "<group>";
+		};
+		2ED49A8E1F3C3301006A5F15 /* iphoneSceneController */ = {
+			isa = PBXGroup;
+			children = (
+				F6FD00A01DDDD470009ABA64 /* TouchSubViewController.h */,
+				F6FD00A11DDDD470009ABA64 /* TouchSubViewController.m */,
+				2E7B64BB1E9B66A9001F7469 /* SceneAddVC */,
+				2E7B64B91E9B666A001F7469 /* iphoneFirstVC */,
+				2E8715D01EA06EB3006D3FB0 /* MusicController */,
+				2EF75C7E1EB329140055147D /* Timing */,
+			);
+			name = iphoneSceneController;
+			sourceTree = "<group>";
+		};
+		2ED49A8F1F3C33A5006A5F15 /* ipadSceneController */ = {
+			isa = PBXGroup;
+			children = (
+				2ECD5B111ED276710091880D /* ipadFirstVC */,
+				2ECD5B171ED28D530091880D /* ipadSceneVC */,
+				CDEE58CE1EEE89910023C669 /* iPadMyVC */,
+			);
+			name = ipadSceneController;
+			sourceTree = "<group>";
+		};
+		2ED49A901F3C33F0006A5F15 /* iphone\ipad-public */ = {
+			isa = PBXGroup;
+			children = (
+				F646C0B71D91173000DF1728 /* IphoneRoomView.h */,
+				F646C0B81D91173000DF1728 /* IphoneRoomView.m */,
+				F62CFA3F1DAC699D006410F7 /* IphoneTypeView.h */,
+				F62CFA401DAC699D006410F7 /* IphoneTypeView.m */,
+				F64EF7FC1D8FBCC1003C1C48 /* IphoneSceneController.h */,
+				F64EF7FD1D8FBCC1003C1C48 /* IphoneSceneController.m */,
+				F62E05641DAB68620096BF00 /* IphoneEditSceneController.h */,
+				F62E05651DAB68620096BF00 /* IphoneEditSceneController.m */,
+				F62CFA421DAC90DD006410F7 /* IphoneSaveNewSceneController.h */,
+				F62CFA431DAC90DD006410F7 /* IphoneSaveNewSceneController.m */,
+				2E7B64BD1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.h */,
+				2E7B64BE1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m */,
+			);
+			name = "iphone\\ipad-public";
+			sourceTree = "<group>";
+		};
+		2EEFF7461E96494C008F2C7F /* SceneView */ = {
 			isa = PBXGroup;
 			children = (
 				2E12CC0B1E7F5E3000C7D006 /* CYLineLayout.h */,
@@ -2023,19 +1993,7 @@
 				2E12CC0E1E7F5E3000C7D006 /* CYPhotoCell.m */,
 				2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */,
 			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		2EEFF7471E96495D008F2C7F /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				2EF75C7E1EB329140055147D /* Timing */,
-				2E8715D01EA06EB3006D3FB0 /* MusicController */,
-				2E7B64BC1E9B66FA001F7469 /* SceneEditVC */,
-				2E7B64BB1E9B66A9001F7469 /* SceneAddVC */,
-				2E7B64B91E9B666A001F7469 /* FirstVC */,
-			);
-			name = Controller;
+			name = SceneView;
 			sourceTree = "<group>";
 		};
 		2EF75C7E1EB329140055147D /* Timing */ = {
@@ -2229,41 +2187,6 @@
 			name = CustomNavigationBar;
 			sourceTree = "<group>";
 		};
-		F64EF7F81D8FB710003C1C48 /* IphoneControllers */ = {
-			isa = PBXGroup;
-			children = (
-				0F0A40151ED2EBA6002003C4 /* FixTimeListCell.h */,
-				0F0A40161ED2EBA6002003C4 /* FixTimeListCell.m */,
-				0F0A40121ED2EAD8002003C4 /* DeviceTimerCell.h */,
-				0F0A40131ED2EAD8002003C4 /* DeviceTimerCell.m */,
-				F64EF7FC1D8FBCC1003C1C48 /* IphoneSceneController.h */,
-				F64EF7FD1D8FBCC1003C1C48 /* IphoneSceneController.m */,
-				F64EF7FF1D8FDCE7003C1C48 /* IphoneDeviceListController.h */,
-				F64EF8001D8FDCE7003C1C48 /* IphoneDeviceListController.m */,
-				F646C0B71D91173000DF1728 /* IphoneRoomView.h */,
-				F646C0B81D91173000DF1728 /* IphoneRoomView.m */,
-				F62E05641DAB68620096BF00 /* IphoneEditSceneController.h */,
-				F62E05651DAB68620096BF00 /* IphoneEditSceneController.m */,
-				F617771B1DCC23AC00B382D4 /* CollectionViewCell.h */,
-				F617771C1DCC23AC00B382D4 /* CollectionViewCell.m */,
-				F62CFA3F1DAC699D006410F7 /* IphoneTypeView.h */,
-				F62CFA401DAC699D006410F7 /* IphoneTypeView.m */,
-				F62CFA421DAC90DD006410F7 /* IphoneSaveNewSceneController.h */,
-				F62CFA431DAC90DD006410F7 /* IphoneSaveNewSceneController.m */,
-				F62CFA481DAC952F006410F7 /* IphoneRoomListController.h */,
-				F62CFA491DAC952F006410F7 /* IphoneRoomListController.m */,
-				2EDC0E8E1DEC072700F95BE0 /* IPhoneRoom.h */,
-				2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */,
-				F6FD00A01DDDD470009ABA64 /* TouchSubViewController.h */,
-				F6FD00A11DDDD470009ABA64 /* TouchSubViewController.m */,
-				F680AAB51DD94565001D1807 /* FamilyCell.h */,
-				F680AAB61DD94565001D1807 /* FamilyCell.m */,
-				2EEE53691E3061930026F97D /* IphoneDetailViewController.h */,
-				2EEE536A1E3061930026F97D /* IphoneDetailViewController.m */,
-			);
-			path = IphoneControllers;
-			sourceTree = "<group>";
-		};
 		F6DAFF50D58D29D0493A07C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2291,17 +2214,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F6DC64181DEBC1710056EC00 /* iPadControllers */ = {
+		F6DC64181DEBC1710056EC00 /* iPadPlaneControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0FC0FFDB1CF57E58000F71D5 /* TouchImage.h */,
+				0FC0FFDC1CF57E58000F71D5 /* TouchImage.m */,
+				0FB42E1C1CF681A7007DE64F /* planeScene.h */,
+				0FB42E1D1CF681A7007DE64F /* planeScene.m */,
 				F6DC64191DEBC2250056EC00 /* RoomDeviceCell.h */,
 				F6DC641A1DEBC2250056EC00 /* RoomDeviceCell.m */,
 				F6DC641C1DEC17710056EC00 /* RoomDeviceController.h */,
 				F6DC641D1DEC17710056EC00 /* RoomDeviceController.m */,
 				CDF90B3F1E1E425D009043B9 /* RoomDetailViewController.h */,
 				CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */,
+				F69C82341D363A4D002DE6D7 /* ServiceRecordCell.h */,
+				F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */,
+				2ED49A861F3BF171006A5F15 /* SceneCell.h */,
+				2ED49A871F3BF171006A5F15 /* SceneCell.m */,
+				2ED49A891F3BF1E4006A5F15 /* EditSceneCell.h */,
+				2ED49A8A1F3BF1E4006A5F15 /* EditSceneCell.m */,
+				0FA1E09C1D533BFA001CA819 /* PluginCell.h */,
+				0FA1E09D1D533BFA001CA819 /* PluginCell.m */,
+				F6BF2AEB1D86556500A3C9D5 /* HostIDSController.h */,
+				F6BF2AEC1D86556500A3C9D5 /* HostIDSController.m */,
+				2EDC0E8E1DEC072700F95BE0 /* IPhoneRoom.h */,
+				2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */,
 			);
-			name = iPadControllers;
+			name = iPadPlaneControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2472,7 +2411,6 @@
 				2E6A065C1EA743B50022B681 /* NewColourCell.xib in Resources */,
 				0F49CB7D1E7A204300D46ECC /* MyInfo-iPad.storyboard in Resources */,
 				CDEC86841E960E92009EC245 /* background.png in Resources */,
-				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				CD8CFCD11ED6873000B49712 /* PlaneGraph.storyboard in Resources */,
 				0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */,
 				0F49CB7B1E7A204300D46ECC /* Home-iPad.storyboard in Resources */,
@@ -2916,7 +2854,6 @@
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,
 				0FB35C681DB0CECA00B48EA7 /* Plugin.m in Sources */,
 				0FBEFE2A1D24F0C10084244F /* WebManager.m in Sources */,
-				2EEE536B1E3061930026F97D /* IphoneDetailViewController.m in Sources */,
 				2E4298061ED67870003F4A76 /* IpadDeviceTypeCell.m in Sources */,
 				CD8CFCD41EE0165E00B49712 /* DemoVideoPlayerViewController.m in Sources */,
 				0F6ADFE01E7136B500BFF67F /* RCDataManager.m in Sources */,
@@ -2951,8 +2888,6 @@
 				2E03E3001ECAD57E00487319 /* ECMessage.m in Sources */,
 				CDF90B411E1E425D009043B9 /* RoomDetailViewController.m in Sources */,
 				CD7DDA131E825E9C00638DB3 /* RegistFirstStepViewController.m in Sources */,
-				F680AAB71DD94565001D1807 /* FamilyCell.m in Sources */,
-				2EF75C7D1EB2CAE00055147D /* ShortcutKeyViewController.m in Sources */,
 				2E7B64BF1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m in Sources */,
 				2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */,
 				2EB516F41E9CE3A40064B18E /* ScreenCurtainCell.m in Sources */,
@@ -2986,7 +2921,6 @@
 				0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */,
 				2EBABC7D1E8361C50093EF3A /* OtherTableViewCell.m in Sources */,
 				2E42980A1ED6B53B003F4A76 /* IpadSceneDetailVC.m in Sources */,
-				0F0A40171ED2EBA6002003C4 /* FixTimeListCell.m in Sources */,
 				2E9F4BDA1EDFA4B20039BFE9 /* AddIpadSceneVC.m in Sources */,
 				0FCFB3891CF2929900B37DD3 /* Aircon.m in Sources */,
 				F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */,
@@ -3043,19 +2977,14 @@
 				F65AF6D41D3370770048A4E5 /* ProfileFaultsViewController.m in Sources */,
 				2EF75C811EB32D390055147D /* DeviceTimingViewController.m in Sources */,
 				0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */,
-				2E12CC161E7FC04800C7D006 /* IphoneNewEditSceneController.m in Sources */,
 				F6251F741D541D8A000A5A47 /* Device.m in Sources */,
 				F6251F771D542508000A5A47 /* SQLManager.m in Sources */,
 				2EBABC871E839F2E0093EF3A /* DVDTableViewCell.m in Sources */,
 				CDB8B84A1EB1D3AE003AA894 /* FamilyDynamicViewController.m in Sources */,
 				0FDB34441E79269500DA53BB /* LayerUtil.m in Sources */,
-				F62CFA4A1DAC952F006410F7 /* IphoneRoomListController.m in Sources */,
 				F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */,
-				F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */,
-				F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */,
 				F65838DA1D3A2A43004210AC /* MsgCell.m in Sources */,
 				2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */,
-				2EF75C7C1EB2CAE00055147D /* ShortcutKeyCell.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
 				2ED49A881F3BF171006A5F15 /* SceneCell.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
@@ -3077,7 +3006,6 @@
 				CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */,
 				2EBABC821E83787B0093EF3A /* ScreenTableViewCell.m in Sources */,
 				2ED49A8B1F3BF1E4006A5F15 /* EditSceneCell.m in Sources */,
-				F617771D1DCC23AC00B382D4 /* CollectionViewCell.m in Sources */,
 				2E2D92CE1EF1067C0007B90A /* PowerLightCell.m in Sources */,
 				0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */,
 				2E2EA7871EFCBE0C0030EB46 /* ChangeNameViewController.m in Sources */,

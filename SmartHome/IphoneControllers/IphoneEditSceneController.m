@@ -24,7 +24,7 @@
 #import "AmplifierController.h"
 #import "WindowSlidingController.h"
 #import "BgMusicController.h"
-#import "CollectionViewCell.h"
+//#import "CollectionViewCell.h"
 #import "TouchSubViewController.h"
 #import "HttpManager.h"
 #import "NewColourCell.h"

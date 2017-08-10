@@ -11,7 +11,7 @@
 #import "NewLightCell.h"
 #import "SQLManager.h"
 #import "BgMusicController.h"
-#import "CollectionViewCell.h"
+//#import "CollectionViewCell.h"
 #import "TouchSubViewController.h"
 #import "HttpManager.h"
 #import "NewColourCell.h"
