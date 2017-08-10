@@ -661,8 +661,6 @@ static NSString * const CYPhotoId = @"photo";
     Scene *scene = [[SceneManager defaultManager] readSceneByID:self.currentCell.sceneID];
     scene.roomID = self.roomID;
     [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
-  
-   
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
     [[SDImageCache sharedImageCache] clearMemory];
     [self.currentCell.imageView setImage:self.selectSceneImg];
@@ -727,12 +725,7 @@ static NSString * const CYPhotoId = @"photo";
          }else{
              [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
          }
-         NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
-         [self.scenes removeAllObjects];
-         [self.scenes addObjectsFromArray:tmpArr];
-         NSString *imageName = @"AddSceneBtn";
-         [self.scenes addObject:imageName];
-         [self.FirstCollectionView reloadData];
+              [self freshUICollectionViewCell];
      }
   
 }
