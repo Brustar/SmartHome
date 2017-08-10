@@ -15,7 +15,7 @@
 #import "DVDController.h"
 #import "FMController.h"
 #import "AirController.h"
-#import "NetvController.h"
+//#import "NetvController.h"
 #import "CameraController.h"
 #import "GuardController.h"
 #import "ScreenCurtainController.h"

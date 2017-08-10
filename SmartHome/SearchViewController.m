@@ -11,7 +11,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "TVController.h"
 #import "DVDController.h"
-#import "NetvController.h"
+//#import "NetvController.h"
 #import "LightController.h"
 #import "CurtainController.h"
 #import "GuardController.h"
@@ -208,9 +208,9 @@
             */
         }else{
             
-            NetvController *netVC = [storyBoard instantiateViewControllerWithIdentifier:@"NetvController"];
-            netVC.deviceid = [NSString stringWithFormat:@"%d",eId];
-            [self.navigationController pushViewController:netVC animated:YES];
+//            NetvController *netVC = [storyBoard instantiateViewControllerWithIdentifier:@"NetvController"];
+//            netVC.deviceid = [NSString stringWithFormat:@"%d",eId];
+//            [self.navigationController pushViewController:netVC animated:YES];
         }
     }else if([typeName isEqualToString:@"空调"]){
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){

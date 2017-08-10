@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomViewController.h"
-#import "LightCell.h"
+//#import "LightCell.h"
 #import "AireTableViewCell.h"
 #import "CurtainTableViewCell.h"
 #import "TVTableViewCell.h"

@@ -10,7 +10,7 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "MySubEnergyCell.h"
-#import "ENenViewController.h"
+//#import "ENenViewController.h"
 #import "FSLineChart.h"
 #import "UIColor+FSPalette.h"
 #import "IphoneRoomView.h"
@@ -264,12 +264,12 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UIStoryboard * board = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ENenViewController * VC = [board instantiateViewControllerWithIdentifier:@"ENenViewController"];
-    NSDictionary * dict = self.enameArr[indexPath.row];
-    VC.eqid = [dict[@"eid"] intValue];
-    VC.titleName = dict[@"ename"];
-    [self.navigationController pushViewController:VC animated:YES];
+//    UIStoryboard * board = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    ENenViewController * VC = [board instantiateViewControllerWithIdentifier:@"ENenViewController"];
+//    NSDictionary * dict = self.enameArr[indexPath.row];
+//    VC.eqid = [dict[@"eid"] intValue];
+//    VC.titleName = dict[@"ename"];
+//    [self.navigationController pushViewController:VC animated:YES];
 }
 
 -(void)changeClickButton:(UIButton *)sender{

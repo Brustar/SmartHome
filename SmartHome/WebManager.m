@@ -7,7 +7,7 @@
 //
 
 #import "WebManager.h"
-#import "RegisterPhoneNumController.h"
+//#import "RegisterPhoneNumController.h"
 
 
 @implementation WebManager

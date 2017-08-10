@@ -20,7 +20,7 @@
 #import "Projector.h"
 #import "SocketManager.h"
 #import "AppDelegate.h"
-#import "SceneController.h"
+//#import "SceneController.h"
 #import "AFHTTPSessionManager.h"
 #import "UploadManager.h"
 #import "MBProgressHUD+NJ.h"

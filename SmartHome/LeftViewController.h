@@ -9,7 +9,7 @@
 #import "ProfileFaultsViewController.h"
 #import "ServiceRecordViewController.h"
 #import "MySubEnergyVC.h"
-#import "IphoneFavorController.h"
+//#import "IphoneFavorController.h"
 #import "MSGController.h"
 #import "MySettingViewController.h"
 #import "MBProgressHUD+NJ.h"

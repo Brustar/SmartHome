@@ -224,10 +224,10 @@
             //airVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:airVC];
         }else if([typeName isEqualToString:@"机顶盒"]){
-            NetvController *netVC = [storyBoard instantiateViewControllerWithIdentifier:@"NetvController"];
-            netVC.roomID = self.roomID;
-            //netVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-            [self addViewAndVC:netVC];
+//            NetvController *netVC = [storyBoard instantiateViewControllerWithIdentifier:@"NetvController"];
+//            netVC.roomID = self.roomID;
+//            //netVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//            [self addViewAndVC:netVC];
             
         }else if([typeName isEqualToString:@"摄像头"]){
             CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];

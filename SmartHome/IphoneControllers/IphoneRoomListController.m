@@ -36,10 +36,6 @@
     return _rooms;
 }
 
-
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
