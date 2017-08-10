@@ -16,6 +16,8 @@
 #import "UIViewController+Navigator.h"
 #import "UIView+Popup.h"
 #import "SceneManager.h"
+#import "SocketManager.h"
+#import "DeviceSchedule.h"
 
 @interface FloweringController ()
 
@@ -125,22 +127,22 @@
     
     [button setSelected:!button.isSelected];
     if (button.isSelected) {
-        //selected
-        [button setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateSelected];
-    }else{
-        //normal
-        [button setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
+        Schedule *sch = [[Schedule alloc] initWhithoutSchedule];
+        sch.startTime = self.HLabel.text;
+        sch.interval = [self.SLabel.text intValue];
+        
+        NSString *plistFile = [NSString stringWithFormat:@"schedule_%ld_%@.plist",[[DeviceInfo defaultManager] masterID],self.deviceid];
+        
+        DeviceSchedule *ds = [DeviceSchedule new];
+        ds.deviceID = [self.deviceid intValue];
+        ds.schedules = @[sch];
+        [IOManager writeScene:plistFile scene:ds];
+        
+        //upload
+        [[SceneManager defaultManager] saveDeviceSchedule:plistFile];
     }
-    
-    Schedule *sch = [[Schedule alloc] initWhithoutSchedule];
-    sch.startTime = self.HLabel.text;
-    sch.interval = [self.SLabel.text intValue];
-    
-    NSString *plistFile = [NSString stringWithFormat:@"schedule_%ld_%@.plist",[[DeviceInfo defaultManager] masterID],self.deviceid];
-    [IOManager writeScene:plistFile scene:@{@"schedules":@[sch]}];
-    
-    //upload
-    [[SceneManager defaultManager] saveDeviceSchedule:plistFile];
+    NSData *data = [[DeviceInfo defaultManager] scheduleDevice:button.isSelected deviceID:self.deviceid];
+    [[[SocketManager defaultManager] socket] writeData:data withTimeout:1 tag:1];
 }
 
 -(IBAction)startNow:(id)sender

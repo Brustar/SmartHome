@@ -54,6 +54,7 @@
 		0F5F909E1EEA723700BACC3E /* IPadDevicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F5F909D1EEA723700BACC3E /* IPadDevicesView.m */; };
 		0F6183FA1EA9A24600000EAD /* NewLightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6183F81EA9A24600000EAD /* NewLightCell.m */; };
 		0F6183FB1EA9A24600000EAD /* NewLightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6183F91EA9A24600000EAD /* NewLightCell.xib */; };
+		0F61C7751F3C087200A8D9A5 /* DeviceSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F61C7741F3C087200A8D9A5 /* DeviceSchedule.m */; };
 		0F6423491DE57C83003379FC /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6423441DE57C83003379FC /* AudioStreamer.m */; };
 		0F64234A1DE57C83003379FC /* RTSPPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6423461DE57C83003379FC /* RTSPPlayer.m */; };
 		0F64234B1DE57C83003379FC /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6423481DE57C83003379FC /* Utilities.m */; };
@@ -457,6 +458,8 @@
 		0F6183F71EA9A24600000EAD /* NewLightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLightCell.h; sourceTree = "<group>"; };
 		0F6183F81EA9A24600000EAD /* NewLightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLightCell.m; sourceTree = "<group>"; };
 		0F6183F91EA9A24600000EAD /* NewLightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewLightCell.xib; sourceTree = "<group>"; };
+		0F61C7731F3C087200A8D9A5 /* DeviceSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceSchedule.h; sourceTree = "<group>"; };
+		0F61C7741F3C087200A8D9A5 /* DeviceSchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceSchedule.m; sourceTree = "<group>"; };
 		0F6423431DE57C83003379FC /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
 		0F6423441DE57C83003379FC /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
 		0F6423451DE57C83003379FC /* RTSPPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSPPlayer.h; sourceTree = "<group>"; };
@@ -1178,6 +1181,8 @@
 				CD5134361E8D07FD00C2EDAF /* Goods.m */,
 				CD4F12481EB452D800E0B301 /* Address.h */,
 				CD4F12491EB452D800E0B301 /* Address.m */,
+				0F61C7731F3C087200A8D9A5 /* DeviceSchedule.h */,
+				0F61C7741F3C087200A8D9A5 /* DeviceSchedule.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -3056,6 +3061,7 @@
 				CD8CFCD41EE0165E00B49712 /* DemoVideoPlayerViewController.m in Sources */,
 				0F6ADFE01E7136B500BFF67F /* RCDataManager.m in Sources */,
 				F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */,
+				0F61C7751F3C087200A8D9A5 /* DeviceSchedule.m in Sources */,
 				0FABB33C1EAF22FC0089A5A4 /* ContextMenuCell.m in Sources */,
 				F6642A811D4220100003D56B /* DeviceListController.m in Sources */,
 				0F094AC61E94CDC100977123 /* Key.m in Sources */,
