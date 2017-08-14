@@ -74,7 +74,6 @@
 
 static NSString * const CYPhotoId = @"photo";
 
-
 - (void)setupNaviBar {
     
     [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
@@ -182,7 +181,7 @@ static NSString * const CYPhotoId = @"photo";
       self.roomList = [SQLManager getAllRoomsInfo];
       [self setUI];
       [self setUpRoomView];
-    self.arrayData = @[@"删除此场景",@"收藏",@"语音"];
+     self.arrayData = @[@"删除此场景",@"收藏",@"语音"];
     _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
     _AddSceneBtn.layer.masksToBounds = YES; //圆角
     self.navigationItem.rightBarButtonItems = nil;
@@ -499,13 +498,12 @@ static NSString * const CYPhotoId = @"photo";
     baseTabbarController.tabBar.hidden = YES;
 }
 
-
 #pragma mark - UIViewControllerPreviewingDelegate
 
 - (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
 {
      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    TouchSubViewController * touchSubViewVC = [storyboard instantiateViewControllerWithIdentifier:@"TouchSubViewController"];
+     TouchSubViewController * touchSubViewVC = [storyboard instantiateViewControllerWithIdentifier:@"TouchSubViewController"];
       touchSubViewVC.preferredContentSize = CGSizeMake(0.0f,500.0f);
 //      touchSubViewVC.sceneID = self.scene.sceneID;
       touchSubViewVC.sceneID = self.selectedSId;

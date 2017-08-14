@@ -17,6 +17,7 @@
 
 @interface IpadFirstViewController : CustomViewController<NowMusicControllerDelegate, SingleMaskViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic,strong)  UIImageView *SupImageView ;
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
 @property (nonatomic, strong) NowMusicController * nowMusicController;
 @property (nonatomic, strong) NSMutableArray *shortcutsArray;

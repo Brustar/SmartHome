@@ -14,7 +14,7 @@
 
 #define ANIMATION_TIME 1
 
-@interface IpadFirstViewController ()<RCIMReceiveMessageDelegate,UIGestureRecognizerDelegate,LeftViewControllerDelegate,HttpDelegate,TcpRecvDelegate>
+@interface IpadFirstViewController ()<RCIMReceiveMessageDelegate,UIGestureRecognizerDelegate,LeftViewControllerDelegate,HttpDelegate,TcpRecvDelegate,UIWebViewDelegate>
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
@@ -53,6 +53,7 @@
 @property (nonatomic,weak) NSString *deviceid;
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,assign) NSTimer *scheculer;
+@property (nonatomic,strong) UIWebView *webView;
 
 @end
 
@@ -448,32 +449,42 @@
                 launchAnimation = @"ipadFirstViewVC";
             }
     }
-    
-    //test uiimageview
-    NSURL *fileUrl = [[NSBundle mainBundle] URLForResource:launchAnimation withExtension:@"gif"]; //加载GIF图片
-    CGImageSourceRef gifSource = CGImageSourceCreateWithURL((CFURLRef) fileUrl, NULL); //将GIF图片转换成对应的图片源
-    size_t frameCout = CGImageSourceGetCount(gifSource); //获取其中图片源个数，即由多少帧图片组成
-    NSMutableArray *frames = [[NSMutableArray alloc] init]; //定义数组存储拆分出来的图片
-    for (size_t i = 0; i < frameCout; i++) {
-        CGImageRef imageRef = CGImageSourceCreateImageAtIndex(gifSource, i, NULL); //从GIF图片中取出源图片
-        UIImage *imageName = [UIImage imageWithCGImage:imageRef];//将图片源转换成UIimageView能使用的图片源
-        [frames addObject:imageName]; //将图片加入数组中
-        CGImageRelease(imageRef);
-    }
-    UIImageView *gifImageView = [[UIImageView alloc] initWithFrame:frame];
-    gifImageView.animationImages = frames; //将图片数组加入UIImageView动画数组中
-    gifImageView.animationDuration = ANIMATION_TIME;//每次动画时长
-    [gifImageView setAnimationRepeatCount:1];
-    [gifImageView startAnimating];
-    [self.view addSubview:gifImageView];
-    
-    CFRelease(gifSource);
-    [self performSelector:@selector(doOtherAction) withObject:nil afterDelay:ANIMATION_TIME];
+  
+    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:launchAnimation ofType:@"gif"]];
+    // view生成
+     _webView= [[UIWebView alloc] initWithFrame:frame];
+    _webView.backgroundColor = [UIColor clearColor];
+    _webView.opaque = NO;
+    _webView.delegate = self;
+     [self.view addSubview:self.imageView];
+    [self.imageView addSubview:self.TimerLabel];
+    [self.imageView addSubview:self.cityLabel];
+    [self.imageView addSubview:self.weekDayLabel];
+    [self.imageView addSubview:self.temperatureLabel];
+    [self.imageView addSubview:self.messageLabel];
+    [self.imageView addSubview:self.DUPImageView];
+    [self.imageView addSubview:self.MessageBtnDo];
+    [self.imageView addSubview:self.remindLabel];
+    [self.imageView addSubview:self.VoiceBtn];
+    [self.imageView addSubview:self.CoverView];
+     _webView.userInteractionEnabled = NO;//用户不可交互
+     [_webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+     _webView.scalesPageToFit = YES;
+     _webView.tag = 201;
+     [self.view addSubview:_webView];
+     [self performSelector:@selector(doOtherAction) withObject:nil afterDelay:ANIMATION_TIME];
 
 }
-
--(void)doOtherAction{
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    // WebView放到最上层
+//    [_SupImageView removeFromSuperview];
+    [self.view bringSubviewToFront:self.webView];
+   
     
+}
+-(void)doOtherAction{
+    [_webView removeFromSuperview];
     UIStoryboard *planeGraphStoryBoard  = [UIStoryboard storyboardWithName:@"PlaneGraph" bundle:nil];
     PlaneGraphViewController *planeGraphVC = [planeGraphStoryBoard instantiateViewControllerWithIdentifier:@"PlaneGraphVC"];
     [self.navigationController pushViewController:planeGraphVC animated:NO];
