@@ -215,6 +215,9 @@
             //发通知刷新设备首页，场景首页,app首页
             [NC postNotificationName:@"ChangeHostRefreshUINotification" object:nil];
             
+            //重连UDP
+            [self reconnectUDP];
+            
         }else{
             [MBProgressHUD showError:@"切换失败"];
         }
@@ -383,4 +386,21 @@
         [self loginHost];
     }
 }
+
+#pragma mark - TCP Delegate
+-(void)recv:(NSData *)data withTag:(long)tag {
+    
+}
+
+//重连UDP
+- (void)reconnectUDP {
+    SocketManager *sock = [SocketManager defaultManager];
+    if ([[UD objectForKey:@"HostType"] intValue]) {
+        [sock connectUDP:[IOManager C4Port]];
+    }else{
+        [sock connectUDP:[IOManager crestronPort]];
+    }
+    sock.delegate = self;
+}
+
 @end

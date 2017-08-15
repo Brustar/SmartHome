@@ -12,8 +12,9 @@
 #import "HostListCell.h"
 #import "SQLManager.h"
 #import "AFNetworking.h"
+#import "SocketManager.h"
 
-@interface HostListViewController : CustomViewController<HttpDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface HostListViewController : CustomViewController<HttpDelegate, UITableViewDelegate, UITableViewDataSource, TcpRecvDelegate> 
 @property (nonatomic, strong) NSMutableArray *hostArray;
 @property (nonatomic, strong) NSMutableArray *homeNameArray;
 @property (nonatomic, strong) NSString *selectedHost;
