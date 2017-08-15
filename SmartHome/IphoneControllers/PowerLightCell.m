@@ -91,6 +91,7 @@
     
     [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron:self.powerLightBtn.selected];
+    [device setBrightness:100];
     [device setColor:@[]];
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];

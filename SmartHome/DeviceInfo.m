@@ -293,7 +293,7 @@
     proto.action.G = 0x00;
     proto.action.B = 0x00;
     
-    proto.deviceID = dID;
+    proto.deviceID = CFSwapInt16BigToHost(dID);
     proto.deviceType = dtype;
     return dataFromProtocol(proto);
 }
