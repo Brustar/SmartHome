@@ -1115,6 +1115,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rvx-d6-XTw">
                                 <rect key="frame" x="165" y="604" width="46" height="46"/>
                                 <state key="normal" image="DVD_play" backgroundImage="music_button_control"/>
+                                <state key="selected" image="DVD_pause"/>
                                 <connections>
                                     <action selector="playMusic:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="3Dg-wY-OR0"/>
                                 </connections>
@@ -2682,6 +2683,7 @@
     <resources>
         <image name="Air_glory" width="239" height="239"/>
         <image name="DVD_next" width="10" height="10"/>
+        <image name="DVD_pause" width="4" height="10"/>
         <image name="DVD_play" width="9" height="10"/>
         <image name="DVD_pop" width="12" height="12"/>
         <image name="DVD_previous" width="10" height="10"/>
