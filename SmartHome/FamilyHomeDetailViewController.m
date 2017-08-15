@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addNotifications];
     _hostType = [[UD objectForKey:@"HostType"] integerValue];//主机类型 0:Creston  1:C4
     
     [self initUI];
@@ -32,6 +33,16 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+}
+
+- (void)addNotifications {
+    [NC addObserver:self selector:@selector(refreshHomeDetailNotification:) name:@"RefreshHomeDetailNotification" object:nil];
+}
+
+- (void)refreshHomeDetailNotification:(NSNotification *)noti {
+    if (_hostType == 0) {  //Creston
+        [self getDeviceStateInfoByHttp];//Http获取所有设备的状态
+    }
 }
 
 - (void)getDeviceStateInfoByHttp {
@@ -801,6 +812,9 @@
             
         }
         
+    } else if(proto.cmd == 0x02) {
+        
+        NSLog(@"0x02---0x02");
     }
 }
 
