@@ -87,8 +87,6 @@
     [self.CoverView addGestureRecognizer:recognizer];
     
     self.scheculer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timing:) userInfo:nil repeats:YES];
-    
- 
    
 }
 -(void)creatItemID
@@ -144,7 +142,6 @@
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
-    
     self.messageLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
     self.FamilyMenberLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",[UD objectForKey:@"familyNum"]];
     SocketManager *sock=[SocketManager defaultManager];
@@ -164,8 +161,6 @@
         }
         
     }
-    
-   
     if (unread == 0) {
         self.messageLabel2.text = [NSString stringWithFormat:@"%@" , @"暂无新消息"];
         self.messageLabel1.text = @"";

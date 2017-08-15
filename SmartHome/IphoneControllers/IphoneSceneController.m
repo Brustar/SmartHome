@@ -819,7 +819,6 @@ static NSString * const CYPhotoId = @"photo";
           BOOL success = [SQLManager updateSceneIsActive:_isActive.integerValue sceneID:_timeSceneID];
             if (success) {
                 [MBProgressHUD showSuccess:responseObject[@"msg"]];
-//                [[DeviceInfo defaultManager] scheduleScene:0x01 sceneID:[NSString stringWithFormat:@"%d",_timeSceneID]];
             }else {
                 [MBProgressHUD showError:@"操作失败"];
             }
@@ -864,7 +863,9 @@ static NSString * const CYPhotoId = @"photo";
         sender.selected = NO;
     }
       _timeSceneID = sceneID;
-    [[DeviceInfo defaultManager] scheduleScene:sender.selected sceneID:[NSString stringWithFormat:@"%d",_timeSceneID]];
+    NSData *data=[[DeviceInfo defaultManager] scheduleScene:sender.selected sceneID:[NSString stringWithFormat:@"%d",_timeSceneID]];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
     NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
     

@@ -9,7 +9,8 @@
 #import "PlaneGraphViewController.h"
 
 @interface PlaneGraphViewController ()
-
+@property (nonatomic,strong) NSMutableArray * bgmusicIDS;
+@property (nonatomic,weak) NSString *deviceid;
 @end
 
 @implementation PlaneGraphViewController
@@ -387,6 +388,24 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    SocketManager *sock = [SocketManager defaultManager];
+    sock.delegate = self;
+    _bgmusicIDS = [[NSMutableArray alloc] init];
+    NSArray * roomArr = [SQLManager getAllRoomsInfo];
+    for (int i = 0; i < roomArr.count; i ++) {
+        Room * roomName = roomArr[i];
+        if (![SQLManager isWholeHouse:roomName.rId]) {
+            self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:roomName.rId];
+        }
+        if (self.deviceid.length != 0) {
+            [_bgmusicIDS addObject:self.deviceid];
+            //查询设备状态
+            NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            
+        }
+    }
     [super viewWillAppear:animated];
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
@@ -501,6 +520,27 @@
     }
     
     [self showRoomStatus];
+    
+    for (int i = 0; i <self.bgmusicIDS.count; i ++) {
+        if (proto.cmd==0x01) {
+            NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+            if ([devID intValue]==[self.bgmusicIDS[i] intValue]) {
+                if (proto.action.state == PROTOCOL_VOLUME) {
+                    NSLog(@"有音量");
+                }if (proto.action.state == PROTOCOL_ON) {
+                    NSLog(@"开启状态");
+                    [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
+                    
+                    //                    [_bgmusicIDArr addObject:devID];
+                    
+                }if (proto.action.state == PROTOCOL_OFF) {
+                    NSLog(@"关闭状态");
+                    [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
+                }
+            }
+        }
+    }
+    [self setupNaviBar];
 }
 
 - (void)showRoomStatus {
