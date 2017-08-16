@@ -242,11 +242,10 @@
                         if(result)
                         {   [MBProgressHUD showSuccess:@"新增成功"];
                             NSLog(@"新增场景，入库成功！");
-                            [IOManager removeTempFile];
                             if (self.block) {
                                 self.block(YES);
                             }
-                            
+                            [IOManager removeTempFile];
                         }else {
                             [MBProgressHUD showSuccess:@"新增失败"];
                             NSLog(@"新增场景，入库失败！");

@@ -819,6 +819,7 @@ static NSString * const CYPhotoId = @"photo";
           BOOL success = [SQLManager updateSceneIsActive:_isActive.integerValue sceneID:_timeSceneID];
             if (success) {
                 [MBProgressHUD showSuccess:responseObject[@"msg"]];
+                [self freshUICollectionViewCell];
             }else {
                 [MBProgressHUD showError:@"操作失败"];
             }
