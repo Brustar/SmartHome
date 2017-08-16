@@ -46,25 +46,6 @@
     }
     return _weeks;
 }
--(Scene *)scene
-{
-    if(!_scene)
-    {
-        
-        NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
-        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-        
-        _scene = [[Scene alloc] initWhithoutSchedule];
-        if(plistDic)
-        {
-            [_scene setValuesForKeysWithDictionary:plistDic];
-        }
-        
-        
-    }
-    return _scene;
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -147,6 +128,15 @@
 }
 -(void)rightBtnClicked:(UIButton *)btn
 {
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+    
+    _scene = [[Scene alloc] initWhithoutSchedule];
+    if(plistDic)
+    {
+        [_scene setValuesForKeysWithDictionary:plistDic];
+    }
     if (self.isDeviceTimer) {
         NSDictionary *dic = @{
                               @"startDay":self.starTimeLabel.text,
@@ -316,7 +306,15 @@
     }
     
     self.schedule.weekDays = weekValue;
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
+    _scene = [[Scene alloc] initWhithoutSchedule];
+    if(plistDic)
+    {
+        [_scene setValuesForKeysWithDictionary:plistDic];
+    }
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 
 }

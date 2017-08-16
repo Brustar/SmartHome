@@ -84,6 +84,7 @@
 -(void)reachNotification
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFixTimeInfo:) name:@"AddSceneOrDeviceTimerNotification" object:nil];
+    
 }
 -(void)getFixTimeInfo:(NSNotification *)notification
 {
@@ -120,6 +121,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                   [IOManager writeUserdefault:@"1" forKey:@"IsAddSceneVC"];
                 [self.navigationController popToRootViewControllerAnimated:YES];
+                
             });
         }];
     }

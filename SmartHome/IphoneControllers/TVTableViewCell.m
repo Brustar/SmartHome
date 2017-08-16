@@ -51,7 +51,7 @@
       _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
        TV *device=[[TV alloc] init];
     if (sender == self.TVSwitchBtn) {
-        [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+        [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
         self.AddTvDeviceBtn.selected = YES;
         self.TVSwitchBtn.selected = !self.TVSwitchBtn.selected;
         if (self.TVSwitchBtn.selected) {
