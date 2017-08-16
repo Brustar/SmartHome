@@ -416,47 +416,13 @@
 }
 //退出登录
 - (IBAction)QuitBtn:(id)sender {
-    //退出发送请求
-    NSString *authorToken =[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    if (authorToken) {
-        NSDictionary *dict = @{@"token":authorToken};
-        
-        NSString *url = [NSString stringWithFormat:@"%@login/logout.aspx",[IOManager httpAddr]];
-        HttpManager *http=[HttpManager defaultManager];
-        http.delegate=self;
-        http.tag = 1;
-        [http sendPost:url param:dict];
-    }else{
-        //跳转到欢迎页
-        //self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
-        //[self performSegueWithIdentifier:@"goWelcomeSegue" sender:self];
-        [self gotoLoginViewController];
-    }
-    
-    [[RCIM sharedRCIM] logout];
+        [UD removeObjectForKey:@"AuthorToken"];  [UD synchronize]; //清空token
+        [[SocketManager defaultManager] cutOffSocket];//断开socket长连接
+        [[RCIM sharedRCIM] logout];//IM注销
+        [self gotoLoginViewController];//跳转到登录页面
 }
 
 - (void)gotoLoginViewController {
-    
-    /*[UD setObject:@"" forKey:ShowMaskViewHomePageChatBtn];
-    [UD setObject:@"" forKey:ShowMaskViewHomePageEnterChat];
-    [UD setObject:@"" forKey:ShowMaskViewHomePageEnterFamily];
-    [UD setObject:@"" forKey:ShowMaskViewHomePageScene];
-    [UD setObject:@"" forKey:ShowMaskViewHomePageDevice];
-    [UD setObject:@"" forKey:ShowMaskViewHomePageCloud];
-    [UD setObject:@"" forKey:ShowMaskViewChatView];
-    [UD setObject:@"" forKey:ShowMaskViewFamilyHome];
-    [UD setObject:@"" forKey:ShowMaskViewFamilyHomeDetail];
-    [UD setObject:@"" forKey:ShowMaskViewScene];
-    [UD setObject:@"" forKey:ShowMaskViewSceneDetail];
-    [UD setObject:@"" forKey:ShowMaskViewDevice];
-    [UD setObject:@"" forKey:ShowMaskViewDeviceAir];
-    [UD setObject:@"" forKey:ShowMaskViewLeftView];
-    [UD setObject:@"" forKey:ShowMaskViewSettingView];
-    [UD setObject:@"" forKey:ShowMaskViewAccessControl];
-    [UD setObject:@"" forKey:ShowMaskViewSceneAdd];
-    [UD synchronize];*/
-    
     
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"loginNavController"];//进入登录页面
