@@ -448,9 +448,9 @@
     NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:launchAnimation ofType:@"gif"]];
     // view生成
      _webView= [[UIWebView alloc] initWithFrame:frame];
-    _webView.backgroundColor = [UIColor clearColor];
-    _webView.opaque = NO;
-    _webView.delegate = self;
+     _webView.backgroundColor = [UIColor clearColor];
+     _webView.opaque = NO;
+     _webView.delegate = self;
      _webView.userInteractionEnabled = NO;//用户不可交互
      [_webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
      _webView.scalesPageToFit = YES;
