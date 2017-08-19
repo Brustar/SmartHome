@@ -818,8 +818,6 @@ NSArray *array = [NSArray arrayWithObjects:
             if (self.homeNameArray) {
                 [IOManager writeUserdefault:self.homeNameArray forKey:@"HomeNameList"];
             }
-            
-            
                 if ([self.hostIDS count] >0) {
                     
                     [UD removeObjectForKey:@"room_version"];
@@ -829,10 +827,6 @@ NSArray *array = [NSArray arrayWithObjects:
                     [UD removeObjectForKey:@"fm_version"];
                     [UD synchronize];
                 }
-           
-            
-            
-            
             //更新UD的@"HostID"， 更新DeviceInfo的 masterID
             [IOManager writeUserdefault:@([responseObject[@"hostid"] integerValue]) forKey:@"HostID"];
             info.masterID = [responseObject[@"hostid"] integerValue];

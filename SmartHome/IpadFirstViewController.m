@@ -448,20 +448,9 @@
     NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:launchAnimation ofType:@"gif"]];
     // view生成
      _webView= [[UIWebView alloc] initWithFrame:frame];
-    _webView.backgroundColor = [UIColor clearColor];
-    _webView.opaque = NO;
-    _webView.delegate = self;
-     [self.view addSubview:self.imageView];
-    [self.imageView addSubview:self.TimerLabel];
-    [self.imageView addSubview:self.cityLabel];
-    [self.imageView addSubview:self.weekDayLabel];
-    [self.imageView addSubview:self.temperatureLabel];
-    [self.imageView addSubview:self.messageLabel];
-    [self.imageView addSubview:self.DUPImageView];
-    [self.imageView addSubview:self.MessageBtnDo];
-    [self.imageView addSubview:self.remindLabel];
-    [self.imageView addSubview:self.VoiceBtn];
-    [self.imageView addSubview:self.CoverView];
+     _webView.backgroundColor = [UIColor clearColor];
+     _webView.opaque = NO;
+     _webView.delegate = self;
      _webView.userInteractionEnabled = NO;//用户不可交互
      [_webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
      _webView.scalesPageToFit = YES;
@@ -473,7 +462,6 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     // WebView放到最上层
-//    [_SupImageView removeFromSuperview];
     [self.view bringSubviewToFront:self.webView];
    
     
