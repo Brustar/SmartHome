@@ -69,6 +69,10 @@
         NSData *data=[[DeviceInfo defaultManager] changeBright:self.NewLightSlider.value*100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(onLightSliderValueChanged:deviceID:)]) {
+            [_delegate onLightSliderValueChanged:self.NewLightSlider deviceID:self.deviceid.intValue];
+        }
     }
     if (sender == self.NewLightPowerBtn) {
         if (ON_IPAD) {
@@ -99,8 +103,8 @@
          SocketManager *sock=[SocketManager defaultManager];
          [sock.socket writeData:data withTimeout:1 tag:1];
          
-         if (_delegate && [_delegate respondsToSelector:@selector(onLightPowerBtnClicked:)]) {
-             [_delegate onLightPowerBtnClicked:self.NewLightPowerBtn];
+         if (_delegate && [_delegate respondsToSelector:@selector(onLightPowerBtnClicked:deviceID:)]) {
+             [_delegate onLightPowerBtnClicked:self.NewLightPowerBtn deviceID:self.deviceid.intValue];
          }
          
     }

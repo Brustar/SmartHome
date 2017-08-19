@@ -368,6 +368,7 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
         if (device.hTypeId == 1) { //开关灯
             PowerLightCell * powerCell = [tableView dequeueReusableCellWithIdentifier:@"PowerLightCell" forIndexPath:indexPath];
+            powerCell.delegate = self;
             powerCell.selectionStyle = UITableViewCellSelectionStyleNone;
             powerCell.backgroundColor = [UIColor clearColor];
             powerCell.powerBtnConstraint.constant = 10;
@@ -384,6 +385,7 @@
             
         }else if (device.hTypeId == 2) { //调光灯
             NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
+            cell.delegate = self;
             cell.backgroundColor = [UIColor clearColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.AddLightBtn.hidden = YES;
@@ -407,6 +409,7 @@
             return cell;
         }else if (device.hTypeId == 3) { //调色灯
             NewColourCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
+            cell.delegate = self;
             cell.backgroundColor = [UIColor clearColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.AddColourLightBtn.hidden = YES;
@@ -428,6 +431,7 @@
         
     }else if (indexPath.section == 1) {//窗帘
         CurtainTableViewCell *curtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
+        curtainCell.delegate = self;
         curtainCell.backgroundColor =[UIColor clearColor];
         curtainCell.selectionStyle = UITableViewCellSelectionStyleNone;
         curtainCell.AddcurtainBtn.hidden = YES;
@@ -457,6 +461,7 @@
             return aireCell;
         }else { //环境的其他类型
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.delegate = self;
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
             otherCell.AddOtherBtn.hidden = YES;
@@ -472,6 +477,7 @@
         
         if (device.hTypeId == 14) { //背景音乐
             BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
+            BjMusicCell.delegate = self;
             BjMusicCell.backgroundColor = [UIColor clearColor];
             BjMusicCell.selectionStyle = UITableViewCellSelectionStyleNone;
             BjMusicCell.AddBjmusicBtn.hidden = YES;
@@ -531,6 +537,7 @@
             return ScreenCell;
         }else if (device.hTypeId == 16) { //投影仪(只有开关)
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.delegate = self;
             otherCell.backgroundColor = [UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
             otherCell.AddOtherBtn.hidden = YES;
@@ -568,6 +575,7 @@
             
         }else if (device.hTypeId == 18) { //功放
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.delegate = self;
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
             otherCell.AddOtherBtn.hidden = YES;
@@ -578,6 +586,7 @@
             return otherCell;
         }else { //影音其他类型
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.delegate = self;
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
             otherCell.AddOtherBtn.hidden = YES;
@@ -593,6 +602,7 @@
     }else if (indexPath.section == 4) {//智能单品
         Device *device = [SQLManager getDeviceWithDeviceID:[_intelligentArray[indexPath.row] intValue]];
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        otherCell.delegate = self;
         otherCell.backgroundColor =[UIColor clearColor];
         otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
         otherCell.AddOtherBtn.hidden = YES;
@@ -794,17 +804,17 @@
             else if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
                 device.power = proto.action.state;
                 
-//                if (proto.deviceType == 0x14) {
-//                    NSLog(@"背景音乐---开关---  %d", proto.action.state);
-//                }
+                if (proto.deviceType == 0x14) {
+                    NSLog(@"背景音乐---开关---  %d", proto.action.state);
+                }
                 
-//                if (proto.deviceType == 0x13) {
-//                    NSLog(@"DVD---开关---  %d", proto.action.state);
-//                }
+                if (proto.deviceType == 0x13) {
+                    NSLog(@"DVD---开关---  %d", proto.action.state);
+                }
                 
-//                if (proto.deviceType == 0x11) {
-//                    NSLog(@"电视---开关---  %d", proto.action.state);
-//                }
+                if (proto.deviceType == 0x11) {
+                    NSLog(@"电视---开关---  %d", proto.action.state);
+                }
             }
             
             [SQLManager updateDeviceStatus:device];
@@ -885,6 +895,44 @@
         
     }
     
+}
+
+#pragma mark - NewLightCellDelegate
+- (void)onLightPowerBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
+    [SQLManager updateDevicePowerStatus:deviceID power:btn.selected];
+}
+
+- (void)onLightSliderValueChanged:(UISlider *)slider deviceID:(int)deviceID {
+    [SQLManager updateDeviceBrightStatus:deviceID value:slider.value];
+}
+
+#pragma mark - PowerLightCellDelegate
+- (void)onPowerLightPowerBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
+    [SQLManager updateDevicePowerStatus:deviceID power:btn.selected];
+}
+
+#pragma mark - NewColourCellDelegate
+- (void)onColourSwitchBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
+    [SQLManager updateDevicePowerStatus:deviceID power:btn.selected];
+}
+
+#pragma mark - CurtainTableViewCellDelegate
+- (void)onCurtainOpenBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
+    [SQLManager updateCurtainPowerStatus:deviceID power:btn.selected];
+}
+
+- (void)onCurtainSliderBtnValueChanged:(UISlider *)slider deviceID:(int)deviceID {
+    [SQLManager updateCurtainPositionStatus:deviceID value:slider.value];
+}
+
+#pragma mark - BjMusicTableViewCellDelegate
+- (void)onBjPowerButtonClicked:(UIButton *)btn deviceID:(int)deviceID {
+    [SQLManager updateDevicePowerStatus:deviceID power:btn.selected];
+}
+
+#pragma mark - OtherTableViewCellDelegate
+- (void)onOtherSwitchBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
+    [SQLManager updateDevicePowerStatus:deviceID power:btn.selected];
 }
 
 @end

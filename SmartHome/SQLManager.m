@@ -2928,4 +2928,94 @@
     return ret;
 }
 
+//更新设备开关状态
++ (BOOL)updateDevicePowerStatus:(int)deviceID power:(int)power {
+    int bright = 0;
+    if (power) {
+        bright = 100;
+    }
+    FMDatabase *db = [SQLManager connetdb];
+    
+    BOOL ret = NO;
+    if([db open])
+    {
+        
+        NSString *sql = [NSString stringWithFormat:@"update Devices set power = %d,  bright = %d where ID = %d and masterID = '%ld'", power, bright, deviceID, [[DeviceInfo defaultManager] masterID]];
+        
+        ret = [db executeUpdate:sql];
+        
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return ret;
+}
+
+//更新灯亮度状态
++ (BOOL)updateDeviceBrightStatus:(int)deviceID value:(float)value {
+    int power = 0;
+    int bright = value*100;
+    if (value >0) {
+        power = 1;
+    }
+    FMDatabase *db = [SQLManager connetdb];
+    
+    BOOL ret = NO;
+    if([db open])
+    {
+        
+        NSString *sql = [NSString stringWithFormat:@"update Devices set power = %d,  bright = %d where ID = %d and masterID = '%ld'", power, bright, deviceID, [[DeviceInfo defaultManager] masterID]];
+        
+        ret = [db executeUpdate:sql];
+        
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return ret;
+}
+
+//更新窗帘开关状态
++ (BOOL)updateCurtainPowerStatus:(int)deviceID power:(int)power {
+    int position = 0;
+    if (power) {
+        position = 100;
+    }
+    FMDatabase *db = [SQLManager connetdb];
+    
+    BOOL ret = NO;
+    if([db open])
+    {
+        
+        NSString *sql = [NSString stringWithFormat:@"update Devices set power = %d,  position = %d where ID = %d and masterID = '%ld'", power, position, deviceID, [[DeviceInfo defaultManager] masterID]];
+        
+        ret = [db executeUpdate:sql];
+        
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return ret;
+}
+
+//更新窗帘位置状态
++ (BOOL)updateCurtainPositionStatus:(int)deviceID value:(float)value {
+    int power = 0;
+    int position = value*100;
+    if (value >0) {
+        power = 1;
+    }
+    FMDatabase *db = [SQLManager connetdb];
+    
+    BOOL ret = NO;
+    if([db open])
+    {
+        
+        NSString *sql = [NSString stringWithFormat:@"update Devices set power = %d,  position = %d where ID = %d and masterID = '%ld'", power, position, deviceID, [[DeviceInfo defaultManager] masterID]];
+        
+        ret = [db executeUpdate:sql];
+        
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return ret;
+}
+
 @end

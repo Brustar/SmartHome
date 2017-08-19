@@ -42,7 +42,7 @@
 #define minimumLineSpacing 3.0
 
 
-@interface FamilyHomeDetailViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate,UITableViewDataSource, HttpDelegate, SingleMaskViewDelegate, TcpRecvDelegate>
+@interface FamilyHomeDetailViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate,UITableViewDataSource, HttpDelegate, SingleMaskViewDelegate, TcpRecvDelegate, NewLightCellDelegate, PowerLightCellDelegate, NewColourCellDelegate, CurtainTableViewCellDelegate, BjMusicTableViewCellDelegate, OtherTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *softButton;
 @property (weak, nonatomic) IBOutlet UIButton *normalButton;

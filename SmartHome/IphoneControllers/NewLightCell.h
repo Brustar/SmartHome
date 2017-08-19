@@ -14,8 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *NewLightNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *NewLightPowerBtn;
 @property (weak, nonatomic) IBOutlet UISlider *NewLightSlider;
-@property(nonatomic, copy)NSString * deviceid;
-@property (nonatomic,weak) NSString *sceneid;
+@property(nonatomic, copy)  NSString *deviceid;
+@property (nonatomic,weak)  NSString *sceneid;
 //房间id
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
@@ -33,6 +33,7 @@
 @protocol NewLightCellDelegate <NSObject>
 
 @optional
-- (void)onLightPowerBtnClicked:(UIButton *)btn;
+- (void)onLightPowerBtnClicked:(UIButton *)btn deviceID:(int)deviceID;
+- (void)onLightSliderValueChanged:(UISlider *)slider deviceID:(int)deviceID;
 
 @end

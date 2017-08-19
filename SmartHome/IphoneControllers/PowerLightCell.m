@@ -63,7 +63,9 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         
-       
+        if (_delegate && [_delegate respondsToSelector:@selector(onPowerLightPowerBtnClicked:deviceID:)]) {
+            [_delegate onPowerLightPowerBtnClicked:self.powerLightBtn deviceID:self.deviceid.intValue];
+        }
         
     }else if (sender == self.addPowerLightBtn){
         self.addPowerLightBtn.selected = !self.addPowerLightBtn.selected;

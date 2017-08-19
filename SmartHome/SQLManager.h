@@ -202,4 +202,8 @@
 + (BOOL)updateUserNickNameByID:(int)userID nickName:(NSString *)nickName;
 + (NSArray *)getDeviceIDsBySubTypeId:(int)subTypeId;
 + (NSArray *)getDeviceIDsByRid:(NSInteger)rId;
++ (BOOL)updateDevicePowerStatus:(int)deviceID power:(int)power;
++ (BOOL)updateDeviceBrightStatus:(int)deviceID value:(float)value;
++ (BOOL)updateCurtainPowerStatus:(int)deviceID power:(int)power;
++ (BOOL)updateCurtainPositionStatus:(int)deviceID value:(float)value;
 @end

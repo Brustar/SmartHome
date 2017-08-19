@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *AddColourLightBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *subImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ColourLightConstraint;
-@property(nonatomic, strong) NSString * deviceid;
+@property(nonatomic, strong) NSString *deviceid;
 @property (nonatomic,strong) NSString *sceneid;
 //房间id
 @property (nonatomic,assign) int roomID;
@@ -36,7 +36,7 @@
 @protocol NewColourCellDelegate <NSObject>
 
 @optional
-- (void)onColourSwitchBtnClicked:(UIButton *)btn;
+- (void)onColourSwitchBtnClicked:(UIButton *)btn deviceID:(int)deviceID;
 
 
 @end

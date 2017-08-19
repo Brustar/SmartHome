@@ -103,8 +103,8 @@
         
         }
         
-        if (_delegate && [_delegate respondsToSelector:@selector(onBjPowerButtonClicked:)]) {
-            [_delegate onBjPowerButtonClicked:sender];
+        if (_delegate && [_delegate respondsToSelector:@selector(onBjPowerButtonClicked:deviceID:)]) {
+            [_delegate onBjPowerButtonClicked:self.BjPowerButton deviceID:self.deviceid.intValue];
         }
         
     }else if (sender == self.AddBjmusicBtn){
