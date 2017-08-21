@@ -28,8 +28,8 @@
     [self.AddTvDeviceBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.TVSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     self.TVSlider.continuous = NO;
-    [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
-    [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+    [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"TV_on"] forState:UIControlStateHighlighted];
+    [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"TV_off"] forState:UIControlStateNormal];
 }
 -(void)initWithFrame
 {
@@ -56,14 +56,14 @@
         self.AddTvDeviceBtn.selected = YES;
         self.TVSwitchBtn.selected = !self.TVSwitchBtn.selected;
         if (self.TVSwitchBtn.selected) {
-            [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+            
             NSData *data=nil;
             DeviceInfo *device=[DeviceInfo defaultManager];
             data=[device toogle:self.TVSwitchBtn.selected deviceID:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
         }else{
-            [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            
             NSData *data=nil;
             DeviceInfo *device=[DeviceInfo defaultManager];
             data=[device toogle:self.TVSwitchBtn.selected deviceID:self.deviceid];

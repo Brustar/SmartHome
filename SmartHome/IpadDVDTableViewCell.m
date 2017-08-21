@@ -29,8 +29,8 @@
     [self.AddDvdBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.DVDSwitchBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.DVDSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
-    [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+    [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"TV_off"] forState:UIControlStateNormal];
+    [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"TV_on"] forState:UIControlStateHighlighted];
 }
 -(void)initWithFrame
 {
@@ -58,14 +58,14 @@
         NSData *data=nil;
         self.DVDSwitchBtn.selected = !self.DVDSwitchBtn.selected;
         if (self.DVDSwitchBtn.selected) {
-            [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+            
             data=[[DeviceInfo defaultManager] ON:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
             
         }else{
             
-            [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            
             data=[[DeviceInfo defaultManager] OFF:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
