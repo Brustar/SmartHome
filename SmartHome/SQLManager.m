@@ -2323,6 +2323,33 @@
     return roomList;
 }
 
++(NSArray *)getAllRoomsWhenHasDevices
+{
+    FMDatabase *db = [SQLManager connetdb];
+    NSMutableArray *roomList = [NSMutableArray array];
+    if([db open])
+    {
+        NSString * roomSql =[NSString stringWithFormat:@"select * from Rooms where openforcurrentuser = 1 and masterID = '%ld' and (id in (SELECT distinct rid from Devices) or isAll =1)", [[DeviceInfo defaultManager] masterID]];
+        FMResultSet *resultSet = [db executeQuery:roomSql];
+        while ([resultSet next]) {
+            Room *room = [Room new];
+            room.rId = [resultSet intForColumn:@"ID"];
+            room.rName = [resultSet stringForColumn:@"NAME"];
+            room.pm25 = [resultSet intForColumn:@"PM25"];
+            room.noise = [resultSet intForColumn:@"NOISE"];
+            room.tempture = [resultSet intForColumn:@"TEMPTURE"];
+            room.co2 = [resultSet intForColumn:@"CO2"];
+            room.moisture = [resultSet intForColumn:@"moisture"];
+            room.imgUrl = [resultSet stringForColumn:@"imgUrl"];
+            room.ibeacon = [resultSet intForColumn:@"ibeacon"];
+            [roomList addObject:room];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return [roomList copy];
+}
+
 +(NSArray *)getAllRoomsInfo
 {
     FMDatabase *db = [SQLManager connetdb];
