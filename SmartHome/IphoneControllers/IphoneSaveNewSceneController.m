@@ -15,6 +15,7 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "IphoneSceneController.h"
+#import "SocketManager.h"
 
 @interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;//输入场景名的输入框
@@ -44,8 +45,12 @@
        [self.sceneName setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
        [self reachNotification];
        [self setupNaviBar];
-       [self creatUI];
        self.startSceneBtn.selected = YES;
+       _isActive = 1;
+      NSData *data=[[DeviceInfo defaultManager] scheduleScene:_isActive sceneID:[NSString stringWithFormat:@"%d",self.sceneID]];
+      SocketManager *sock=[SocketManager defaultManager];
+      [sock.socket writeData:data withTimeout:1 tag:1];
+    NSLog(@"_isActive:%ld",(long)_isActive);
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -62,18 +67,6 @@
   
 }
 
--(void)creatUI
-{
-     _isActive = 1;
-     _startValue = [NSMutableString string];
-     [_startValue appendString:@"01000000"];//默认开
-    if (_isActive == 1) {
-        [_startValue appendString:@"01000000"];//默认开
-    }else{
-        [_startValue appendString:@"00000000"];
-    }
-
-}
 - (void)setupNaviBar {
     [self setNaviBarTitle:@"保存场景"]; //设置标题
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
@@ -216,15 +209,18 @@
 }
 //启用定时
 - (IBAction)startSceneBtn:(id)sender {
-    
+   
     self.startSceneBtn.selected = !self.startSceneBtn.selected;
     if (self.startSceneBtn.selected) {
-         [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateSelected];
+      
+         [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
     }else{
-        [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
+          [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
     }
-    _isActive = !self.startSceneBtn.selected;
-    NSLog(@"_isActive:%ld",(long)_isActive);
+    _isActive = self.startSceneBtn.selected;
+    NSData *data=[[DeviceInfo defaultManager] scheduleScene:_isActive sceneID:[NSString stringWithFormat:@"%d",self.sceneID]];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
     
 }
 

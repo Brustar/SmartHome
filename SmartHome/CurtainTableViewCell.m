@@ -71,8 +71,8 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
         
-        if (_delegate && [_delegate respondsToSelector:@selector(onCurtainSliderBtnValueChanged:)]) {
-            [_delegate onCurtainSliderBtnValueChanged:sender];
+        if (_delegate && [_delegate respondsToSelector:@selector(onCurtainSliderBtnValueChanged:deviceID:)]) {
+            [_delegate onCurtainSliderBtnValueChanged:self.slider deviceID:self.deviceid.intValue];
         }
     }
     
@@ -96,8 +96,8 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
         
-        if (_delegate && [_delegate respondsToSelector:@selector(onCurtainOpenBtnClicked:)]) {
-            [_delegate onCurtainOpenBtnClicked:sender];
+        if (_delegate && [_delegate respondsToSelector:@selector(onCurtainOpenBtnClicked:deviceID:)]) {
+            [_delegate onCurtainOpenBtnClicked:self.open deviceID:self.deviceid.intValue];
         }
     }
   

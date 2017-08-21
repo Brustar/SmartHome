@@ -65,8 +65,8 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         
-        if (_delegate && [_delegate respondsToSelector:@selector(onOtherSwitchBtnClicked:)]) {
-            [_delegate onOtherSwitchBtnClicked:sender];
+        if (_delegate && [_delegate respondsToSelector:@selector(onOtherSwitchBtnClicked:deviceID:)]) {
+            [_delegate onOtherSwitchBtnClicked:self.OtherSwitchBtn deviceID:self.deviceid.intValue];
         }
         
     }else if (sender == self.AddOtherBtn){

@@ -858,7 +858,7 @@
 
 
 #pragma mark - NewLightCellDelegate
-- (void)onLightPowerBtnClicked:(UIButton *)btn {
+- (void)onLightPowerBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
     
     if (btn.selected) {
         _switchBtnString = @"01000000";//开
@@ -868,7 +868,7 @@
 }
 
 #pragma mark - ColorLightCellDelegate
-- (void)onColourSwitchBtnClicked:(UIButton *)btn {
+- (void)onColourSwitchBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
     if (btn.selected) {
         _switchBtnString = @"01000000";//开
     }else {
@@ -877,7 +877,7 @@
 }
 
 #pragma mark - CurtainCellDelegate
-- (void)onCurtainOpenBtnClicked:(UIButton *)btn {
+- (void)onCurtainOpenBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
     
     if (btn.selected) {
         _switchBtnString = @"01000000";//开
@@ -886,7 +886,7 @@
     }
 }
 
-- (void)onCurtainSliderBtnValueChanged:(UISlider *)slider {
+- (void)onCurtainSliderBtnValueChanged:(UISlider *)slider deviceID:(int)deviceID {
     
     NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", (int)slider.value*100]];
     if (hexString.length == 2) {
@@ -951,7 +951,7 @@
 }
 
 #pragma mark - BjMusicTableViewCellDelegate
-- (void)onBjPowerButtonClicked:(UIButton *)btn {
+- (void)onBjPowerButtonClicked:(UIButton *)btn deviceID:(int)deviceID {
     if (btn.selected) {
         _switchBtnString = @"01000000";//开
     }else {
@@ -1013,7 +1013,7 @@
 }
 
 #pragma mark - OtherTableViewCellDelegate
-- (void)onOtherSwitchBtnClicked:(UIButton *)btn {
+- (void)onOtherSwitchBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
     if (btn.selected) {
         _switchBtnString = @"01000000";//开
     }else {
