@@ -76,7 +76,7 @@ static NSString * const CYPhotoId = @"photo";
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     _bgmusicIDS = [[NSMutableArray alloc] init];
-    NSArray * roomArr = [SQLManager getAllRoomsInfo];
+    NSArray * roomArr = [SQLManager getAllRoomsWhenHasDevices];
     for (int i = 0; i < roomArr.count; i ++) {
         Room * roomName = roomArr[i];
         if (![SQLManager isWholeHouse:roomName.rId]) {
@@ -121,7 +121,7 @@ static NSString * const CYPhotoId = @"photo";
    
     [self showNetStateView];
 
-    self.rooms = [SQLManager getAllRoomsInfo];
+    self.rooms = [SQLManager getAllRoomsWhenHasDevices];
     
     [self setUpRoomScrollerView];
     [self getUI];
@@ -233,7 +233,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)changeHostRefreshUINotification:(NSNotification *)noti {
-    self.rooms = [SQLManager getAllRoomsInfo];
+    self.rooms = [SQLManager getAllRoomsWhenHasDevices];
     [self setUpRoomScrollerView];
 }
 
