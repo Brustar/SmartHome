@@ -82,8 +82,7 @@
 
 // 是否cellar
 + (BOOL) isEnableWWAN {
-    return ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] != NotReachable);
-    //return [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusReachableViaWWAN;
+    return ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == ReachableViaWWAN);
 }
 
 @end

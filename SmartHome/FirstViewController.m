@@ -25,6 +25,7 @@
 #import "IOManager.h"
 #import "NowMusicController.h"
 #import "UIImageView+WebCache.h"
+#import "NetStatusManager.h"
 
 @interface FirstViewController ()<RCIMReceiveMessageDelegate,HttpDelegate,TcpRecvDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView * SubImageView;//首页的日历大圆
