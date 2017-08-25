@@ -42,7 +42,7 @@
 
 #define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)  
 
-@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate>
+@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate, TcpRecvDelegate>
 
 
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -653,7 +653,7 @@ static NSString * const CYPhotoId = @"photo";
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
-    self.selectSceneImg = info[UIImagePickerControllerOriginalImage];
+    self.selectSceneImg = info[UIImagePickerControllerEditedImage];
     
     //场景ID不变
     Scene *scene = [[SceneManager defaultManager] readSceneByID:self.currentCell.sceneID];
@@ -864,10 +864,15 @@ static NSString * const CYPhotoId = @"photo";
         sender.selected = NO;
     }
       _timeSceneID = sceneID;
+    
+    //发TCP定时指令给主机
     NSData *data=[[DeviceInfo defaultManager] scheduleScene:sender.selected sceneID:[NSString stringWithFormat:@"%d",_timeSceneID]];
     SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate = self;
     [sock.socket writeData:data withTimeout:1 tag:1];
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+    
+    
+    /*NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
     
     if (auothorToken.length >0) {
@@ -880,7 +885,7 @@ static NSString * const CYPhotoId = @"photo";
         http.delegate = self;
         http.tag = 2;
         [http sendPost:url param:dict];
-    }
+    }*/
 }
 
 #pragma mark -- lazy load
