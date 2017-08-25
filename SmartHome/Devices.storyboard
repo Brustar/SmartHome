@@ -1063,6 +1063,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nas-3f-VDd" userLabel="Button_repeat">
                                 <rect key="frame" x="16" y="109" width="61" height="60"/>
                                 <state key="normal" image="repeat_white" backgroundImage="mode_button"/>
+                                <state key="selected" image="repeat_red"/>
                                 <state key="highlighted" image="repeat_red"/>
                                 <connections>
                                     <action selector="repeat:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="XIU-EP-6CF"/>
@@ -1071,7 +1072,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wir-ch-GS4" userLabel="Button_shuffle">
                                 <rect key="frame" x="298" y="109" width="61" height="60"/>
                                 <state key="normal" image="shuffle_white" backgroundImage="mode_button"/>
-                                <state key="highlighted" image="shuffle_red"/>
+                                <state key="selected" image="shuffle_red"/>
                                 <connections>
                                     <action selector="shuffle:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="4aF-ws-eo7"/>
                                 </connections>

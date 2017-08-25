@@ -219,12 +219,16 @@
 }
 
 - (IBAction)repeat:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    button.selected = !button.selected;
     NSData *data=[[DeviceInfo defaultManager] repeat:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (IBAction)shuffle:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    button.selected = !button.selected;
     NSData *data=[[DeviceInfo defaultManager] shuffle:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
