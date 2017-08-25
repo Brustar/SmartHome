@@ -1063,6 +1063,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nas-3f-VDd" userLabel="Button_repeat">
                                 <rect key="frame" x="16" y="109" width="61" height="60"/>
                                 <state key="normal" image="repeat_white" backgroundImage="mode_button"/>
+                                <state key="highlighted" image="repeat_red"/>
                                 <connections>
                                     <action selector="repeat:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="XIU-EP-6CF"/>
                                 </connections>
@@ -1070,6 +1071,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wir-ch-GS4" userLabel="Button_shuffle">
                                 <rect key="frame" x="298" y="109" width="61" height="60"/>
                                 <state key="normal" image="shuffle_white" backgroundImage="mode_button"/>
+                                <state key="highlighted" image="shuffle_red"/>
                                 <connections>
                                     <action selector="shuffle:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="4aF-ws-eo7"/>
                                 </connections>
@@ -2732,12 +2734,14 @@
         <image name="music_button_control" width="46" height="46"/>
         <image name="plugin_on" width="145" height="145"/>
         <image name="pm2.5" width="141" height="141"/>
+        <image name="repeat_red" width="12" height="12"/>
         <image name="repeat_white" width="12" height="12"/>
         <image name="schedule_line" width="64" height="1"/>
         <image name="screen_control_btn" width="240" height="101"/>
         <image name="screen_down" width="25" height="24"/>
         <image name="screen_pause" width="12" height="28"/>
         <image name="screen_up" width="25" height="24"/>
+        <image name="shuffle_red" width="13" height="10"/>
         <image name="shuffle_white" width="13" height="10"/>
         <image name="sp_base" width="375" height="385"/>
         <image name="sp_off" width="73" height="73"/>
