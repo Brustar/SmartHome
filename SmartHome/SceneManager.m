@@ -126,6 +126,14 @@
                         {   [MBProgressHUD showSuccess:@"新增成功"];
                             NSLog(@"新增场景，入库成功！");
                              [IOManager removeTempFile];
+                            
+                            //判断是否有定时，并且定时是否已开启，好发送8A指令通知C4主机下载plist文件
+                            if (isplan == 1 && isactive == 1) {
+                                //发TCP定时指令给主机
+                                NSData *data = [[DeviceInfo defaultManager] scheduleScene:isactive sceneID:[NSString stringWithFormat:@"%d",scene.sceneID]];
+                                SocketManager *sock = [SocketManager defaultManager];
+                                [sock.socket writeData:data withTimeout:1 tag:1];
+                            }
                            
                             
                         }else {
@@ -237,7 +245,7 @@
                     FMDatabase *db = [SQLManager connetdb];
                     if([db open])
                     {
-                        NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,'%ld','%d','%d','%ld')",scene.sceneID,name,roomName,[sceneDict objectForKey:@"image_url"],(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID],0,isplan,isactive];
+                        NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,'%ld','%d','%d','%ld')",scene.sceneID,name,roomName,[sceneDict objectForKey:@"image_url"],(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID],0,isplan, isactive];
                         BOOL result = [db executeUpdate:sql];
                         if(result)
                         {   [MBProgressHUD showSuccess:@"新增成功"];
