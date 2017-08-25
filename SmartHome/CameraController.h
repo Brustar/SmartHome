@@ -12,8 +12,6 @@
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
 
-@property (strong, nonatomic) Scene *scene;
-
 @property (nonatomic,strong) RTSPPlayer *video;
 @property (nonatomic,assign) int roomID;
 @property (nonatomic) float lastFrameTime;

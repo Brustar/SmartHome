@@ -15,7 +15,4 @@
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,assign) BOOL isAddDevice;
 
-@property (strong, nonatomic) Scene *scene;
-
-
 @end

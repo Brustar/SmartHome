@@ -77,28 +77,6 @@
         [self.camerUrls addObject:url];
     }
 
-    if ([[DeviceInfo defaultManager] editingScene]) {
-        NSArray *IDS = [SQLManager getDeviceByTypeName:@"摄像头" andRoomID:self.roomID];
-        self.deviceid = IDS[0];
-        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        [self save:nil];
-    }
-}
-
--(IBAction)save:(id)sender
-{
-    Camera *device=[[Camera alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 
 -(IBAction)playButtonAction:(id)sender {

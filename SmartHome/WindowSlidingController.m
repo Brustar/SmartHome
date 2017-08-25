@@ -103,22 +103,6 @@
     [self.switcher constraintToCenter:SWITCH_SIZE];
 }
 
--(IBAction)save:(id)sender
-{
-
-    WinOpener *device=[[WinOpener alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    [_scene setReadonly:NO];
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-    
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

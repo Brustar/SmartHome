@@ -117,15 +117,6 @@
     
     [self naviToDevice];
     
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-    if ([self.sceneid intValue]>0) {
-        for(int i=0;i<[_scene.devices count];i++)
-        {
-            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Amplifier class]]) {
-                self.switcher.isOn=((Amplifier *)[_scene.devices objectAtIndex:i]).waiting;
-            }
-        }
-    }
     SocketManager *sock = [SocketManager defaultManager];
     sock.delegate = self;
     //查询设备状态
@@ -147,26 +138,6 @@
     
     [self.view addSubview:self.switcher];
     [self.switcher constraintToCenter:SWITCH_SIZE];
-}
-
--(IBAction)save:(id)sender
-{
-    Amplifier *device=[[Amplifier alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setWaiting: self.switchView.isOn];
-    
-    
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-    
 }
 
 #pragma mark - TCP recv delegate

@@ -176,37 +176,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
              @"A":@(a)};
 }
 
--(IBAction)save:(id)sender
-{
-    NSString *etype = [SQLManager getEType:[self.deviceid intValue]];
-    
-    Light *device=[[Light alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setIsPoweron: self.switcher.isOn];
-    NSArray *colors=[self changeUIColorToRGB:self.base.backgroundColor];
-    if (colors) {
-        if ([etype isEqualToString:@"03"]) {
-            [device setColor:colors];  
-        }
-        [device setColor:@[]];
-    }
-    
-    if (![etype isEqualToString:@"01"])
-    {
-        [device setBrightness:(int)self.tranformView.tag];
-    }
-    
-    Scene *scene = [Scene new];
-    [scene setSceneID:[self.sceneid intValue]];
-    [scene setRoomID:self.roomID];
-    [scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    
-    [scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
-    [scene setDevices:devices];
-    [[SceneManager defaultManager] addScene:scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-}
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
@@ -290,10 +259,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     [[SceneManager defaultManager] romantic:[self.sceneid intValue]];
 }
 - (IBAction)LightSlider:(id)sender {
-    
     [[SceneManager defaultManager] dimingScene:[self.sceneid intValue] brightness:[self.deviceid intValue]];
-    //[self.lightSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
