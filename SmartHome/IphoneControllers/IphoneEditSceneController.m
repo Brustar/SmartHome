@@ -163,7 +163,14 @@
 
         [[SceneManager defaultManager] editScene:scene];
     }];
-    [alertVC addAction:saveAction];
+    
+    //判断场景的　stype
+    int stype = [SQLManager getReadOnly:self.sceneID];
+    if (stype == 0) { // 自定义场景
+        [alertVC addAction:saveAction];
+    }
+    
+    
     UIAlertAction *saveNewAction = [UIAlertAction actionWithTitle:@"另存为新场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //另存为场景，新的场景ID
         

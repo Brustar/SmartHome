@@ -244,7 +244,7 @@ static NSString * const CYPhotoId = @"photo";
     
     [_afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         
-        [NC postNotificationName:@"NetWorkDidChangedNotification" object:nil];
+       // [NC postNotificationName:@"NetWorkDidChangedNotification" object:nil];
         
         DeviceInfo *info = [DeviceInfo defaultManager];
         if(status == AFNetworkReachabilityStatusReachableViaWWAN) //手机自带网络

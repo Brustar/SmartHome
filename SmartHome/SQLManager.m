@@ -2063,7 +2063,7 @@
         NSString *sqlRoom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER, \"imgUrl\" TEXT,\"ibeacon\" INTEGER,\"totalVisited\" INTEGER,\"masterID\" TEXT,\"openforcurrentuser\" INTEGER,\"isAll\" INTEGER)";
         NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE ,\"eqId\" INTEGER,\"channelValue\" INTEGER,\"cNumber\" INTEGER, \"Channel_name\" TEXT,\"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0, \"eqNumber\" TEXT,\"masterID\" TEXT)";
         NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" INTEGER, \"temperature\" INTEGER, \"fanspeed\" INTEGER, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"bright\" INTEGER, \"color\" TEXT, \"position\" INTEGER, \"volume\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"htypeID\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"icon_url\" TEXT, \"camera_url\" TEXT, \"UITypeOfLight\" INTEGER, \"isIR\" BOOL DEFAULT 0)";
-        NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT ,\"status\" INTEGER DEFAULT (0), \"isplan\" INTEGER, \"isactive\" INTEGER)";
+        NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER DEFAULT (0), \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT ,\"status\" INTEGER DEFAULT (0), \"isplan\" INTEGER, \"isactive\" INTEGER)";
         NSString *sqlChat = @"CREATE TABLE IF NOT EXISTS chats(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,nickname varchar(20),portrait varchar(100),username varchar(20),user_id integer)";
         NSString *sqlCatalog = @"CREATE TABLE IF NOT EXISTS catalog(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,catalogName varchar(20))";
         NSString *sqlUser = @"CREATE TABLE IF NOT EXISTS Users(ID INT PRIMARY KEY NOT NULL, userType INTEGER, userName TEXT, nickName TEXT, vip TEXT, age INTEGER, sex INTEGER, portraitUrl TEXT, phoneNum TEXT, signature TEXT, extra1 TEXT, extra2 TEXT, extra3 TEXT, extra4 TEXT)";
@@ -2755,7 +2755,7 @@
                 int sId = [sceneInfoDic[@"scence_id"] intValue];
                 NSString *sName = sceneInfoDic[@"name"];
                 int isFavorite = [sceneInfoDic[@"isstore"] intValue];//是否收藏，1:已收藏 2: 未收藏
-                int sType = [sceneInfoDic[@"type"] intValue];
+                int sType = [sceneInfoDic[@"type"] intValue];//场景类型：1，默认  0，自定义
                 NSString *sNumber = sceneInfoDic[@"snumber"];
                 NSString *urlImage = sceneInfoDic[@"image_url"];
                 NSInteger isplan = [sceneInfoDic[@"isplan"] integerValue];

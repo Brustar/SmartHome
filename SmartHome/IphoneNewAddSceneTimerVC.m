@@ -156,11 +156,15 @@
     UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     IphoneSaveNewSceneController * iphoneSaveNewSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
    
-    if ([lastVC isKindOfClass:[iphoneSaveNewSceneVC class]]) {
+    if ([lastVC isKindOfClass:[iphoneSaveNewSceneVC class]]) {  //新增定时
         self.schedule.startTime = self.starTimeLabel.text;
         self.schedule.endTime = self.endTimeLabel.text;
         _scene.schedules = @[self.schedule];
+        _scene.isplan = 1;
+        _scene.isactive = 1;
+        
         [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+        
         NSDictionary *dic = @{
                               @"startDay":self.starTimeLabel.text,
                               @"endDay":self.endTimeLabel.text,
@@ -169,7 +173,7 @@
                               };
         [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
         
-    }else{
+    }else{  //编辑定时
         _scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
         Schedule *sch = [[Schedule alloc] init];
         sch.startTime = self.starTimeLabel.text;
