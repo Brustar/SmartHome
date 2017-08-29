@@ -202,33 +202,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
 }
 
-//将UIColor转换为RGB值
-- (NSArray *) changeUIColorToRGB:(UIColor *)color
-{
-    NSMutableArray *RGBStrValueArr = [[NSMutableArray alloc] init];
-    NSString *RGBStr = nil;
-    //获得RGB值描述
-    NSString *RGBValue = [NSString stringWithFormat:@"%@",color];
-    //将RGB值描述分隔成字符串
-    NSArray *RGBArr = [RGBValue componentsSeparatedByString:@" "];
-    if ([RGBArr count]>3) {
-        //获取红色值
-        int r = [[NSString stringWithFormat:@"%@",[RGBArr objectAtIndex:1]] floatValue] * 255;
-        RGBStr = [NSString stringWithFormat:@"%d",r];
-        [RGBStrValueArr addObject:RGBStr];
-        //获取绿色值
-        int g = [[NSString stringWithFormat:@"%@",[RGBArr objectAtIndex:2] ] floatValue] * 255;
-        RGBStr = [NSString stringWithFormat:@"%d",g];
-        [RGBStrValueArr addObject:RGBStr];
-        //获取蓝色值
-        int b = [[NSString stringWithFormat:@"%@",[RGBArr objectAtIndex:3]] floatValue] * 255;
-        RGBStr = [NSString stringWithFormat:@"%d",b];
-        [RGBStrValueArr addObject:RGBStr];
-    }
-    //返回保存RGB值的数组
-    return RGBStrValueArr;
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
@@ -384,20 +357,21 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         [self.contextMenuTableView dismisWithIndexPath:0];
         self.contextMenuTableView = nil;
     }else{
-        self.contextMenuTableView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
-        self.contextMenuTableView.animationDuration = 0.05;
-        //optional - implement custom YALContextMenuTableView custom protocol
-        self.contextMenuTableView.yalDelegate = self;
-        //optional - implement menu items layout
-        self.contextMenuTableView.menuItemsSide = Left;
-        self.contextMenuTableView.menuItemsAppearanceDirection = FromTopToBottom;
-        
-        //register nib
-        UINib *cellNib = [UINib nibWithNibName:@"MenuCell" bundle:nil];
-        [self.contextMenuTableView registerNib:cellNib forCellReuseIdentifier:menuCellIdentifier];
-    
-        // it is better to use this method only for proper animation
         if ([self.lights count]>0) {
+            self.contextMenuTableView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
+            self.contextMenuTableView.animationDuration = 0.05;
+            //optional - implement custom YALContextMenuTableView custom protocol
+            self.contextMenuTableView.yalDelegate = self;
+            //optional - implement menu items layout
+            self.contextMenuTableView.menuItemsSide = Left;
+            self.contextMenuTableView.menuItemsAppearanceDirection = FromTopToBottom;
+            
+            //register nib
+            UINib *cellNib = [UINib nibWithNibName:@"MenuCell" bundle:nil];
+            [self.contextMenuTableView registerNib:cellNib forCellReuseIdentifier:menuCellIdentifier];
+        
+            // it is better to use this method only for proper animation
+            
             [self.contextMenuTableView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(80+22,0,0,0) animated:YES];
         }
     }
