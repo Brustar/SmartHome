@@ -17,7 +17,6 @@
 
 @property (strong, nonatomic) IBOutlet UISwitch *switchView;
 
-@property (strong, nonatomic) Scene *scene;
 @property (nonatomic,assign) BOOL isAddDevice;
 
 @end
