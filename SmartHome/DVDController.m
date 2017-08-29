@@ -102,18 +102,6 @@
     }
     [self naviToDevice];
     
-    [self.btnMenu setImage:[UIImage imageNamed:@"TV_menu_red"] forState:UIControlStateHighlighted];
-    [self.btnUP setImage:[UIImage imageNamed:@"dir_up_red"]  forState:UIControlStateHighlighted];
-    [self.btnDown setImage:[UIImage imageNamed:@"dir_down_red"]  forState:UIControlStateHighlighted];
-    [self.btnLeft setImage:[UIImage imageNamed:@"dir_left_red"]  forState:UIControlStateHighlighted];
-    [self.btnRight setImage:[UIImage imageNamed:@"dir_right_red"]  forState:UIControlStateHighlighted];
-    [self.btnOK setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-    [self.btnPop setImage:[UIImage imageNamed:@"DVD_pop_red"] forState:UIControlStateHighlighted];
-    
-    [self.btnPrevoius setImage:[UIImage imageNamed:@"DVD_previous_red"] forState:UIControlStateHighlighted];
-    //[self.btnPlay setImage:[UIImage imageNamed:@"DVD_pause"] forState:UIControlStateSelected];
-    [self.btnNext setImage:[UIImage imageNamed:@"DVD_next_red"] forState:UIControlStateHighlighted];
-    
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
     if ([SQLManager isIR:[self.deviceid intValue]]) {

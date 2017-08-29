@@ -588,6 +588,7 @@
                                     <constraint firstAttribute="height" constant="12" id="IvM-br-Xqw"/>
                                 </constraints>
                                 <state key="normal" image="dir_up"/>
+                                <state key="highlighted" image="dir_up_red"/>
                                 <connections>
                                     <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="gW7-7r-vnK"/>
                                 </connections>
@@ -598,6 +599,7 @@
                                     <constraint firstAttribute="height" constant="12" id="C84-1F-quV"/>
                                 </constraints>
                                 <state key="normal" image="dir_down"/>
+                                <state key="highlighted" image="dir_down_red"/>
                                 <connections>
                                     <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="ktg-UB-xZU"/>
                                 </connections>
@@ -605,6 +607,7 @@
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEq-cA-XA4">
                                 <rect key="frame" x="102" y="322" width="12" height="24"/>
                                 <state key="normal" image="dir_left"/>
+                                <state key="highlighted" image="dir_left_red"/>
                                 <connections>
                                     <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="GHk-Nn-Whs"/>
                                 </connections>
@@ -612,6 +615,7 @@
                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8G0-0j-Rx1">
                                 <rect key="frame" x="262" y="322" width="12" height="24"/>
                                 <state key="normal" image="dir_right"/>
+                                <state key="highlighted" image="dir_right_red"/>
                                 <connections>
                                     <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="EaU-as-Axq"/>
                                 </connections>
@@ -622,6 +626,9 @@
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="OK">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="N2s-S4-mxP"/>
@@ -636,6 +643,7 @@
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LO1-O9-3dJ">
                                 <rect key="frame" x="16" y="114" width="61" height="60"/>
                                 <state key="normal" image="TV_menu" backgroundImage="mode_button"/>
+                                <state key="highlighted" image="TV_menu_red"/>
                                 <connections>
                                     <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="5zi-eL-qND"/>
                                 </connections>
@@ -679,6 +687,9 @@
                                 <state key="normal" title="CH+">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="seq-Gd-mof"/>
                                 </connections>
@@ -687,6 +698,9 @@
                                 <rect key="frame" x="322" y="314" width="30" height="30"/>
                                 <state key="normal" title="CH-">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="h62-KR-eHL"/>
@@ -1307,6 +1321,7 @@
                                 <rect key="frame" x="262" y="604" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" image="DVD_next" backgroundImage="control_button"/>
+                                <state key="highlighted" image="DVD_next_red"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="Xyd-nS-jye"/>
                                 </connections>
@@ -1381,6 +1396,7 @@
                                     <constraint firstAttribute="width" constant="24" id="zVb-aQ-u6V"/>
                                 </constraints>
                                 <state key="normal" image="dir_up"/>
+                                <state key="highlighted" image="dir_up_red"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="bmG-Ld-l6B"/>
                                 </connections>
@@ -1391,6 +1407,7 @@
                                     <constraint firstAttribute="height" constant="12" id="I1i-pq-Y6B"/>
                                 </constraints>
                                 <state key="normal" image="dir_down"/>
+                                <state key="highlighted" image="dir_down_red"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="W69-5y-iIe"/>
                                 </connections>
@@ -1398,6 +1415,7 @@
                             <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfe-ES-qjk">
                                 <rect key="frame" x="101.5" y="321.5" width="12" height="24"/>
                                 <state key="normal" image="dir_left"/>
+                                <state key="highlighted" image="dir_left_red"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="My3-i5-0cC"/>
                                 </connections>
@@ -1405,6 +1423,7 @@
                             <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pfv-UU-Wsq">
                                 <rect key="frame" x="261.5" y="321.5" width="12" height="24"/>
                                 <state key="normal" image="dir_right"/>
+                                <state key="highlighted" image="dir_right_red"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="mz1-JG-kYF"/>
                                 </connections>
@@ -1414,6 +1433,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="OK">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="seQ-xd-XJe"/>
@@ -1428,6 +1450,7 @@
                             <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zC7-jj-JeS" userLabel="Button_menu">
                                 <rect key="frame" x="36" y="124" width="61" height="60"/>
                                 <state key="normal" image="TV_menu" backgroundImage="mode_button"/>
+                                <state key="highlighted" image="TV_menu_red"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="81Q-ci-rVm"/>
                                 </connections>
@@ -1435,6 +1458,7 @@
                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duh-R2-so8" userLabel="Button_pop">
                                 <rect key="frame" x="278" y="124" width="61" height="60"/>
                                 <state key="normal" image="DVD_pop" backgroundImage="mode_button"/>
+                                <state key="highlighted" image="DVD_pop_red"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="Mep-i5-Jtd"/>
                                 </connections>
@@ -1452,6 +1476,7 @@
                                 <rect key="frame" x="10" y="604" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" image="DVD_previous" backgroundImage="control_button"/>
+                                <state key="highlighted" image="DVD_previous_red"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="KVA-Tz-C8y"/>
                                 </connections>
@@ -2686,15 +2711,19 @@
     <resources>
         <image name="Air_glory" width="239" height="239"/>
         <image name="DVD_next" width="10" height="10"/>
+        <image name="DVD_next_red" width="10" height="10"/>
         <image name="DVD_pause" width="4" height="10"/>
         <image name="DVD_play" width="9" height="10"/>
         <image name="DVD_pop" width="12" height="12"/>
+        <image name="DVD_pop_red" width="12" height="12"/>
         <image name="DVD_previous" width="10" height="10"/>
+        <image name="DVD_previous_red" width="10" height="10"/>
         <image name="DVD_toogle" width="14" height="10"/>
         <image name="DVD_toogle_red" width="14" height="10"/>
         <image name="TV_back" width="10" height="11"/>
         <image name="TV_home" width="13" height="12"/>
         <image name="TV_menu" width="11" height="10"/>
+        <image name="TV_menu_red" width="11" height="10"/>
         <image name="TV_off" width="12" height="12"/>
         <image name="TV_on" width="12" height="12"/>
         <image name="air_base" width="326" height="326"/>
@@ -2709,11 +2738,15 @@
         <image name="control_button" width="103" height="47"/>
         <image name="cool" width="10" height="11"/>
         <image name="dir_down" width="24" height="12"/>
+        <image name="dir_down_red" width="24" height="12"/>
         <image name="dir_ear" width="368" height="262"/>
         <image name="dir_left" width="12" height="24"/>
+        <image name="dir_left_red" width="12" height="24"/>
         <image name="dir_pad" width="326" height="326"/>
         <image name="dir_right" width="12" height="24"/>
+        <image name="dir_right_red" width="12" height="24"/>
         <image name="dir_up" width="37" height="19"/>
+        <image name="dir_up_red" width="24" height="12"/>
         <image name="disk" width="198" height="198"/>
         <image name="disk_base" width="326" height="326"/>
         <image name="dvd_btn_switch_off" width="34" height="23"/>
