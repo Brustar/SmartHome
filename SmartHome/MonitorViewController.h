@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RTSPPlayer.h"
+#import "MBProgressHUD+NJ.h"
 
 #define Video_Output_Width  UI_SCREEN_WIDTH-120
 #define Video_Output_Height 160
@@ -37,6 +38,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fullScreenBtnTrailing;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fullScreenBtnBottom;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rNameLabelBottom;
+@property (nonatomic, retain) NSTimer *videoTimeoutTimer;
+@property (nonatomic, strong) NSDate *startDate;
 
 - (IBAction)adjustBtnClicked:(id)sender;
 - (IBAction)fullScreenBtnClicked:(id)sender;

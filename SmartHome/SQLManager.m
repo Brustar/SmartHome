@@ -183,7 +183,7 @@
 +(NSString *)deviceUrlByDeviceID:(int)deviceID
 {
     FMDatabase *db = [self connetdb];
-    NSString *url;
+    NSString *url = nil;
     if([db open])
     {
         NSString *sql = nil;
@@ -198,6 +198,9 @@
         while ([resultSet next])
         {
             url = [resultSet stringForColumn:@"camera_url"];
+            if (url.length >0) {
+                break;
+            }
         }
     }
     [db closeOpenResultSets];

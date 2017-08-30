@@ -215,6 +215,9 @@
             //发通知刷新设备首页，场景首页,app首页
             [NC postNotificationName:@"ChangeHostRefreshUINotification" object:nil];
             
+            //发通知刷新左侧菜单选项
+            [NC postNotificationName:@"RefreshMenuItemsNotification" object:nil];
+            
             //重连UDP
             [self reconnectUDP];
             

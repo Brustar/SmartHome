@@ -21,7 +21,16 @@
     [super viewDidLoad];
     [self addNotifications];
     [self getUserInfoFromDB];
-    _itemArray = @[@"家庭成员",@"视频动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
+    
+    NSString *cameraURL = [SQLManager deviceUrlByDeviceID:-1];
+    if (cameraURL.length >0) {
+        _itemArray = @[@"家庭成员",@"视频动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
+        _iconArray = @[@"my_family",@"my_scene",@"my_cloud",@"my_msg",@"my_alert",@"my_exchange"];
+    }else {
+        _itemArray = @[@"家庭成员",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
+        _iconArray = @[@"my_family",@"my_cloud",@"my_msg",@"my_alert",@"my_exchange"];
+    }
+    
     _bgButton = [[UIButton alloc] initWithFrame:self.view.frame];
     [_bgButton setBackgroundImage:[UIImage imageNamed:@"my_bg_side_nol"] forState:UIControlStateNormal];
     [_bgButton addTarget:self action:@selector(bgButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -80,37 +89,44 @@
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.text = [_itemArray objectAtIndex:indexPath.row];
-    if (indexPath.row == 0) {
-        cell.imageView.image = [UIImage imageNamed:@"my_family"];
-    }else if (indexPath.row == 1) {
-        cell.imageView.image = [UIImage imageNamed:@"my_scene"];
-    }else if (indexPath.row == 2) {
-        cell.imageView.image = [UIImage imageNamed:@"my_cloud"];
-    }else if (indexPath.row == 3) {
-        cell.imageView.image = [UIImage imageNamed:@"my_msg"];
+    cell.imageView.image = [UIImage imageNamed:[_iconArray objectAtIndex:indexPath.row]];
         
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(90, 12, 20, 20)];
-        label.backgroundColor = [UIColor redColor];
-        label.layer.masksToBounds = YES;
-        label.layer.cornerRadius = 10;
-        [cell addSubview:label];
-        if (_sum == 0) {
-            label.hidden = YES;
-        }else{
-            label.hidden = NO;
+    if (_itemArray.count < 6) {
+        if (indexPath.row == 2) {
+            UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(90, 12, 20, 20)];
+            label.backgroundColor = [UIColor redColor];
+            label.layer.masksToBounds = YES;
+            label.layer.cornerRadius = 10;
+            [cell addSubview:label];
+            if (_sum == 0) {
+                label.hidden = YES;
+            }else{
+                label.hidden = NO;
+            }
+            label.text = [NSString stringWithFormat:@"%d",_sum];
+            label.textColor = [UIColor whiteColor];
+            label.font = [UIFont systemFontOfSize:12];
+            label.textAlignment = NSTextAlignmentCenter;
         }
-        label.text = [NSString stringWithFormat:@"%d",_sum];
-        label.textColor = [UIColor whiteColor];
-        label.font = [UIFont systemFontOfSize:12];
-        label.textAlignment = NSTextAlignmentCenter;
-     
-
-       
-    }else if (indexPath.row == 4) {
-        cell.imageView.image = [UIImage imageNamed:@"my_alert"];
-    }else if (indexPath.row == 5) {
-        cell.imageView.image = [UIImage imageNamed:@"my_exchange"];
+    }else {
+        if (indexPath.row == 3) {
+            UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(90, 12, 20, 20)];
+            label.backgroundColor = [UIColor redColor];
+            label.layer.masksToBounds = YES;
+            label.layer.cornerRadius = 10;
+            [cell addSubview:label];
+            if (_sum == 0) {
+                label.hidden = YES;
+            }else{
+                label.hidden = NO;
+            }
+            label.text = [NSString stringWithFormat:@"%d",_sum];
+            label.textColor = [UIColor whiteColor];
+            label.font = [UIFont systemFontOfSize:12];
+            label.textAlignment = NSTextAlignmentCenter;
+        }
     }
+    
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -374,6 +390,20 @@
     [NC addObserver:self selector:@selector(showMaskViewNotification:) name:@"ShowMaskViewNotification" object:nil];
     [NC addObserver:self selector:@selector(refreshNickName:) name:@"refreshNickName" object:nil];
     [NC addObserver:self selector:@selector(SumNumber:) name:@"SumNumber" object:nil];
+    [NC addObserver:self selector:@selector(refreshMenuItems:) name:@"RefreshMenuItemsNotification" object:nil];
+}
+
+- (void)refreshMenuItems:(NSNotification *) noti {
+    NSString *cameraURL = [SQLManager deviceUrlByDeviceID:-1];
+    if (cameraURL.length >0) {
+        _itemArray = @[@"家庭成员",@"视频动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
+        _iconArray = @[@"my_family",@"my_scene",@"my_cloud",@"my_msg",@"my_alert",@"my_exchange"];
+    }else {
+        _itemArray = @[@"家庭成员",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
+        _iconArray = @[@"my_family",@"my_cloud",@"my_msg",@"my_alert",@"my_exchange"];
+    }
+    
+    [_myTableView reloadData];
 }
 
 - (void)refreshPortrait:(NSNotification *)noti {
