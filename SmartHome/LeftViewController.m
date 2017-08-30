@@ -160,9 +160,17 @@
     }else if ([item isEqualToString:@"视频动态"]) {
          //视频动态
        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) { //如果是主人，
-            FamilyDynamicViewController *vc = [familyStoryBoard instantiateViewControllerWithIdentifier:@"FamilyDynamicVC"];
-            vc.hidesBottomBarWhenPushed = YES;
-            [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
+           
+           //如果有摄像头，才进入
+           NSString *cameraURL = [SQLManager deviceUrlByDeviceID:-1];
+           if (cameraURL.length >0) {
+               FamilyDynamicViewController *vc = [familyStoryBoard instantiateViewControllerWithIdentifier:@"FamilyDynamicVC"];
+               vc.hidesBottomBarWhenPushed = YES;
+               [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
+           }else {
+               [MBProgressHUD showError:@"无视频动态"];
+           }
+           
        }else {
            [MBProgressHUD showError:@"你是普通用户无权查看"];
        }

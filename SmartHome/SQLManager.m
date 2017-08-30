@@ -186,7 +186,13 @@
     NSString *url;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT camera_url FROM Devices where ID = %d and masterID = '%ld'",deviceID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = nil;
+        
+        if (deviceID == -1) {
+            sql = [NSString stringWithFormat:@"SELECT camera_url FROM Devices where masterID = '%ld'", [[DeviceInfo defaultManager] masterID]];
+        }else {
+            sql = [NSString stringWithFormat:@"SELECT camera_url FROM Devices where ID = %d and masterID = '%ld'",deviceID,[[DeviceInfo defaultManager] masterID]];
+        }
         
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
@@ -2451,7 +2457,7 @@
     NSString *rName ;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Rooms where ID = (select rid from devices where id = %d) and masterID = '%ld'",deviceId, [[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Rooms where ID = (select rid from Devices where id = %d) and masterID = '%ld'",deviceId, [[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
