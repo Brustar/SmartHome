@@ -419,6 +419,7 @@
         [UD removeObjectForKey:@"AuthorToken"];  [UD synchronize]; //清空token
         [[SocketManager defaultManager] cutOffSocket];//断开socket长连接
         [[RCIM sharedRCIM] logout];//IM注销
+        [[UIApplication sharedApplication] unregisterForRemoteNotifications];//注销推送通知
         [self gotoLoginViewController];//跳转到登录页面
 }
 

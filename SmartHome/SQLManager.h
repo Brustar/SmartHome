@@ -158,8 +158,8 @@
 +(int)getRoomIDByBeacon:(int)beacon;
 +(NSString *)getRoomNameByRoomID:(int) rId;
 
-+ (Device *)getDeviceWithDeviceID:(int) deviceID ;
-+ (Device *)getDeviceWithDeviceHtypeID:(int) htypeID ;
++ (Device *)getDeviceWithDeviceID:(int) deviceID;
++ (Device *)getDeviceWithDeviceHtypeID:(int)htypeID roomID:(int)rID;
 
 +(BOOL)updateTotalVisited:(int)roomID;
 

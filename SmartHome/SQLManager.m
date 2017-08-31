@@ -1657,7 +1657,8 @@
     [db close];
     return device;
 }
-+ (Device *)getDeviceWithDeviceHtypeID:(int) htypeID
+
++ (Device *)getDeviceWithDeviceHtypeID:(int)htypeID roomID:(int)rID
 {
     Device *device = nil;
     
@@ -1666,7 +1667,7 @@
     {
         long masterID =[[DeviceInfo defaultManager] masterID];
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM Devices where ID = %d and masterID = '%ld'",htypeID, masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM Devices where htypeID = %d and rID = %d and masterID = '%ld'", htypeID, rID, masterID];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
