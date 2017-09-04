@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mpT-6G-VZu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mpT-6G-VZu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -2182,14 +2182,24 @@
                                     <constraint firstAttribute="height" constant="40" id="PGC-RH-dgq"/>
                                 </constraints>
                             </stackView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWI-O6-IAO">
+                                <rect key="frame" x="0.0" y="151" width="375" height="385"/>
+                                <state key="normal" image="IR_power_btn_normal"/>
+                                <state key="highlighted" image="IR_power_btn_highLighted"/>
+                                <connections>
+                                    <action selector="toogleAction:" destination="APC-Z7-X0o" eventType="touchUpInside" id="HJi-aV-sNb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="UAb-Oa-aQE" firstAttribute="leading" secondItem="hw2-Uu-Wzn" secondAttribute="leading" id="2pj-aP-kru"/>
                             <constraint firstItem="jnl-ro-ZnG" firstAttribute="top" secondItem="4sE-11-bb1" secondAttribute="bottom" constant="44" id="DBi-Xf-Du5"/>
                             <constraint firstItem="UAb-Oa-aQE" firstAttribute="top" secondItem="4sE-11-bb1" secondAttribute="bottom" id="ITk-Z0-9lg"/>
+                            <constraint firstItem="fWI-O6-IAO" firstAttribute="centerY" secondItem="UAb-Oa-aQE" secondAttribute="centerY" id="JRP-k7-Sqa"/>
                             <constraint firstAttribute="trailing" secondItem="UAb-Oa-aQE" secondAttribute="trailing" id="MS5-QU-LyZ"/>
                             <constraint firstItem="OdP-VW-6qj" firstAttribute="top" secondItem="UAb-Oa-aQE" secondAttribute="bottom" id="cLB-My-WkQ"/>
+                            <constraint firstItem="fWI-O6-IAO" firstAttribute="centerX" secondItem="UAb-Oa-aQE" secondAttribute="centerX" id="dhj-13-V5h"/>
                             <constraint firstItem="jnl-ro-ZnG" firstAttribute="leading" secondItem="hw2-Uu-Wzn" secondAttribute="leading" id="vTb-Kn-gpe"/>
                             <constraint firstAttribute="trailing" secondItem="jnl-ro-ZnG" secondAttribute="trailing" id="xF2-Hn-Io1"/>
                         </constraints>
@@ -2197,6 +2207,7 @@
                     <connections>
                         <outlet property="menuContainer" destination="jnl-ro-ZnG" id="Rqe-3W-2Nm"/>
                         <outlet property="menuTop" destination="DBi-Xf-Du5" id="hgi-zl-d4F"/>
+                        <outlet property="toogle" destination="fWI-O6-IAO" id="8Ln-Gw-NYO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8e3-NY-rWb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2720,6 +2731,8 @@
         <image name="DVD_previous_red" width="10" height="10"/>
         <image name="DVD_toogle" width="14" height="10"/>
         <image name="DVD_toogle_red" width="14" height="10"/>
+        <image name="IR_power_btn_highLighted" width="375" height="385"/>
+        <image name="IR_power_btn_normal" width="375" height="385"/>
         <image name="TV_back" width="10" height="11"/>
         <image name="TV_home" width="13" height="12"/>
         <image name="TV_menu" width="11" height="10"/>

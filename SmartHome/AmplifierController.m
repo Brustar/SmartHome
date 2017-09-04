@@ -19,58 +19,14 @@
 #import "IphoneRoomView.h"
 @interface AmplifierController ()<ORBSwitchDelegate,IphoneRoomViewDelegate>
 @property (nonatomic,strong) NSArray *menus;
-@property (nonatomic,strong) NSMutableArray *amplifierNames;
-@property (nonatomic,strong) NSMutableArray *amplifierIDArr;
+
 @property (nonatomic,strong) ORBSwitch *switcher;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
+@property (weak, nonatomic) IBOutlet UIButton *toogle;
 @end
 
 @implementation AmplifierController
-
--(NSMutableArray *)amplifierIDArr
-{
-    if(!_amplifierIDArr)
-    {
-        _amplifierIDArr = [NSMutableArray array];
-        
-        if(self.sceneid > 0 && !self.isAddDevice)
-        {
-            NSArray *amplifiers = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
-            for(int i = 0; i<amplifiers.count; i++)
-            {
-                NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[amplifiers[i] intValue]];
-                if([typeName isEqualToString:@"功放"])
-                {
-                    [_amplifierIDArr addObject:amplifiers[i]];
-                }
-
-            }
-        }else if(self.roomID)
-        {
-            [_amplifierIDArr addObject:[SQLManager singleDeviceWithCatalogID:amplifier byRoom:self.roomID]];
-            
-        }else{
-            [_amplifierIDArr addObject:self.deviceid];
-        }
-        
-    }
-    return _amplifierIDArr;
-}
-
--(NSMutableArray *)amplifierNames
-{
-    if(!_amplifierNames)
-    {
-        _amplifierNames = [NSMutableArray array];
-        for(int i = 0; i < self.amplifierIDArr.count; i++)
-        {
-            int amplifierID = [self.amplifierIDArr[i] intValue];
-            [_amplifierNames addObject:[SQLManager deviceNameByDeviceID:amplifierID]];
-        }
-    }
-    return _amplifierNames;
-}
 
 -(void)setUpRoomScrollerView
 {
@@ -105,8 +61,13 @@
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     self.title = [NSString stringWithFormat:@"%@ - 功放",roomName];
     [self setNaviBarTitle:self.title];
-    self.deviceid = [self.amplifierIDArr firstObject];
-    [self initSwitcher];
+    self.deviceid = [SQLManager singleDeviceWithCatalogID:amplifier byRoom:self.roomID];
+    if ([SQLManager isIR:[self.deviceid intValue]]) {
+        self.toogle.hidden = NO;
+    }else{
+        self.toogle.hidden = YES;
+        [self initSwitcher];
+    }
     
     self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     if (self.menus.count<6) {
@@ -138,6 +99,15 @@
     
     [self.view addSubview:self.switcher];
     [self.switcher constraintToCenter:SWITCH_SIZE];
+}
+
+-(IBAction)toogleAction:(id)sender
+{
+    UIButton *btn = (UIButton *)sender;
+    btn.selected = !btn.selected;
+    NSData *data=[[DeviceInfo defaultManager] toogle:btn.selected deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 #pragma mark - TCP recv delegate
