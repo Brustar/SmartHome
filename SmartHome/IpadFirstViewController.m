@@ -266,11 +266,18 @@
     NSString *url = [NSString stringWithFormat:@"%@cloud/weather.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-        NSDictionary *dict = @{@"token":auothorToken,@"code":@"shenzhen"};
-        HttpManager *http=[HttpManager defaultManager];
-        http.delegate = self;
-        http.tag = 1;
-        [http sendPost:url param:dict showProgressHUD:NO];
+        NSString *city = [UD objectForKey:@"host_city"];
+        if (city.length >0) {
+            NSDictionary *dict = @{
+                                   @"token":auothorToken,
+                                   @"code":city
+                                   };
+            HttpManager *http=[HttpManager defaultManager];
+            http.delegate = self;
+            http.tag = 1;
+            [http sendPost:url param:dict showProgressHUD:NO];
+        }
+        
     }
 }
 -(void)httpHandler:(id)responseObject tag:(int)tag
@@ -285,7 +292,8 @@
 //            NSString * weather = responseObject[@"weather"];
             NSString * weather_curr = responseObject[@"weather_curr"];
             self.weahter = weather_curr;
-            self.temperatureLabel.text = [NSString stringWithFormat:@"当前%@",temperature_curr];
+            self.cityLabel.text = responseObject[@"city"];
+            self.temperatureLabel.text = [NSString stringWithFormat:@"当前%@℃",temperature_curr];
              if ([weather_curr rangeOfString:@"多云"].location != NSNotFound ||[weather_curr rangeOfString:@"阴"].location != NSNotFound) {
                  self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-Overcast"];
              }else if([weather_curr rangeOfString:@"雨"].location != NSNotFound) {

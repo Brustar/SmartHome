@@ -667,6 +667,9 @@ NSArray *array = [NSArray arrayWithObjects:
     NSString * hostbrand = responseObject[@"hostbrand"];
     NSString * host_brand_number = responseObject[@"host_brand_number"];
     NSString * homename = responseObject[@"homename"];
+    NSString * city = responseObject[@"city"];
+    [IOManager writeUserdefault:city forKey:@"host_city"];//家庭主机所在城市
+    
     if (homename == nil) {
         [self.home_room_infoArr addObject:@" "];
     }else{
