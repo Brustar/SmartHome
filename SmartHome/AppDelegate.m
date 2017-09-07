@@ -156,6 +156,20 @@
     [self handlePush:userInfo];
 }
 
+- (void)getNetConfigInfo {
+    NSString *url = [NSString stringWithFormat:@"%@cloud/netconfig.aspx",[IOManager httpAddr]];
+    
+    NSDictionary *dict = @{
+                           @"optype":@(2)
+                           };
+    
+    
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 1;
+    [http sendPost:url param:dict];
+}
+
 -(void) gotoMSG
 {
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -284,6 +298,28 @@
     }
     
     return YES;
+}
+
+#pragma - mark http delegate
+- (void)httpHandler:(id) responseObject tag:(int)tag
+{
+    if(tag == 1)
+    {
+        if ([responseObject[@"result"] intValue] == 0)
+        {
+            [IOManager writeUserdefault:responseObject[@"c4_port"] forKey:@"C4_port"];
+            [IOManager writeUserdefault:responseObject[@"crestron_port"] forKey:@"Crestron_port"];
+            [IOManager writeUserdefault:responseObject[@"tcp_port"] forKey:@"Tcp_port"];
+            [IOManager writeUserdefault:responseObject[@"http_port"] forKey:@"Http_port"];
+            [IOManager writeUserdefault:responseObject[@"tcp_server"] forKey:@"Tcp_server"];
+            [IOManager writeUserdefault:responseObject[@"http_server"] forKey:@"Http_server"];
+            
+            
+            
+        }
+        
+    }
+    
 }
 
 -(void)dealloc

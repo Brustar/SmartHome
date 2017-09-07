@@ -7,8 +7,9 @@
 //
 #import "LeftSlideViewController.h"
 #import "BaseTabBarController.h"
+#import "HttpManager.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, HttpDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) LeftSlideViewController *LeftSlideVC;//侧滑视图VC
