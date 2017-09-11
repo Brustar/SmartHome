@@ -93,7 +93,7 @@
     
     [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron:self.powerLightBtn.selected];
-    [device setBrightness:100];
+    [device setBrightness:0]; //开关灯 没有亮度参数,设置为0
     [device setColor:@[]];
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];
