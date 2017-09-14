@@ -15,6 +15,7 @@ typedef NS_ENUM(NSUInteger, deviceType) {
     DVDtype = 13,
     bgmusic = 14,
     FM = 15,
+    newWind = 30,
     air = 31,
     doorclock = 40,
     projector = 16,

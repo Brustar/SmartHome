@@ -76,6 +76,13 @@
         case Wetting:
             targetName = @"WettingController";
             break;
+        case air:
+            targetName = @"AirController";
+            break;
+        case newWind:
+            targetName = @"NewWindController";
+            break;
+            
         default:
             break;
     }

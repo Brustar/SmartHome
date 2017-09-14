@@ -239,6 +239,7 @@
 		CDB8B85E1EB1EBD2003AA894 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B85D1EB1EBD2003AA894 /* UserInfo.m */; };
 		CDBEFF501EA5FEBF00258B1E /* FamilyHomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF4F1EA5FEBF00258B1E /* FamilyHomeDetailViewController.m */; };
 		CDBEFF531EA616CD00258B1E /* FamilyHomeDetailSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF521EA616CD00258B1E /* FamilyHomeDetailSceneCell.m */; };
+		CDC4B0841F69590400FFE3F0 /* NewWindController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC4B0831F69590400FFE3F0 /* NewWindController.m */; };
 		CDEC86801E95EBAB009EC245 /* TabbarPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */; };
 		CDEC86841E960E92009EC245 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEC86831E960E92009EC245 /* background.png */; };
 		CDEC86891E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86881E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m */; };
@@ -827,6 +828,8 @@
 		CDBEFF4F1EA5FEBF00258B1E /* FamilyHomeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHomeDetailViewController.m; sourceTree = "<group>"; };
 		CDBEFF511EA616CD00258B1E /* FamilyHomeDetailSceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeDetailSceneCell.h; sourceTree = "<group>"; };
 		CDBEFF521EA616CD00258B1E /* FamilyHomeDetailSceneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHomeDetailSceneCell.m; sourceTree = "<group>"; };
+		CDC4B0821F69590400FFE3F0 /* NewWindController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewWindController.h; sourceTree = "<group>"; };
+		CDC4B0831F69590400FFE3F0 /* NewWindController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewWindController.m; sourceTree = "<group>"; };
 		CDEC867E1E95EBAB009EC245 /* TabbarPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarPanel.h; sourceTree = "<group>"; };
 		CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarPanel.m; sourceTree = "<group>"; };
 		CDEC86831E960E92009EC245 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
@@ -1871,6 +1874,8 @@
 				0F3CCF3A1D0F97B70058A320 /* CameraController.m */,
 				0FF7B0B41D1380BF003C2D52 /* AirController.h */,
 				0FF7B0B51D1380BF003C2D52 /* AirController.m */,
+				CDC4B0821F69590400FFE3F0 /* NewWindController.h */,
+				CDC4B0831F69590400FFE3F0 /* NewWindController.m */,
 				0FCAA40A1D1945BB00C1E58C /* BgMusicController.h */,
 				0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */,
 				F67091BA1D93BF300002DDC5 /* WindowSlidingController.h */,
@@ -2840,6 +2845,7 @@
 				2E12CC111E7F5E3000C7D006 /* CYPhotoCell.m in Sources */,
 				CDB8B84D1EB1D421003AA894 /* MonitorViewController.m in Sources */,
 				CD4F12471EB4400A00E0B301 /* DeliveryAddressCell.m in Sources */,
+				CDC4B0841F69590400FFE3F0 /* NewWindController.m in Sources */,
 				2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */,
 				0F49CB821E7A21FF00D46ECC /* ORBSwitch.m in Sources */,
 				CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */,

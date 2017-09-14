@@ -17,6 +17,7 @@
 #import "PluginViewController.h"
 #import "CameraController.h"
 #import "AirController.h"
+#import "NewWindController.h"
 #import "ScreenCurtainController.h"
 #import "ProjectController.h"
 #import "IphoneRoomView.h"
@@ -542,8 +543,8 @@ static NSString * const CYPhotoId = @"photo";
             return @[device];
         case cata_env:
             device = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"AirController"];
-            ((AirController*)device).roomID = room.rId;
-            return @[device];
+            ((AirController *)device).roomID = room.rId;
+            return @[menu,device];
         case cata_single_product:
             device = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"FloweringController"];
             ((FloweringController*)device).roomID = room.rId;
