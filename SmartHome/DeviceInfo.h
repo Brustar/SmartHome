@@ -172,6 +172,18 @@ enum{
 -(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID;
 -(NSData *) changeInterval:(uint8_t)interval deviceID:(NSString *)deviceID;
 
+-(NSData *) toogleAirCon:(uint8_t)toogle deviceID:(NSString *)deviceID roomID:(uint8_t)roomID; //开:1,关:0
+-(NSData *) changeTemperature:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)temperature roomID:(uint8_t)roomID;
+-(NSData *) changeDirect:(uint8_t)direct deviceID:(NSString *)deviceID roomID:(uint8_t)roomID;
+-(NSData *) changeSpeed:(uint8_t)speed deviceID:(NSString *)deviceID roomID:(uint8_t)roomID;
+-(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID roomID:(uint8_t)roomID;
+-(NSData *) changeInterval:(uint8_t)interval deviceID:(NSString *)deviceID roomID:(uint8_t)roomID;
+
+#pragma mark - Fresh Air
+-(NSData *) toogleFreshAir:(uint8_t)toogle deviceID:(NSString *)deviceID deviceType:(uint8_t)devicetype; //开:1,关:0
+-(NSData *) changeSpeed:(uint8_t)speed deviceID:(NSString *)deviceID deviceType:(uint8_t)deviceType;
+-(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID deviceType:(uint8_t)deviceType;
+
 #pragma mark - BGMusic CALL PUBLIC
 -(NSData *) repeat:(NSString *)deviceID;
 -(NSData *) shuffle:(NSString *)deviceID;
