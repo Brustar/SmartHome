@@ -222,6 +222,34 @@
     return dataFromProtocol(proto);
 }
 
+-(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID roomID:(uint8_t)roomID
+{
+    NSData *data = [self action:action deviceID:deviceID];
+    Proto proto = protocolFromData(data);
+    
+    proto.action.B=roomID;
+    return dataFromProtocol(proto);
+}
+
+-(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID deviceType:(uint8_t)deviceType
+{
+    NSData *data = [self action:action deviceID:deviceID];
+    Proto proto = protocolFromData(data);
+    
+    proto.deviceType=deviceType;
+    return dataFromProtocol(proto);
+}
+
+-(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)value roomID:(uint8_t)roomID
+{
+    NSData *data = [self action:action deviceID:deviceID];
+    Proto proto = protocolFromData(data);
+    
+    proto.action.RValue=value;
+    proto.action.B=roomID;
+    return dataFromProtocol(proto);
+}
+
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue
 {
     NSData *data = [self action:action deviceID:deviceID];
@@ -555,6 +583,45 @@
 -(NSData *) changeInterval:(uint8_t)interval deviceID:(NSString *)deviceID
 {
     return [self action:interval deviceID:deviceID];
+}
+
+-(NSData *) toogleAirCon:(uint8_t)toogle deviceID:(NSString *)deviceID roomID:(uint8_t)roomID
+{
+    return [self action:toogle deviceID:deviceID roomID:roomID];
+}
+-(NSData *) changeTemperature:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)temperature  roomID:(uint8_t)roomID
+{
+    return [self action:action deviceID:deviceID value:temperature roomID:roomID];
+}
+-(NSData *) changeDirect:(uint8_t)direct deviceID:(NSString *)deviceID roomID:(uint8_t)roomID
+{
+    return [self action:direct deviceID:deviceID roomID:roomID];
+}
+-(NSData *) changeSpeed:(uint8_t)speed deviceID:(NSString *)deviceID roomID:(uint8_t)roomID
+{
+    return [self action:speed deviceID:deviceID roomID:roomID];
+}
+-(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID roomID:(uint8_t)roomID
+{
+    return [self action:mode deviceID:deviceID roomID:roomID];
+}
+-(NSData *) changeInterval:(uint8_t)interval deviceID:(NSString *)deviceID roomID:(uint8_t)roomID
+{
+    return [self action:interval deviceID:deviceID roomID:roomID];
+}
+
+#pragma mark - Fresh Air
+-(NSData *) toogleFreshAir:(uint8_t)toogle deviceID:(NSString *)deviceID deviceType:(uint8_t)deviceType
+{
+    return [self action:toogle deviceID:deviceID deviceType:deviceType];
+}
+-(NSData *) changeSpeed:(uint8_t)speed deviceID:(NSString *)deviceID deviceType:(uint8_t)deviceType
+{
+    return [self action:speed deviceID:deviceID deviceType:deviceType];
+}
+-(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID deviceType:(uint8_t)deviceType
+{
+    return [self action:mode deviceID:deviceID deviceType:deviceType];
 }
 
 #pragma mark - bgmusic
