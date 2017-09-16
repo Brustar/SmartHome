@@ -350,7 +350,7 @@
     }else if (section == 1){
         return _curtainArray.count;//窗帘
     }else if (section == 2){
-        return _environmentArray.count;//环境（空调）
+        return _environmentArray.count;//环境（空调, 新风）
     }else if (section == 3){
         return _multiMediaArray.count;//影音
     }else if (section == 4){
@@ -469,6 +469,7 @@
             otherCell.NameLabel.text = device.name;
             otherCell.OtherSwitchBtn.selected = device.power;//开关
             otherCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
+            otherCell.hTypeId = device.hTypeId;
             return otherCell;
         }
         

@@ -49,6 +49,7 @@ typedef NS_ENUM(NSUInteger, catalog) {
 @interface Device : NSObject
 
 @property (nonatomic,assign) int eID;
+@property (nonatomic,assign) int airID;//空调子ID
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) NSString *sn;
 @property (nonatomic,strong) NSString *birth;

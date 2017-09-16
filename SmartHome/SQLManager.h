@@ -99,7 +99,7 @@
 + (NSArray *)getDeviceTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID subTypeName:(NSString *)subTypeName;
 
 //修改场景的打开状态（status： 0表示关闭 1表示打开）
-+ (BOOL)updateSceneStatus:(int)status sceneID:(int)sceneID;
++ (BOOL)updateSceneStatus:(int)status sceneID:(int)sceneID roomID:(int)roomID;
 + (BOOL)updateScenePic:(NSString *)img sceneID:(int)sceneID;
 
 //得到所有设备父类和具体的设备

@@ -51,18 +51,19 @@
                                     <constraint firstAttribute="height" constant="230" id="SBZ-wv-D6K"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" backgroundImage="air_control_off">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" title="25 ℃" backgroundImage="air_control_cool"/>
+                                <state key="selected" backgroundImage="air_control_cool"/>
                                 <state key="highlighted" backgroundImage="air_control_off"/>
                                 <connections>
                                     <action selector="powerBtnClicked:" destination="3h7-Sz-H0a" eventType="touchUpInside" id="c8i-eW-ukU"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BsE-g9-aud">
-                                <rect key="frame" x="162" y="320.5" width="50.5" height="26.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <rect key="frame" x="154" y="315.5" width="69" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -70,7 +71,7 @@
                                 <rect key="frame" x="100" y="520" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title=" 高速" image="speed_fast" backgroundImage="control_button"/>
-                                <state key="selected">
+                                <state key="selected" title=" 高速" image="speed_fast_selected" backgroundImage="control_button">
                                     <color key="titleColor" red="0.13311299369999999" green="0.41950653100000002" blue="0.93497004530000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="control_button_pressed"/>
@@ -82,7 +83,7 @@
                                 <rect key="frame" x="135.5" y="520" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title=" 中速" image="speed_middle" backgroundImage="control_button"/>
-                                <state key="selected">
+                                <state key="selected" title=" 中速" image="speed_middle_selected" backgroundImage="control_button">
                                     <color key="titleColor" red="0.13311299369999999" green="0.41950653100000002" blue="0.93497004530000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="control_button_pressed"/>
@@ -94,7 +95,7 @@
                                 <rect key="frame" x="172" y="520" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title=" 低速" image="speed_slow" backgroundImage="control_button"/>
-                                <state key="selected">
+                                <state key="selected" title=" 低速" image="speed_slow_selected" backgroundImage="control_button">
                                     <color key="titleColor" red="0.13311299369999999" green="0.41950653100000002" blue="0.93497004530000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="control_button_pressed"/>
@@ -124,6 +125,7 @@
                         <outlet property="lowSpeedBtn" destination="ABc-Xq-266" id="TUr-zQ-pe3"/>
                         <outlet property="middleSpeedBtn" destination="qbf-LS-zIU" id="riT-Jr-UHL"/>
                         <outlet property="powerBtn" destination="OVT-ts-tqW" id="opS-eF-sTq"/>
+                        <outlet property="tempLabel" destination="BsE-g9-aud" id="GiN-pG-MAx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eVL-QR-KfT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2902,8 +2904,11 @@
         <image name="sp_base" width="375" height="385"/>
         <image name="sp_off" width="73" height="73"/>
         <image name="speed_fast" width="16" height="18"/>
+        <image name="speed_fast_selected" width="16" height="18"/>
         <image name="speed_middle" width="14" height="14"/>
+        <image name="speed_middle_selected" width="14" height="14"/>
         <image name="speed_slow" width="14" height="15"/>
+        <image name="speed_slow_selected" width="14" height="15"/>
         <image name="stylus" width="43" height="166"/>
         <image name="switch_room" width="31" height="27"/>
         <image name="time_base" width="52" height="22"/>

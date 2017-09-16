@@ -712,7 +712,7 @@ static NSString * const CYPhotoId = @"photo";
             if (scene.status == 0) {
                  [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
                  [[SceneManager defaultManager] startScene:scene.sceneID];
-                 [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+                 [SQLManager updateSceneStatus:1 sceneID:scene.sceneID roomID:scene.roomID];
              }
          }
          if (ON_IPAD) {
@@ -946,7 +946,7 @@ static NSString * const CYPhotoId = @"photo";
         if (scene.status == 0) {
             [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
             [[SceneManager defaultManager] startScene:scene.sceneID];
-            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID roomID:scene.roomID];
         }
         
         if (ON_IPAD) {
@@ -996,7 +996,7 @@ static NSString * const CYPhotoId = @"photo";
         if (scene.status == 0) {
             [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
             [[SceneManager defaultManager] startScene:scene.sceneID];
-            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID roomID:scene.roomID];
         }
         
         if (ON_IPAD) {

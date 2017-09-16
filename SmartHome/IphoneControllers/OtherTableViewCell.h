@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *AddOtherBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *OtherConstraint;
 @property(nonatomic, strong) NSString *deviceid;
+@property (nonatomic,assign) NSInteger hTypeId;
 @property (nonatomic,weak)   NSString *sceneid;
 //房间id
 @property (nonatomic,assign) int roomID;
