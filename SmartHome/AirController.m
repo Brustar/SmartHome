@@ -102,10 +102,10 @@ static NSString *const airCellIdentifier = @"airCell";
     
     if (ON_IPAD) {
         self.menuTop.constant = self.controlBottom.constant = 80;
-        self.menuLeft.constant = self.menuRight.constant =self.controlLeft.constant=self.controlRight.constant = 240;
+        self.menuLeft.constant = self.menuRight.constant =self.controlLeft.constant=self.controlRight.constant = 110;
         self.subControlLeft.constant = 20;
         self.subControlRight.constant = -20;
-        self.diskLeft.constant= self.diskRight.constant = 180;
+        self.diskLeft.constant= self.diskRight.constant = 80;
         self.ldiskTop.constant = self.rdiskTop.constant = 300;
         self.diskTop.constant = -260;
     }
@@ -278,8 +278,8 @@ static NSString *const airCellIdentifier = @"airCell";
 
 -(NSData *)createCmd:(uint8_t) cmd
 {
-    return [[DeviceInfo defaultManager] changeMode:cmd
-                                                  deviceID:self.deviceid];
+    Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:self.roomID];
+    return [[DeviceInfo defaultManager] changeMode:cmd deviceID:self.deviceid roomID:device.airID];
 }
 
 #pragma mark - Navigation
@@ -294,8 +294,8 @@ static NSString *const airCellIdentifier = @"airCell";
 
 - (void)changedCurrentTemperature:(CGFloat)currentValue {
     self.currentDegree = round(currentValue);
-    
-    NSData *data=[[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:self.currentDegree];
+    Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:self.roomID];
+    NSData *data=[[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:self.currentDegree roomID:device.airID];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
@@ -303,7 +303,8 @@ static NSString *const airCellIdentifier = @"airCell";
 #pragma mark - ORBSwitchDelegate
 - (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
     NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
-    NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
+    Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:self.roomID];
+    NSData *data=[[DeviceInfo defaultManager] toogleAirCon:self.switcher.isOn deviceID:self.deviceid roomID:device.airID];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }

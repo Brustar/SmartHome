@@ -79,7 +79,7 @@ enum{
 
 //主机ID
 @property (nonatomic) long masterID;
-//主机ID
+//房间ID
 @property (nonatomic) long roomID;
 //主机ip
 @property (nonatomic, strong) NSString *masterIP;

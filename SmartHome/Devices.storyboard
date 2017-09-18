@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mpT-6G-VZu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mpT-6G-VZu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,6 +24,113 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wlN-Hx-NRz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2068" y="-268"/>
+        </scene>
+        <!--NewWind-->
+        <scene sceneID="hdp-wU-fqh">
+            <objects>
+                <viewController storyboardIdentifier="NewWindController" id="3h7-Sz-H0a" userLabel="NewWind" customClass="NewWindController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hnU-ZX-Jb0"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wl8-hU-ch1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZNn-rR-uNt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Uch-XB-lbm">
+                                <rect key="frame" x="37" y="193.5" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="VoX-ea-Mhw"/>
+                                    <constraint firstAttribute="height" constant="300" id="YHj-2a-YFJ"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVT-ts-tqW">
+                                <rect key="frame" x="72" y="218" width="230" height="230"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="230" id="HHn-6p-sh5"/>
+                                    <constraint firstAttribute="height" constant="230" id="SBZ-wv-D6K"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal" backgroundImage="air_control_off">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="air_control_cool"/>
+                                <state key="highlighted" backgroundImage="air_control_off"/>
+                                <connections>
+                                    <action selector="powerBtnClicked:" destination="3h7-Sz-H0a" eventType="touchUpInside" id="c8i-eW-ukU"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BsE-g9-aud">
+                                <rect key="frame" x="154" y="315.5" width="69" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9T1-JT-vPe">
+                                <rect key="frame" x="100" y="520" width="103" height="47"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title=" 高速" image="speed_fast" backgroundImage="control_button"/>
+                                <state key="selected" title=" 高速" image="speed_fast_selected" backgroundImage="control_button">
+                                    <color key="titleColor" red="0.13311299369999999" green="0.41950653100000002" blue="0.93497004530000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="control_button_pressed"/>
+                                <connections>
+                                    <action selector="highSpeedBtnClicked:" destination="3h7-Sz-H0a" eventType="touchUpInside" id="FQY-Xr-Bzf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbf-LS-zIU">
+                                <rect key="frame" x="135.5" y="520" width="103" height="47"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title=" 中速" image="speed_middle" backgroundImage="control_button"/>
+                                <state key="selected" title=" 中速" image="speed_middle_selected" backgroundImage="control_button">
+                                    <color key="titleColor" red="0.13311299369999999" green="0.41950653100000002" blue="0.93497004530000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="control_button_pressed"/>
+                                <connections>
+                                    <action selector="middleSpeedBtnClicked:" destination="3h7-Sz-H0a" eventType="touchUpInside" id="V6Q-uT-7jC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABc-Xq-266">
+                                <rect key="frame" x="172" y="520" width="103" height="47"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title=" 低速" image="speed_slow" backgroundImage="control_button"/>
+                                <state key="selected" title=" 低速" image="speed_slow_selected" backgroundImage="control_button">
+                                    <color key="titleColor" red="0.13311299369999999" green="0.41950653100000002" blue="0.93497004530000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="control_button_pressed"/>
+                                <connections>
+                                    <action selector="lowSpeedBtnClicked:" destination="3h7-Sz-H0a" eventType="touchUpInside" id="5EJ-24-60w"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BsE-g9-aud" firstAttribute="centerY" secondItem="ZNn-rR-uNt" secondAttribute="centerY" id="ALO-lX-HWh"/>
+                            <constraint firstItem="BsE-g9-aud" firstAttribute="centerX" secondItem="ZNn-rR-uNt" secondAttribute="centerX" id="CaR-7s-tQU"/>
+                            <constraint firstItem="OVT-ts-tqW" firstAttribute="centerY" secondItem="ZNn-rR-uNt" secondAttribute="centerY" id="HrX-ef-iLJ"/>
+                            <constraint firstItem="9T1-JT-vPe" firstAttribute="leading" secondItem="ZNn-rR-uNt" secondAttribute="leading" constant="100" id="JBp-1d-YxS"/>
+                            <constraint firstItem="Uch-XB-lbm" firstAttribute="centerX" secondItem="ZNn-rR-uNt" secondAttribute="centerX" id="RzA-qy-NQc"/>
+                            <constraint firstAttribute="bottom" secondItem="9T1-JT-vPe" secondAttribute="bottom" constant="100" id="a22-PR-Wz7"/>
+                            <constraint firstItem="OVT-ts-tqW" firstAttribute="centerX" secondItem="ZNn-rR-uNt" secondAttribute="centerX" id="qNg-sm-tbi"/>
+                            <constraint firstAttribute="bottom" secondItem="ABc-Xq-266" secondAttribute="bottom" constant="100" id="vXQ-rN-Bd3"/>
+                            <constraint firstItem="Uch-XB-lbm" firstAttribute="centerY" secondItem="ZNn-rR-uNt" secondAttribute="centerY" constant="10" id="vdB-GM-bzQ"/>
+                            <constraint firstAttribute="trailing" secondItem="ABc-Xq-266" secondAttribute="trailing" constant="100" id="xcP-ON-IYV"/>
+                            <constraint firstItem="qbf-LS-zIU" firstAttribute="centerX" secondItem="ZNn-rR-uNt" secondAttribute="centerX" id="xcw-R2-ZMn"/>
+                            <constraint firstAttribute="bottom" secondItem="qbf-LS-zIU" secondAttribute="bottom" constant="100" id="zxA-JX-7jg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="highSpeedBtn" destination="9T1-JT-vPe" id="vXq-Rq-5yM"/>
+                        <outlet property="lowSpeedBtn" destination="ABc-Xq-266" id="TUr-zQ-pe3"/>
+                        <outlet property="middleSpeedBtn" destination="qbf-LS-zIU" id="riT-Jr-UHL"/>
+                        <outlet property="powerBtn" destination="OVT-ts-tqW" id="opS-eF-sTq"/>
+                        <outlet property="tempLabel" destination="BsE-g9-aud" id="GiN-pG-MAx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eVL-QR-KfT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1449" y="-1590"/>
         </scene>
         <!--AirCondition-->
         <scene sceneID="O4I-m7-YWH">
@@ -2740,6 +2847,8 @@
         <image name="TV_off" width="12" height="12"/>
         <image name="TV_on" width="12" height="12"/>
         <image name="air_base" width="326" height="326"/>
+        <image name="air_control_cool" width="122" height="122"/>
+        <image name="air_control_off" width="122" height="122"/>
         <image name="air_dot_blue" width="6" height="6"/>
         <image name="air_dot_red" width="6" height="6"/>
         <image name="background" width="375" height="667"/>
@@ -2749,6 +2858,7 @@
         <image name="clock_open" width="375" height="385"/>
         <image name="control_banner" width="338" height="60"/>
         <image name="control_button" width="103" height="47"/>
+        <image name="control_button_pressed" width="105" height="48"/>
         <image name="cool" width="10" height="11"/>
         <image name="dir_down" width="24" height="12"/>
         <image name="dir_down_red" width="24" height="12"/>
@@ -2766,6 +2876,7 @@
         <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="fm_pad" width="326" height="326"/>
         <image name="glory" width="239" height="239"/>
+        <image name="head_bg" width="185" height="185"/>
         <image name="heat" width="11" height="11"/>
         <image name="humidity" width="141" height="141"/>
         <image name="icon_start" width="16" height="15"/>
@@ -2792,6 +2903,12 @@
         <image name="shuffle_white" width="13" height="10"/>
         <image name="sp_base" width="375" height="385"/>
         <image name="sp_off" width="73" height="73"/>
+        <image name="speed_fast" width="16" height="18"/>
+        <image name="speed_fast_selected" width="16" height="18"/>
+        <image name="speed_middle" width="14" height="14"/>
+        <image name="speed_middle_selected" width="14" height="14"/>
+        <image name="speed_slow" width="14" height="15"/>
+        <image name="speed_slow_selected" width="14" height="15"/>
         <image name="stylus" width="43" height="166"/>
         <image name="switch_room" width="31" height="27"/>
         <image name="time_base" width="52" height="22"/>

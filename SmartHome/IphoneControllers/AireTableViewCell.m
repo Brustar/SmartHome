@@ -64,7 +64,9 @@
         }else{
             [self.AireSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
         }
-        NSData * data = [[DeviceInfo defaultManager] toogleAirCon:self.AireSwitchBtn.selected deviceID:self.deviceid];
+        
+        Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:self.roomID];
+        NSData * data = [[DeviceInfo defaultManager] toogleAirCon:self.AireSwitchBtn.selected deviceID:self.deviceid roomID:device.airID];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         

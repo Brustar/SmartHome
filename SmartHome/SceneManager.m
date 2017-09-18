@@ -1046,7 +1046,8 @@
         if ([device isKindOfClass:[Aircon class]]) {
             Aircon *aircon=(Aircon *)device;
             NSString *deviceid=[NSString stringWithFormat:@"%d", aircon.deviceID];
-            data=[[DeviceInfo defaultManager] toogleAirCon:YES deviceID:deviceid];
+            Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:scene.roomID];
+            data=[[DeviceInfo defaultManager] toogleAirCon:YES deviceID:deviceid roomID:device.airID];
             [sock.socket writeData:data withTimeout:1 tag:1];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 if (aircon.mode>=0) {

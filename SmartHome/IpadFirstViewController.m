@@ -887,12 +887,12 @@
         [_firstBtn setBackgroundImage:[UIImage imageNamed:@"circular2"] forState:UIControlStateSelected];
         [_firstBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [[SceneManager defaultManager] startScene:_info1.sceneID];
-        [SQLManager updateSceneStatus:1 sceneID:_info1.sceneID];//更新数据库
+        [SQLManager updateSceneStatus:1 sceneID:_info1.sceneID roomID:_info1.roomID];//更新数据库
     }else{
         [_firstBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_firstBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
         [[SceneManager defaultManager] poweroffAllDevice:_info1.sceneID];
-        [SQLManager updateSceneStatus:0 sceneID:_info1.sceneID];//更新数据库
+        [SQLManager updateSceneStatus:0 sceneID:_info1.sceneID roomID:_info1.roomID];//更新数据库
     }
 }
 
@@ -902,12 +902,12 @@
         [_TwoBtn setBackgroundImage:[UIImage imageNamed:@"circular2"] forState:UIControlStateSelected];
         [_TwoBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [[SceneManager defaultManager] startScene:_info2.sceneID];
-        [SQLManager updateSceneStatus:1 sceneID:_info2.sceneID];//更新数据库
+        [SQLManager updateSceneStatus:1 sceneID:_info2.sceneID roomID:_info2.roomID];//更新数据库
     }else{
         [_TwoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_TwoBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
         [[SceneManager defaultManager] poweroffAllDevice:_info2.sceneID];
-        [SQLManager updateSceneStatus:0 sceneID:_info2.sceneID];//更新数据库
+        [SQLManager updateSceneStatus:0 sceneID:_info2.sceneID roomID:_info2.roomID];//更新数据库
     }
     
 }
@@ -924,12 +924,12 @@
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular2"] forState:UIControlStateSelected];
             [_ThreeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [[SceneManager defaultManager] startScene:_info3.sceneID];
-            [SQLManager updateSceneStatus:1 sceneID:_info3.sceneID];//更新数据库
+            [SQLManager updateSceneStatus:1 sceneID:_info3.sceneID roomID:_info3.roomID];//更新数据库
         }else{
             [_ThreeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
             [[SceneManager defaultManager] poweroffAllDevice:_info3.sceneID];
-            [SQLManager updateSceneStatus:0 sceneID:_info3.sceneID];//更新数据库
+            [SQLManager updateSceneStatus:0 sceneID:_info3.sceneID roomID:_info3.roomID];//更新数据库
         }
     }
     

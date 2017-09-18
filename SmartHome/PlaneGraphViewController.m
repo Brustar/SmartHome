@@ -603,6 +603,14 @@
                     if (plistURL.length >0) {
                         //下载plist
                         [self downloadPlist:plistURL];
+                    }else {
+                        if (_hostType == 0) {  //Creston
+                            [self fetchRoomDeviceStatus];//Http获取房间设备状态
+                        }
+                    }
+                }else {
+                    if (_hostType == 0) {  //Creston
+                        [self fetchRoomDeviceStatus];//Http获取房间设备状态
                     }
                 }
             }

@@ -61,9 +61,29 @@
         }else{
             [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
         }
-        NSData *data=[[DeviceInfo defaultManager] toogle:self.OtherSwitchBtn.selected deviceID:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        if (self.hTypeId == 30) { //新风
+          if (self.OtherSwitchBtn.selected) {
+            //发开指令
+            NSData *data = [[DeviceInfo defaultManager] toogleFreshAir:0x01 deviceID:self.deviceid deviceType:0x30];
+            SocketManager *sock = [SocketManager defaultManager];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            
+            //发送风指令
+            data = [[DeviceInfo defaultManager] changeMode:0x41 deviceID:self.deviceid deviceType:0x30];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+          }else {
+              //发关指令
+              NSData *data = [[DeviceInfo defaultManager] toogleFreshAir:0x00 deviceID:self.deviceid deviceType:0x30];
+              SocketManager *sock = [SocketManager defaultManager];
+              [sock.socket writeData:data withTimeout:1 tag:1];
+          }
+            
+        }else {
+           NSData *data = [[DeviceInfo defaultManager] toogle:self.OtherSwitchBtn.selected deviceID:self.deviceid];
+           SocketManager *sock = [SocketManager defaultManager];
+           [sock.socket writeData:data withTimeout:1 tag:1];
+        }
         
         if (_delegate && [_delegate respondsToSelector:@selector(onOtherSwitchBtnClicked:deviceID:)]) {
             [_delegate onOtherSwitchBtnClicked:self.OtherSwitchBtn deviceID:self.deviceid.intValue];
