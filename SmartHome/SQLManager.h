@@ -155,6 +155,8 @@
 +(NSArray *)getAllRoomsInfo;
 +(NSArray *)getAllRoomsWhenHasDevices;
 
++(NSArray *)othersWithScene:(NSString *)devices withRoom:(int)rid;
+
 +(int)getRoomIDByBeacon:(int)beacon;
 +(NSString *)getRoomNameByRoomID:(int) rId;
 
