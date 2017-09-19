@@ -119,7 +119,49 @@ static NSString *const airCellIdentifier = @"airCell";
         self.windBtn.hidden = YES;
         self.autoBtn.hidden = YES;
         self.controlLeft.constant=self.controlRight.constant = 310;
+        self.subControlLeft.constant = 22;
+        self.subControlRight.constant = -20;
+        
+        if (ON_IPONE) {
+            self.controlLeft.constant=self.controlRight.constant = 110;
+            self.menuLeft.constant = self.menuRight.constant =self.controlLeft.constant=self.controlRight.constant = 50;
+            self.subControlLeft.constant = 80;
+        }
+       
     }
+    
+    [self setupMenu];
+}
+
+- (void)setupMenu {
+    self.menus = [SQLManager envDeviceNamesByRoom:self.roomID];
+    if (self.menus.count<6) {
+        [self initMenuContainer:self.menuContainer andArray:self.menus andID:self.deviceid];
+    }else{
+        [self setUpRoomScrollerView];
+    }
+}
+
+-(void)setUpRoomScrollerView
+{
+    NSMutableArray *deviceNames = [NSMutableArray array];
+    int index=0,i=0;
+    for (Device *device in self.menus) {
+        NSString *deviceName = device.typeName;
+        [deviceNames addObject:deviceName];
+        if (device.hTypeId == TVtype) {
+            index = i;
+        }
+        i++;
+    }
+    
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, 40)];
+    
+    menu.dataArray = deviceNames;
+    menu.delegate = self;
+    
+    [menu setSelectButton:index];
+    [self.menuContainer addSubview:menu];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -254,6 +296,12 @@ static NSString *const airCellIdentifier = @"airCell";
 -(IBAction)changeButton:(id)sender
 {
     UIButton *btn =(UIButton *)sender;
+    
+    NSInteger _hostType = [[UD objectForKey:@"HostType"] integerValue];//主机类型 0:Crestron  1:C4
+    if (_hostType == 1) {
+        btn.tag = 2;
+    }
+    
     self.currentButton=(int)btn.tag;
     
     if (self.paramView) {
@@ -278,6 +326,11 @@ static NSString *const airCellIdentifier = @"airCell";
         if (ON_IPAD) {
             bottom = -140;
         }
+        
+       /* CGFloat offsetY = 230;
+        if (ON_IPONE) {
+            offsetY = 100;
+        }*/
         [self.paramView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(0,0,bottom,0) animated:YES];
     }
 }
@@ -404,12 +457,23 @@ static NSString *const airCellIdentifier = @"airCell";
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (void)tableView:(YALContextMenuTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     uint8_t cmd=0;
-    if (self.currentButton == speed) {
-        cmd = 0x35+(int)indexPath.row;
+    
+    NSInteger _hostType = [[UD objectForKey:@"HostType"] integerValue];//主机类型 0:Crestron  1:C4
+    if (_hostType == 1) {
+        if (self.currentButton == direction) {
+            cmd = 0x35+(int)indexPath.row;
+        }
+        
+    }else {
+        if (self.currentButton == speed) {
+            cmd = 0x35+(int)indexPath.row;
+        }
+        if (self.currentButton == direction) {
+            cmd = 0x43+(int)indexPath.row;
+        }
     }
-    if (self.currentButton == direction) {
-        cmd = 0x43+(int)indexPath.row;
-    }
+    
+   
     NSData *data=[self createCmd:cmd];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
@@ -423,18 +487,32 @@ static NSString *const airCellIdentifier = @"airCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.params[self.currentButton-1] count];
+    
+    NSInteger _hostType = [[UD objectForKey:@"HostType"] integerValue];//主机类型 0:Crestron  1:C4
+    if (_hostType == 1) {
+        return [self.params[self.currentButton-2] count];
+    }else {
+        return [self.params[self.currentButton-1] count];
+    }
 }
 
 - (UITableViewCell *)tableView:(YALContextMenuTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ContextMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:airCellIdentifier forIndexPath:indexPath];
     
-    //if (cell) {
+    
         cell.backgroundColor = [UIColor clearColor];
+    
+    
+    NSInteger _hostType = [[UD objectForKey:@"HostType"] integerValue];//主机类型 0:Crestron  1:C4
+    if (_hostType == 1) {
+        cell.icon.image = [UIImage imageNamed:[self.params[self.currentButton-2] objectAtIndex:indexPath.row]];
+    }else {
         cell.icon.image = [UIImage imageNamed:[self.params[self.currentButton-1] objectAtIndex:indexPath.row]];
+    }
+    
         [cell setContraint:self.currentButton];
-    //}
+    
     
     return cell;
 }
@@ -455,6 +533,12 @@ static NSString *const airCellIdentifier = @"airCell";
     if (btn.tag == 1) { //制冷
         ;
     }
+}
+
+#pragma mark - IphoneRoomViewDelegate
+- (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
+    Device *device = self.menus[index];
+    [self.navigationController pushViewController:[DeviceInfo calcController:device.hTypeId] animated:NO];
 }
 
 @end

@@ -489,6 +489,10 @@ static NSString * const CYPhotoId = @"photo";
             return @"screen";
         case projector:
             return @"projector";
+        case air:
+            return @"air";
+        case newWind:
+            return @"newWind";
         default:
             break;
     }
@@ -503,14 +507,18 @@ static NSString * const CYPhotoId = @"photo";
         case cata_curtain:
             return @"curtain";
         case cata_env:
-            return @"air";
+        {    Room *rm = self.rooms[self.roomIndex];
+            int type = [SQLManager currentDevicesOfRoom:rm.rId subTypeID:2];
+            
+            return [self storyIDByroom:type];
+        }
         case cata_single_product:
             return @"flowering";
         case cata_media:
         {
             Room *room = self.rooms[self.roomIndex];
             int rid = room.rId;
-            int type = [SQLManager currentDevicesOfRoom:rid];
+            int type = [SQLManager currentDevicesOfRoom:rid subTypeID:3];
             
             return [self storyIDByroom:type];
         }

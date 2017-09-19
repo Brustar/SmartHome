@@ -1517,16 +1517,16 @@
     return light;
 }
 
-+(int) currentDevicesOfRoom:(int)roomID
++(int) currentDevicesOfRoom:(int)roomID subTypeID:(int)subTypeID
 {
     FMDatabase *db = [self connetdb];
     if([db open])
     {
         NSString *sql;
         if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"select htypeid from devices  where subtypeid = 3 order by htypeID LIMIT 1"];
+            sql = [NSString stringWithFormat:@"select htypeid from devices  where subtypeid = %d order by htypeID LIMIT 1", subTypeID];
         }else{
-            sql = [NSString stringWithFormat:@"select htypeid from devices  where subtypeid = 3 and rid =%d order by htypeID LIMIT 1",roomID];
+            sql = [NSString stringWithFormat:@"select htypeid from devices  where subtypeid = %d and rid =%d order by htypeID LIMIT 1", subTypeID, roomID];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
@@ -1552,6 +1552,35 @@
             sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 3 order by htypeID"];
         }else{
             sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 3 and rid=%d order by htypeID",roomID];
+        }
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            Device *device = [Device new];
+            device.typeName =[resultSet stringForColumn:@"typename"];
+            device.hTypeId = [[resultSet stringForColumn:@"hTypeId"] intValue];
+            device.eID = [[resultSet stringForColumn:@"Id"] intValue];
+            [devices addObject:device];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return devices;
+}
+
+//环境UI菜单
++(NSArray *)envDeviceNamesByRoom:(int)roomID
+{
+    NSMutableArray *devices = [NSMutableArray new];
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql;
+        if ([self isWholeHouse:roomID]) {
+            sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 2 order by htypeID"];
+        }else{
+            sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 2 and rid=%d order by htypeID",roomID];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])

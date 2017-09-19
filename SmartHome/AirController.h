@@ -8,6 +8,8 @@
 //
 
 #import "LoadMaskHelper.h"
+#import "UIViewController+Navigator.h"
+#import "IphoneRoomView.h"
 
 typedef NS_ENUM(NSUInteger,mode)
 {
@@ -21,7 +23,7 @@ typedef NS_ENUM(NSUInteger,wind)
     direction
 };
 
-@interface AirController : CustomViewController<SingleMaskViewDelegate>
+@interface AirController : CustomViewController<SingleMaskViewDelegate,IphoneRoomViewDelegate>
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
@@ -41,5 +43,7 @@ typedef NS_ENUM(NSUInteger,wind)
 @property (nonatomic,assign) int roomID;
 
 @property (nonatomic,assign) BOOL isAddDevice;
+@property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
+@property (nonatomic,strong) NSArray *menus;
 
 @end

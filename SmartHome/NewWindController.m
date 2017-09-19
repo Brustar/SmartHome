@@ -30,6 +30,13 @@
     SocketManager *sock = [SocketManager defaultManager];
     sock.delegate = self;
     [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    [self setupMenu];
+    
+    if (ON_IPONE) {
+        self.highSpeedBtnLeading.constant = 20;
+        self.lowSpeedBtnTrailing.constant = 20;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,15 +44,36 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)setupMenu {
+    self.menus = [SQLManager envDeviceNamesByRoom:self.roomID];
+    if (self.menus.count<6) {
+        [self initMenuContainer:self.menuContainer andArray:self.menus andID:self.deviceID];
+    }else{
+        [self setUpRoomScrollerView];
+    }
 }
-*/
+
+-(void)setUpRoomScrollerView
+{
+    NSMutableArray *deviceNames = [NSMutableArray array];
+    int index=0,i=0;
+    for (Device *device in self.menus) {
+        NSString *deviceName = device.typeName;
+        [deviceNames addObject:deviceName];
+        if (device.hTypeId == TVtype) {
+            index = i;
+        }
+        i++;
+    }
+    
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, 40)];
+    
+    menu.dataArray = deviceNames;
+    menu.delegate = self;
+    
+    [menu setSelectButton:index];
+    [self.menuContainer addSubview:menu];
+}
 
 
 - (IBAction)powerBtnClicked:(id)sender {
@@ -143,6 +171,12 @@
             }
         }
     }
+}
+
+#pragma mark - IphoneRoomViewDelegate
+- (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
+    Device *device = self.menus[index];
+    [self.navigationController pushViewController:[DeviceInfo calcController:device.hTypeId] animated:NO];
 }
 
 @end
