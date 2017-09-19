@@ -404,6 +404,7 @@ static NSString *const airCellIdentifier = @"airCell";
     [sock.socket writeData:data withTimeout:1 tag:1];
     
     [tableView dismisWithIndexPath:indexPath];
+    self.paramView = nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
