@@ -31,9 +31,10 @@
     sock.delegate = self;
     [sock.socket writeData:data withTimeout:1 tag:1];
     
-    [self setupMenu];
+    
     
     if (ON_IPONE) {
+        [self setupMenu];
         self.highSpeedBtnLeading.constant = 20;
         self.lowSpeedBtnTrailing.constant = 20;
     }

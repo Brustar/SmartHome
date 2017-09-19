@@ -92,7 +92,8 @@ static NSString *const airCellIdentifier = @"airCell";
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     
-    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid]; //withRoom:self.];
+    Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:self.roomID];
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid withRoom:device.airID];
     [sock.socket writeData:data withTimeout:1 tag:1];
     
     //  PM2.5
@@ -130,7 +131,10 @@ static NSString *const airCellIdentifier = @"airCell";
        
     }
     
-    [self setupMenu];
+    
+    if (ON_IPONE) {
+        [self setupMenu];
+    }
 }
 
 - (void)setupMenu {
