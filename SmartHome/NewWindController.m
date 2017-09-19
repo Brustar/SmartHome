@@ -19,7 +19,9 @@
     self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     self.title = [NSString stringWithFormat:@"%@ - 新风",roomName];
-    [self setNaviBarTitle:self.title];
+    if (ON_IPAD) {
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
+    }
     Device *device = [SQLManager getDeviceWithDeviceHtypeID:newWind roomID:self.roomID];
     self.deviceID = [NSString stringWithFormat:@"%d", device.eID];
     

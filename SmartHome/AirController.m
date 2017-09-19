@@ -53,6 +53,8 @@ static NSString *const airCellIdentifier = @"airCell";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rdiskTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ldiskTop;
 
+@property (weak, nonatomic) IBOutlet UIButton *windBtn;//风向按钮
+@property (weak, nonatomic) IBOutlet UIButton *autoBtn;//自动按钮
 
 @end
 
@@ -69,9 +71,11 @@ static NSString *const airCellIdentifier = @"airCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 空调",roomName]];
+    if (ON_IPAD) {
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:[NSString stringWithFormat:@"%@ - 空调",roomName]];
+    }
     self.disk.enabled = NO;
     [self initSwitch];
     self.tempreturePan.transform = CGAffineTransformMakeRotation(MIX_TEMP_ROTATE_DEGREE);
@@ -108,6 +112,13 @@ static NSString *const airCellIdentifier = @"airCell";
         self.diskLeft.constant= self.diskRight.constant = 80;
         self.ldiskTop.constant = self.rdiskTop.constant = 300;
         self.diskTop.constant = -260;
+    }
+    
+    NSInteger _hostType = [[UD objectForKey:@"HostType"] integerValue];//主机类型 0:Crestron  1:C4
+    if (_hostType == 1) {
+        self.windBtn.hidden = YES;
+        self.autoBtn.hidden = YES;
+        self.controlLeft.constant=self.controlRight.constant = 310;
     }
 }
 

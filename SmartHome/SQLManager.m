@@ -577,7 +577,7 @@
             sql = [NSString stringWithFormat:@"SELECT distinct typeName,htypeid FROM Devices where htypeid<>45 and subtypeid = %d and rID = '%d' order by htypeID",typeID,roomID];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
-        int i=0;
+        int i = 0;
         while ([resultSet next])
         {
             Device *device = [Device new];

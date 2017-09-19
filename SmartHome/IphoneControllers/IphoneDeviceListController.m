@@ -542,8 +542,9 @@ static NSString * const CYPhotoId = @"photo";
             ((CurtainController*)device).roomID = room.rId;
             return @[device];
         case cata_env:
-            device = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"AirController"];
-            ((AirController *)device).roomID = room.rId;
+            device = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"NewWindController"];
+            ((NewWindController *)device).roomID = room.rId;
+            [[DeviceInfo defaultManager] setRoomID:room.rId];
             return @[menu,device];
         case cata_single_product:
             device = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"FloweringController"];

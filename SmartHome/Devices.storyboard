@@ -549,6 +549,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="autoBtn" destination="WWd-JJ-45g" id="KQz-vW-za5"/>
                         <outlet property="container" destination="GeX-Ow-7B7" id="SqW-Ob-Kpl"/>
                         <outlet property="controlBottom" destination="26r-gi-2ad" id="1h9-6f-cKz"/>
                         <outlet property="controlLeft" destination="cDf-hR-o3N" id="dty-wh-SGA"/>
@@ -572,6 +573,7 @@
                         <outlet property="switcher" destination="GeX-Ow-7B7" id="Ohi-FQ-UhV"/>
                         <outlet property="tempreturePan" destination="lRp-H9-4uS" id="2RK-4R-2Va"/>
                         <outlet property="wetLabel" destination="nvL-WE-vqh" id="zcG-ok-1pA"/>
+                        <outlet property="windBtn" destination="RAp-mu-gNW" id="pd8-Ua-nbg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x1K-D1-Qg6" userLabel="First Responder" sceneMemberID="firstResponder"/>
