@@ -29,7 +29,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *FMchoiceHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fmchannelSliderTopConstraint;
 -(void) query:(NSString *)deviceid;
-
+-(void) query:(NSString *)deviceid withRoom:(uint8_t)rid;
 @end
 
 

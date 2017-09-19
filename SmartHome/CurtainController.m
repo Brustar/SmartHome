@@ -161,10 +161,8 @@
         return;
     }
     //同步设备状态
-    if(proto.cmd == 0x01 && proto.action.state == 0x2A){
-        cell.slider.value = proto.action.RValue/100.0;
-        NSString *icon = cell.slider.value == 0 ? @"bd_icon_wd_off": @"bd_icon_wd_on";
-        [cell.open setImage:[UIImage imageNamed: icon] forState:UIControlStateNormal];
+    if(proto.cmd == 0x01){
+         cell.open.selected = proto.action.state == PROTOCOL_ON;
     }
     
     if (tag==0 && (proto.action.state == 0x2A || proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
