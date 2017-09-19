@@ -307,6 +307,23 @@
     return dataFromProtocol(proto);
 }
 
+-(NSData *)query:(NSString *)deviceID withRoom:(uint8_t)rid
+{
+    Proto proto=createProto();
+    
+    proto.cmd=0x9A;
+    
+    NSString *enumber=[SQLManager getENumber:[deviceID integerValue]];
+    NSString *eid=[SQLManager getEType:[deviceID integerValue]];
+    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
+    proto.action.state=0x00;
+    proto.action.RValue=0x00;
+    proto.action.G=0x00;
+    proto.action.B=rid;
+    proto.deviceType=[PackManager NSDataToUint8:eid];
+    return dataFromProtocol(proto);
+}
+
 -(NSData *) scheduleScene:(uint8_t)action sceneID:(NSString *)sceneID
 {
     return [self schedule:action dID:[sceneID intValue] type:0x60];

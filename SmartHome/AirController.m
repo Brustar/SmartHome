@@ -92,7 +92,7 @@ static NSString *const airCellIdentifier = @"airCell";
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     
-    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid]; //withRoom:self.];
     [sock.socket writeData:data withTimeout:1 tag:1];
     
     //  PM2.5
