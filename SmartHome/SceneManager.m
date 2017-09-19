@@ -1069,6 +1069,26 @@
             });
         }
     }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_USEC)), dispatch_get_main_queue(), ^{
+        [self interlockScene:sceneid withRoom:scene.roomID];
+    });
+}
+
+
+-(void) interlockScene:(int)sceneid withRoom:(int)rid
+{
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, sceneid]];
+    NSString *content = [NSString stringWithContentsOfFile:scenePath encoding:NSUTF8StringEncoding error:nil];
+    NSString *idstring = [[content componentsMatchedByRegex:@"<key>deviceID</key>\\s+<integer>(\\d+)</integer>" capture:1L] componentsJoinedByString:@","];
+    NSArray *ids = [SQLManager othersWithScene:idstring withRoom:rid];
+    NSData *data=nil;
+    SocketManager *sock=[SocketManager defaultManager];
+    for(NSString *did in ids)
+    {
+        data = [[DeviceInfo defaultManager] toogle:0x00 deviceID:did];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
 }
 
 -(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device withId:(int)deviceID

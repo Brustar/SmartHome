@@ -2000,6 +2000,29 @@
     return [subTypeNames copy];
 }
 
++(NSArray *)othersWithScene:(NSString *)devices withRoom:(int)rid
+{
+    NSMutableArray *ids = [NSMutableArray array];
+    
+    FMDatabase *db = [self connetdb];
+    
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"select id FROM devices where id not in(%@) and rid = %d", devices,  rid];
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            NSString *idName = [resultSet stringForColumn:@"id"];
+
+            [ids addObject:idName];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return ids;
+}
+
 //根据subTypeName 从Devices表 查询typeName(要去重)
 + (NSArray *)getDeviceTypeNameWithSubTypeName:(NSString *)subTypeName {
     NSMutableArray *typeNames = [NSMutableArray array];
