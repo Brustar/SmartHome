@@ -366,9 +366,9 @@ static NSString * const CYPhotoId = @"photo";
 -(void)getUI
 {
     // 创建CollectionView
-    CGFloat collectionW = self.view.frame.size.width;
+    CGFloat collectionW = self.view.frame.size.width-50;
     CGFloat collectionH = self.view.frame.size.height-200;
-    CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
+    CGRect frame = CGRectMake(25, 130, collectionW, collectionH);
     // 创建布局
     CYLineLayout *layout = [[CYLineLayout alloc] init];
     if (([UIScreen mainScreen].bounds.size.height <= 568.0)) {
