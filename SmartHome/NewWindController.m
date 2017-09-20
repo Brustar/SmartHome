@@ -161,12 +161,16 @@
     
     if (proto.cmd == 0x01) {
         
-        if (proto.action.state == 0x6A) { //温度
-            self.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
-        }
+        Device *device = [SQLManager getDeviceWithDeviceHtypeID:newWind roomID:self.roomID];
+        NSString *devID = [SQLManager getDeviceIDByENumberForC4:CFSwapInt16BigToHost(proto.deviceID) airID:device.airID htypeID:newWind];
         
-        NSString *devID = [SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
         if ([devID intValue] == [self.deviceID intValue]) {
+        
+            if (proto.action.state == 0x6A) { //温度
+                self.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+            }
+        
+        
             if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {  //开关
                 self.powerBtn.selected = proto.action.state;
             }

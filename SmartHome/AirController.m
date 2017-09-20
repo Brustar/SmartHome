@@ -193,15 +193,20 @@ static NSString *const airCellIdentifier = @"airCell";
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    Proto proto=protocolFromData(data);
+    Proto proto = protocolFromData(data);
     
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
     
-    if (proto.cmd==0x01) {
+    if (proto.cmd == 0x01) {
         
-        if (proto.action.state==0x6A) { //温度
+        Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:self.roomID];
+        NSString *devID = [SQLManager getDeviceIDByENumberForC4:CFSwapInt16BigToHost(proto.deviceID) airID:device.airID htypeID:air];
+        if ([devID intValue] == [self.deviceid intValue]) {
+            
+        
+        if (proto.action.state == 0x6A) { //温度
             self.currentTemp.text = [NSString stringWithFormat:@"Current:%d°C",proto.action.RValue];
             self.currentDegree = proto.action.RValue;
             self.tempreturePan.transform = CGAffineTransformMakeRotation(self.currentDegree*MAX_TEMP_ROTATE_DEGREE/30);
@@ -212,12 +217,14 @@ static NSString *const airCellIdentifier = @"airCell";
                 viewred.hidden = self.currentDegree - i<=16 || self.airMode == 0;
             }
         }
-        if (proto.action.state==0x8A) { // 湿度
+            
+        if (proto.action.state == 0x8A) { // 湿度
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
             self.wetLabel.text = valueString;
             [self.humidity_hand rotate:30+proto.action.RValue*300/100];
         }
-        if (proto.action.state==0x7F) { // PM2.5
+            
+        if (proto.action.state == 0x7F) { // PM2.5
             NSString *valueString = [NSString stringWithFormat:@"%d",proto.action.RValue];
             self.pmLabel.text = valueString;
             
@@ -233,12 +240,10 @@ static NSString *const airCellIdentifier = @"airCell";
         }
         
         
-        NSString *devID=[SQLManager getDeviceIDByENumberForC4:CFSwapInt16BigToHost(proto.deviceID) airID:1];
-        //if ([devID intValue]==[self.deviceid intValue]) {
-            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
+            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {  //开关
                 self.switcher.isOn = proto.action.state;
             }
-        //}
+        }
         
     }
 }
