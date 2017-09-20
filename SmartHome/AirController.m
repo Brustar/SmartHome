@@ -206,7 +206,7 @@ static NSString *const airCellIdentifier = @"airCell";
         if ([devID intValue] == [self.deviceid intValue]) {
             
         
-        if (proto.action.state == 0x6A) { //温度
+        if (proto.action.state == 0x6B) { //当前室内温度
             self.currentTemp.text = [NSString stringWithFormat:@"Current:%d°C",proto.action.RValue];
             self.currentDegree = proto.action.RValue;
             self.tempreturePan.transform = CGAffineTransformMakeRotation(self.currentDegree*MAX_TEMP_ROTATE_DEGREE/30);
@@ -216,6 +216,10 @@ static NSString *const airCellIdentifier = @"airCell";
                 UIView *viewred = [self.view viewWithTag:i+200+1];
                 viewred.hidden = self.currentDegree - i<=16 || self.airMode == 0;
             }
+        }
+            
+        if (proto.action.state == 0x6A) { //空调设置温度
+             self.showTemLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
         }
             
         if (proto.action.state == 0x8A) { // 湿度

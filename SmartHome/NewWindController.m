@@ -166,7 +166,7 @@
         
         if ([devID intValue] == [self.deviceID intValue]) {
         
-            if (proto.action.state == 0x6A) { //温度
+            if (proto.action.state == 0x6B) { //当前室内温度
                 self.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
             }
         
