@@ -111,6 +111,7 @@
 +(NSString *)getEType:(NSInteger)eID;
 +(NSString *)getENumber:(NSInteger)eID;
 +(NSString *)getDeviceIDByENumber:(NSInteger)eID;
++(NSString *)getDeviceIDByENumberForC4:(NSInteger)eID airID:(int)airID htypeID:(int)htypeID;
 +(int)saveMaxSceneId:(Scene *)scene name:name pic:(NSString *)img;
 
 +(NSArray *) fetchScenes:(NSString *)name;

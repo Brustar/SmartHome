@@ -98,12 +98,19 @@ static NSString *const airCellIdentifier = @"airCell";
     
     //  PM2.5
     NSString *pmID = [SQLManager singleDeviceWithCatalogID:55 byRoom:self.roomID];
-    data = [[DeviceInfo defaultManager] query:pmID];
-    [sock.socket writeData:data withTimeout:1 tag:1];
+    if (pmID.length >0) {
+        data = [[DeviceInfo defaultManager] query:pmID];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    
     //  湿度
     NSString *humidityID = [SQLManager singleDeviceWithCatalogID:50 byRoom:self.roomID];
-    data = [[DeviceInfo defaultManager] query:humidityID];
-    [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    if (humidityID.length >0) {
+        data = [[DeviceInfo defaultManager] query:humidityID];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    
     
     if (ON_IPAD) {
         self.menuTop.constant = self.controlBottom.constant = 80;
@@ -224,12 +231,15 @@ static NSString *const airCellIdentifier = @"airCell";
             }
             [self.pm_clock_hand rotate:value];
         }
-        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-        if ([devID intValue]==[self.deviceid intValue]) {
+        
+        
+        NSString *devID=[SQLManager getDeviceIDByENumberForC4:CFSwapInt16BigToHost(proto.deviceID) airID:1];
+        //if ([devID intValue]==[self.deviceid intValue]) {
             if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
                 self.switcher.isOn = proto.action.state;
             }
-        }
+        //}
+        
     }
 }
 

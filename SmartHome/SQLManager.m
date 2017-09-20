@@ -940,6 +940,25 @@
     return deviceID;
 }
 
++(NSString *)getDeviceIDByENumberForC4:(NSInteger)eID airID:(int)airID htypeID:(int)htypeID
+{
+    NSString *deviceID=nil;
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        long masterID = [[DeviceInfo defaultManager] masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where upper(enumber) = upper('%04lx') and masterID='%ld' and airID = %d and htypeID = %d",(long)eID, masterID, airID, htypeID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            deviceID = [resultSet stringForColumn:@"ID"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return deviceID;
+}
+
 + (NSArray *) fetchScenes:(NSString *)name
 {
     long masterID =  [[DeviceInfo defaultManager] masterID];
