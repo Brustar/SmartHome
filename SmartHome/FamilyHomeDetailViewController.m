@@ -749,7 +749,7 @@
 - (void)getDeviceStateInfoByTcp {
     
     //查询所有的设备ID
-    NSArray *devIDs = [SQLManager getDeviceIDsByRid:self.roomID];
+    NSArray *devIDs = [SQLManager getAllDevicesInfo:(int)self.roomID];
     
     NSMutableArray *deviceIDs = [[NSMutableArray alloc] init];
     if (devIDs.count >0) {
@@ -760,8 +760,19 @@
     sock.delegate = self;
     
     [deviceIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSData *data = [[DeviceInfo defaultManager] query:[obj stringValue]];
-        [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        Device *device = (Device *)obj;
+        NSString *deviceID = [NSString stringWithFormat:@"%d", device.eID];
+        
+        if (device.hTypeId == air) {
+            NSData *data = [[DeviceInfo defaultManager] query:deviceID withRoom:device.airID];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            
+        }else {
+            NSData *data = [[DeviceInfo defaultManager] query:deviceID];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+        }
+        
     }];
 }
 
@@ -775,13 +786,13 @@
     //同步设备状态
     if(proto.cmd == 0x01) {
         
-        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-        Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue];
+        NSString *devID=[SQLManager getDeviceIDByENumberForC4:CFSwapInt16BigToHost(proto.deviceID) airID:proto.action.B];
+        Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue airID:proto.action.B];
         
         if (device) {
             device.actionState = proto.action.state;
             
-            if(proto.action.state == 0x6A) { //温度
+            if(proto.action.state == 0x6B) { //温度
                 device.temperature  = proto.action.RValue;
                 
             }

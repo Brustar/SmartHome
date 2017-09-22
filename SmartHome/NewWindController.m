@@ -87,8 +87,8 @@
         [sock.socket writeData:data withTimeout:1 tag:1];
         
         //发送风指令
-        data = [[DeviceInfo defaultManager] changeMode:0x41 deviceID:self.deviceID deviceType:0x30];
-        [sock.socket writeData:data withTimeout:1 tag:1];
+        //data = [[DeviceInfo defaultManager] changeMode:0x41 deviceID:self.deviceID deviceType:0x30];
+        //[sock.socket writeData:data withTimeout:1 tag:1];
         
     }else {
         //发关指令

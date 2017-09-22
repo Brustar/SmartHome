@@ -151,11 +151,11 @@
     
     
     //查询所有房间的设备ID（灯，空调，影音）
-    NSArray *lightIDs = [SQLManager getDeviceIDsBySubTypeId:1];
-    NSArray *airIDs = [SQLManager getDeviceIDsBySubTypeId:2];
-    NSArray *avIDs = [SQLManager getDeviceIDsBySubTypeId:3];
+    NSArray *lightIDs = [SQLManager getAllDevicesInfoBySubTypeID:1];
+    NSArray *airIDs = [SQLManager getAllDevicesInfoBySubTypeID:2];
+    NSArray *avIDs = [SQLManager getAllDevicesInfoBySubTypeID:3];
     
-    NSMutableArray *deviceIDs = [[NSMutableArray alloc] init];
+    /*NSMutableArray *deviceIDs = [[NSMutableArray alloc] init];
     if (lightIDs.count >0) {
         [deviceIDs addObjectsFromArray:lightIDs];
     }
@@ -166,7 +166,10 @@
     
     if (avIDs.count >0) {
         [deviceIDs addObjectsFromArray:avIDs];
-    }
+    }*/
+    
+    
+    
     
     
     SocketManager *sock = [SocketManager defaultManager];
@@ -174,10 +177,80 @@
     
     _startDate = [NSDate date];
     
-    [deviceIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSData *data = [[DeviceInfo defaultManager] query:[obj stringValue]];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-    }];
+    
+    //灯
+    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC));
+    
+    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+        
+        [lightIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            Device *device = (Device *)obj;
+            NSString *deviceID = [NSString stringWithFormat:@"%d", device.eID];
+            
+            if (device.hTypeId == air) {
+                NSData *data = [[DeviceInfo defaultManager] query:deviceID withRoom:device.airID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+                
+            }else {
+                NSData *data = [[DeviceInfo defaultManager] query:deviceID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+            
+        }];
+        
+    });
+    
+    
+    
+    //空调
+    delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC));
+    
+    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+        
+        [airIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            Device *device = (Device *)obj;
+            NSString *deviceID = [NSString stringWithFormat:@"%d", device.eID];
+            
+            if (device.hTypeId == air) {
+                NSData *data = [[DeviceInfo defaultManager] query:deviceID withRoom:device.airID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+                
+            }else {
+                NSData *data = [[DeviceInfo defaultManager] query:deviceID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+            
+        }];
+        
+    });
+    
+    
+    //影音
+    delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.1 * NSEC_PER_SEC));
+    
+    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+        
+        [avIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            Device *device = (Device *)obj;
+            NSString *deviceID = [NSString stringWithFormat:@"%d", device.eID];
+            
+            if (device.hTypeId == air) {
+                NSData *data = [[DeviceInfo defaultManager] query:deviceID withRoom:device.airID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+                
+            }else {
+                NSData *data = [[DeviceInfo defaultManager] query:deviceID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+            
+        }];
+        
+    });
+    
+    
     
     
     
@@ -202,6 +275,10 @@
         
     }];
     
+    
+}
+
+- (void)sendLights {
     
 }
 
@@ -460,8 +537,8 @@
         //同步设备状态
         if(proto.cmd == 0x01) {
             
-            NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-            Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue];
+            NSString *devID=[SQLManager getDeviceIDByENumberForC4:CFSwapInt16BigToHost(proto.deviceID) airID:proto.action.B];
+            Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue airID:proto.action.B];
             
             if (device) {
                 device.actionState = proto.action.state;
@@ -469,12 +546,12 @@
                 if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
                     device.power = proto.action.state;
                     
-                    if (proto.deviceType == 0x14) {
+                    /*if (proto.deviceType == 0x14) {
                         NSDate *endDate  =  [NSDate date];
                         NSLog(@"背景音乐  时间： %f", [endDate timeIntervalSinceDate:_startDate]);
                         NSLog(@"背景音乐---开关---  %d", proto.action.state);
                         
-                   }
+                   }*/
                     
                     /*if (proto.deviceType == 0x11) {
                         NSDate *endDate  =  [NSDate date];
@@ -496,8 +573,9 @@
                     
                 }
                 
-                else if (proto.action.state==0x6A) { //温度
+                else if (proto.action.state==0x6B) { //温度
                     device.currTemp  = proto.action.RValue;
+                    NSLog(@"当前温度：%d", device.currTemp);    
                     
                 }
                 
@@ -557,28 +635,40 @@
             [_deviceArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
                 
                 Device *device = (Device *)obj;
-                if (device.rID == room.rId) {
+                
+                if (device.airID >0) { //空调
+                    Device *dev = [SQLManager getDeviceWithDeviceHtypeID:air roomID:room.rId];
+                    if (dev.airID == device.airID) {
+                        if (device.actionState == 0x6B) {   //温度
+                            room.tempture = device.currTemp;
+                        }else if (device.actionState == PROTOCOL_ON) {   // 开
+                            
+                                room.airStatus = 1;
                     
-                    if (device.actionState == 0x6A) {   //温度
-                        room.tempture = device.currTemp;
-                    }else if (device.actionState == 0x8A) {   // 湿度
-                        room.humidity = device.humidity;
-                    }else if (device.actionState == 0x7F) {   //PM2.5
-                        room.pm25 = device.pm25;
-                    }else if (device.actionState == PROTOCOL_OFF) {  // 关
-                        
-                    }else if (device.actionState == PROTOCOL_ON) {   // 开
-                        if (device.subTypeId == 1) {   //灯光
-                            room.lightStatus = 1;
-                        }else if(device.subTypeId == 2) {   //空调
-                            room.airStatus = 1;
-                        }else if (device.subTypeId == 3) {    //影音
-                            room.avStatus = 1;
                         }
                     }
-                    
-                    
+                }else {
+                    if (device.rID == room.rId) {
+                        
+                        if (device.actionState == 0x8A) {   // 湿度
+                            room.humidity = device.humidity;
+                        }else if (device.actionState == 0x7F) {   //PM2.5
+                            room.pm25 = device.pm25;
+                        }else if (device.actionState == PROTOCOL_OFF) {  // 关
+                            
+                        }else if (device.actionState == PROTOCOL_ON) {   // 开
+                            if (device.subTypeId == 1) {   //灯光
+                                room.lightStatus = 1;
+                            }else if (device.subTypeId == 3) {    //影音
+                                room.avStatus = 1;
+                            }
+                        }
+                        
+                        
+                    }
                 }
+                
+                
                 
             }];
         }

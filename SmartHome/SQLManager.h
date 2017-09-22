@@ -212,4 +212,7 @@
 + (BOOL)updateDeviceBrightStatus:(int)deviceID value:(float)value;
 + (BOOL)updateCurtainPowerStatus:(int)deviceID power:(int)power;
 + (BOOL)updateCurtainPositionStatus:(int)deviceID value:(float)value;
++ (NSArray *)getAllDevicesInfoBySubTypeID:(int)subTypeID;
++ (Device *)getDeviceWithDeviceID:(int) deviceID airID:(int)airID;
++ (NSString *)getDeviceIDByENumberForC4:(NSInteger)eID airID:(int)airID;
 @end

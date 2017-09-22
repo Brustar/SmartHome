@@ -42,6 +42,26 @@
     return [deviceModels copy];
 }
 
+//从数据中获取某种类型的设备信息（按subTypeID）
++ (NSArray *)getAllDevicesInfoBySubTypeID:(int)subTypeID
+{
+    FMDatabase *db = [self connetdb];
+    NSMutableArray *deviceModels = [NSMutableArray array];
+    if([db open])
+    {
+        NSString *deviceSql =[NSString stringWithFormat:@"select * from Devices where masterID = '%ld' and subTypeId = %d", [[DeviceInfo defaultManager] masterID], subTypeID];
+        
+        FMResultSet *resultSet = [db executeQuery:deviceSql];
+        
+        while ([resultSet next]){
+            [deviceModels addObject:[self deviceMdoelByFMResultSet:resultSet]];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return [deviceModels copy];
+}
+
 //从数据中获取所有设备信息
 +(NSArray *)getAllDevicesInfo
 {
@@ -959,6 +979,25 @@
     return deviceID;
 }
 
++(NSString *)getDeviceIDByENumberForC4:(NSInteger)eID airID:(int)airID
+{
+    NSString *deviceID=nil;
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        long masterID = [[DeviceInfo defaultManager] masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where upper(enumber) = upper('%04lx') and masterID='%ld' and airID = %d",(long)eID, masterID, airID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            deviceID = [resultSet stringForColumn:@"ID"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return deviceID;
+}
+
 + (NSArray *) fetchScenes:(NSString *)name
 {
     long masterID =  [[DeviceInfo defaultManager] masterID];
@@ -1696,6 +1735,25 @@
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT * FROM Devices where ID = %d and masterID = '%ld'",deviceID, [[DeviceInfo defaultManager] masterID]];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            device = [self deviceMdoelByFMResultSet:resultSet];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return device;
+}
+
++ (Device *)getDeviceWithDeviceID:(int) deviceID airID:(int)airID
+{
+    Device *device = nil;
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM Devices where ID = %d and masterID = '%ld' and airID = %d",deviceID, [[DeviceInfo defaultManager] masterID], airID];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {

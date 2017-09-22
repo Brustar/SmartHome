@@ -206,28 +206,34 @@ static NSString *const airCellIdentifier = @"airCell";
         if ([devID intValue] == [self.deviceid intValue]) {
             
         
-        if (proto.action.state == 0x6B) { //当前室内温度
-            self.currentTemp.text = [NSString stringWithFormat:@"Current:%d°C",proto.action.RValue];
-            self.currentDegree = proto.action.RValue;
-            self.tempreturePan.transform = CGAffineTransformMakeRotation(self.currentDegree*MAX_TEMP_ROTATE_DEGREE/30);
-            for (int i=1; i<16; i++) {
-                UIView *viewblue = [self.view viewWithTag:i+100+1];
-                viewblue.hidden = self.currentDegree - i<=16 || self.airMode == 1;
-                UIView *viewred = [self.view viewWithTag:i+200+1];
-                viewred.hidden = self.currentDegree - i<=16 || self.airMode == 0;
+            if (proto.action.state == 0x6B) { //当前室内温度
+                self.currentTemp.text = [NSString stringWithFormat:@"Current:%d°C",proto.action.RValue];
+                self.currentDegree = proto.action.RValue;
+                self.tempreturePan.transform = CGAffineTransformMakeRotation(self.currentDegree*MAX_TEMP_ROTATE_DEGREE/30);
+                for (int i=1; i<16; i++) {
+                    UIView *viewblue = [self.view viewWithTag:i+100+1];
+                    viewblue.hidden = self.currentDegree - i<=16 || self.airMode == 1;
+                    UIView *viewred = [self.view viewWithTag:i+200+1];
+                    viewred.hidden = self.currentDegree - i<=16 || self.airMode == 0;
+                }
+            }
+                
+            if (proto.action.state == 0x6A) { //空调设置温度
+                 self.showTemLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+            }
+            
+        
+            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {  //开关
+                self.switcher.isOn = proto.action.state;
             }
         }
-            
-        if (proto.action.state == 0x6A) { //空调设置温度
-             self.showTemLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
-        }
-            
+        
         if (proto.action.state == 0x8A) { // 湿度
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
             self.wetLabel.text = valueString;
             [self.humidity_hand rotate:30+proto.action.RValue*300/100];
         }
-            
+        
         if (proto.action.state == 0x7F) { // PM2.5
             NSString *valueString = [NSString stringWithFormat:@"%d",proto.action.RValue];
             self.pmLabel.text = valueString;
@@ -243,25 +249,18 @@ static NSString *const airCellIdentifier = @"airCell";
             [self.pm_clock_hand rotate:value];
         }
         
-        
-            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {  //开关
-                self.switcher.isOn = proto.action.state;
-            }
-        }
-        
     }
 }
 
 - (IBAction)changeMode:(id)sender {
     uint8_t cmd=0;
-    NSArray *imgBlue = @[@"cool",@"heat",@"wet",@"wind",@""];
-    NSArray *imgRed = @[@"cool_red",@"heat_red",@"wet_red",@"wind_red",@""];
     UIButton *btn = (UIButton *)sender;
+    btn.selected = YES;
     self.currentMode=(int)btn.tag;
 
     for (UIButton *b in self.visitedBtns) {
         if(b.tag!=self.currentMode){
-            [b setImage:[UIImage imageNamed:[imgBlue objectAtIndex:b.tag]] forState:UIControlStateNormal];
+            b.selected = NO;
             [b setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         }
     }
@@ -281,15 +280,18 @@ static NSString *const airCellIdentifier = @"airCell";
                   inactiveBackgroundImage:[UIImage imageNamed:@"air_control_off"]
                     activeBackgroundImage:[UIImage imageNamed:@"air_control_heat"]];
     }
-    if (self.airMode == 0) {
-        [btn setTitleColor:[UIColor colorWithRed:33/255.0 green:119/255.0 blue:175/255.0 alpha:1.0] forState:UIControlStateNormal];
-    }else{
-        [btn setTitleColor:[UIColor colorWithRed:215/255.0 green:57/255.0 blue:78/255.0 alpha:1.0] forState:UIControlStateNormal];
+    if (self.airMode == 0) { //制冷
+        [btn setTitleColor:[UIColor colorWithRed:33/255.0 green:119/255.0 blue:175/255.0 alpha:1.0] forState:UIControlStateSelected];//蓝色
+    }else{ //制热
         
-        [btn setImage:[UIImage imageNamed:[imgRed objectAtIndex:self.currentMode]] forState:UIControlStateNormal];
+        if (btn.tag == 0) { //制热按钮
+            [btn setTitleColor:[UIColor colorWithRed:215/255.0 green:57/255.0 blue:78/255.0 alpha:1.0] forState:UIControlStateSelected];//红色
+        }else { // 其它按钮
+            [btn setTitleColor:[UIColor colorWithRed:33/255.0 green:119/255.0 blue:175/255.0 alpha:1.0] forState:UIControlStateSelected]; //蓝色
+        }
     }
     
-    if (self.currentMode < 2){
+    if (self.currentMode < 2) {
         for (int i=1; i<16; i++) {
             UIView *viewblue = [self.view viewWithTag:i+100];
             viewblue.hidden = i>self.currentDegree-15 || self.airMode == 1;

@@ -174,6 +174,7 @@
                                         <state key="normal" title=" 制冷" image="cool" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="selected" image="cool_red"/>
                                         <connections>
                                             <action selector="changeMode:" destination="rZG-4r-cjU" eventType="touchUpInside" id="r7O-Uu-i6F"/>
                                         </connections>
@@ -182,6 +183,7 @@
                                         <rect key="frame" x="94" y="0.0" width="93.5" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title=" 制热" image="heat" backgroundImage="light_bar"/>
+                                        <state key="selected" image="heat_red"/>
                                         <connections>
                                             <action selector="changeMode:" destination="rZG-4r-cjU" eventType="touchUpInside" id="mmm-xj-G4I"/>
                                         </connections>
@@ -190,6 +192,7 @@
                                         <rect key="frame" x="187.5" y="0.0" width="94" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title=" 除湿" image="wet" backgroundImage="light_bar"/>
+                                        <state key="selected" image="wet_red"/>
                                         <connections>
                                             <action selector="changeMode:" destination="rZG-4r-cjU" eventType="touchUpInside" id="Vte-IV-grQ"/>
                                         </connections>
@@ -197,7 +200,8 @@
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gy3-2E-69f">
                                         <rect key="frame" x="281.5" y="0.0" width="93.5" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title=" 抽风" image="wind" backgroundImage="light_bar"/>
+                                        <state key="normal" title=" 送风" image="wind" backgroundImage="light_bar"/>
+                                        <state key="selected" image="wind_red"/>
                                         <connections>
                                             <action selector="changeMode:" destination="rZG-4r-cjU" eventType="touchUpInside" id="Yyb-A2-EZr"/>
                                         </connections>
@@ -397,8 +401,8 @@
                             <imageView userInteractionEnabled="NO" tag="115" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="air_dot_blue" translatesAutoresizingMaskIntoConstraints="NO" id="kvm-ZG-GWR" userLabel="air_dot_blue_30">
                                 <rect key="frame" x="258.5" y="398" width="6" height="6"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7g-WJ-v7Q">
-                                <rect key="frame" x="164.5" y="371" width="46" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7g-WJ-v7Q">
+                                <rect key="frame" x="167.5" y="371" width="40.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.10460308939218521" green="0.46211808919906616" blue="0.69479680061340332" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2885,6 +2889,7 @@
         <image name="control_button" width="103" height="47"/>
         <image name="control_button_pressed" width="105" height="48"/>
         <image name="cool" width="10" height="11"/>
+        <image name="cool_red" width="10" height="11"/>
         <image name="dir_down" width="24" height="12"/>
         <image name="dir_down_red" width="24" height="12"/>
         <image name="dir_ear" width="368" height="262"/>
@@ -2903,6 +2908,7 @@
         <image name="glory" width="239" height="239"/>
         <image name="head_bg" width="185" height="185"/>
         <image name="heat" width="11" height="11"/>
+        <image name="heat_red" width="11" height="11"/>
         <image name="humidity" width="141" height="141"/>
         <image name="icon_start" width="16" height="15"/>
         <image name="icon_timer" width="16" height="15"/>
@@ -2946,6 +2952,8 @@
         <image name="voice_up" width="54" height="24"/>
         <image name="voice_up_red" width="54" height="24"/>
         <image name="wet" width="9" height="11"/>
+        <image name="wet_red" width="9" height="11"/>
         <image name="wind" width="10" height="10"/>
+        <image name="wind_red" width="10" height="10"/>
     </resources>
 </document>
