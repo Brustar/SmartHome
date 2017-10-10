@@ -550,13 +550,113 @@
     if (tag == 3) { // 恢复初始设置
         if([responseObject[@"result"] intValue] == 0)
         {
-            [MBProgressHUD showSuccess:@"恢复成功"];
+            //请求场景配置信息
+            [self sendRequestForGettingConfigInfos:@"Cloud/load_config_data.aspx" withTag:4];
         }else {
             [MBProgressHUD showError:@"恢复失败，请稍后再试"];
         }
     }
     
+    if (tag == 4) { // 场景配置信息
+        if ([responseObject[@"result"] intValue] == 0)
+        {
+            NSDictionary *versioninfo = responseObject[@"version_info"];
+            //执久化配置版本号
+            [versioninfo enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                [IOManager writeUserdefault:obj forKey:key];
+            }];
+            
+            //写场景配置信息到sql
+            [self writeScensConfigDataToSQL:responseObject[@"room_scence_list"]];
+            
+            //发通知刷新设备首页，场景首页,app首页
+            [NC postNotificationName:@"ChangeHostRefreshUINotification" object:nil];
+            
+            
+            [MBProgressHUD showSuccess:@"恢复成功"];
+            
+        }else{
+            [MBProgressHUD showError:@"恢复失败,请稍后再试"];
+        }
+    }
+    
 }
+
+//写场景配置信息到SQL
+-(void)writeScensConfigDataToSQL:(NSArray *)rooms
+{
+    if(rooms.count == 0 || rooms == nil)
+    {
+        return;
+    }
+    NSArray *plists = [SQLManager writeScenes:rooms];
+    for (NSString *s in plists) {
+        [self downloadPlsit:s];
+    }
+}
+
+//下载场景plist文件到本地
+- (void)downloadPlsit:(NSString *)urlPlist
+{
+    AFHTTPSessionManager *session=[AFHTTPSessionManager manager];
+    
+    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:urlPlist]];
+    NSURLSessionDownloadTask *task=[session downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+        //下载进度
+        NSLog(@"%@",downloadProgress);
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            
+            //self.pro.progress=downloadProgress.fractionCompleted;
+            
+        }];
+        
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
+        //下载到哪个文件夹
+        NSString *path = [[IOManager scenesPath] stringByAppendingPathComponent:response.suggestedFilename];
+        
+        
+        return [NSURL fileURLWithPath:path];
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        NSLog(@"下载完成了 %@",filePath);
+    }];
+    [task resume];
+    
+}
+
+//获取设备配置信息
+- (void)sendRequestForGettingConfigInfos:(NSString *)str withTag:(int)tag;
+{
+    NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
+    NSString *md5Json = [IOManager md5JsonByScenes:[NSString stringWithFormat:@"%ld",[DeviceInfo defaultManager].masterID]];
+    NSDictionary *dic = @{
+                          @"token":[UD objectForKey:@"AuthorToken"],
+                          @"md5Json":md5Json,
+                          @"change_host":@(0)//是否是切换家庭 0:否  1:是
+                          };
+    
+    if ([UD objectForKey:@"room_version"]) {
+        dic = @{
+                @"token":[UD objectForKey:@"AuthorToken"],
+                @"room_ver":[UD objectForKey:@"room_version"],
+                @"equipment_ver":[UD objectForKey:@"equipment_version"],
+                @"scence_ver":[UD objectForKey:@"scence_version"],
+                @"tv_ver":[UD objectForKey:@"tv_version"],
+                @"fm_ver":[UD objectForKey:@"fm_version"],
+                //@"chat_ver":[UD objectForKey:@"chat_version"],
+                @"md5Json":md5Json,
+                @"change_host":@(0)//是否是切换家庭 0:否  1:是
+                };
+    }
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = tag;
+    [http sendPost:url param:dic];
+}
+
 -(void)gotoAppStoreToComment
 {
     NSString *str = [NSString stringWithFormat:@"https://itunes.apple.com/cn/app/yi-yun-zhi-neng-jia-ju/id1173335171?l=zh&ls=1&mt=8"];

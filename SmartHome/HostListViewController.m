@@ -162,7 +162,7 @@
             //更新token
             [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];
             
-            //更新主机类型（0:Creston   1:C4）
+            //更新主机类型（0:Crestron   1:C4）
             [IOManager writeUserdefault:responseObject[@"hosttype"] forKey:@"HostType"];
             
             //更新家庭名
@@ -263,8 +263,7 @@
 }
 
 //下载场景plist文件到本地
--(void)downloadPlsit:(NSString *)urlPlist
-
+- (void)downloadPlsit:(NSString *)urlPlist
 {
     AFHTTPSessionManager *session=[AFHTTPSessionManager manager];
     

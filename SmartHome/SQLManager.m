@@ -2903,15 +2903,15 @@
                 int sType = [sceneInfoDic[@"type"] intValue];//场景类型：1，默认  0，自定义
                 NSString *sNumber = sceneInfoDic[@"snumber"];
                 NSString *urlImage = sceneInfoDic[@"image_url"];
-                NSInteger isplan = [sceneInfoDic[@"isplan"] integerValue];
-                NSInteger isactive = [sceneInfoDic[@"isactive"] integerValue];
+                int isplan = [sceneInfoDic[@"isplan"] intValue];
+                int isactive = [sceneInfoDic[@"isactive"] intValue];
                 
                 if(sceneInfoDic[@"plist_url"])
                 {
                     NSString *urlPlist = sceneInfoDic[@"plist_url"];
                     [plists addObject:urlPlist];
                 }
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null,'%ld', %d, %ld, %ld)",sId,sName,rName,urlImage,room_id,sType,sNumber,isFavorite,[DeviceInfo defaultManager].masterID, 0, isplan, isactive];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null,'%ld', %d, %d, %d)",sId,sName,rName,urlImage,room_id,sType,sNumber,isFavorite,[DeviceInfo defaultManager].masterID, 0, isplan, isactive];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
