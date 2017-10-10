@@ -582,6 +582,12 @@
     return [self action:0x32 deviceID:deviceID];
 }
 
+//停止C4窗帘
+- (NSData *)stopCurtainByDeviceID:(NSString *)deviceID
+{
+    return [self action:0x32 deviceID:deviceID];
+}
+
 
 #pragma mark - Air
 -(NSData *) toogleAirCon:(uint8_t)toogle deviceID:(NSString *)deviceID
@@ -658,6 +664,10 @@
 -(NSData *) shuffle:(NSString *)deviceID
 {
     return [self action:0x46 deviceID:deviceID];
+}
+
+- (void)playVibrate {
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 @end

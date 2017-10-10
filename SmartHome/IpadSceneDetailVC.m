@@ -302,6 +302,7 @@
         newColourCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
         newColourCell.powerLightNameLabel.text = device.name;
+        newColourCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         
         if(dictionary)

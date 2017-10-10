@@ -9,10 +9,10 @@
 	<key>tcpPort</key>
 	<real>8000</real>
 	<key>tcpServer</key>
-	<string>tcp.e-cloudcn.com</string>
+	<string>tp.e-cloudcn.com</string>
 	<key>httpPort</key>
 	<real>8082</real>
 	<key>httpServer</key>
-	<string>www.e-cloudcn.com</string>
+	<string>h5.e-cloudcn.com</string>
 </dict>
 </plist>

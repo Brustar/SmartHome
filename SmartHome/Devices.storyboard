@@ -174,7 +174,7 @@
                                         <state key="normal" title=" 制冷" image="cool" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="selected" image="cool_red"/>
+                                        <state key="selected" image="cool_blue"/>
                                         <connections>
                                             <action selector="changeMode:" destination="rZG-4r-cjU" eventType="touchUpInside" id="r7O-Uu-i6F"/>
                                         </connections>
@@ -192,7 +192,7 @@
                                         <rect key="frame" x="187.5" y="0.0" width="94" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title=" 除湿" image="wet" backgroundImage="light_bar"/>
-                                        <state key="selected" image="wet_red"/>
+                                        <state key="selected" image="wet_blue"/>
                                         <connections>
                                             <action selector="changeMode:" destination="rZG-4r-cjU" eventType="touchUpInside" id="Vte-IV-grQ"/>
                                         </connections>
@@ -201,7 +201,7 @@
                                         <rect key="frame" x="281.5" y="0.0" width="93.5" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title=" 送风" image="wind" backgroundImage="light_bar"/>
-                                        <state key="selected" image="wind_red"/>
+                                        <state key="selected" image="wind_blue"/>
                                         <connections>
                                             <action selector="changeMode:" destination="rZG-4r-cjU" eventType="touchUpInside" id="Yyb-A2-EZr"/>
                                         </connections>
@@ -2889,7 +2889,7 @@
         <image name="control_button" width="103" height="47"/>
         <image name="control_button_pressed" width="105" height="48"/>
         <image name="cool" width="10" height="11"/>
-        <image name="cool_red" width="10" height="11"/>
+        <image name="cool_blue" width="10" height="11"/>
         <image name="dir_down" width="24" height="12"/>
         <image name="dir_down_red" width="24" height="12"/>
         <image name="dir_ear" width="368" height="262"/>
@@ -2952,8 +2952,8 @@
         <image name="voice_up" width="54" height="24"/>
         <image name="voice_up_red" width="54" height="24"/>
         <image name="wet" width="9" height="11"/>
-        <image name="wet_red" width="9" height="11"/>
+        <image name="wet_blue" width="9" height="11"/>
         <image name="wind" width="10" height="10"/>
-        <image name="wind_red" width="10" height="10"/>
+        <image name="wind_blue" width="10" height="10"/>
     </resources>
 </document>

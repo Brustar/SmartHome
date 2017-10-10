@@ -240,6 +240,8 @@
 		CDBEFF501EA5FEBF00258B1E /* FamilyHomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF4F1EA5FEBF00258B1E /* FamilyHomeDetailViewController.m */; };
 		CDBEFF531EA616CD00258B1E /* FamilyHomeDetailSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF521EA616CD00258B1E /* FamilyHomeDetailSceneCell.m */; };
 		CDC4B0841F69590400FFE3F0 /* NewWindController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC4B0831F69590400FFE3F0 /* NewWindController.m */; };
+		CDC4B0881F7DEFFC00FFE3F0 /* CurtainC4TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC4B0861F7DEFFB00FFE3F0 /* CurtainC4TableViewCell.m */; };
+		CDC4B0891F7DEFFC00FFE3F0 /* CurtainC4TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC4B0871F7DEFFB00FFE3F0 /* CurtainC4TableViewCell.xib */; };
 		CDEC86801E95EBAB009EC245 /* TabbarPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */; };
 		CDEC86841E960E92009EC245 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEC86831E960E92009EC245 /* background.png */; };
 		CDEC86891E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86881E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m */; };
@@ -830,6 +832,9 @@
 		CDBEFF521EA616CD00258B1E /* FamilyHomeDetailSceneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHomeDetailSceneCell.m; sourceTree = "<group>"; };
 		CDC4B0821F69590400FFE3F0 /* NewWindController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewWindController.h; sourceTree = "<group>"; };
 		CDC4B0831F69590400FFE3F0 /* NewWindController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewWindController.m; sourceTree = "<group>"; };
+		CDC4B0851F7DEFFB00FFE3F0 /* CurtainC4TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainC4TableViewCell.h; sourceTree = "<group>"; };
+		CDC4B0861F7DEFFB00FFE3F0 /* CurtainC4TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainC4TableViewCell.m; sourceTree = "<group>"; };
+		CDC4B0871F7DEFFB00FFE3F0 /* CurtainC4TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurtainC4TableViewCell.xib; sourceTree = "<group>"; };
 		CDEC867E1E95EBAB009EC245 /* TabbarPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarPanel.h; sourceTree = "<group>"; };
 		CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarPanel.m; sourceTree = "<group>"; };
 		CDEC86831E960E92009EC245 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
@@ -1795,6 +1800,9 @@
 				2E2D92CD1EF1067C0007B90A /* PowerLightCell.xib */,
 				F6359AFD1CFFC4DC0035EB31 /* ColourTableViewCell.h */,
 				F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */,
+				CDC4B0851F7DEFFB00FFE3F0 /* CurtainC4TableViewCell.h */,
+				CDC4B0861F7DEFFB00FFE3F0 /* CurtainC4TableViewCell.m */,
+				CDC4B0871F7DEFFB00FFE3F0 /* CurtainC4TableViewCell.xib */,
 			);
 			name = AllDeviceTableViewCell;
 			path = IphoneControllers;
@@ -2411,6 +2419,7 @@
 				CDEE5EAE1ECEC07E00A5779D /* Assets.xcassets in Resources */,
 				CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */,
 				0F9214C71EE9241E0088D5DA /* keyPad.xib in Resources */,
+				CDC4B0891F7DEFFC00FFE3F0 /* CurtainC4TableViewCell.xib in Resources */,
 				2EF5B02A1F02523E00C369C6 /* rain.gif in Resources */,
 				CD9F0AC11EB861F5007B0CF7 /* address.txt in Resources */,
 				2EF5B0241F02517C00C369C6 /* ipadFirstViewVC.gif in Resources */,
@@ -2921,6 +2930,7 @@
 				2EA99E901E1C9A0100659065 /* MySubEnergyVC.m in Sources */,
 				0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */,
 				0FCFB3921CF293D800B37DD3 /* Netv.m in Sources */,
+				CDC4B0881F7DEFFC00FFE3F0 /* CurtainC4TableViewCell.m in Sources */,
 				0F094AC31E94CD3A00977123 /* Keypad.m in Sources */,
 				0FC1197A1D6FE61C001DA19A /* Projector.m in Sources */,
 				F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */,

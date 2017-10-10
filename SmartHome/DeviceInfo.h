@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 enum{
     offLine,  //离线
@@ -192,5 +193,10 @@ enum{
 #pragma mark - Scheduler CALL PUBLIC
 -(NSData *) scheduleScene:(uint8_t)action sceneID:(NSString *)sceneID;
 -(NSData *) scheduleDevice:(uint8_t)action deviceID:(NSString *)deviceID;
+
+- (NSData *)stopCurtainByDeviceID:(NSString *)deviceID;
+
+//震动
+- (void)playVibrate;
 
 @end

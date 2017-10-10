@@ -103,7 +103,10 @@
         }
         self.AddAireBtn.selected = YES;
         self.temperatureLabel.text = [NSString stringWithFormat:@"%ld°C", lroundf(self.AireSlider.value)];
-        NSData *data=[[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:lroundf(self.AireSlider.value)];
+        
+        Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:self.roomID];
+        NSData *data = [[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:lroundf(self.AireSlider.value) roomID:device.airID];
+        
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         

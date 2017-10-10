@@ -76,13 +76,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    _hostType = [[UD objectForKey:@"HostType"] integerValue];
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 窗帘",roomName]];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [UIView new];
     
+    [self.tableView registerNib:[UINib nibWithNibName:@"CurtainC4TableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainC4TableViewCell"];//C4窗帘
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
@@ -161,7 +162,7 @@
         return;
     }
     //同步设备状态
-    if(proto.cmd == 0x01){
+    /*if(proto.cmd == 0x01){
          cell.open.selected = proto.action.state == PROTOCOL_ON;
     }
     
@@ -173,7 +174,7 @@
                 cell.slider.value=1;
             }
         }
-    }
+    }*/
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -183,19 +184,38 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CurtainTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
-    cell.slider.continuous = NO;
-
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.label.text = [self.curNames objectAtIndex:indexPath.row];
-    cell.deviceid = [self.curtainIDArr objectAtIndex:indexPath.row];
-    cell.tag = [cell.deviceid integerValue];
-    cell.slider.tag = 100+indexPath.row;
-    cell.open.tag = indexPath.row;
-    cell.AddcurtainBtn.hidden = YES;
-    cell.curtainContraint.constant = 10;
-    return cell;
+    
+    if (_hostType == 0) {  //Crestron
+        CurtainTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
+        cell.slider.continuous = NO;
+        
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.label.text = [self.curNames objectAtIndex:indexPath.row];
+        cell.deviceid = [self.curtainIDArr objectAtIndex:indexPath.row];
+        cell.tag = [cell.deviceid integerValue];
+        cell.slider.tag = 100+indexPath.row;
+        cell.open.tag = indexPath.row;
+        cell.AddcurtainBtn.hidden = YES;
+        cell.curtainContraint.constant = 10;
+        return cell;
+    }else if (_hostType == 1) {   //C4
+        //CurtainC4TableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainC4TableViewCell" owner:self options:nil] lastObject];
+        
+        CurtainC4TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CurtainC4TableViewCell" forIndexPath:indexPath];
+        
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.name.text = [self.curNames objectAtIndex:indexPath.row];
+        cell.deviceid = [self.curtainIDArr objectAtIndex:indexPath.row];
+        cell.tag = [cell.deviceid integerValue];
+        //cell.open.tag = indexPath.row;
+        //cell.AddcurtainBtn.hidden = YES;
+        //cell.curtainContraint.constant = 10;
+        return cell;
+    }
+    
+    return nil;
 }
 
 //设置表头高度
@@ -211,11 +231,21 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (ON_IPAD) {
-        return 150.0f;
-    }else{
-        return 100;
+    
+    if (_hostType == 0) {  //Crestron
+        
+        if (ON_IPAD) {
+            return 150.0f;
+        }else{
+            return 100;
+        }
+        
+    }else if (_hostType == 1) {   //C4
+        
+        return 44;
     }
+    
+    return 44;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

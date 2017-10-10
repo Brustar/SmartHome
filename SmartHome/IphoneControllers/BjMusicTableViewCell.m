@@ -158,7 +158,7 @@
 }
 //音量减
 - (IBAction)voice_downBtn:(id)sender {
-    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     data=[device volumeDown:self.deviceid];
@@ -168,7 +168,7 @@
 
 //音量加
 - (IBAction)voice_upBtn:(id)sender {
-    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     data=[device volumeUp:self.deviceid];
