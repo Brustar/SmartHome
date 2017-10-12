@@ -2653,7 +2653,7 @@
         
         NSString *sql = [NSString stringWithFormat:@"update Scenes set status = %d where status = %d and masterID = '%ld' and rId = %d",0,1, masterID, roomID];
         
-        ret = [db executeUpdate:sql];
+        [db executeUpdate:sql];
         
         sql = [NSString stringWithFormat:@"update Scenes set status = %d where ID = %d and masterID = '%ld' and rId = %d",status,sceneID, masterID, roomID];
         
