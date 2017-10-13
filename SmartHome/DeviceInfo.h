@@ -93,7 +93,7 @@ enum{
 @property (nonatomic, assign) BOOL isPhotoLibrary;
 
 + (instancetype) defaultManager;
-
+- (UIViewController *)getCurrentVC;
 - (void) deviceGenaration;
 - (void) initConfig;
 +(UIViewController *)calcController:(NSUInteger)uid;
