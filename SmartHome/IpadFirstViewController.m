@@ -155,10 +155,21 @@
             if (device) {
                 [_bgmusicIDS addObject:device];
                 
-                NSData *data = [[DeviceInfo defaultManager] query:[NSString stringWithFormat:@"%d", device.eID]];
-                SocketManager *sock = [SocketManager defaultManager];
-                sock.delegate = self;
-                [sock.socket writeData:data withTimeout:1 tag:1];
+                
+                float delay = 0.1*i;
+                
+                // GCD 延时，非阻塞主线程 延时时间：delay
+                dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
+                
+                dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+                    
+                    NSData *data = [[DeviceInfo defaultManager] query:[NSString stringWithFormat:@"%d", device.eID]];
+                    SocketManager *sock = [SocketManager defaultManager];
+                    sock.delegate = self;
+                    [sock.socket writeData:data withTimeout:1 tag:1];
+                    
+                });
+                
             }
             
         }

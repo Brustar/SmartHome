@@ -197,6 +197,7 @@
 		2EF5B02E1F02657700C369C6 /* haze.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B02D1F02657700C369C6 /* haze.gif */; };
 		2EF75C811EB32D390055147D /* DeviceTimingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C801EB32D390055147D /* DeviceTimingViewController.m */; };
 		39951F658604DC8E80FE9361 /* Pods_SmartHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB719EB6AD94BADA3066D54C /* Pods_SmartHome.framework */; };
+		CD263F281F8E0B4D006F427D /* RoomPlaneGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD263F271F8E0B4D006F427D /* RoomPlaneGraphViewController.m */; };
 		CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12431EB316EF00E0B301 /* DeliveryAddressViewController.m */; };
 		CD4F12471EB4400A00E0B301 /* DeliveryAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12461EB4400A00E0B301 /* DeliveryAddressCell.m */; };
 		CD4F124A1EB452D800E0B301 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12491EB452D800E0B301 /* Address.m */; };
@@ -761,6 +762,8 @@
 		2EF75C801EB32D390055147D /* DeviceTimingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTimingViewController.m; sourceTree = "<group>"; };
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
 		AB719EB6AD94BADA3066D54C /* Pods_SmartHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD263F261F8E0B4D006F427D /* RoomPlaneGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomPlaneGraphViewController.h; sourceTree = "<group>"; };
+		CD263F271F8E0B4D006F427D /* RoomPlaneGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomPlaneGraphViewController.m; sourceTree = "<group>"; };
 		CD4F12421EB316EF00E0B301 /* DeliveryAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryAddressViewController.h; sourceTree = "<group>"; };
 		CD4F12431EB316EF00E0B301 /* DeliveryAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryAddressViewController.m; sourceTree = "<group>"; };
 		CD4F12451EB4400A00E0B301 /* DeliveryAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryAddressCell.h; sourceTree = "<group>"; };
@@ -2074,6 +2077,8 @@
 			children = (
 				CD8CFCCD1ED6844600B49712 /* PlaneGraphViewController.h */,
 				CD8CFCCE1ED6844600B49712 /* PlaneGraphViewController.m */,
+				CD263F261F8E0B4D006F427D /* RoomPlaneGraphViewController.h */,
+				CD263F271F8E0B4D006F427D /* RoomPlaneGraphViewController.m */,
 			);
 			name = PlaneGraph;
 			sourceTree = "<group>";
@@ -3043,6 +3048,7 @@
 				2E8AC52F1E7BAE350002E717 /* FirstViewController.m in Sources */,
 				F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */,
 				0FAF74AD1CEE9A9600432713 /* LightController.m in Sources */,
+				CD263F281F8E0B4D006F427D /* RoomPlaneGraphViewController.m in Sources */,
 				F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */,
 				F6251F711D541885000A5A47 /* PluginViewController.m in Sources */,
 				CD9F0AC31EB861F5007B0CF7 /* City.m in Sources */,

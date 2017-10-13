@@ -82,6 +82,7 @@ typedef NS_ENUM(NSUInteger, catalog) {
 @property (nonatomic,strong) NSString *subTypeName;
 @property (nonatomic, assign) uint8_t actionState;
 @property (nonatomic, assign) BOOL isIR;
+@property (nonatomic, assign) NSInteger UITypeOfLight;//灯显示类型： 1，射灯  2，灯带  3，调色灯
 
 + (instancetype)deviceWithDict:(NSDictionary *)dict;
 @end

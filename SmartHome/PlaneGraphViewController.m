@@ -139,12 +139,26 @@
 - (void)openRoom:(NSNumber *)roomId {
     //鉴权一下
     int roomAuth = [SQLManager getRoomAuthority:roomId.intValue];
+    
     if (roomAuth == 1) {
-        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
-        FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
-        vc.roomID = [roomId integerValue];
-        vc.roomName = [SQLManager getRoomNameByRoomID:[roomId intValue]];
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        if (_hostType == 0) {  //Creston
+            
+            UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
+            FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
+            vc.roomID = [roomId integerValue];
+            vc.roomName = [SQLManager getRoomNameByRoomID:[roomId intValue]];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else {
+            UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"PlaneGraph" bundle:nil];
+            RoomPlaneGraphViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"RoomPlaneGraphViewController"];
+            vc.roomID = [roomId integerValue];
+            vc.roomName = [SQLManager getRoomNameByRoomID:[roomId intValue]];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
+        
     }else {
         [MBProgressHUD showError:@"你无权限打开此房间"];
     }
@@ -749,11 +763,6 @@
                         if (roomInfo.lightStatus == 1) {
                             UIButton *lightIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, temp_origin_y, iconWidth, iconHeight)];
                             [lightIcon setBackgroundImage:[UIImage imageNamed:@"planeLightIcon"] forState:UIControlStateNormal];
-                            //lightIcon.backgroundColor = [UIColor orangeColor];
-//                            lightIcon.tag = 777;
-//                            
-//                            UIView *lastIcon = [self.planeGraph viewWithTag:777];
-//                            [lastIcon removeFromSuperview];
                             
                             [self.planeGraph addSubview:lightIcon];
                             
@@ -764,11 +773,6 @@
                             UIButton *airIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, temp_origin_y, iconWidth, iconHeight)];
                             
                             [airIcon setBackgroundImage:[UIImage imageNamed:@"planeAirIcon"] forState:UIControlStateNormal];
-                            //airIcon.backgroundColor = [UIColor blueColor];
-//                            airIcon.tag = 888;
-//                            
-//                            UIView *lastIcon = [self.planeGraph viewWithTag:888];
-//                            [lastIcon removeFromSuperview];
                             
                             [self.planeGraph addSubview:airIcon];
                             
@@ -779,16 +783,9 @@
                             UIButton *mediaIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, temp_origin_y, iconWidth, iconHeight)];
                             
                             [mediaIcon setBackgroundImage:[UIImage imageNamed:@"planeMediaIcon"] forState:UIControlStateNormal];
-                            //mediaIcon.backgroundColor = [UIColor redColor];
-//                            mediaIcon.tag = 999;
-//                            
-//                            
-//                            UIView *lastIcon = [self.planeGraph viewWithTag:999];
-//                            [lastIcon removeFromSuperview];
                             
                             [self.planeGraph addSubview:mediaIcon];
                             
-                            //temp_origin_x += (iconWidth + gap);
                         }
                         
                         break;

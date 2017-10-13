@@ -365,6 +365,7 @@
     device.subTypeId = [resultSet intForColumn:@"subTypeId"];
     device.typeName = [resultSet stringForColumn:@"typeName"];
     device.subTypeName = [resultSet stringForColumn:@"subTypeName"];
+    device.UITypeOfLight = [resultSet intForColumn:@"UITypeOfLight"];
     
     device.power = [resultSet intForColumn:@"power"];
     device.bright = [resultSet intForColumn:@"bright"];

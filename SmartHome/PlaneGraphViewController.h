@@ -23,6 +23,7 @@
 #import "FamilyHomeCell.h"
 #import "CustomViewController.h"
 #import "FamilyHomeDetailViewController.h"
+#import "RoomPlaneGraphViewController.h"
 #import "NowMusicController.h"
 #import "TouchImage.h"
 #import "UIImageView+WebCache.h"
