@@ -33,5 +33,6 @@
 @property(nonatomic, strong) NSString *endTime;
 @property(nonatomic, strong) NSString *repeatition;
 @property(nonatomic, strong) NSMutableString *repeatString;
+@property (nonatomic, assign) NSInteger hostType;//主机类型：0，creston   1, C4
 
 @end

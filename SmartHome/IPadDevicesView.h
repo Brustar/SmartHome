@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CurtainC4TableViewCell.h"
 
 @interface IPadDevicesView : UIView<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *menu;
@@ -15,6 +16,7 @@
 @property (nonatomic,strong) NSArray *menus;
 @property (nonatomic,strong) NSArray *devices;
 @property (nonatomic,strong) NSArray *temp;
+@property (nonatomic, assign) NSInteger hostType;//主机类型：0，creston   1, C4
 -(void)initData;
 
 @end

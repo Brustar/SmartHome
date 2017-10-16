@@ -16,6 +16,7 @@
 #import "NewColourCell.h"
 #import "FMTableViewCell.h"
 #import "CurtainTableViewCell.h"
+#import "CurtainC4TableViewCell.h"
 #import "ScreenCurtainCell.h"
 #import "OtherTableViewCell.h"
 #import "BjMusicTableViewCell.h"
@@ -65,7 +66,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    _hostType = [[UD objectForKey:@"HostType"] integerValue];
     
       self.tableView.tableFooterView = [UIView new];
     _isGloom = NO;
@@ -119,6 +120,7 @@
     _SwitchLightArr = [[NSMutableArray alloc] init];
     [self.tableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
     [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
+    [self.tableView registerNib:[UINib nibWithNibName:@"CurtainC4TableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainC4TableViewCell"];//窗帘(C4)
     [self.tableView registerNib:[UINib nibWithNibName:@"IpadTVCell" bundle:nil] forCellReuseIdentifier:@"IpadTVCell"];//网络电视
     [self.tableView registerNib:[UINib nibWithNibName:@"NewColourCell" bundle:nil] forCellReuseIdentifier:@"NewColourCell"];//调色灯
     [self.tableView registerNib:[UINib nibWithNibName:@"OtherTableViewCell" bundle:nil] forCellReuseIdentifier:@"OtherTableViewCell"];//其他
@@ -367,6 +369,9 @@
         
         return aireCell;
     }if (indexPath.section == 4) {//窗帘
+        
+    if (_hostType == 0) {  //Crestron
+        
         CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor = [UIColor clearColor];
         aireCell.AddcurtainBtn.hidden = YES;
@@ -404,7 +409,51 @@
         
         
         return aireCell;
-    }if (indexPath.section == 5) {//TV
+    }else {
+        CurtainC4TableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainC4TableViewCell" forIndexPath:indexPath];
+        aireCell.backgroundColor = [UIColor clearColor];
+        aireCell.addBtn.hidden = YES;
+        aireCell.switchBtnTrailingConstraint.constant = 10;
+        aireCell.roomID = self.roomID;
+        aireCell.sceneid = self.sceneid;
+        Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
+        if(dictionary)
+        {
+            int openvalue;
+            for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                
+                if([dic objectForKey:@"deviceID"])
+                {
+                    deviceID = [dic[@"deviceID"] intValue];
+                    
+                }
+                if (deviceID == [_CurtainArray[indexPath.row] intValue]) {
+                    
+                    openvalue = [dic[@"openvalue"] intValue];
+                    
+                    if ((float)openvalue/100.0f > 0) {
+                        aireCell.switchBtn.selected = YES;
+                    }if ((float)openvalue/100.0f == 0) {
+                        aireCell.switchBtn.selected = NO;
+                    }
+                    
+                }
+                
+            }
+        }
+        
+        aireCell.deviceid = _CurtainArray[indexPath.row];
+        aireCell.name.text = device.name;
+        
+        
+        return aireCell;
+    }
+}
+    
+    
+    
+    
+    if (indexPath.section == 5) {//TV
         IpadTVCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"IpadTVCell" forIndexPath:indexPath];
         TVCell.TVConstraint.constant = 10;
         TVCell.AddTvDeviceBtn.hidden = YES;
@@ -609,6 +658,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( indexPath.section == 0 || indexPath.section == 3 || indexPath.section == 10 || indexPath.section == 11 || indexPath.section == 1 || indexPath.section == 4) {
+        
+        if (indexPath.section == 4 && _hostType != 0) {
+            return 100;
+        }
+        
         return 150;
     }
     if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12 || indexPath.section == 2) {

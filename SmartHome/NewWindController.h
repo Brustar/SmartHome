@@ -30,6 +30,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *highSpeedBtnLeading;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *lowSpeedBtnTrailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *highSpeedBtnBottomConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *middleSpeedBtnBottomConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lowSpeedBtnBottomConstraint;
 
 - (IBAction)powerBtnClicked:(id)sender;
 - (IBAction)highSpeedBtnClicked:(id)sender;

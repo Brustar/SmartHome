@@ -15,6 +15,7 @@
 #import "FMTableViewCell.h"
 #import "AireTableViewCell.h"
 #import "CurtainTableViewCell.h"
+#import "CurtainC4TableViewCell.h"
 #import "TVTableViewCell.h"
 #import "OtherTableViewCell.h"
 #import "ScreenTableViewCell.h"
@@ -42,7 +43,7 @@
 #define minimumLineSpacing 3.0
 
 
-@interface FamilyHomeDetailViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate,UITableViewDataSource, HttpDelegate, SingleMaskViewDelegate, TcpRecvDelegate, NewLightCellDelegate, PowerLightCellDelegate, NewColourCellDelegate, CurtainTableViewCellDelegate, BjMusicTableViewCellDelegate, OtherTableViewCellDelegate>
+@interface FamilyHomeDetailViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate,UITableViewDataSource, HttpDelegate, SingleMaskViewDelegate, TcpRecvDelegate, NewLightCellDelegate, PowerLightCellDelegate, NewColourCellDelegate, CurtainTableViewCellDelegate, CurtainC4TableViewCellDelegate,BjMusicTableViewCellDelegate, OtherTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *softButton;
 @property (weak, nonatomic) IBOutlet UIButton *normalButton;

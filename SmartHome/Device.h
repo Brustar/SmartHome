@@ -10,7 +10,7 @@
 
 typedef NS_ENUM(NSUInteger, deviceType) {
     light = 1,
-    curtain = 7,
+    curtain = 21,
     TVtype = 11,
     DVDtype = 13,
     bgmusic = 14,

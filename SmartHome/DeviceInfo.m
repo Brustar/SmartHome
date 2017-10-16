@@ -36,6 +36,19 @@
         case light:
             targetName = @"LightController";
             break;
+            
+        case dimmarLight:
+            targetName = @"LightController";
+            break;
+            
+        case colorLight:
+            targetName = @"LightController";
+            break;
+            
+        case curtain:
+            targetName = @"CurtainController";
+            break;
+            
         case DVDtype:
             targetName = @"DVDController";
             break;

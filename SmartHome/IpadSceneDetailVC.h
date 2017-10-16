@@ -19,6 +19,7 @@
 @property (nonatomic, assign) BOOL isGloom;
 @property (nonatomic, assign) BOOL isRomantic;
 @property (nonatomic, assign) BOOL isSprightly;
+@property (nonatomic, assign) NSInteger hostType;//主机类型：0，creston   1, C4
 -(void)refreshData:(NSArray *)data;
 
 @end

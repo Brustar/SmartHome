@@ -151,18 +151,22 @@
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     Proto proto=protocolFromData(data);
-    int devID=[[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)] intValue];
+    int devID = [[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)] intValue];
     if (![self.curtainIDArr containsObject:@(devID)]) {
         return;
     }
     
-    CurtainTableViewCell *cell = [self.tableView viewWithTag:devID];
-    
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
+    
+    if (_hostType == 0) {  //Crestron
+    
+      CurtainTableViewCell *cell = [self.tableView viewWithTag:devID];
+    
+    
     //同步设备状态
-    /*if(proto.cmd == 0x01){
+    if(proto.cmd == 0x01){
          cell.open.selected = proto.action.state == PROTOCOL_ON;
     }
     
@@ -174,7 +178,24 @@
                 cell.slider.value=1;
             }
         }
-    }*/
+    }
+        
+        
+  }
+    
+    else { //C4
+        CurtainC4TableViewCell *cell = [self.tableView viewWithTag:devID];
+        
+        
+        //同步设备状态
+        if(proto.cmd == 0x01){
+            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
+                cell.switchBtn.selected = proto.action.state;
+            }
+            
+        }
+    }
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -200,7 +221,6 @@
         cell.curtainContraint.constant = 10;
         return cell;
     }else if (_hostType == 1) {   //C4
-        //CurtainC4TableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainC4TableViewCell" owner:self options:nil] lastObject];
         
         CurtainC4TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CurtainC4TableViewCell" forIndexPath:indexPath];
         
@@ -209,9 +229,9 @@
         cell.name.text = [self.curNames objectAtIndex:indexPath.row];
         cell.deviceid = [self.curtainIDArr objectAtIndex:indexPath.row];
         cell.tag = [cell.deviceid integerValue];
-        //cell.open.tag = indexPath.row;
-        //cell.AddcurtainBtn.hidden = YES;
-        //cell.curtainContraint.constant = 10;
+        cell.switchBtn.tag = indexPath.row;
+        cell.addBtn.hidden = YES;
+        cell.switchBtnTrailingConstraint.constant = 10;
         return cell;
     }
     
@@ -242,7 +262,11 @@
         
     }else if (_hostType == 1) {   //C4
         
-        return 44;
+        if (ON_IPAD) {
+            return 100.0f;
+        }else{
+            return 100;
+        }
     }
     
     return 44;

@@ -30,6 +30,10 @@
 #import "IpadTVCell.h"
 #import "UIImageView+WebCache.h"
 #import "UIView_extra.h"
+#import "LightController.h"
+#import "AirController.h"
+#import "NewWindController.h"
+#import "CurtainController.h"
 
 
 

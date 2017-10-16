@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mpT-6G-VZu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mpT-6G-VZu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -131,11 +131,14 @@
                     </view>
                     <connections>
                         <outlet property="highSpeedBtn" destination="9T1-JT-vPe" id="vXq-Rq-5yM"/>
+                        <outlet property="highSpeedBtnBottomConstraint" destination="a22-PR-Wz7" id="usG-p3-eoF"/>
                         <outlet property="highSpeedBtnLeading" destination="JBp-1d-YxS" id="dA7-Me-036"/>
                         <outlet property="lowSpeedBtn" destination="ABc-Xq-266" id="TUr-zQ-pe3"/>
+                        <outlet property="lowSpeedBtnBottomConstraint" destination="vXQ-rN-Bd3" id="9wh-7h-j3a"/>
                         <outlet property="lowSpeedBtnTrailing" destination="xcP-ON-IYV" id="X4d-AZ-niF"/>
                         <outlet property="menuContainer" destination="wti-A6-3zA" id="cbE-as-AXl"/>
                         <outlet property="middleSpeedBtn" destination="qbf-LS-zIU" id="riT-Jr-UHL"/>
+                        <outlet property="middleSpeedBtnBottomConstraint" destination="zxA-JX-7jg" id="w0f-VQ-JJT"/>
                         <outlet property="powerBtn" destination="OVT-ts-tqW" id="opS-eF-sTq"/>
                         <outlet property="tempLabel" destination="BsE-g9-aud" id="GiN-pG-MAx"/>
                     </connections>
@@ -579,6 +582,8 @@
                         <outlet property="controlBottom" destination="26r-gi-2ad" id="1h9-6f-cKz"/>
                         <outlet property="controlLeft" destination="cDf-hR-o3N" id="dty-wh-SGA"/>
                         <outlet property="controlRight" destination="9v7-vI-xTL" id="FDc-6t-7o9"/>
+                        <outlet property="control_banner" destination="Jnm-1r-xpE" id="LAm-XM-a20"/>
+                        <outlet property="control_bannerConstraint" destination="26r-gi-2ad" id="yWj-HX-aHY"/>
                         <outlet property="currentTemp" destination="Ow4-aQ-ROA" id="5GF-JH-lCg"/>
                         <outlet property="disk" destination="Frd-EU-W7z" id="ah2-5X-z1Y"/>
                         <outlet property="diskLeft" destination="hBg-D0-ddn" id="YdF-kd-brM"/>
@@ -600,6 +605,7 @@
                         <outlet property="tempreturePan" destination="lRp-H9-4uS" id="2RK-4R-2Va"/>
                         <outlet property="wetLabel" destination="nvL-WE-vqh" id="zcG-ok-1pA"/>
                         <outlet property="windBtn" destination="RAp-mu-gNW" id="pd8-Ua-nbg"/>
+                        <outlet property="windSpeedBtn" destination="ei2-zo-KB5" id="Aww-mm-vu8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x1K-D1-Qg6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1144,7 +1150,11 @@
                         <outlet property="base" destination="cNa-Uw-OPg" id="NcH-sI-P65"/>
                         <outlet property="bottom" destination="szb-d8-h4d" id="vqd-SJ-6xJ"/>
                         <outlet property="btnPen" destination="qbi-rs-2ri" id="s4T-3i-QaA"/>
+                        <outlet property="cLightBtn" destination="QGa-1P-CGE" id="PCc-Kk-pZo"/>
+                        <outlet property="ddLightBtn" destination="DoF-Wk-GOP" id="BbD-dT-Kfh"/>
                         <outlet property="lightName" destination="Ejp-Uz-H6K" id="7bh-0o-kDI"/>
+                        <outlet property="lightTitleBottomConstraint" destination="szb-d8-h4d" id="mdy-Ek-d87"/>
+                        <outlet property="sLightBtn" destination="UIl-39-dXr" id="xVt-CF-4uZ"/>
                         <outlet property="top" destination="Pbb-Ct-zjz" id="KYS-xf-1Dq"/>
                         <outlet property="tranformView" destination="k3c-R3-iSW" id="yVK-bE-VKg"/>
                     </connections>

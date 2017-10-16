@@ -165,6 +165,7 @@
     
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
+    [self.deviceTableView registerNib:[UINib nibWithNibName:@"CurtainC4TableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainC4TableViewCell"];//窗帘(C4)
     
     if (ON_IPAD) {
         [self.deviceTableView registerNib:[UINib nibWithNibName:@"IpadTVCell" bundle:nil] forCellReuseIdentifier:@"IpadTVCell"];//网络电视
@@ -186,7 +187,7 @@
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM收音机
     
-
+    [self.planeGraph setContentMode:UIViewContentModeCenter];
 }
 
 - (void)addNotifications {
@@ -273,19 +274,36 @@
         }
         
     }else if (indexPath.section == 1) {//窗帘
-        CurtainTableViewCell *curtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
-        curtainCell.delegate = self;
+        
+        if (_hostType == 0) {  //crestron
+            CurtainTableViewCell *curtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
+            curtainCell.delegate = self;
+            curtainCell.backgroundColor =[UIColor clearColor];
+            curtainCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            curtainCell.AddcurtainBtn.hidden = YES;
+            curtainCell.curtainContraint.constant = 10;
+            curtainCell.roomID = (int)self.roomID;
+            Device *device = [SQLManager getDeviceWithDeviceID:[_curtainArray[indexPath.row] intValue]];
+            curtainCell.label.text = device.name;
+            curtainCell.deviceid = _curtainArray[indexPath.row];
+            curtainCell.slider.value = (float)device.position/100.0f;//窗帘位置
+            curtainCell.open.selected = device.power;//开关状态
+            return curtainCell;
+        }else { //C4
+        
+        CurtainC4TableViewCell *curtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainC4TableViewCell" forIndexPath:indexPath];
+        //curtainCell.delegate = self;
         curtainCell.backgroundColor =[UIColor clearColor];
         curtainCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        curtainCell.AddcurtainBtn.hidden = YES;
-        curtainCell.curtainContraint.constant = 10;
+        curtainCell.addBtn.hidden = YES;
+        curtainCell.switchBtnTrailingConstraint.constant = 10;
         curtainCell.roomID = (int)self.roomID;
         Device *device = [SQLManager getDeviceWithDeviceID:[_curtainArray[indexPath.row] intValue]];
-        curtainCell.label.text = device.name;
+        curtainCell.name.text = device.name;
         curtainCell.deviceid = _curtainArray[indexPath.row];
-        curtainCell.slider.value = (float)device.position/100.0f;//窗帘位置
-        curtainCell.open.selected = device.power;//开关状态
+        curtainCell.switchBtn.selected = device.power;//开关状态
         return curtainCell;
+      }
     }else if (indexPath.section == 2) { //环境
         
         Device *device = [SQLManager getDeviceWithDeviceID:[_environmentArray[indexPath.row] intValue]];
@@ -520,7 +538,7 @@
         }
     }else if (indexPath.section == 1) { //窗帘
         if (ON_IPAD) {
-            return 150;
+            return 100;
         }else {
             return 100;
         }
@@ -717,40 +735,69 @@
                 Device * device = [SQLManager getDeviceWithDeviceID:deviceId];
                 if (device.subTypeId == cata_light) {  //灯
                     if (device.UITypeOfLight == 1) { // 射灯
-                        deviceIconNormal = @"";
-                        deviceIconSelected = @"";
+                        deviceIconNormal = @"lv_icon_light_off";
+                        deviceIconSelected = @"lv_icon_light_on";
                     }else if (device.UITypeOfLight == 2) { //灯带
-                        deviceIconNormal = @"";
-                        deviceIconSelected = @"";
+                        deviceIconNormal = @"light_off_dd";
+                        deviceIconSelected = @"light_off_dd";
+                        if ([device.name isEqualToString:@"鞋柜灯带"]) {
+                            deviceIconNormal = @"light_off_dd_h";
+                            deviceIconSelected = @"light_off_dd_h";
+                        }
                     }else if (device.UITypeOfLight == 3) { //色灯
-                        deviceIconNormal = @"";
-                        deviceIconSelected = @"";
+                        deviceIconNormal = @"lv_icon_light_off";
+                        deviceIconSelected = @"lv_icon_light_on";
                     }
                 }else if(device.subTypeId == cata_curtain) { //窗帘
-                        deviceIconNormal = @"";
-                        deviceIconSelected = @"";
+                        deviceIconNormal = @"blind_icon";
+                        deviceIconSelected = @"blind_icon";
                 }else if(device.subTypeId == cata_env) { //环境
                     if (device.hTypeId == newWind) { //新风
-                        deviceIconNormal = @"";
-                        deviceIconSelected = @"";
+                        deviceIconNormal = @"newWind_off";
+                        deviceIconSelected = @"newWind_on";
                     }else if (device.hTypeId == air) {  //空调
-                        deviceIconNormal = @"";
-                        deviceIconSelected = @"";
+                        deviceIconNormal = @"airControl_off_v";
+                        deviceIconSelected = @"airControl_off_v";
                     }
                     
                 }else if(device.subTypeId == cata_media) { //影音
-                     deviceIconNormal = @"";
-                     deviceIconSelected = @"";
+                     deviceIconNormal = @"media_off";
+                     deviceIconSelected = @"media_on";
                 }
+                
+                UIImage *imageNormal = [UIImage imageNamed:deviceIconNormal];
+                UIImage *imageSelected = [UIImage imageNamed:deviceIconSelected];
                 
                 
                 UIButton *deviceBtn = [[UIButton alloc] initWithFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y, iconWidth, iconHeight)];
                 deviceBtn.tag = deviceId;
-                [deviceBtn setBackgroundImage:[UIImage imageNamed:deviceIconNormal] forState:UIControlStateNormal];
-                [deviceBtn setBackgroundImage:[UIImage imageNamed:deviceIconSelected] forState:UIControlStateSelected];
+                [deviceBtn setBackgroundImage:imageNormal forState:UIControlStateNormal];
+                [deviceBtn setBackgroundImage:imageSelected forState:UIControlStateSelected];
                 deviceBtn.selected = device.power; //开关状态
                 
+                if (deviceBtn.selected) {
+                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+110, imageSelected.size.width, imageSelected.size.height)];
+                }else {
+                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+110, imageNormal.size.width, imageNormal.size.height)];
+                }
+                
+                if (device.UITypeOfLight == 2) { //灯带
+                    if ([device.name isEqualToString:@"天花灯带"]) {
+                        [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+110, imageNormal.size.width, imageNormal.size.height+100)];
+                    }
+                }
+                
+                if (device.hTypeId == air) {  //空调
+                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+110, imageNormal.size.width, imageNormal.size.height+30)];
+                }
+                
+                if (device.hTypeId == newWind) { //新风
+                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+125, imageNormal.size.width, imageNormal.size.height)];
+                }
+                
                 [deviceBtn addTarget:self action:@selector(deviceBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+                
+                [self.planeGraph addSubview:deviceBtn];
             }
             
         }
@@ -758,7 +805,78 @@
 }
 
 - (void)deviceBtnClicked:(UIButton *)btn {
+    int deviceId = (int)btn.tag;
+    Device * device = [SQLManager getDeviceWithDeviceID:deviceId];
     
+    UIButton *touchBg = [[UIButton alloc] initWithFrame:self.view.frame];
+    touchBg.backgroundColor = RGB(0, 0, 0, 0.5);
+    [touchBg addTarget:self action:@selector(touchBgAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIViewController *superVC = [[UIViewController alloc] init];
+    superVC.view.frame = CGRectMake((UI_SCREEN_WIDTH-UI_SCREEN_WIDTH*2/3)/2, (UI_SCREEN_HEIGHT-UI_SCREEN_HEIGHT*2/3)/2, UI_SCREEN_WIDTH*2/3, UI_SCREEN_HEIGHT*2/3);
+    
+    UIViewController *deviceVC = [DeviceInfo calcController:device.hTypeId];
+    
+    
+    
+    if (device.subTypeId == cata_light) {  //灯
+        LightController *control = (LightController *)deviceVC;
+        control.deviceid = [NSString stringWithFormat:@"%d", device.eID];
+        control.roomID = (int)self.roomID;
+        deviceVC.view.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH*2/3, UI_SCREEN_HEIGHT*2/3);
+        [control visibleUI:device];
+        [control hideNaviBar:YES];
+        control.sLightBtn.hidden = YES;
+        control.ddLightBtn.hidden = YES;
+        control.cLightBtn.hidden = YES;
+        control.lightTitleBottomConstraint.constant = 20;
+        
+    }else if(device.subTypeId == cata_curtain) { //窗帘
+        
+        CurtainController *control = (CurtainController *)deviceVC;
+        control.deviceid = [NSString stringWithFormat:@"%d", device.eID];
+        control.roomID = (int)self.roomID;
+        deviceVC.view.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH*2/3, UI_SCREEN_HEIGHT*2/3);
+        [control hideNaviBar:YES];
+        
+    }else if(device.subTypeId == cata_env) { //环境
+        if (device.hTypeId == newWind) { //新风
+            
+            NewWindController *control = (NewWindController *)deviceVC;
+            control.deviceID = [NSString stringWithFormat:@"%d", device.eID];
+            control.roomID = (int)self.roomID;
+            deviceVC.view.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH*2/3, UI_SCREEN_HEIGHT*2/3);
+            [control hideNaviBar:YES];
+            control.highSpeedBtnBottomConstraint.constant = 50;
+            control.middleSpeedBtnBottomConstraint.constant = 50;
+            control.lowSpeedBtnBottomConstraint.constant = 50;
+           
+        }else if (device.hTypeId == air) {  //空调
+            AirController *control = (AirController *)deviceVC;
+            control.deviceid = [NSString stringWithFormat:@"%d", device.eID];
+            control.roomID = (int)self.roomID;
+            deviceVC.view.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH*2/3, UI_SCREEN_HEIGHT*2/3);
+            [control hideNaviBar:YES];
+            control.control_bannerConstraint.constant = 10;
+            control.control_banner.hidden = YES;
+            control.windSpeedBtn.hidden = YES;
+        }
+        
+    }else if(device.subTypeId == cata_media) { //影音
+       
+    }
+    
+    
+    
+    
+    [superVC.view addSubview:deviceVC.view];
+    [superVC addChildViewController:deviceVC];
+    [touchBg addSubview:superVC.view];
+    [self.tabBarController.view addSubview:touchBg];
+}
+
+- (void)touchBgAction:(UIButton *)btn {
+    [btn removeFromSuperview];
 }
 
 @end

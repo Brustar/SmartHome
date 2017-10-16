@@ -93,7 +93,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _hostType = [[UD objectForKey:@"HostType"] integerValue];
     _isGloom = NO;
     _isRomantic = NO;
     _isSprightly = NO;
@@ -348,6 +348,7 @@
     _SwitchLightArr = [[NSMutableArray alloc] init];
     [self.tableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
     [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
+    [self.tableView registerNib:[UINib nibWithNibName:@"CurtainC4TableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainC4TableViewCell"];//窗帘(C4)
     [self.tableView registerNib:[UINib nibWithNibName:@"TVTableViewCell" bundle:nil] forCellReuseIdentifier:@"TVTableViewCell"];//网络电视
     [self.tableView registerNib:[UINib nibWithNibName:@"NewColourCell" bundle:nil] forCellReuseIdentifier:@"NewColourCell"];//调色灯
     [self.tableView registerNib:[UINib nibWithNibName:@"OtherTableViewCell" bundle:nil] forCellReuseIdentifier:@"OtherTableViewCell"];//其他
@@ -819,6 +820,9 @@
         
         return aireCell;
     }if (indexPath.section == 4) {//窗帘
+        
+    if (_hostType == 0) {  //Crestron
+        
         CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor = [UIColor clearColor];
         aireCell.AddcurtainBtn.hidden = YES;
@@ -858,7 +862,51 @@
         
         
         return aireCell;
-    }if (indexPath.section == 5) {//TV
+    }else {
+        CurtainC4TableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainC4TableViewCell" forIndexPath:indexPath];
+        aireCell.backgroundColor = [UIColor clearColor];
+        aireCell.addBtn.hidden = YES;
+        aireCell.switchBtnTrailingConstraint.constant = 10;
+        aireCell.roomID = self.roomID;
+        aireCell.sceneid = self.sceneid;
+        Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
+        if(dictionary)
+        {
+            int openvalue;
+            for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                
+                if([dic objectForKey:@"deviceID"])
+                {
+                    deviceID = [dic[@"deviceID"] intValue];
+                    
+                }
+                if (deviceID == [_CurtainArray[indexPath.row] intValue]) {
+                    
+                    openvalue = [dic[@"openvalue"] intValue];
+                    
+                    if ((float)openvalue/100.0f > 0) {
+                        aireCell.switchBtn.selected = YES;
+                    }if ((float)openvalue/100.0f == 0) {
+                        aireCell.switchBtn.selected = NO;
+                    }
+                    
+                }
+                
+            }
+        }
+        
+        aireCell.deviceid = _CurtainArray[indexPath.row];
+        aireCell.name.text = device.name;
+        
+        
+        return aireCell;
+    }
+}
+    
+    
+    
+    
+    if (indexPath.section == 5) {//TV
         TVTableViewCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
         TVCell.TVConstraint.constant = 10;
         TVCell.AddTvDeviceBtn.hidden = YES;
@@ -1106,7 +1154,11 @@
                     ((AireTableViewCell *)cell).AddAireBtn.hidden = !proto.action.state;
                     break;
                 case curtain:
-                    ((CurtainTableViewCell *)cell).AddcurtainBtn.hidden = !proto.action.state;
+                    if (_hostType == 0) {  //Crestron
+                        ((CurtainTableViewCell *)cell).open.selected = proto.action.state;
+                    }else { //C4
+                        ((CurtainC4TableViewCell *)cell).switchBtn.selected = proto.action.state;
+                    }
                     break;
                 case TVtype:
                     ((TVTableViewCell *)cell).AddTvDeviceBtn.hidden = !proto.action.state;
@@ -1136,6 +1188,9 @@
 {
     if (indexPath.section == 5 || indexPath.section == 6 || indexPath.section == 8) {
         return 150;
+    }
+    if (indexPath.section == 4) {
+        return 100;
     }
     if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12 || indexPath.section == 13 || indexPath.section == 2) {
         return 50;

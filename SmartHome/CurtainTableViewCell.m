@@ -51,6 +51,7 @@
     NSData *data = [[DeviceInfo defaultManager] query:deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
+
 -(IBAction)save:(id)sender
 {
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
