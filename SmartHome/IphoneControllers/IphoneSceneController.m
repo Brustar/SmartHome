@@ -524,9 +524,9 @@ static NSString * const CYPhotoId = @"photo";
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
+    cell.delegate = self;
     if (indexPath.row+1 >= self.scenes.count) {
-        CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
-        cell.delegate = self;
         cell.imageView.image = [UIImage imageNamed:@"AddScene-ImageView"];
         cell.subImageView.image = [UIImage imageNamed:@"AddSceneBtn"];
         cell.sceneID = 0;
@@ -538,8 +538,6 @@ static NSString * const CYPhotoId = @"photo";
     
         return cell;
     }else{
-        CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
-        cell.delegate = self;
         Scene *scene = self.scenes[indexPath.row];
         cell.sceneID = scene.sceneID;
         cell.roomID = self.selectedRoomID;
@@ -566,36 +564,25 @@ static NSString * const CYPhotoId = @"photo";
         cell.SceneName.text = scene.sceneName;
         self.lgPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
         self.lgPress.delegate = self;
-        [collectionView addGestureRecognizer:self.lgPress];
+        [cell addGestureRecognizer:self.lgPress];
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"PhotoIcon9"]];
         [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
         cell.deleteBtn.hidden = NO;
         cell.powerBtn.hidden = NO;
         //场景是否开启
-        if (scene.status == 0) {
-            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
-        }else if (scene.status == 1) {
-            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
-        }
+        cell.powerBtn.selected = scene.status == 1;
+
         //场景定时是否启动
-        if (scene.isactive == 0) {
-            [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
-        }else if (scene.isactive == 1){
-             [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateNormal];
-        }
+        cell.seleteSendPowBtn.selected = scene.isactive == 1;
+
         //是否是系统场景：是的话不允许删除场景，按钮为禁止状态
         if([SQLManager sceneBySceneID:cell.sceneID].readonly == YES)
         {
             [cell.deleteBtn setEnabled:NO];
-//            cell.deleteBtn.hidden = YES;
-            
         }else{
-            
             [cell.deleteBtn setEnabled:YES];
-//            cell.deleteBtn.hidden = NO;
         }
         return cell;
-       
     }
     
 }
