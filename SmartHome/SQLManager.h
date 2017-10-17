@@ -215,4 +215,6 @@
 + (NSArray *)getAllDevicesInfoBySubTypeID:(int)subTypeID;
 + (Device *)getDeviceWithDeviceID:(int) deviceID airID:(int)airID;
 + (NSString *)getDeviceIDByENumberForC4:(NSInteger)eID airID:(int)airID;
+
++ (BOOL)updateAirPowerStatus:(int)deviceID power:(int)power airID:(int)airID;//更新空调开关状态
 @end

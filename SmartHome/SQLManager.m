@@ -3091,7 +3091,7 @@
     if([db open])
     {
         
-        NSString *sql = [NSString stringWithFormat:@"update Devices set power = %ld,  bright = %ld,  color = '%@',  position = %ld, volume = %ld, temperature = %ld,  fanspeed = %ld,  model = %ld  where ID = %d and masterID = '%ld'",(long)deviceInfo.power, (long)deviceInfo.bright, deviceInfo.color, (long)deviceInfo.position, (long)deviceInfo.volume, (long)deviceInfo.temperature, (long)deviceInfo.fanspeed, (long)deviceInfo.air_model, deviceInfo.eID, [[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"update Devices set power = %ld,  bright = %ld,  color = '%@',  position = %ld, volume = %ld, temperature = %ld,  fanspeed = %ld,  model = %ld  where ID = %d and masterID = '%ld' and airID = %d",(long)deviceInfo.power, (long)deviceInfo.bright, deviceInfo.color, (long)deviceInfo.position, (long)deviceInfo.volume, (long)deviceInfo.temperature, (long)deviceInfo.fanspeed, (long)deviceInfo.air_model, deviceInfo.eID, [[DeviceInfo defaultManager] masterID], deviceInfo.airID];
         
         ret = [db executeUpdate:sql];
         
@@ -3114,6 +3114,25 @@
     {
         
         NSString *sql = [NSString stringWithFormat:@"update Devices set power = %d,  bright = %d where ID = %d and masterID = '%ld'", power, bright, deviceID, [[DeviceInfo defaultManager] masterID]];
+        
+        ret = [db executeUpdate:sql];
+        
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return ret;
+}
+
+//更新空调开关状态
++ (BOOL)updateAirPowerStatus:(int)deviceID power:(int)power airID:(int)airID {
+    
+    FMDatabase *db = [SQLManager connetdb];
+    
+    BOOL ret = NO;
+    if([db open])
+    {
+        
+        NSString *sql = [NSString stringWithFormat:@"update Devices set power = %d where ID = %d and masterID = '%ld' and airID = %d", power, deviceID, [[DeviceInfo defaultManager] masterID], airID];
         
         ret = [db executeUpdate:sql];
         

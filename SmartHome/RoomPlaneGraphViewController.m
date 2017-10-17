@@ -29,7 +29,15 @@
         [self getDeviceStateInfoByTcp];//TCP获取所有设备状态
     }
     
-    [self getPlaneGraphConfiguration];
+    [self performSelector:@selector(getPlaneGraphConfiguration) withObject:nil afterDelay:1];
+}
+
+- (void)addNotifications {
+    [NC addObserver:self selector:@selector(airControllerStatusChangedNotification:) name:@"AirControllerStatusChangedNotifications" object:nil];
+}
+
+- (void)airControllerStatusChangedNotification:(NSNotification *)noti {
+    [self refreshDeviceTableView];
 }
 
 //获取房间平面图配置
@@ -188,10 +196,6 @@
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM收音机
     
     [self.planeGraph setContentMode:UIViewContentModeCenter];
-}
-
-- (void)addNotifications {
-    [NC addObserver:self selector:@selector(refreshHomeDetailNotification:) name:@"RefreshHomeDetailNotification" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -739,10 +743,10 @@
                         deviceIconSelected = @"lv_icon_light_on";
                     }else if (device.UITypeOfLight == 2) { //灯带
                         deviceIconNormal = @"light_off_dd";
-                        deviceIconSelected = @"light_off_dd";
+                        deviceIconSelected = @"light_on_dd";
                         if ([device.name isEqualToString:@"鞋柜灯带"]) {
                             deviceIconNormal = @"light_off_dd_h";
-                            deviceIconSelected = @"light_off_dd_h";
+                            deviceIconSelected = @"light_on_dd_h";
                         }
                     }else if (device.UITypeOfLight == 3) { //色灯
                         deviceIconNormal = @"lv_icon_light_off";
@@ -771,28 +775,25 @@
                 
                 UIButton *deviceBtn = [[UIButton alloc] initWithFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y, iconWidth, iconHeight)];
                 deviceBtn.tag = deviceId;
-                [deviceBtn setBackgroundImage:imageNormal forState:UIControlStateNormal];
-                [deviceBtn setBackgroundImage:imageSelected forState:UIControlStateSelected];
+                [deviceBtn setImage:imageNormal forState:UIControlStateNormal];
+                [deviceBtn setImage:imageSelected forState:UIControlStateSelected];
                 deviceBtn.selected = device.power; //开关状态
                 
+                CGFloat offset_Y = 105;
+                
                 if (deviceBtn.selected) {
-                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+110, imageSelected.size.width, imageSelected.size.height)];
+                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+offset_Y, imageSelected.size.width, imageSelected.size.height)];
                 }else {
-                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+110, imageNormal.size.width, imageNormal.size.height)];
+                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+offset_Y, imageNormal.size.width, imageNormal.size.height)];
                 }
                 
-                if (device.UITypeOfLight == 2) { //灯带
-                    if ([device.name isEqualToString:@"天花灯带"]) {
-                        [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+110, imageNormal.size.width, imageNormal.size.height+100)];
-                    }
-                }
                 
-                if (device.hTypeId == air) {  //空调
-                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+110, imageNormal.size.width, imageNormal.size.height+30)];
-                }
+//                if (device.hTypeId == air) {  //空调
+//                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+offset_Y, imageNormal.size.width, imageNormal.size.height+30)];
+//                }
                 
                 if (device.hTypeId == newWind) { //新风
-                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+125, imageNormal.size.width, imageNormal.size.height)];
+                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+offset_Y+10, imageNormal.size.width, imageNormal.size.height)];
                 }
                 
                 [deviceBtn addTarget:self action:@selector(deviceBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -808,30 +809,79 @@
     int deviceId = (int)btn.tag;
     Device * device = [SQLManager getDeviceWithDeviceID:deviceId];
     
-    UIButton *touchBg = [[UIButton alloc] initWithFrame:self.view.frame];
-    touchBg.backgroundColor = RGB(0, 0, 0, 0.5);
-    [touchBg addTarget:self action:@selector(touchBgAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIViewController *superVC = [[UIViewController alloc] init];
-    superVC.view.frame = CGRectMake((UI_SCREEN_WIDTH-UI_SCREEN_WIDTH*2/3)/2, (UI_SCREEN_HEIGHT-UI_SCREEN_HEIGHT*2/3)/2, UI_SCREEN_WIDTH*2/3, UI_SCREEN_HEIGHT*2/3);
-    
-    UIViewController *deviceVC = [DeviceInfo calcController:device.hTypeId];
-    
-    
-    
     if (device.subTypeId == cata_light) {  //灯
-        LightController *control = (LightController *)deviceVC;
-        control.deviceid = [NSString stringWithFormat:@"%d", device.eID];
-        control.roomID = (int)self.roomID;
-        deviceVC.view.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH*2/3, UI_SCREEN_HEIGHT*2/3);
-        [control visibleUI:device];
-        [control hideNaviBar:YES];
-        control.sLightBtn.hidden = YES;
-        control.ddLightBtn.hidden = YES;
-        control.cLightBtn.hidden = YES;
-        control.lightTitleBottomConstraint.constant = 20;
+        
+        for (UIButton *button in self.planeGraph.subviews) {
+            if ([button isKindOfClass:[UIButton class]]) {
+                if (button.tag == btn.tag) {
+                    button.selected = !button.selected;
+                    
+                    if (device.hTypeId == switchLight || device.hTypeId == dimmarLight) { //开关灯 or 调光灯
+                        
+                        if (device.UITypeOfLight == 1) { // 射灯
+                            
+                            NSString *deviceIconNormal = @"lv_icon_light_off";
+                            NSString *deviceIconSelected = @"lv_icon_light_on";
+                            if (button.selected) {
+                                [button setImage:[UIImage imageNamed:deviceIconSelected] forState:UIControlStateSelected];
+                                CGRect temp = button.frame;
+                                temp.size.width = [UIImage imageNamed:deviceIconSelected].size.width;
+                                temp.size.height = [UIImage imageNamed:deviceIconSelected].size.height;
+                                button.frame = temp;
+                            }else {
+                                [button setImage:[UIImage imageNamed:deviceIconNormal] forState:UIControlStateNormal];
+                                CGRect temp = button.frame;
+                                temp.size.width = [UIImage imageNamed:deviceIconNormal].size.width;
+                                temp.size.height = [UIImage imageNamed:deviceIconNormal].size.height;
+                                button.frame = temp;
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                }
+            }
+        }
+        
+        
+        NSData *data = [[DeviceInfo defaultManager] toogleLight:btn.selected deviceID:[NSString stringWithFormat:@"%d", deviceId]];
+        SocketManager *sock = [SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        //更新左侧列表设备状态
+        [SQLManager updateDevicePowerStatus:deviceId power:btn.selected];
+        [self refreshDeviceTableView];
+        
+        if (device.hTypeId == dimmarLight) {  //调光灯
+            UIButton *touchBg = [[UIButton alloc] initWithFrame:self.view.frame];
+            touchBg.backgroundColor = RGB(0, 0, 0, 0.7);
+            [touchBg addTarget:self action:@selector(touchBgAction:) forControlEvents:UIControlEventTouchUpInside];
+            
+            UIViewController *superVC = [[UIViewController alloc] init];
+            superVC.view.frame = CGRectMake((UI_SCREEN_WIDTH-UI_SCREEN_WIDTH*2/3)/2, (UI_SCREEN_HEIGHT-UI_SCREEN_HEIGHT*2/3)/2, UI_SCREEN_WIDTH*2/3, UI_SCREEN_HEIGHT*2/3);
+            
+            CustomSliderViewController *vc = [[CustomSliderViewController alloc] initWithNibName:@"CustomSliderViewController" bundle:nil];
+            vc.deviceid = [NSString stringWithFormat:@"%d", device.eID];
+            vc.view.frame = CGRectMake(100, 0, UI_SCREEN_WIDTH*1/3, 50);
+            [superVC.view addSubview:vc.view];
+            [superVC addChildViewController:vc];
+            [touchBg addSubview:superVC.view];
+            [self.tabBarController.view addSubview:touchBg];
+            
+        }
         
     }else if(device.subTypeId == cata_curtain) { //窗帘
+        
+        UIButton *touchBg = [[UIButton alloc] initWithFrame:self.view.frame];
+        touchBg.backgroundColor = RGB(0, 0, 0, 0.7);
+        [touchBg addTarget:self action:@selector(touchBgAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIViewController *superVC = [[UIViewController alloc] init];
+        superVC.view.frame = CGRectMake((UI_SCREEN_WIDTH-UI_SCREEN_WIDTH*2/3)/2, (UI_SCREEN_HEIGHT-UI_SCREEN_HEIGHT*2/3)/2, UI_SCREEN_WIDTH*2/3, UI_SCREEN_HEIGHT*2/3);
+        
+        UIViewController *deviceVC = [DeviceInfo calcController:device.hTypeId];
         
         CurtainController *control = (CurtainController *)deviceVC;
         control.deviceid = [NSString stringWithFormat:@"%d", device.eID];
@@ -839,9 +889,24 @@
         deviceVC.view.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH*2/3, UI_SCREEN_HEIGHT*2/3);
         [control hideNaviBar:YES];
         
+        [superVC.view addSubview:deviceVC.view];
+        [superVC addChildViewController:deviceVC];
+        [touchBg addSubview:superVC.view];
+        [self.tabBarController.view addSubview:touchBg];
+        
     }else if(device.subTypeId == cata_env) { //环境
+        
+        UIButton *touchBg = [[UIButton alloc] initWithFrame:self.view.frame];
+        touchBg.backgroundColor = RGB(0, 0, 0, 0.7);
+        [touchBg addTarget:self action:@selector(touchBgAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIViewController *superVC = [[UIViewController alloc] init];
+        superVC.view.frame = CGRectMake((UI_SCREEN_WIDTH-UI_SCREEN_WIDTH*2/3)/2, (UI_SCREEN_HEIGHT-UI_SCREEN_HEIGHT*2/3)/2, UI_SCREEN_WIDTH*2/3, UI_SCREEN_HEIGHT*2/3);
+        
+        UIViewController *deviceVC = [DeviceInfo calcController:device.hTypeId];
+        
         if (device.hTypeId == newWind) { //新风
-            
+            [[DeviceInfo defaultManager] setRoomID:self.roomID];
             NewWindController *control = (NewWindController *)deviceVC;
             control.deviceID = [NSString stringWithFormat:@"%d", device.eID];
             control.roomID = (int)self.roomID;
@@ -850,8 +915,14 @@
             control.highSpeedBtnBottomConstraint.constant = 50;
             control.middleSpeedBtnBottomConstraint.constant = 50;
             control.lowSpeedBtnBottomConstraint.constant = 50;
+            
+            [superVC.view addSubview:deviceVC.view];
+            [superVC addChildViewController:deviceVC];
+            [touchBg addSubview:superVC.view];
+            [self.tabBarController.view addSubview:touchBg];
            
         }else if (device.hTypeId == air) {  //空调
+            [[DeviceInfo defaultManager] setRoomID:self.roomID];
             AirController *control = (AirController *)deviceVC;
             control.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             control.roomID = (int)self.roomID;
@@ -860,6 +931,11 @@
             control.control_bannerConstraint.constant = 10;
             control.control_banner.hidden = YES;
             control.windSpeedBtn.hidden = YES;
+            
+            [superVC.view addSubview:deviceVC.view];
+            [superVC addChildViewController:deviceVC];
+            [touchBg addSubview:superVC.view];
+            [self.tabBarController.view addSubview:touchBg];
         }
         
     }else if(device.subTypeId == cata_media) { //影音
@@ -869,14 +945,96 @@
     
     
     
-    [superVC.view addSubview:deviceVC.view];
-    [superVC addChildViewController:deviceVC];
-    [touchBg addSubview:superVC.view];
-    [self.tabBarController.view addSubview:touchBg];
+    
 }
 
 - (void)touchBgAction:(UIButton *)btn {
     [btn removeFromSuperview];
+}
+
+#pragma mark - refresh planeGraph
+- (void)refreshPlaneGraph {
+    for (UIButton *btn in self.planeGraph.subviews) {
+        if ([btn isKindOfClass:[UIButton class]]) {
+            
+            int deviceId = (int)btn.tag;
+            Device * device = [SQLManager getDeviceWithDeviceID:deviceId];
+            btn.selected = device.power;
+            
+            if (device.hTypeId == switchLight || device.hTypeId == dimmarLight) { //开关灯 or 调光灯
+                
+                if (device.UITypeOfLight == 1) { // 射灯
+                    
+                    NSString *deviceIconNormal = @"lv_icon_light_off";
+                    NSString *deviceIconSelected = @"lv_icon_light_on";
+                    if (btn.selected) {
+                        [btn setImage:[UIImage imageNamed:deviceIconSelected] forState:UIControlStateSelected];
+                        CGRect temp = btn.frame;
+                        temp.size.width = [UIImage imageNamed:deviceIconSelected].size.width;
+                        temp.size.height = [UIImage imageNamed:deviceIconSelected].size.height;
+                        btn.frame = temp;
+                    }else {
+                        [btn setImage:[UIImage imageNamed:deviceIconNormal] forState:UIControlStateNormal];
+                        CGRect temp = btn.frame;
+                        temp.size.width = [UIImage imageNamed:deviceIconNormal].size.width;
+                        temp.size.height = [UIImage imageNamed:deviceIconNormal].size.height;
+                        btn.frame = temp;
+                    }
+                    
+                }
+                
+                
+            }
+            
+        }
+    }
+}
+
+#pragma mark - NewLightCellDelegate
+- (void)onLightPowerBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
+    [SQLManager updateDevicePowerStatus:deviceID power:btn.selected];
+    [self refreshPlaneGraph];
+}
+
+- (void)onLightSliderValueChanged:(UISlider *)slider deviceID:(int)deviceID {
+    [SQLManager updateDeviceBrightStatus:deviceID value:slider.value];
+    [self refreshPlaneGraph];
+}
+
+#pragma mark - PowerLightCellDelegate
+- (void)onPowerLightPowerBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
+    [SQLManager updateDevicePowerStatus:deviceID power:btn.selected];
+    [self refreshPlaneGraph];
+}
+
+#pragma mark - NewColourCellDelegate
+- (void)onColourSwitchBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
+    [SQLManager updateDevicePowerStatus:deviceID power:btn.selected];
+    [self refreshPlaneGraph];
+}
+
+#pragma mark - CurtainTableViewCellDelegate
+- (void)onCurtainOpenBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
+    [SQLManager updateCurtainPowerStatus:deviceID power:btn.selected];
+}
+
+- (void)onCurtainSliderBtnValueChanged:(UISlider *)slider deviceID:(int)deviceID {
+    [SQLManager updateCurtainPositionStatus:deviceID value:slider.value];
+}
+
+#pragma mark - BjMusicTableViewCellDelegate
+- (void)onBjPowerButtonClicked:(UIButton *)btn deviceID:(int)deviceID {
+    [SQLManager updateDevicePowerStatus:deviceID power:btn.selected];
+}
+
+#pragma mark - OtherTableViewCellDelegate
+- (void)onOtherSwitchBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
+    [SQLManager updateDevicePowerStatus:deviceID power:btn.selected];
+    [self refreshPlaneGraph];
+}
+
+- (void)dealloc {
+    [NC removeObserver:self];
 }
 
 @end

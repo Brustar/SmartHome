@@ -34,6 +34,7 @@
 #import "AirController.h"
 #import "NewWindController.h"
 #import "CurtainController.h"
+#import "CustomSliderViewController.h"
 
 
 

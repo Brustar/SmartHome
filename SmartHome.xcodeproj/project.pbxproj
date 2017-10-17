@@ -198,6 +198,8 @@
 		2EF75C811EB32D390055147D /* DeviceTimingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C801EB32D390055147D /* DeviceTimingViewController.m */; };
 		39951F658604DC8E80FE9361 /* Pods_SmartHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB719EB6AD94BADA3066D54C /* Pods_SmartHome.framework */; };
 		CD263F281F8E0B4D006F427D /* RoomPlaneGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD263F271F8E0B4D006F427D /* RoomPlaneGraphViewController.m */; };
+		CD36DFD91F95E590006A6EA0 /* CustomSliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD36DFD71F95E590006A6EA0 /* CustomSliderViewController.m */; };
+		CD36DFDA1F95E590006A6EA0 /* CustomSliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD36DFD81F95E590006A6EA0 /* CustomSliderViewController.xib */; };
 		CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12431EB316EF00E0B301 /* DeliveryAddressViewController.m */; };
 		CD4F12471EB4400A00E0B301 /* DeliveryAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12461EB4400A00E0B301 /* DeliveryAddressCell.m */; };
 		CD4F124A1EB452D800E0B301 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12491EB452D800E0B301 /* Address.m */; };
@@ -764,6 +766,9 @@
 		AB719EB6AD94BADA3066D54C /* Pods_SmartHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD263F261F8E0B4D006F427D /* RoomPlaneGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomPlaneGraphViewController.h; sourceTree = "<group>"; };
 		CD263F271F8E0B4D006F427D /* RoomPlaneGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomPlaneGraphViewController.m; sourceTree = "<group>"; };
+		CD36DFD61F95E590006A6EA0 /* CustomSliderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSliderViewController.h; sourceTree = "<group>"; };
+		CD36DFD71F95E590006A6EA0 /* CustomSliderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSliderViewController.m; sourceTree = "<group>"; };
+		CD36DFD81F95E590006A6EA0 /* CustomSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomSliderViewController.xib; sourceTree = "<group>"; };
 		CD4F12421EB316EF00E0B301 /* DeliveryAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryAddressViewController.h; sourceTree = "<group>"; };
 		CD4F12431EB316EF00E0B301 /* DeliveryAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryAddressViewController.m; sourceTree = "<group>"; };
 		CD4F12451EB4400A00E0B301 /* DeliveryAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryAddressCell.h; sourceTree = "<group>"; };
@@ -2079,6 +2084,9 @@
 				CD8CFCCE1ED6844600B49712 /* PlaneGraphViewController.m */,
 				CD263F261F8E0B4D006F427D /* RoomPlaneGraphViewController.h */,
 				CD263F271F8E0B4D006F427D /* RoomPlaneGraphViewController.m */,
+				CD36DFD61F95E590006A6EA0 /* CustomSliderViewController.h */,
+				CD36DFD71F95E590006A6EA0 /* CustomSliderViewController.m */,
+				CD36DFD81F95E590006A6EA0 /* CustomSliderViewController.xib */,
 			);
 			name = PlaneGraph;
 			sourceTree = "<group>";
@@ -2447,6 +2455,7 @@
 				2E12CC121E7F5E3000C7D006 /* CYPhotoCell.xib in Resources */,
 				2E2D92CF1EF1067C0007B90A /* PowerLightCell.xib in Resources */,
 				CDEC868B1E99CD7B009EC245 /* Family.storyboard in Resources */,
+				CD36DFDA1F95E590006A6EA0 /* CustomSliderViewController.xib in Resources */,
 				CD7DDA071E81168000638DB3 /* login_pwd@2x.png in Resources */,
 				2EBABC741E835EC70093EF3A /* AireTableViewCell.xib in Resources */,
 				2EB516F51E9CE3A40064B18E /* ScreenCurtainCell.xib in Resources */,
@@ -2994,6 +3003,7 @@
 				CD75CC9B1F132FE500917D40 /* SingleMaskView.m in Sources */,
 				2E2EA78A1EFD0EC70030EB46 /* ChangePassWordVC.m in Sources */,
 				0F6ADFE31E7136C500BFF67F /* ConversationViewController.m in Sources */,
+				CD36DFD91F95E590006A6EA0 /* CustomSliderViewController.m in Sources */,
 				CD7863B31E84D2A800F42AC0 /* RegistSecondStepViewController.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
 				CD75CC9E1F13308800917D40 /* UIView+SetRect.m in Sources */,

@@ -396,6 +396,9 @@ static NSString *const airCellIdentifier = @"airCell";
     NSData *data=[[DeviceInfo defaultManager] toogleAirCon:self.switcher.isOn deviceID:self.deviceid roomID:device.airID];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    [SQLManager updateAirPowerStatus:[self.deviceid intValue] power:self.switcher.isOn airID:device.airID];
+    [NC postNotificationName:@"AirControllerStatusChangedNotifications" object:nil];
 }
 
 - (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
