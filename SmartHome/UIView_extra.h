@@ -29,22 +29,4 @@
  */
 - (void)removeAllSubviews;
 
-/**
- @brief 弹窗
- @param title 弹窗标题
-        message 弹窗信息
- */
-+ (void) showAlertView: (NSString*) title andMessage: (NSString *) message;
-
-/**
- *  弹窗
- *
- *  @param title    弹窗标题
- *  @param message  弹窗信息
- *  @param delegate 弹窗代理
- */
-+ (void) showAlertView: (NSString*) title
-            andMessage: (NSString *) message
-          withDelegate: (UIViewController<UIAlertViewDelegate> *) delegate;
-
 @end
