@@ -383,17 +383,10 @@
 }
 
 - (IBAction)registBtnClicked:(id)sender {
-    
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"扫描二维码注册", @"体验账号注册", nil];
-    [sheet showInView:self.view];
-}
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    alert.popoverPresentationController.barButtonItem = self.navigationItem.leftBarButtonItem;
 
-#pragma mark - UIActionSheet Delegate 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString *btnTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-    if ([btnTitle isEqualToString:@"扫描二维码注册"]) {
-        
-        
+    [alert addAction:[UIAlertAction actionWithTitle:@"扫描二维码注册" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         if ([QRCodeReader supportsMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]]) {
             static QRCodeReaderViewController *vc = nil;
             static dispatch_once_t onceToken;
@@ -423,28 +416,29 @@
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
             [alert addAction:okAction];
         }
-        
-    }else if ([btnTitle isEqualToString:@"体验账号注册"]) {
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"体验账号注册" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
         UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"registFirstStepForPhoneVC"];
         [self.navigationController pushViewController:vc animated:YES];
-    }
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)writeQRCodeStringToFile:(NSString *)string{
-    NSArray *paths;
-    NSString  *arrayPath;
-paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                             NSUserDomainMask, YES);//搜索沙盒路径下的document文件夹。
-arrayPath = [[paths objectAtIndex:0]
+    NSString  *arrayPath = [[paths objectAtIndex:0]
              stringByAppendingPathComponent:@"QRCodeString.plist"];//在此文件夹下创建文件，相当于你的xxx.txt
 
-NSArray *array = [NSArray arrayWithObjects:
+    NSArray *array = [NSArray arrayWithObjects:
                   string, nil];//将你的数据放入数组中
 
-[array writeToFile:arrayPath atomically:YES];//将数组中的数据写入document下xxx.txt。
-
-    
+    [array writeToFile:arrayPath atomically:YES];//将数组中的数据写入document下xxx.txt。
 }
 
 #pragma mark - QRCode Delegate

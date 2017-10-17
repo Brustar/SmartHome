@@ -26,7 +26,8 @@ typedef NS_ENUM(NSUInteger, deviceType) {
     windowOpener = 42,
     flowering = 33,
     feeding = 34,
-    Wetting
+    Wetting = 35,
+    Atomizing 
 };
 
 typedef NS_ENUM(NSUInteger, hType) {

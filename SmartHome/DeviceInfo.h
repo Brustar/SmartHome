@@ -82,6 +82,7 @@ enum{
 @property (nonatomic) long masterID;
 //房间ID
 @property (nonatomic) long roomID;
+@property (nonatomic) int deviceType;
 //主机ip
 @property (nonatomic, strong) NSString *masterIP;
 //主机端口
