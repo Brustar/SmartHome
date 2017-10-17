@@ -493,6 +493,14 @@ static NSString * const CYPhotoId = @"photo";
             return @"air";
         case newWind:
             return @"newWind";
+        case plugin:
+            return @"plugin";
+        case flowering:
+            return @"flowering";
+        case feeding:
+            return @"feeding";
+        case Wetting:
+            return @"Wetting";
         default:
             break;
     }
@@ -501,25 +509,26 @@ static NSString * const CYPhotoId = @"photo";
 
 -(NSString *) seguaName:(int) typeID
 {
+    Room *room = self.rooms[self.roomIndex];
     switch (typeID) {
         case cata_light:
             return @"lighting";
         case cata_curtain:
             return @"curtain";
         case cata_env:
-        {    Room *rm = self.rooms[self.roomIndex];
-            int type = [SQLManager currentDevicesOfRoom:rm.rId subTypeID:2];
-            
+        {
+            int type = [SQLManager currentDevicesOfRoom:room.rId subTypeID:cata_env];
             return [self storyIDByroom:type];
         }
         case cata_single_product:
-            return @"flowering";
+        {
+            int type = [SQLManager currentDevicesOfRoom:room.rId subTypeID:cata_single_product];
+            return [self storyIDByroom:type];
+            //return @"flowering";
+        }
         case cata_media:
         {
-            Room *room = self.rooms[self.roomIndex];
-            int rid = room.rId;
-            int type = [SQLManager currentDevicesOfRoom:rid subTypeID:3];
-            
+            int type = [SQLManager currentDevicesOfRoom:room.rId subTypeID:cata_media];
             return [self storyIDByroom:type];
         }
         case cata_security:

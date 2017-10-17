@@ -383,7 +383,6 @@
 }
 
 - (IBAction)registBtnClicked:(id)sender {
-    
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"扫描二维码注册", @"体验账号注册", nil];
     [sheet showInView:self.view];
 }
