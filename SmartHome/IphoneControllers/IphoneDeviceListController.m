@@ -494,6 +494,7 @@ static NSString * const CYPhotoId = @"photo";
         case newWind:
             return @"newWind";
         case plugin:
+        case Atomizing:
             return @"plugin";
         case flowering:
             return @"flowering";
@@ -501,6 +502,7 @@ static NSString * const CYPhotoId = @"photo";
             return @"feeding";
         case Wetting:
             return @"Wetting";
+        
         default:
             break;
     }
