@@ -346,7 +346,12 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 }
 
 - (IBAction)loadCatalog:(id)sender {
-    self.lightCatalog = ((UIButton *)sender).tag;
+    UIButton *btn = (UIButton *)sender;
+    btn.enabled = NO;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(50 * [self.lights count] * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
+        btn.enabled = YES;
+    });
+    self.lightCatalog = btn.tag;
     int htype = [[SQLManager getEType:[self.deviceid integerValue]] intValue];
     self.base.hidden = self.btnPen.hidden = (htype == 3?NO:YES);
     self.tranformView.hidden=(htype == 2?NO:YES);
