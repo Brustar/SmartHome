@@ -14,4 +14,5 @@
 @property (weak, nonatomic) IBOutlet UISlider *lightSlider;
 @property(nonatomic, copy)  NSString *deviceid;
 
+- (IBAction)onSliderValueChange:(id)sender;
 @end

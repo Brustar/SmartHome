@@ -195,7 +195,7 @@
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM收音机
     
-    [self.planeGraph setContentMode:UIViewContentModeCenter];
+    [self.planeGraph setContentMode:UIViewContentModeScaleAspectFit];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -668,6 +668,12 @@
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             if ([responseObject[@"result"] integerValue] == 0) {
                 
+                   NSString *photoWidth =  responseObject[@"width"];
+                   NSString *photoHeight =  responseObject[@"height"];
+                
+                   self.photoWidth = [photoWidth floatValue];
+                   self.photoHeight = [photoHeight floatValue];
+                
                     NSString *bgImgUrl = responseObject[@"imgpath"];//设置平面背景
                     if (bgImgUrl.length >0) {
                         [self.planeGraph sd_setImageWithURL:[NSURL URLWithString:bgImgUrl] placeholderImage:nil options:SDWebImageRetryFailed];
@@ -779,12 +785,13 @@
                 [deviceBtn setImage:imageSelected forState:UIControlStateSelected];
                 deviceBtn.selected = device.power; //开关状态
                 
-                CGFloat offset_Y = 105;
+                CGFloat offset_X = (self.planeGraph.size.width - self.photoWidth)/2;
+                CGFloat offset_Y = (self.planeGraph.size.height - self.photoHeight)/2;
                 
                 if (deviceBtn.selected) {
-                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+offset_Y, imageSelected.size.width, imageSelected.size.height)];
+                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x+offset_X, iconRect.origin.y+offset_Y, imageSelected.size.width, imageSelected.size.height)];
                 }else {
-                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+offset_Y, imageNormal.size.width, imageNormal.size.height)];
+                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x+offset_X, iconRect.origin.y+offset_Y, imageNormal.size.width, imageNormal.size.height)];
                 }
                 
                 
@@ -793,7 +800,7 @@
 //                }
                 
                 if (device.hTypeId == newWind) { //新风
-                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x, iconRect.origin.y+offset_Y+10, imageNormal.size.width, imageNormal.size.height)];
+                    [deviceBtn setFrame:CGRectMake(iconRect.origin.x+offset_X, iconRect.origin.y+offset_Y+10, imageNormal.size.width, imageNormal.size.height)];
                 }
                 
                 [deviceBtn addTarget:self action:@selector(deviceBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -860,11 +867,12 @@
             [touchBg addTarget:self action:@selector(touchBgAction:) forControlEvents:UIControlEventTouchUpInside];
             
             UIViewController *superVC = [[UIViewController alloc] init];
-            superVC.view.frame = CGRectMake((UI_SCREEN_WIDTH-UI_SCREEN_WIDTH*2/3)/2, (UI_SCREEN_HEIGHT-UI_SCREEN_HEIGHT*2/3)/2, UI_SCREEN_WIDTH*2/3, UI_SCREEN_HEIGHT*2/3);
+            superVC.view.frame = CGRectMake((UI_SCREEN_WIDTH-UI_SCREEN_WIDTH*2/3)/2, (UI_SCREEN_HEIGHT-UI_SCREEN_HEIGHT*2/3)/2, UI_SCREEN_WIDTH*2/3, 50);
             
             CustomSliderViewController *vc = [[CustomSliderViewController alloc] initWithNibName:@"CustomSliderViewController" bundle:nil];
             vc.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             vc.view.frame = CGRectMake(100, 0, UI_SCREEN_WIDTH*1/3, 50);
+            
             [superVC.view addSubview:vc.view];
             [superVC addChildViewController:vc];
             [touchBg addSubview:superVC.view];

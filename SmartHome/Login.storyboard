@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1001,7 +1001,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YRl-pe-vR9">
-                                <rect key="frame" x="0.0" y="44" width="414" height="492"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="472"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="hostsCell" id="u0g-Vf-6yE" customClass="HostListCell">
@@ -1056,7 +1056,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="8oz-Rz-pk9" secondAttribute="bottom" constant="80" id="BJe-hH-7C7"/>
-                            <constraint firstItem="YRl-pe-vR9" firstAttribute="top" secondItem="sYX-c9-Afd" secondAttribute="top" constant="44" id="Joh-6b-ccJ"/>
+                            <constraint firstItem="YRl-pe-vR9" firstAttribute="top" secondItem="sYX-c9-Afd" secondAttribute="top" constant="64" id="Joh-6b-ccJ"/>
                             <constraint firstAttribute="trailing" secondItem="YRl-pe-vR9" secondAttribute="trailing" id="KO5-SR-IUZ"/>
                             <constraint firstAttribute="trailing" secondItem="8oz-Rz-pk9" secondAttribute="trailing" constant="30" id="T3M-pG-cwr"/>
                             <constraint firstItem="YRl-pe-vR9" firstAttribute="leading" secondItem="sYX-c9-Afd" secondAttribute="leading" id="lcd-UO-4ZL"/>

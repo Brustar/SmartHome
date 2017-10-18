@@ -57,5 +57,7 @@
 @property (nonatomic,assign)  NSInteger deviceType_count;//设备种类数量
 @property (nonatomic, assign) NSInteger roomID;
 @property (nonatomic, strong) NSString *roomName;
+@property (nonatomic, assign) CGFloat photoWidth;
+@property (nonatomic, assign) CGFloat photoHeight;
 
 @end
