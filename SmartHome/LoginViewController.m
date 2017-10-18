@@ -8,6 +8,9 @@
 
 #import "LoginViewController.h"
 
+#import "UIView+Popup.h"
+#import "STColorPicker.h"
+
 @interface LoginViewController ()
 
 @end
@@ -15,7 +18,6 @@
 @implementation LoginViewController
 
 @synthesize userType;
-@synthesize UserType;
 
 -(NSMutableArray *)hostIDS
 {
@@ -59,7 +61,6 @@
     self.nameTextField.delegate = self;
     self.pwdTextField.delegate = self;
     userType = [[UD objectForKey:@"Type"] intValue];
-    UserType =[[UD objectForKey:@"UserType"] intValue];
     
     if ([[UD objectForKey:@"Account"] isEqualToString:@"DemoUser"]) {
         self.nameTextField.text = @"";
