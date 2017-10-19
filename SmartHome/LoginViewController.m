@@ -384,7 +384,8 @@
 }
 
 - (IBAction)registBtnClicked:(id)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:ON_IPAD?UIAlertControllerStyleAlert:UIAlertControllerStyleActionSheet];
     alert.popoverPresentationController.barButtonItem = self.navigationItem.leftBarButtonItem;
 
     [alert addAction:[UIAlertAction actionWithTitle:@"扫描二维码注册" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {

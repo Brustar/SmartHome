@@ -135,7 +135,7 @@
             }else {
                 alertMsg = @"支付失败";
             }
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"支付结果" message:alertMsg preferredStyle:UIAlertControllerStyleActionSheet];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"支付结果" message:alertMsg preferredStyle:ON_IPAD?UIAlertControllerStyleAlert:UIAlertControllerStyleActionSheet];
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             }]];
             [self presentViewController:alert animated:YES completion:nil];
