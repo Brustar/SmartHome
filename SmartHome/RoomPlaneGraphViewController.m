@@ -862,7 +862,7 @@
         [self refreshDeviceTableView];
         
         if (device.hTypeId == dimmarLight) {  //调光灯
-            UIButton *touchBg = [[UIButton alloc] initWithFrame:self.view.frame];
+            /*UIButton *touchBg = [[UIButton alloc] initWithFrame:self.view.frame];
             touchBg.backgroundColor = RGB(0, 0, 0, 0.7);
             [touchBg addTarget:self action:@selector(touchBgAction:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -876,7 +876,7 @@
             [superVC.view addSubview:vc.view];
             [superVC addChildViewController:vc];
             [touchBg addSubview:superVC.view];
-            [self.tabBarController.view addSubview:touchBg];
+            [self.tabBarController.view addSubview:touchBg];*/
             
         }
         

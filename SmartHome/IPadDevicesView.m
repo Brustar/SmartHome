@@ -191,7 +191,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 cell.backgroundColor = [UIColor clearColor];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.AddLightBtn.hidden = YES;
-                cell.LightConstraint.constant = 5;
+                cell.LightConstraint.constant = 15;
                 
                 cell.NewLightNameLabel.text = device.name;
                 cell.NewLightSlider.continuous = NO;
@@ -218,7 +218,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
             {
                 PowerLightCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"PowerLightCell" forIndexPath:indexPath];
                 newColourCell.addPowerLightBtn.hidden = YES;
-                newColourCell.powerBtnConstraint.constant = 10;
+                newColourCell.powerBtnConstraint.constant = 20;
                 newColourCell.backgroundColor =[UIColor clearColor];
                 [newColourCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
                 newColourCell.powerLightNameLabel.text = device.name;

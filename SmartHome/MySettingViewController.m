@@ -474,9 +474,20 @@
 }
 
 - (void)doResetOperation {
-    //删除服务器端自定义场景
-    [self resetSceneOfServer];
+    [self resetSceneOfServer]; //删除服务器端自定义场景
+}
+
+- (BOOL)resetSceneShortcuts {
+    BOOL resetSucceed = NO;
+    NSString *shortcutsPath = [[IOManager sceneShortcutsPath] stringByAppendingPathComponent:@"sceneShortcuts.plist"];
+    BOOL exist = [[NSFileManager defaultManager] fileExistsAtPath:shortcutsPath];
+    if (exist) {
+        resetSucceed = [[NSFileManager defaultManager] removeItemAtPath:shortcutsPath error:nil];
+    }else {
+        return YES;
+    }
     
+    return resetSucceed;
 }
 
 - (void)resetSceneOfServer {
@@ -572,8 +583,13 @@
             //发通知刷新设备首页，场景首页,app首页
             [NC postNotificationName:@"ChangeHostRefreshUINotification" object:nil];
             
-            
-            [MBProgressHUD showSuccess:@"恢复成功"];
+            //删除本地的场景快捷键
+            BOOL succeed = [self resetSceneShortcuts];
+            if (succeed) {
+                [MBProgressHUD showSuccess:@"恢复成功"];
+            }else {
+                [MBProgressHUD showError:@"恢复失败,请稍后再试"];
+            }
             
         }else{
             [MBProgressHUD showError:@"恢复失败,请稍后再试"];
