@@ -41,7 +41,7 @@
     return sharedInstance;
 }
 
-- (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive
+- (void)addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive
 {
     if (name.length >0) {
         
@@ -157,7 +157,8 @@
   }
     
 }
-- (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive block:(SaveOK )block{
+
+- (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive block:(SaveOK )block {
     self.block = block;
     
     if (name.length >0) {
@@ -287,6 +288,81 @@
     }
     
 }
+
+- (void)addDeviceTimer:(DeviceSchedule *)timer  isEdited:(BOOL)isEdited  isActive:(NSInteger)isActive block:(SaveOK )block {
+    self.block = block;
+    
+    if (!isEdited) {
+        
+        //同步云端
+        NSString *deviceTimerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], timer.deviceID];
+        NSString *deviceTimerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:deviceTimerFile];
+        
+        NSString *URL = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+        
+        NSString *fileName = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], timer.deviceID];
+        NSDictionary *parameter;
+        
+        NSMutableArray *schedulesTemp = [NSMutableArray array];
+        
+        for (NSDictionary *dict in timer.schedules) {
+            Schedule *schedule = [[Schedule alloc] initWhithoutSchedule];
+            
+            [schedule setValuesForKeysWithDictionary:dict];
+            
+            [schedulesTemp addObject:schedule];
+        }
+        
+        timer.schedules = [schedulesTemp copy];
+        if(timer.schedules.count >0)
+        {
+            parameter = @{
+                          @"token":[UD objectForKey:@"AuthorToken"],
+                          @"optype":@(1),
+                          @"scencefile":deviceTimerPath,
+                          @"isactive":@(1)
+                          //@"starttime":timer.startTime,
+                          //@"endtime":timer.endTime,
+                          //@"weekvalue":timer.repetition,
+                          //@"equipmentid":@(timer.eID),
+                          //@"startvalue":timer.deviceValue
+                          };
+        }
+        
+        
+        NSData *fileData = [NSData dataWithContentsOfFile:deviceTimerPath];
+        
+        [[UploadManager defaultManager] uploadDeviceTimer:fileData url:URL dic:parameter fileName:fileName completion:^(id responseObject) {
+            
+            NSNumber *result = [responseObject objectForKey:@"result"];
+            //NSString *msg = [responseObject objectForKey:@"msg"];
+            
+            if(result.integerValue == 0) { //成功
+                
+                //[MBProgressHUD showSuccess:@"新增成功"];
+                
+                if (self.block) {
+                    self.block(YES);
+                }
+                
+            }else { //失败
+                //[MBProgressHUD showError:@"新增失败"];
+                if (self.block) {
+                    self.block(NO);
+                }
+            }
+            
+            
+        }];
+        
+    }else {
+        //编辑设备定时时，修改本地plist文件
+        [IOManager writeDeviceTimer:[NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], timer.deviceID] timer:timer];     
+    }
+    
+}
+
+
 
 //另存为(保存为一个新的场景）
 - (void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(UIImage *)image

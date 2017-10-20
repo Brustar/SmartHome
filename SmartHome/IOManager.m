@@ -22,9 +22,14 @@
     return scenesPath;
 }
 
-+ (NSString *) scenesPath
++ (NSString *)scenesPath
 {
     return [IOManager newPath:@"scenes"];
+}
+
++ (NSString *)deviceTimerPath
+{
+    return [IOManager newPath:@"deviceTimer"];
 }
 
 + (NSString *)realScenePath {
@@ -135,6 +140,16 @@
     NSDictionary *dic = [PrintObject getObjectData:sceneData];
     BOOL ret = [dic writeToFile:scenePath atomically:YES];
 
+    NSAssert(ret,@"写文件失败");
+    
+}
+
++ (void)writeDeviceTimer:(NSString *)timerFile timer:(id)timerData
+{
+    NSString *timerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:timerFile];
+    NSDictionary *dic = [PrintObject getObjectData:timerData];
+    BOOL ret = [dic writeToFile:timerPath atomically:YES];
+    
     NSAssert(ret,@"写文件失败");
     
 }

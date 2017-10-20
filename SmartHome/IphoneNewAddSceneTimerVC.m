@@ -128,16 +128,25 @@
 }
 -(void)rightBtnClicked:(UIButton *)btn
 {
-    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
-    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
-    _scene = [[Scene alloc] initWhithoutSchedule];
-    if(plistDic)
-    {
-        [_scene setValuesForKeysWithDictionary:plistDic];
-    }
-    if (self.isDeviceTimer) {
+    if (self.isDeviceTimer && _timer) {
+        
+        NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], _timer.deviceID];
+        NSString *timerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:timerFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:timerPath];
+        
+        if(plistDic)
+        {
+            [_timer setValuesForKeysWithDictionary:plistDic];
+        }
+        
+        self.schedule.startTime = self.starTimeLabel.text;
+        self.schedule.endTime = self.endTimeLabel.text;
+        _timer.schedules = @[self.schedule];
+        
+        
+        [[SceneManager defaultManager] addDeviceTimer:_timer isEdited:YES isActive:1 block:nil];
+        
         NSDictionary *dic = @{
                               @"startDay":self.starTimeLabel.text,
                               @"endDay":self.endTimeLabel.text,
@@ -147,8 +156,19 @@
         [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
         
         [self.navigationController popViewControllerAnimated:YES];
+        
     }else {
     
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+        NSString *scenePath = [[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+        
+        _scene = [[Scene alloc] initWhithoutSchedule];
+        
+        if(plistDic)
+        {
+            [_scene setValuesForKeysWithDictionary:plistDic];
+        }
     
     _viewControllerArrs =self.navigationController.viewControllers;
     NSInteger vcCount = _viewControllerArrs.count;

@@ -10,4 +10,14 @@
 
 @implementation DeviceSchedule
 
+- (instancetype)initWithoutScheduleByDeviceID:(int)deviceid
+{
+    self = [super init];
+    if (self) {
+        [self setDeviceID:deviceid];
+        [self setSchedules:@[]];
+    }
+    return self;
+}
+
 @end

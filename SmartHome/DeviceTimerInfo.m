@@ -6,9 +6,19 @@
 //  Copyright © 2017年 Brustar. All rights reserved.
 //
 
+
+
 #import "DeviceTimerInfo.h"
 
 @implementation DeviceTimerInfo
 
+- (instancetype)initWithoutSchedule 
+{
+    self = [super init];
+    if (self) {
+        [self setSchedules:@[]];
+    }
+    return self;
+}
 
 @end
