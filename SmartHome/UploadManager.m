@@ -109,7 +109,7 @@
         // 将本地的文件上传至服务器
         if(timerData)
         {
-            [formData appendPartWithFileData:timerData name:@"DeviceTimerFile" fileName:fileName mimeType:@"multipart/form-data"];
+            [formData appendPartWithFileData:timerData name:@"ScenceFile" fileName:fileName mimeType:@"multipart/form-data"];
             
         }
         
