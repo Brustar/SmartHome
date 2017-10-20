@@ -22,8 +22,6 @@
 //     [IOManager removeTempFile];
     [self.addPowerLightBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.powerLightBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [self.powerLightBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
-    [self.powerLightBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
     if (ON_IPAD) {
         
         self.powerLightNameLabel.font = [UIFont systemFontOfSize:17];

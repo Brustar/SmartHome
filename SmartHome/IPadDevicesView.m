@@ -216,14 +216,15 @@ static NSString *const leftMenuCell = @"leftMenuCell";
             }
             case 1:
             {
-                PowerLightCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"PowerLightCell" forIndexPath:indexPath];
-                newColourCell.addPowerLightBtn.hidden = YES;
-                newColourCell.powerBtnConstraint.constant = 20;
-                newColourCell.backgroundColor =[UIColor clearColor];
-                [newColourCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
-                newColourCell.powerLightNameLabel.text = device.name;
-                newColourCell.tag = device.eID;
-                return newColourCell;
+                PowerLightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PowerLightCell" forIndexPath:indexPath];
+                //cell.addPowerLightBtn.hidden = YES;
+                cell.addPowerLightBtn.alpha = 0;
+                cell.powerBtnConstraint.constant = 20;
+                cell.backgroundColor =[UIColor clearColor];
+                [cell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+                cell.powerLightNameLabel.text = device.name;
+                cell.tag = device.eID;
+                return cell;
             }
             case air:
             {
@@ -239,16 +240,15 @@ static NSString *const leftMenuCell = @"leftMenuCell";
             case 21://curtain:
             {
                 if (_hostType == 0) {  //Crestron
-                
-                CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
-                aireCell.backgroundColor = [UIColor clearColor];
-                aireCell.AddcurtainBtn.hidden = YES;
-                aireCell.curtainContraint.constant = 10;
-                aireCell.roomID = self.roomID;
-                aireCell.tag = device.eID;
-                aireCell.label.text = device.name;
-                [aireCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:nil];
-                return aireCell;
+                    CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
+                    aireCell.backgroundColor = [UIColor clearColor];
+                    aireCell.AddcurtainBtn.hidden = YES;
+                    aireCell.curtainContraint.constant = 10;
+                    aireCell.roomID = self.roomID;
+                    aireCell.tag = device.eID;
+                    aireCell.label.text = device.name;
+                    [aireCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:nil];
+                    return aireCell;
                 }else {
                     CurtainC4TableViewCell * aireCell = [tableView  dequeueReusableCellWithIdentifier:@"CurtainC4TableViewCell" forIndexPath:indexPath];
                     aireCell.backgroundColor = [UIColor clearColor];
