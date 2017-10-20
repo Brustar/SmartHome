@@ -15,7 +15,6 @@
 //定时列表
 @property (strong,nonatomic) NSArray *schedules;
 
-- (instancetype)initWithoutScheduleByDeviceID:(int)deviceid
-;
+- (instancetype)initWithoutScheduleByDeviceID:(int)deviceid;
 
 @end

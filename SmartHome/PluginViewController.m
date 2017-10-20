@@ -38,6 +38,9 @@
     [self naviToDevice];
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     NSString *deviceName = [SQLManager deviceNameByDeviceID:[self.deviceid intValue]];
+    if ([deviceName isEqualToString:@""]) {
+        deviceName = @"智能插座";
+    }
     self.title = [NSString stringWithFormat:@"%@ - %@",roomName,deviceName];
     [self setNaviBarTitle:self.title];
     if (ON_IPAD) {
