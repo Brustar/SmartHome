@@ -103,6 +103,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     }else if(device.hTypeId>=10){
         //多媒体或智能单品
         [[DeviceInfo defaultManager] setRoomID:self.roomID];
+        [[DeviceInfo defaultManager] setDeviceType:(int)device.hTypeId];
         [self showDetailViewController:[DeviceInfo calcController:device.hTypeId] sender:self];
     }
     
