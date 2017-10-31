@@ -11,10 +11,12 @@
 @interface DeviceSchedule : NSObject
 
 @property (nonatomic,assign) int deviceID;
+@property (nonatomic,assign) NSInteger eNumber;
 
 //定时列表
 @property (strong,nonatomic) NSArray *schedules;
 
 - (instancetype)initWithoutScheduleByDeviceID:(int)deviceid;
+- (instancetype)initWithoutScheduleByENumber:(NSInteger)eNumber;
 
 @end

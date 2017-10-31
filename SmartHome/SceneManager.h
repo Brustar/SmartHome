@@ -33,7 +33,7 @@ typedef void(^SaveOK)(BOOL flag);
 
 - (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive block:(SaveOK )block;
 
-- (void)addDeviceTimer:(DeviceSchedule *)timer  isEdited:(BOOL)isEdited  isActive:(NSInteger)isActive block:(SaveOK )block;  
+- (void)addDeviceTimer:(DeviceSchedule *)timer  isEdited:(BOOL)isEdited  mode:(int)mode isActive:(NSInteger)isActive block:(SaveOK )block;  
 
 - (void) delScene:(Scene *)scene;
 

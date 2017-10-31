@@ -20,4 +20,15 @@
     return self;
 }
 
+- (instancetype)initWithoutScheduleByENumber:(NSInteger)eNumber
+{
+    self = [super init];
+    if (self) {
+        [self setENumber:eNumber];
+        [self setDeviceID:(int)eNumber];
+        [self setSchedules:@[]];
+    }
+    return self;
+}
+
 @end

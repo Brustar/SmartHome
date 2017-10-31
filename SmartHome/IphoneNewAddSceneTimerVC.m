@@ -131,7 +131,7 @@
     
     if (self.isDeviceTimer && _timer) {
         
-        NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], _timer.deviceID];
+        NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%ld.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], _timer.eNumber];
         NSString *timerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:timerFile];
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:timerPath];
         
@@ -145,7 +145,7 @@
         _timer.schedules = @[self.schedule];
         
         
-        [[SceneManager defaultManager] addDeviceTimer:_timer isEdited:YES isActive:1 block:nil];
+        [[SceneManager defaultManager] addDeviceTimer:_timer isEdited:YES  mode:1 isActive:1 block:nil];
         
         NSDictionary *dic = @{
                               @"startDay":self.starTimeLabel.text,
