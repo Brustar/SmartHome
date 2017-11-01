@@ -25,7 +25,7 @@
 
 @interface SQLManager : NSObject
 
-+(FMDatabase *)connetdb;
++(FMDatabase *)connectdb;
 //从数据中获取所有设备信息
 +(NSArray *)getAllDevicesInfo;
 //从数据中获取所有设备

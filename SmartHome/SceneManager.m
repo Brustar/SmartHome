@@ -117,7 +117,7 @@
                     NSString *roomName = [SQLManager getRoomNameByRoomID:(int)scene.roomID];
                     
                     //插入数据库
-                    FMDatabase *db = [SQLManager connetdb];
+                    FMDatabase *db = [SQLManager connectdb];
                     if([db open])
                     {
                          NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,'%ld','%d','%d','%ld')",scene.sceneID,name,roomName,[sceneDict objectForKey:@"image_url"],(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID],0,isplan,isactive];
@@ -237,7 +237,7 @@
                     NSString *roomName = [SQLManager getRoomNameByRoomID:(int)scene.roomID];
                     
                     //插入数据库
-                    FMDatabase *db = [SQLManager connetdb];
+                    FMDatabase *db = [SQLManager connectdb];
                     if([db open])
                     {
                         NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,'%ld','%d','%d','%ld')",scene.sceneID,name,roomName,[sceneDict objectForKey:@"image_url"],(long)scene.roomID,0,@"0",0,[[DeviceInfo defaultManager] masterID],0,isplan, isactive];
@@ -427,7 +427,7 @@
                       NSString *roomName = [SQLManager getRoomNameByRoomID:(int)scene.roomID];
                       
                       //插入数据库
-                      FMDatabase *db = [SQLManager connetdb];
+                      FMDatabase *db = [SQLManager connectdb];
                       if([db open])
                       {
                           NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,null,'%ld')",scene.sceneID,name,roomName,imgUrl,(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID]];
@@ -677,7 +677,7 @@
 - (BOOL)favoriteScene:(Scene *)newScene
 {
        // 写sqlite更新场景表的isFavorite字段
-        FMDatabase *db = [SQLManager connetdb];
+        FMDatabase *db = [SQLManager connectdb];
         if (![db open]) {
             NSLog(@"Could not open db.");
             return NO;
@@ -697,7 +697,7 @@
     if(ret)
     {
         // 写sqlite更新场景文件名
-        FMDatabase *db = [SQLManager connetdb];
+        FMDatabase *db = [SQLManager connectdb];
         if (![db open]) {
             NSLog(@"Could not open db.");
             return ;

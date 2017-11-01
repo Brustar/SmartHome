@@ -15,7 +15,7 @@
 
 @implementation SQLManager
 
-+(FMDatabase *)connetdb
++(FMDatabase *)connectdb
 {
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:SMART_DB];
     NSLog(@"dbPath:%@",dbPath);
@@ -25,7 +25,7 @@
 //从数据中获取该房间的所有设备信息（按房间号）
 +(NSArray *)getAllDevicesInfo:(int)roomID
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSMutableArray *deviceModels = [NSMutableArray array];
     if([db open])
     {
@@ -45,7 +45,7 @@
 //从数据中获取某种类型的设备信息（按subTypeID）
 + (NSArray *)getAllDevicesInfoBySubTypeID:(int)subTypeID
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSMutableArray *deviceModels = [NSMutableArray array];
     if([db open])
     {
@@ -65,7 +65,7 @@
 //从数据中获取所有设备信息
 +(NSArray *)getAllDevicesInfo
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSMutableArray *deviceModels = [NSMutableArray array];
     if([db open])
     {
@@ -84,7 +84,7 @@
 //从数据库中获取所有场景信息
 + (NSArray *)getAllScene
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSMutableArray *deviceModels = [NSMutableArray array];
     if([db open])
     {
@@ -112,7 +112,7 @@
 //从数据库中获取所有场景信息(按房间排序)
 + (NSArray *)getAllSceneOrderByRoomID
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSMutableArray *deviceModels = [NSMutableArray array];
     if([db open])
     {
@@ -139,7 +139,7 @@
 
 +(NSString *)deviceNameByDeviceID:(int)eId
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSString *eName = @"";
     if([db open])
     {
@@ -161,7 +161,7 @@
 //根据设备ID获取设备htypeID
 +(NSInteger)deviceHtypeIDByDeviceID:(int)eId
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSInteger htypeID = 0;
     if([db open])
     {
@@ -183,7 +183,7 @@
 
 +(NSInteger)deviceIDByDeviceName:(NSString *)deviceName
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSInteger eId = 0;
     if([db open])
     {
@@ -202,7 +202,7 @@
 }
 +(NSString *)deviceUrlByDeviceID:(int)deviceID
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSString *url = nil;
     if([db open])
     {
@@ -231,7 +231,7 @@
 
 +(NSString *)deviceTypeNameByDeviceID:(int)eId
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSString *typeName=@"";
     if([db open])
     {
@@ -254,7 +254,7 @@
 
 + (NSString *)getSubTypeNameByDeviceID:(int)eId
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSString *subTypeName = @"";
     if([db open])
     {
@@ -273,7 +273,7 @@
 
 +(NSString*)lightTypeNameByDeviceID:(int)eId
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSString *typeName;
     if([db open])
     {
@@ -296,7 +296,7 @@
 {
     NSString *cata = catalogID<10?[NSString stringWithFormat:@"0%d",catalogID]:[NSString stringWithFormat:@"%d",catalogID];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSString *deviceID = @"";
     if([db open])
     {
@@ -319,7 +319,7 @@
 
 + (NSArray *)devicesWithCatalogID:(long)catalogID room:(int)roomID
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     NSMutableArray *names = [NSMutableArray new];
     if([db open])
     {
@@ -397,7 +397,7 @@
 +(NSArray *)deviceOfRoom:(int) roomID
 {
     NSMutableArray *devices = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID =  [[DeviceInfo defaultManager] masterID];
@@ -425,7 +425,7 @@
 }
 +(int)getIsAllRoomIdByIsAll:(NSInteger)isAll
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     int eId = 0;
     if([db open])
     {
@@ -445,7 +445,7 @@
 }
 + (BOOL)isWholeHouse:(NSInteger)eId
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     int ret = 0;
     if([db open])
     {
@@ -465,7 +465,7 @@
 +(NSArray *)deviceTypeIDByRoom:(NSInteger)roomID
 {
     NSMutableArray *subTypes = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql = nil;
@@ -504,7 +504,7 @@
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID
 {
     NSMutableArray *subTypes = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql = nil;
@@ -546,7 +546,7 @@
 +(NSArray *)getAllDevices
 {
     NSMutableArray *subTypes = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID = [[DeviceInfo defaultManager] masterID];
@@ -588,7 +588,7 @@
 + (NSMutableArray *)typeName:(int)typeID byRoom:(int) roomID
 {
     NSMutableArray *subTypes = [NSMutableArray new];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql ;
@@ -618,7 +618,7 @@
 + (NSArray *)deviceIdsByRoomId:(int)roomID
 {
     NSMutableArray *deviceDIs = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID =  [[DeviceInfo defaultManager] masterID];
@@ -642,7 +642,7 @@
 {
     NSMutableArray *lightNames = [NSMutableArray array];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID = [[DeviceInfo defaultManager] masterID];
@@ -668,7 +668,7 @@
 {
     NSMutableArray *lights = [NSMutableArray array];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID =[[DeviceInfo defaultManager] masterID];
@@ -695,7 +695,7 @@
 {
     NSMutableArray *curtains = [NSMutableArray array];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID = [[DeviceInfo defaultManager] masterID];
@@ -721,7 +721,7 @@
 {
     NSString *deviceID = nil;
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID =  [[DeviceInfo defaultManager] masterID];
@@ -741,7 +741,7 @@
 
 + (NSInteger)getRoomIDByDeviceID:(int)deviceID {
     NSInteger roomID = 0;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT rID FROM Devices where ID = '%d' and masterID = '%ld'",deviceID,[[DeviceInfo defaultManager] masterID]];
@@ -760,7 +760,7 @@
 
 + (NSString *)getCameraUrlByDeviceID:(int)deviceID {
     NSString *cameraURL = nil;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT camera_url FROM Devices where ID = '%d' and masterID = '%ld'",deviceID,[[DeviceInfo defaultManager] masterID]];
@@ -780,7 +780,7 @@
 + (NSArray *)getDeviceIDsByHtypeID:(NSString *)htypeid
 {
     NSMutableArray *array = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where htypeid = \'%@\' and masterID = '%ld'",htypeid,[[DeviceInfo defaultManager] masterID]];
@@ -800,7 +800,7 @@
 + (NSArray *)getDeviceIDsByRid:(NSInteger)rId
 {
     NSMutableArray *array = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = '%ld' and isIR = 0 and masterID = '%ld'", rId, [[DeviceInfo defaultManager] masterID]];
@@ -820,7 +820,7 @@
 + (NSArray *)getDeviceIDsBySubTypeId:(int)subTypeId
 {
     NSMutableArray *array = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where subTypeId = '%d' and isIR = 0 and masterID = '%ld'", subTypeId, [[DeviceInfo defaultManager] masterID]];
@@ -840,7 +840,7 @@
 +(NSArray *)getDeviceByTypeName:(NSString  *)typeid andRoomID:(NSInteger)roomID
 {
     NSMutableArray *array = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and htypeid = \'%@\' and masterID = '%ld'",(long)roomID,typeid,[[DeviceInfo defaultManager] masterID]];
@@ -859,7 +859,7 @@
 +(NSArray *)getDeviceBysubTypeid:(NSString  *)subtypeid andRoomID:(NSInteger)roomID
 {
     NSMutableArray *array = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql = nil;
@@ -885,7 +885,7 @@
 +(NSArray *)getDeviceByTypeName:(NSString  *)typeName
 {
     NSMutableArray *array = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where subTypeName = \'%@\' and masterID = '%ld'",typeName,[[DeviceInfo defaultManager] masterID]];
@@ -905,7 +905,7 @@
 +(NSString *)getEType:(NSInteger)eID
 {
     NSString * htypeID=nil;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID =[[DeviceInfo defaultManager] masterID];
@@ -925,7 +925,7 @@
 +(NSString *)getENumber:(NSInteger)eID
 {
     NSString * enumber=nil;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID = [[DeviceInfo defaultManager] masterID];
@@ -966,7 +966,7 @@
 +(NSString *)getDeviceIDByENumber:(NSInteger)eID
 {
     NSString *deviceID=nil;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID = [[DeviceInfo defaultManager] masterID];
@@ -985,7 +985,7 @@
 +(NSString *)getDeviceIDByENumberForC4:(NSInteger)eID airID:(int)airID htypeID:(int)htypeID
 {
     NSString *deviceID=nil;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID = [[DeviceInfo defaultManager] masterID];
@@ -1004,7 +1004,7 @@
 +(NSString *)getDeviceIDByENumberForC4:(NSInteger)eID airID:(int)airID
 {
     NSString *deviceID=nil;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID = [[DeviceInfo defaultManager] masterID];
@@ -1026,7 +1026,7 @@
     
     NSString *sql=[NSString stringWithFormat:@"select id,roomName,name from Scenes where name like '%%%@%%' and masterID = '%ld'" , name , masterID];
     NSMutableArray *scenes= [NSMutableArray new];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -1052,7 +1052,7 @@
     NSString *sql=[NSString stringWithFormat:@"select stype from Scenes where id=%d and masterID = '%ld'" ,sceneid, masterID];
     
     int readonly=0;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -1074,7 +1074,7 @@
     NSString *sql=[NSString stringWithFormat:@"select snumber from Scenes where id=%d and masterID = '%ld'" ,sceneid, masterID];
     
     NSString *snumber=nil;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -1096,7 +1096,7 @@
     NSString *sql=[NSString stringWithFormat:@"select rId from devices where enumber='%@' and masterID = '%ld'",enumber, masterID];
     
     int roomId=0;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -1118,7 +1118,7 @@
     NSString *sql = [NSString stringWithFormat:@"select openforcurrentuser from Rooms where masterID = '%ld' and ID = '%d'", masterID, roomID];
     
     int roomAuthority = 0;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -1140,7 +1140,7 @@
     NSString *sql=[NSString stringWithFormat:@"select rId from Scenes where ID=%d and masterID = '%ld'",sceneID, masterID];
     
     int roomId=0;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -1163,7 +1163,7 @@
     NSString *sql=[NSString stringWithFormat:@"select NAME from Scenes where ID=%d and masterID = '%ld'",sceneID, masterID];
     
     NSString *sceneName;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -1189,7 +1189,7 @@
     {
         [eIdStr appendString:[NSString stringWithFormat:@"%@,",deviceDic[@"deviceID"]]];
     }
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID =  [[DeviceInfo defaultManager] masterID];
@@ -1220,7 +1220,7 @@
         sql = [NSString stringWithFormat:@"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>0 and htypeid<>45 and rid = %d group by subtypeid" ,roomID];
     }
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -1244,7 +1244,7 @@
     NSMutableArray *subTypeNames = [NSMutableArray array];
     NSMutableArray *deviceIDArr = [NSMutableArray array];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     
     if([db open])
     {
@@ -1296,7 +1296,7 @@
 {
     NSMutableArray *deviceIDs = [NSMutableArray array];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     
     if([db open])
     {
@@ -1324,7 +1324,7 @@
 //根据roomID 从Devices 表 查询出 subTypeName字段(可能有重复数据，要去重)
 + (NSArray *)getDevicesSubTypeNamesWithRoomID:(int)roomID {
     NSMutableArray *subTypeNames = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     
     if([db open])
     {
@@ -1353,7 +1353,7 @@
 + (NSArray *)allTypeinRoom:(int)roomID
 {
     NSMutableArray *subTypeNames = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     
     if([db open])
     {
@@ -1385,7 +1385,7 @@
 + (NSArray *)getDevicesIDWithRoomID:(int)roomID SubTypeName:(NSString *)subTypeName
 {
     NSMutableArray *htypeIDs = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     
     if([db open])
     {
@@ -1415,7 +1415,7 @@
 {
     NSString *subTypeName = nil;
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     
     if([db open])
     {
@@ -1438,7 +1438,7 @@
 {
     NSString *subTypeName = nil;
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     
     if([db open])
     {
@@ -1461,7 +1461,7 @@
 {
     NSArray *deviceIDs;
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     
     if([db open])
     {
@@ -1492,7 +1492,7 @@
 {
     NSMutableArray *lights = [NSMutableArray new];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID =  [[DeviceInfo defaultManager] masterID];
@@ -1513,7 +1513,7 @@
 {
     NSMutableArray *lights = [NSMutableArray new];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID = [[DeviceInfo defaultManager] masterID];
@@ -1533,7 +1533,7 @@
 {
     NSMutableArray *lights = [NSMutableArray new];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID = [[DeviceInfo defaultManager] masterID];
@@ -1555,7 +1555,7 @@
 {
     NSMutableArray *lights = [NSMutableArray new];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID = [[DeviceInfo defaultManager] masterID];
@@ -1576,7 +1576,7 @@
 {
     Device *light = [Device new];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql;
@@ -1599,7 +1599,7 @@
 
 +(int) currentDevicesOfRoom:(int)roomID subTypeID:(int)subTypeID
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql;
@@ -1624,7 +1624,7 @@
 {
     NSMutableArray *devices = [NSMutableArray new];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql;
@@ -1653,7 +1653,7 @@
 {
     NSMutableArray *devices = [NSMutableArray new];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql;
@@ -1682,7 +1682,7 @@
 {
     NSMutableArray *devices = [NSMutableArray new];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql;
@@ -1710,7 +1710,7 @@
 {
     NSMutableArray *curtains = [NSMutableArray new];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID = [[DeviceInfo defaultManager] masterID];
@@ -1731,7 +1731,7 @@
 {
     NSMutableArray *curtains = [NSMutableArray new];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID =  [[DeviceInfo defaultManager] masterID];
@@ -1753,7 +1753,7 @@
 {
     Device *device = nil;
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT * FROM Devices where ID = %d and masterID = '%ld'",deviceID, [[DeviceInfo defaultManager] masterID]];
@@ -1772,7 +1772,7 @@
 {
     Device *device = nil;
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT * FROM Devices where ID = %d and masterID = '%ld' and airID = %d",deviceID, [[DeviceInfo defaultManager] masterID], airID];
@@ -1791,7 +1791,7 @@
 {
     Device *device = nil;
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID =[[DeviceInfo defaultManager] masterID];
@@ -1813,7 +1813,7 @@
 {
     NSMutableArray *temp = [NSMutableArray new];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {     
         NSString *sql = [NSString stringWithFormat:@"SELECT nickname,portrait FROM chats where user_id = '%@'",userid];
@@ -1833,7 +1833,7 @@
 {
     NSMutableArray *temp = [NSMutableArray new];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT nickname,portrait FROM chats"];
@@ -1877,7 +1877,7 @@
 {
     NSString *typeName = [self getDeviceTypeNameWithID:deviceID subTypeName:subTypeName];
     int typeID = 0;
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"select subtypeid from devices where id = %@",deviceID];
@@ -1898,7 +1898,7 @@
 }
 
 +(NSString *) transferSubType:(int)typeID{
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"select catalogName from catalog where id = %d",typeID];
@@ -2013,7 +2013,7 @@
 {
     NSString *typeName = nil;
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     
     if([db open])
     {
@@ -2034,7 +2034,7 @@
 {
     NSMutableArray *subNames = [NSMutableArray array];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     
     if([db open])
     {
@@ -2132,7 +2132,7 @@
 {
     NSMutableArray *ids = [NSMutableArray array];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     
     if([db open])
     {
@@ -2155,7 +2155,7 @@
 + (NSArray *)getDeviceTypeNameWithSubTypeName:(NSString *)subTypeName {
     NSMutableArray *typeNames = [NSMutableArray array];
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     
     if([db open])
     {
@@ -2219,7 +2219,7 @@
 
 +(void)initSQlite
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if ([db open]) {
         
         NSString *sqlRoom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER, \"imgUrl\" TEXT,\"ibeacon\" INTEGER,\"totalVisited\" INTEGER,\"masterID\" TEXT,\"openforcurrentuser\" INTEGER,\"isAll\" INTEGER)";
@@ -2249,7 +2249,7 @@
 
 + (NSInteger)numbersOfDeviceType {
     NSInteger count = 0;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if ([db open]) {
         
         NSString *sql =[NSString stringWithFormat: @"SELECT count(*) as count FROM catalog"];
@@ -2267,7 +2267,7 @@
 
 +(NSArray *)allSceneModels
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     NSMutableArray *sceneModles = [NSMutableArray array];
     if([db open])
     {
@@ -2311,7 +2311,7 @@
 
 + (NSArray *)getAllSceneWithRoomID:(int)roomID
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     NSMutableArray *sceneModles = [NSMutableArray array];
     
     if([db open])
@@ -2356,7 +2356,7 @@
 }
 +(Scene *)sceneBySceneID:(int)sId
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     Scene *scene = [Scene new];
     if([db open])
     {
@@ -2377,7 +2377,7 @@
 }
 +(BOOL)deleteScene:(int)sceneId
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     BOOL isSuccess = false;
     if([db open])
     {
@@ -2392,7 +2392,7 @@
     NSMutableArray *scens = [NSMutableArray array];
     
     
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Scenes where rId = %d",roomId];
@@ -2420,7 +2420,7 @@
 +(NSArray *)getAllSceneIdsFromSql
 {
     NSMutableArray *sceneIds = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID =  [[DeviceInfo defaultManager] masterID];
@@ -2441,7 +2441,7 @@
 +(NSArray *)getFavorScene
 {
     NSMutableArray *scens = [NSMutableArray array];
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     
     if([db open])
     {
@@ -2464,7 +2464,7 @@
 +(NSArray *)getAllRoomsInfoByName:(NSString *)name
 {
     NSMutableArray *roomList = [NSMutableArray array];
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if([db open])
     {
         if (name) {
@@ -2488,7 +2488,7 @@
 
 +(NSArray *)getAllRoomsWhenHasDevices
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     NSMutableArray *roomList = [NSMutableArray array];
     if([db open])
     {
@@ -2515,7 +2515,7 @@
 
 +(NSArray *)getAllRoomsInfo
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     NSMutableArray *roomList = [NSMutableArray array];
     if([db open])
     {
@@ -2543,7 +2543,7 @@
 //获取所有房间除了全屋
 +(NSArray *)getAllRoomsInfoWithoutIsAll
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     NSMutableArray *roomList = [NSMutableArray array];
     if([db open])
     {
@@ -2572,7 +2572,7 @@
 
 +(int)getRoomIDByBeacon:(int)beacon
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     int rID = 0;
     if([db open])
     {
@@ -2592,7 +2592,7 @@
 
 + (NSString *)getRoomNameByRoomID:(int) rId
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     NSString *rName ;
     if([db open])
     {
@@ -2610,7 +2610,7 @@
 
 + (NSString *)getRoomNameByDeviceID:(int) deviceId
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     NSString *rName ;
     if([db open])
     {
@@ -2628,7 +2628,7 @@
 
 + (BOOL)updateSceneIsActive:(NSInteger)isActive sceneID:(int)sceneID
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     
     BOOL ret = NO;
     if([db open])
@@ -2647,7 +2647,7 @@
 
 + (BOOL)updateScenePic:(NSString *)img sceneID:(int)sceneID
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     
     BOOL ret = NO;
     if([db open])
@@ -2665,7 +2665,7 @@
 }
 
 + (BOOL)updateSceneStatus:(int)status sceneID:(int)sceneID roomID:(int)roomID {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     
     BOOL ret = NO;
     if([db open])
@@ -2688,7 +2688,7 @@
 
 +(BOOL)updateTotalVisited:(int)roomID
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     int oldTotalVisite = 0;
     BOOL ret = false;
     if([db open])
@@ -2712,7 +2712,7 @@
 
 #pragma mark - chats
 + (BOOL)updateChatsPortraitByID:(int)userID url:(NSString *)url {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if (![db open]) {
         NSLog(@"Could not open db");
         return NO;
@@ -2724,7 +2724,7 @@
 }
 #pragma mark - chats
 + (BOOL)updateChatsPortraitByID:(int)userID nickname:(NSString *)nickname {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if (![db open]) {
         NSLog(@"Could not open db");
         return NO;
@@ -2736,7 +2736,7 @@
 }
 #pragma mark - User
 + (BOOL)updateUserPortraitUrlByID:(int)userID url:(NSString *)url {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if (![db open]) {
         NSLog(@"Could not open db");
         return NO;
@@ -2748,7 +2748,7 @@
 }
 
 + (BOOL)updateUserNickNameByID:(int)userID nickName:(NSString *)nickName {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if (![db open]) {
         NSLog(@"Could not open db");
         return NO;
@@ -2762,7 +2762,7 @@
 }
 
 + (BOOL)insertOrReplaceUser:(UserInfo *)info {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if (![db open]) {
         NSLog(@"Could not open db");
         return NO;
@@ -2774,7 +2774,7 @@
 }
 
 + (UserInfo *)getUserInfo:(int)userID {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     UserInfo *info = [[UserInfo alloc] init];
     if (![db open]) {
         NSLog(@"Could not open db");
@@ -2805,7 +2805,7 @@
 #pragma mark - channel favor
 +(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type deviceID:(int)deviceID
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     NSMutableArray *mutabelArr = [NSMutableArray array];
     if (![db open]) {
         NSLog(@"Could not open db");
@@ -2837,7 +2837,7 @@
 +(BOOL)getAllChangeChannelForFavoritedNewName:(NSString *)newName FmId:(NSInteger)fmId
 {
     // 写sqlite更新场景表的isFavorite字段
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if (![db open]) {
         NSLog(@"Could not open db.");
         return NO;
@@ -2850,7 +2850,7 @@
 
 +(BOOL)deleteChannelForChannelID:(NSInteger)channel_id
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     BOOL isSuccess = false;
     if([db open])
     {
@@ -2862,7 +2862,7 @@
 
 +(BOOL) isIR:(int) deviceId
 {
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     int ret = NO;
     if([db open])
     {
@@ -2881,7 +2881,7 @@
 
 +(NSArray *)getDetailListWithID:(NSInteger)ID
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if (![db open]) {
         NSLog(@"Could not open db.");
         return nil;
@@ -2906,7 +2906,7 @@
 
 +(NSArray *) writeScenes:(NSArray *)rooms
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     NSMutableArray *plists = [NSMutableArray new];
     if([db open])
     {
@@ -2977,7 +2977,7 @@
         return;
     }
     
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if([db open])
     {
         NSString *delsql=@"delete from Devices";
@@ -3015,7 +3015,7 @@
 
 +(void) writeRooms:(NSArray *)roomList
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if([db open])
     {
         NSString *delsql=@"delete from Rooms";
@@ -3041,7 +3041,7 @@
 
 +(void) writeChannels:(NSArray *)responseObject parent:(NSString *)parent
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if([db open])
     {
         for(NSDictionary *dicInfo in responseObject)
@@ -3075,7 +3075,7 @@
 
 +(void) writeChats:(NSArray *)users
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if([db open])
     {
         NSString *delsql=@"delete from chats";
@@ -3106,7 +3106,7 @@
 
 //更新设备状态
 + (BOOL)updateDeviceStatus:(Device *)deviceInfo {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     
     BOOL ret = NO;
     if([db open])
@@ -3128,7 +3128,7 @@
     if (power) {
         bright = 100;
     }
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     
     BOOL ret = NO;
     if([db open])
@@ -3147,7 +3147,7 @@
 //更新空调开关状态
 + (BOOL)updateAirPowerStatus:(int)deviceID power:(int)power airID:(int)airID {
     
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     
     BOOL ret = NO;
     if([db open])
@@ -3170,7 +3170,7 @@
     if (value >0) {
         power = 1;
     }
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     
     BOOL ret = NO;
     if([db open])
@@ -3192,7 +3192,7 @@
     if (power) {
         position = 100;
     }
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     
     BOOL ret = NO;
     if([db open])
@@ -3215,7 +3215,7 @@
     if (value >0) {
         power = 1;
     }
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     
     BOOL ret = NO;
     if([db open])

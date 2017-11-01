@@ -465,7 +465,7 @@
 
 -(void)writeTVChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     int cNumber = [self.channeNumber.text intValue];
     if([db open])
     {
