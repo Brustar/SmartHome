@@ -369,14 +369,14 @@
 
 -(NSData *) scheduleScene:(uint8_t)action sceneID:(NSString *)sceneID
 {
-    return [self schedule:action dID:[sceneID intValue] type:0x60];
+    return [self schedule:action dID:[sceneID intValue] type:0x60];//0x60 是指定时器类型为场景定时
 }
 
 -(NSData *) scheduleDevice:(uint8_t)action deviceID:(NSString *)deviceID
 {
     NSString *enumber=[SQLManager getENumber:[deviceID integerValue]];
-    uint16_t dID = CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
-    return [self schedule:action dID:dID type:0x61];
+    uint16_t dID = [PackManager NSDataToUint16:enumber];
+    return [self schedule:action dID:dID type:0x61];//0x61 是指定时器类型为设备定时
 }
 
 -(NSData *) schedule:(uint8_t)action dID:(uint16_t)dID type:(uint8_t)dtype

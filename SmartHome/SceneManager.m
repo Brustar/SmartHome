@@ -295,12 +295,12 @@
     if (!isEdited) {
         
         //同步云端
-        NSString *deviceTimerFile = [NSString stringWithFormat:@"%@_%ld_%ld.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], timer.eNumber];
+        NSString *deviceTimerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], [SQLManager getENumberByDeviceID:timer.deviceID]];
         NSString *deviceTimerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:deviceTimerFile];
         
         NSString *URL = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
         
-        NSString *fileName = [NSString stringWithFormat:@"%@_%ld_%ld.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], timer.eNumber];
+        NSString *fileName = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], [SQLManager getENumberByDeviceID:timer.deviceID]];
         NSDictionary *parameter;
         
         NSMutableArray *schedulesTemp = [NSMutableArray array];
@@ -352,7 +352,7 @@
         
     }else {
         //编辑设备定时时，修改本地plist文件
-        [IOManager writeDeviceTimer:[NSString stringWithFormat:@"%@_%ld_%ld.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], timer.eNumber] timer:timer];
+        [IOManager writeDeviceTimer:[NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], [SQLManager getENumberByDeviceID:timer.deviceID]] timer:timer]; 
     }
     
 }

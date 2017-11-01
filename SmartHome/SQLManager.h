@@ -11,6 +11,7 @@
 #import "Device.h"
 #import "Aircon.h"
 #import "UserInfo.h"
+#import "PackManager.h"
 
 #define SWITCHLIGHT_SUB_TYPE @"01"
 #define DIMMER_SUB_TYPE @"02"
@@ -110,6 +111,7 @@
 
 +(NSString *)getEType:(NSInteger)eID;
 +(NSString *)getENumber:(NSInteger)eID;
++ (uint16_t)getENumberByDeviceID:(NSInteger)eID;
 +(NSString *)getDeviceIDByENumber:(NSInteger)eID;
 +(NSString *)getDeviceIDByENumberForC4:(NSInteger)eID airID:(int)airID htypeID:(int)htypeID;
 +(int)saveMaxSceneId:(Scene *)scene name:name pic:(NSString *)img;

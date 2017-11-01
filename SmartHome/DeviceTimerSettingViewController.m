@@ -210,11 +210,11 @@
     }
     
     
-    NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%ld.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], self.device.eNumber];
+    NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], [SQLManager getENumberByDeviceID:self.device.eID]];
     NSString *timerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:timerFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:timerPath];
     
-    DeviceSchedule *_timer = [[DeviceSchedule alloc] initWithoutScheduleByENumber:self.device.eNumber];
+    DeviceSchedule *_timer = [[DeviceSchedule alloc] initWithoutScheduleByDeviceID:self.device.eID];
     if(plistDic)
     {
         [_timer setValuesForKeysWithDictionary:plistDic];
@@ -345,11 +345,11 @@
     }
     
     
-    NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%ld.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], self.device.eNumber];
+    NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], [SQLManager getENumberByDeviceID:self.device.eID]];
     NSString *timerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:timerFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:timerPath];
     
-    DeviceSchedule *_timer = [[DeviceSchedule alloc] initWithoutScheduleByENumber:self.device.eNumber];
+    DeviceSchedule *_timer = [[DeviceSchedule alloc] initWithoutScheduleByDeviceID:self.device.eID];
     if(plistDic)
     {
         [_timer setValuesForKeysWithDictionary:plistDic];  
@@ -836,7 +836,7 @@
         UIStoryboard * sceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
         IphoneNewAddSceneTimerVC * timerVC = [sceneStoryBoard  instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
         timerVC.isDeviceTimer = YES;
-        timerVC.timer = [[DeviceSchedule alloc] initWithoutScheduleByENumber:self.device.eNumber];
+        timerVC.timer = [[DeviceSchedule alloc] initWithoutScheduleByDeviceID:self.device.eID];
         if (_repeatition.length >0) {
             timerVC.repeatitionStr = _repeatition;
         }else {

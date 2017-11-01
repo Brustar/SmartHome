@@ -942,6 +942,27 @@
     return enumber;
 }
 
++ (uint16_t)getENumberByDeviceID:(NSInteger)eID
+{
+    uint16_t  enumber = 0;
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        long masterID = [[DeviceInfo defaultManager] masterID];
+        
+        NSString *sql = [NSString stringWithFormat:@"SELECT enumber FROM Devices where ID = %ld and masterID = '%ld'",(long)eID, masterID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            NSString *enumberStr = [resultSet stringForColumn:@"enumber"];
+             enumber = [PackManager NSDataToUint16:enumberStr];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return enumber;
+}
+
 +(NSString *)getDeviceIDByENumber:(NSInteger)eID
 {
     NSString *deviceID=nil;

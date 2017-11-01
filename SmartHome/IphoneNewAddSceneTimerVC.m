@@ -131,7 +131,7 @@
     
     if (self.isDeviceTimer && _timer) {
         
-        NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%ld.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], _timer.eNumber];
+        NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], [SQLManager getENumberByDeviceID:_timer.deviceID]];
         NSString *timerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:timerFile];
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:timerPath];
         
