@@ -210,11 +210,11 @@
     }
     
     
-    NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], self.device.eID];
+    NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%ld.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], self.device.eNumber];
     NSString *timerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:timerFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:timerPath];
     
-    DeviceSchedule *_timer = [[DeviceSchedule alloc] initWithoutScheduleByDeviceID:self.device.eID];
+    DeviceSchedule *_timer = [[DeviceSchedule alloc] initWithoutScheduleByENumber:self.device.eNumber];
     if(plistDic)
     {
         [_timer setValuesForKeysWithDictionary:plistDic];
@@ -222,7 +222,7 @@
     
     
     //开始设备定时
-    [[SceneManager defaultManager] addDeviceTimer:_timer isEdited:NO isActive:1 block:^(BOOL flag) {
+    [[SceneManager defaultManager] addDeviceTimer:_timer isEdited:NO  mode:2 isActive:1 block:^(BOOL flag) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (flag == YES) {
                 [MBProgressHUD showSuccess:@"修改定时成功"];
@@ -345,11 +345,11 @@
     }
     
     
-    NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], self.device.eID];
+    NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%ld.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], self.device.eNumber];
     NSString *timerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:timerFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:timerPath];
     
-    DeviceSchedule *_timer = [[DeviceSchedule alloc] initWithoutScheduleByDeviceID:self.device.eID];  
+    DeviceSchedule *_timer = [[DeviceSchedule alloc] initWithoutScheduleByENumber:self.device.eNumber];
     if(plistDic)
     {
         [_timer setValuesForKeysWithDictionary:plistDic];  
@@ -357,7 +357,7 @@
 
     
     //开始设备定时
-    [[SceneManager defaultManager] addDeviceTimer:_timer isEdited:NO isActive:1 block:^(BOOL flag) {
+    [[SceneManager defaultManager] addDeviceTimer:_timer isEdited:NO mode:1 isActive:1 block:^(BOOL flag) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (flag == YES) {
                 [MBProgressHUD showSuccess:@"添加成功"];
@@ -836,7 +836,7 @@
         UIStoryboard * sceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
         IphoneNewAddSceneTimerVC * timerVC = [sceneStoryBoard  instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
         timerVC.isDeviceTimer = YES;
-        timerVC.timer = [[DeviceSchedule alloc] initWithoutScheduleByDeviceID:self.device.eID];
+        timerVC.timer = [[DeviceSchedule alloc] initWithoutScheduleByENumber:self.device.eNumber];
         if (_repeatition.length >0) {
             timerVC.repeatitionStr = _repeatition;
         }else {

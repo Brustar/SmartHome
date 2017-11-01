@@ -289,18 +289,18 @@
     
 }
 
-- (void)addDeviceTimer:(DeviceSchedule *)timer  isEdited:(BOOL)isEdited  isActive:(NSInteger)isActive block:(SaveOK )block {
+- (void)addDeviceTimer:(DeviceSchedule *)timer  isEdited:(BOOL)isEdited  mode:(int)mode isActive:(NSInteger)isActive block:(SaveOK )block {
     self.block = block;
     
     if (!isEdited) {
         
         //同步云端
-        NSString *deviceTimerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], timer.deviceID];
+        NSString *deviceTimerFile = [NSString stringWithFormat:@"%@_%ld_%ld.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], timer.eNumber];
         NSString *deviceTimerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:deviceTimerFile];
         
         NSString *URL = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
         
-        NSString *fileName = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], timer.deviceID];
+        NSString *fileName = [NSString stringWithFormat:@"%@_%ld_%ld.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], timer.eNumber];
         NSDictionary *parameter;
         
         NSMutableArray *schedulesTemp = [NSMutableArray array];
@@ -318,14 +318,9 @@
         {
             parameter = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
-                          @"optype":@(1),
+                          @"optype":@(mode),
                           @"scencefile":deviceTimerPath,
                           @"isactive":@(1)
-                          //@"starttime":timer.startTime,
-                          //@"endtime":timer.endTime,
-                          //@"weekvalue":timer.repetition,
-                          //@"equipmentid":@(timer.eID),
-                          //@"startvalue":timer.deviceValue
                           };
         }
         
@@ -357,7 +352,7 @@
         
     }else {
         //编辑设备定时时，修改本地plist文件
-        [IOManager writeDeviceTimer:[NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], timer.deviceID] timer:timer];     
+        [IOManager writeDeviceTimer:[NSString stringWithFormat:@"%@_%ld_%ld.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], timer.eNumber] timer:timer];
     }
     
 }

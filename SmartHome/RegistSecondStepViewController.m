@@ -255,7 +255,7 @@
                            @"mobile":self.phoneNum,
                            @"usertype":@(self.cType),
                            @"authcode":self.checkCodeTextField.text,
-                           @"pushtoken":info.pushToken,
+                           @"pushtoken":info.pushToken?info.pushToken:@"",
                            @"devicetype":@(clientType)
                            };
     NSString *url = [NSString stringWithFormat:@"%@login/regist.aspx",[IOManager httpAddr]];
