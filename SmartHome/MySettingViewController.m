@@ -662,6 +662,7 @@
                 @"scence_ver":[UD objectForKey:@"scence_version"],
                 @"tv_ver":[UD objectForKey:@"tv_version"],
                 @"fm_ver":[UD objectForKey:@"fm_version"],
+                @"source_ver":[UD objectForKey:@"source_version"],
                 //@"chat_ver":[UD objectForKey:@"chat_version"],
                 @"md5Json":md5Json,
                 @"change_host":@(0)//是否是切换家庭 0:否  1:是

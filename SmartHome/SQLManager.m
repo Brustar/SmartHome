@@ -945,7 +945,7 @@
 + (uint16_t)getENumberByDeviceID:(NSInteger)eID
 {
     uint16_t  enumber = 0;
-    FMDatabase *db = [self connetdb];
+    FMDatabase *db = [self connectdb];
     if([db open])
     {
         long masterID = [[DeviceInfo defaultManager] masterID];
@@ -2229,8 +2229,9 @@
         NSString *sqlChat = @"CREATE TABLE IF NOT EXISTS chats(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,nickname varchar(20),portrait varchar(100),username varchar(20),user_id integer)";
         NSString *sqlCatalog = @"CREATE TABLE IF NOT EXISTS catalog(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,catalogName varchar(20))";
         NSString *sqlUser = @"CREATE TABLE IF NOT EXISTS Users(ID INT PRIMARY KEY NOT NULL, userType INTEGER, userName TEXT, nickName TEXT, vip TEXT, age INTEGER, sex INTEGER, portraitUrl TEXT, phoneNum TEXT, signature TEXT, extra1 TEXT, extra2 TEXT, extra3 TEXT, extra4 TEXT)";
+        NSString *sqlSource = @"CREATE TABLE IF NOT EXISTS Source(equipment_id INTEGER, source_name TEXT, channel_id TEXT, masterID TEXT)";
         
-        NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene,sqlChat,sqlCatalog,sqlUser];
+        NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene,sqlChat,sqlCatalog,sqlUser,sqlSource];
         //4.创表
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
@@ -3003,6 +3004,51 @@
                     NSLog(@"insert 成功");
                 }else{
                     NSLog(@"insert 失败");
+                }
+                
+            }
+            
+        }
+        
+    }
+    [db close];
+}
+
++ (void)writeSource:(NSArray *)sources
+{
+    if(sources.count == 0 || sources == nil)
+    {
+        return;
+    }
+    
+    FMDatabase *db = [SQLManager connectdb];
+    if([db open])
+    {
+        NSString *delsql = @"delete from Source";
+        [db executeUpdate:delsql];
+        
+        for(NSDictionary *source in sources)
+        {
+            NSInteger eId = [source[@"equipment_id"] integerValue];
+            NSArray *sourceList = source[@"source_list"];
+            if(sourceList.count == 0 || sourceList == nil)
+            {
+                continue;
+            }
+            for(NSDictionary *info in sourceList)
+            {
+                NSString *masterID = [NSString stringWithFormat:@"%ld", [[DeviceInfo defaultManager] masterID]];
+                NSString *sourceName = info[@"source_name"];
+                NSString *channelID = info[@"channel_id"];
+                
+                NSString *sql = [NSString stringWithFormat:@"insert into Source values(%ld, '%@', '%@', '%@')",eId, sourceName, channelID, masterID];
+                
+                BOOL result = [db executeUpdate:sql];
+                if(result)
+                {
+                    NSLog(@"insert 数据源 成功");
+                }else{
+                    NSLog(@"insert 数据源 失败");
                 }
                 
             }

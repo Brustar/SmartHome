@@ -120,6 +120,7 @@
         [UD removeObjectForKey:@"scence_version"];
         [UD removeObjectForKey:@"tv_version"];
         [UD removeObjectForKey:@"fm_version"];
+        [UD removeObjectForKey:@"source_version"];
         [UD synchronize];
         
     }

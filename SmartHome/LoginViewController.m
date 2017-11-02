@@ -569,6 +569,7 @@
                 @"scence_ver":[UD objectForKey:@"scence_version"],
                 @"tv_ver":[UD objectForKey:@"tv_version"],
                 @"fm_ver":[UD objectForKey:@"fm_version"],
+                @"source_ver":[UD objectForKey:@"source_version"],
                 //@"chat_ver":[UD objectForKey:@"chat_version"],
                 @"md5Json":md5Json,
                 @"change_host":@(0)//是否是切换家庭 0:否  1:是
@@ -588,6 +589,16 @@
         return;
     }
     [SQLManager writeDevices:rooms];
+}
+
+//写影音设备数据源配置信息到sql
+-(void)writSourcesConfigDatesToSQL:(NSArray *)sources
+{
+    if(sources.count == 0 || sources == nil)
+    {
+        return;
+    }
+    [SQLManager writeSource:sources];
 }
 
 //写房间配置信息到SQL
@@ -824,6 +835,7 @@
                     [UD removeObjectForKey:@"scence_version"];
                     [UD removeObjectForKey:@"tv_version"];
                     [UD removeObjectForKey:@"fm_version"];
+                    [UD removeObjectForKey:@"source_version"];
                     [UD synchronize];
                 }
             //更新UD的@"HostID"， 更新DeviceInfo的 masterID
@@ -855,6 +867,8 @@
             [self writeScensConfigDataToSQL:responseObject[@"room_scence_list"]];
             //写设备配置信息到sql
             [self writDevicesConfigDatesToSQL:responseObject[@"room_equipment_list"]];
+            //写影音设备数据源配置信息到sql
+            [self writSourcesConfigDatesToSQL:responseObject[@"equipment_source_list"]];
             //写TV频道信息到sql
             [self writeChannelsConfigDataToSQL:responseObject[@"tv_store_list"] withParent:@"tv"];
             

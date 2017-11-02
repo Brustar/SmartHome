@@ -183,6 +183,7 @@
 
 +(NSArray *)queryChat:(NSString *)userid;
 + (NSArray *)queryAllChat;
++ (void)writeSource:(NSArray *)sources;//影音设备数据源
 + (void) writeDevices:(NSArray *)rooms;
 +(void) writeRooms:(NSArray *)roomList;
 +(NSArray *) writeScenes:(NSArray *)rooms;
