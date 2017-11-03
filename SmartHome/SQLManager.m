@@ -109,6 +109,29 @@
 
 }
 
+//从数据库中获取所有当前影音设备数据源的信息
++ (NSArray *)getSourcesByDeviceID:(NSInteger)deviceID
+{
+    FMDatabase *db = [self connectdb];
+    NSMutableArray *sources = [NSMutableArray array];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"select * from Source where masterID = '%ld' and equipment_id = %ld", [[DeviceInfo defaultManager] masterID], (long)deviceID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        while ([resultSet next]){
+            DeviceSource *source = [DeviceSource new];
+            source.deviceid = [resultSet intForColumn:@"equipment_id"];
+            source.sourceName = [resultSet stringForColumn:@"source_name"];
+            source.channelID = [resultSet stringForColumn:@"channel_id"];
+            [sources addObject:source];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return sources;
+}
+
 //从数据库中获取所有场景信息(按房间排序)
 + (NSArray *)getAllSceneOrderByRoomID
 {

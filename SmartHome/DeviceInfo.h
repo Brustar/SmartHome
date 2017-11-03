@@ -195,6 +195,9 @@ enum{
 -(NSData *) scheduleScene:(uint8_t)action sceneID:(NSString *)sceneID;
 -(NSData *) scheduleDevice:(uint8_t)action deviceID:(NSString *)deviceID;
 
+#pragma mark - ChangeSource   切换数据源
+- (NSData *)changeSource:(uint8_t)channelID deviceID:(NSString *)deviceID;
+
 - (NSData *)stopCurtainByDeviceID:(NSString *)deviceID;
 
 //震动

@@ -30,7 +30,7 @@
     
     if (_video == nil) {
         
-        NSString *rtspTimeoutSetting = @"ffmpeg -stimeout 5000000 -rtsp_transport tcp -i ";
+        NSString *rtspTimeoutSetting = @"";//ffmpeg -stimeout 5000000 -rtsp_transport tcp -i
         NSString *videoURL = [NSString stringWithFormat:@"%@%@", rtspTimeoutSetting, self.cameraURL];
         
         _video = [[RTSPPlayer alloc] initWithVideo:videoURL usesTcp:YES];

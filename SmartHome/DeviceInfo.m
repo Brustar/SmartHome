@@ -463,6 +463,15 @@
     }
 }
 
+- (NSData *)changeSource:(uint8_t)channelID deviceID:(NSString *)deviceID
+{
+    if (deviceID) {
+        return [self action:PROTOCOL_SOURCE deviceID:deviceID value:channelID];
+    }else{
+        return [self action:PROTOCOL_SOURCE value:channelID];
+    }
+}
+
 -(NSData *) mute:(NSString *)deviceID
 {
     return [self action:PROTOCOL_MUTE deviceID:deviceID];

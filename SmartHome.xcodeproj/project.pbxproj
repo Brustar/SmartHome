@@ -203,6 +203,7 @@
 		CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12431EB316EF00E0B301 /* DeliveryAddressViewController.m */; };
 		CD4F12471EB4400A00E0B301 /* DeliveryAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12461EB4400A00E0B301 /* DeliveryAddressCell.m */; };
 		CD4F124A1EB452D800E0B301 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12491EB452D800E0B301 /* Address.m */; };
+		CD50EEBE1FABF3E80065AF08 /* DeviceSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CD50EEBD1FABF3E80065AF08 /* DeviceSource.m */; };
 		CD5134371E8D07FD00C2EDAF /* Goods.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5134361E8D07FD00C2EDAF /* Goods.m */; };
 		CD51343A1E8E369700C2EDAF /* WeChatPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5134391E8E369700C2EDAF /* WeChatPayManager.m */; };
 		CD51343F1E92807600C2EDAF /* tipIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD51343E1E92807500C2EDAF /* tipIcon@2x.png */; };
@@ -775,6 +776,8 @@
 		CD4F12461EB4400A00E0B301 /* DeliveryAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryAddressCell.m; sourceTree = "<group>"; };
 		CD4F12481EB452D800E0B301 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
 		CD4F12491EB452D800E0B301 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
+		CD50EEBC1FABF3E80065AF08 /* DeviceSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceSource.h; sourceTree = "<group>"; };
+		CD50EEBD1FABF3E80065AF08 /* DeviceSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSource.m; sourceTree = "<group>"; };
 		CD5134351E8D07FD00C2EDAF /* Goods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goods.h; sourceTree = "<group>"; };
 		CD5134361E8D07FD00C2EDAF /* Goods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goods.m; sourceTree = "<group>"; };
 		CD5134381E8E369700C2EDAF /* WeChatPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatPayManager.h; sourceTree = "<group>"; };
@@ -1076,6 +1079,8 @@
 				CD4F12491EB452D800E0B301 /* Address.m */,
 				0F61C7731F3C087200A8D9A5 /* DeviceSchedule.h */,
 				0F61C7741F3C087200A8D9A5 /* DeviceSchedule.m */,
+				CD50EEBC1FABF3E80065AF08 /* DeviceSource.h */,
+				CD50EEBD1FABF3E80065AF08 /* DeviceSource.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -2972,6 +2977,7 @@
 				2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */,
 				CDEC86921E9A1D22009EC245 /* FamilyHomeCell.m in Sources */,
 				2EB516F91E9CEB3F0064B18E /* AddDeviceCell.m in Sources */,
+				CD50EEBE1FABF3E80065AF08 /* DeviceSource.m in Sources */,
 				0F7273751ED6BB8600AF1475 /* LeftMenuCell.m in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,
