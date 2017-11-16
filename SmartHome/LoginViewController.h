@@ -81,7 +81,6 @@
 @property (nonatomic,strong)  NSMutableArray * titleArray;
 @property (nonatomic,strong)  NSMutableArray * detailArray;
 
-
 - (IBAction)forgetPwdBtnClicked:(id)sender;
 - (IBAction)tryBtnClicked:(id)sender;
 - (IBAction)loginBtnClicked:(id)sender;

@@ -472,13 +472,7 @@
                 self.hostName = list[1];
                 [vc setValue:self.masterId forKey:@"masterStr"];
                 [vc setValue:self.hostName forKey:@"hostName"];
-                
-                if ([@"1" isEqualToString:list[2]]) {
-                    self.role=@"主人";
-                }else{
-                    self.role=@"客人";
-                }
-                [vc setValue:self.role forKey:@"suerTypeStr"];
+            
             }
             else
             {
@@ -499,14 +493,7 @@
                 self.hostName = list[1];
                 [vc setValue:self.masterId forKey:@"masterStr"];
                 [vc setValue:self.hostName forKey:@"hostName"];
-                
-                
-                if ([@"1" isEqualToString:list[2]]) {
-                    self.role=@"主人";
-                }else{
-                    self.role=@"客人";
-                }
-                [vc setValue:self.role forKey:@"suerTypeStr"];
+
             }
             
             

@@ -70,6 +70,7 @@
         BgMusic *device=[[BgMusic alloc] init];
     
     if (sender == self.BjPowerButton) {
+        [[DeviceInfo defaultManager] playVibrate];
         if (ON_IPAD) {
             [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
         }else{

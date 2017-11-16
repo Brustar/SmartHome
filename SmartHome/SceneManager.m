@@ -925,8 +925,16 @@
     [self dimingRoomLights:lightIDs brightness:90];
 }
 
+- (void)sprightlyForRoomLights:(NSArray *)lightIDs brightness:(int)brightness {
+    [self dimingRoomLights:lightIDs brightness:brightness];
+}
+
 - (void)gloomForRoomLights:(NSArray *)lightIDs {
     [self dimingRoomLights:lightIDs brightness:20];
+}
+
+- (void)gloomForRoomLights:(NSArray *)lightIDs brightness:(int)brightness {
+    [self dimingRoomLights:lightIDs brightness:brightness];
 }
 
 - (void)romanticForRoomLights:(NSArray *)lightIDs {

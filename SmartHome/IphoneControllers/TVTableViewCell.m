@@ -51,6 +51,7 @@
       _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
        TV *device=[[TV alloc] init];
     if (sender == self.TVSwitchBtn) {
+        [[DeviceInfo defaultManager] playVibrate];
         [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
         self.AddTvDeviceBtn.selected = YES;
         self.TVSwitchBtn.selected = !self.TVSwitchBtn.selected;
@@ -115,6 +116,7 @@
 }
 //频道减
 - (IBAction)channelReduce:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     data=[device previous:self.deviceid];
@@ -123,6 +125,7 @@
 }
 //频道加
 - (IBAction)channelAdd:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     data = [device next:self.deviceid];
@@ -132,6 +135,7 @@
 
 //音量减
 - (IBAction)voice_downBtn:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     data=[device volumeDown:self.deviceid];
@@ -141,6 +145,7 @@
 
 //音量加
 - (IBAction)voice_upBtn:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     data=[device volumeUp:self.deviceid];

@@ -15,7 +15,7 @@
 @interface IpadDeviceTypeVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) NSArray * roomList;
-@property (nonatomic,strong) NSArray * SubTypeNameArr;
+@property (nonatomic,strong) NSMutableArray * SubTypeNameArr;
 @property (nonatomic,strong) NSArray * SubTypeIconeImage;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
@@ -27,35 +27,52 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.SubTypeNameArr = @[@"灯光",@"影音",@"环境",@"窗帘",@"智能单品",@"安防"];
-    self.SubTypeIconeImage = @[@"icon_light_nol",@"icon_vdo_nol",@"icon_airconditioner_nol",@"icon_windowcurtains_nol",@"icon_Intelligence_nol",@"ipad-icon_safe_nol"];
-      self.roomList = [SQLManager getDevicesSubTypeNamesWithRoomID:self.roomID];
-      [self setupNaviBar];
-     [self.tableView registerNib:[UINib nibWithNibName:@"AddDeviceCell" bundle:nil] forCellReuseIdentifier:@"AddDeviceCell"];//添加设备的cell
-     self.tableView.scrollEnabled =NO; //设置tableview 不能滚动
-
+    [self initMenu];
+    self.roomList = [SQLManager getDevicesSubTypeNamesWithRoomID:self.roomID];
+    [self setupNaviBar];
+    [self.tableView registerNib:[UINib nibWithNibName:@"AddDeviceCell" bundle:nil] forCellReuseIdentifier:@"AddDeviceCell"];//添加设备的cell
+    self.tableView.scrollEnabled =NO; //设置tableview 不能滚动
 }
+
+- (void)initMenu {
+    self.SubTypeNameArr = [NSMutableArray new];
+    NSArray *devicesIDs = [SQLManager getDeviceIDsBySeneId:self.sceneID];
+    [devicesIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        NSNumber *deviceID = obj;
+        NSString *deviceTypeName = [SQLManager getSubTypeNameByDeviceID:[deviceID intValue]];
+        if (deviceTypeName.length >0) {
+            [self.SubTypeNameArr addObject:deviceTypeName];
+        }
+    }];
+    
+    //菜单项去重
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
+    for(NSString *str in self.SubTypeNameArr)
+    {
+        [dic setValue:str forKey:str];
+    }
+    
+    [self.SubTypeNameArr removeAllObjects];
+    if ([dic allKeys].count >0) {
+        [self.SubTypeNameArr addObjectsFromArray:[dic allKeys]];
+    }
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
-    
-    if ([self.delegate respondsToSelector:@selector(IpadDeviceType:selected:)]) {
+    if (self.SubTypeNameArr.count >0) {
         
-        [self.delegate IpadDeviceType:self selected:1];
-    }
-    if (self.DevicesArr.count == 0) {
         [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
         
-        if ([self.delegate respondsToSelector:@selector(IpadDeviceType:selected:)]) {
+        if ([self.delegate respondsToSelector:@selector(IpadDeviceType:selected:typeName:)]) {
             
-            [self.delegate IpadDeviceType:self selected:0];
+            [self.delegate IpadDeviceType:self selected:0 typeName:self.SubTypeNameArr[0]];
         }
     }
-    
 }
+
 - (void)setupNaviBar {
     
     [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
@@ -120,7 +137,22 @@
     if (indexPath.section == 0) {
         IpadDeviceTypeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         cell.SubTypeNameLabel.text = self.SubTypeNameArr[indexPath.row];
-        cell.SubTypeIconeImage.image = [UIImage imageNamed:self.SubTypeIconeImage[indexPath.row]];
+        NSString *iconImage = @"";
+        if ([cell.SubTypeNameLabel.text isEqualToString:@"灯光"]) {
+            iconImage = @"icon_light_nol";
+        }else if ([cell.SubTypeNameLabel.text isEqualToString:@"影音"]) {
+            iconImage = @"icon_vdo_nol";
+        }else if ([cell.SubTypeNameLabel.text isEqualToString:@"环境"]) {
+            iconImage = @"icon_airconditioner_nol";
+        }else if ([cell.SubTypeNameLabel.text isEqualToString:@"窗帘"]) {
+            iconImage = @"icon_windowcurtains_nol";
+        }else if ([cell.SubTypeNameLabel.text isEqualToString:@"智能单品"]) {
+            iconImage = @"icon_Intelligence_nol";
+        }else if ([cell.SubTypeNameLabel.text isEqualToString:@"安防"]) {
+            iconImage = @"ipad-icon_safe_nol";
+        }
+        
+        cell.SubTypeIconeImage.image = [UIImage imageNamed:iconImage];
         cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ipad-btn_choose_nol"]];
         cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ipad-btn_choose_prd"]];
         return cell;
@@ -137,9 +169,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        if ([self.delegate respondsToSelector:@selector(IpadDeviceType:selected:)]) {
+        if ([self.delegate respondsToSelector:@selector(IpadDeviceType:selected:typeName:)]) {
             
-            [self.delegate IpadDeviceType:self selected:indexPath.row];
+            [self.delegate IpadDeviceType:self selected:indexPath.row typeName:self.SubTypeNameArr[indexPath.row]];
         }
     }
     if (indexPath.section == 1) {

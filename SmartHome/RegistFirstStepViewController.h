@@ -44,7 +44,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tips3Leading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *protocolBtnLeading;
 
-@property (nonatomic,strong) NSString *suerTypeStr;
+@property (nonatomic,strong) NSString *suerTypeStr;//用户类型：1:主人，2:客人
 @property (nonatomic, strong) NSString *masterStr;//主机ID
 @property (nonatomic, strong) NSString *hostName;//主机名
 

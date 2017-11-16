@@ -75,8 +75,10 @@ typedef void(^SaveOK)(BOOL flag);
 - (void)dimingRoomLights:(NSArray *)lightIDs brightness:(int)bright;
 
 - (void)sprightlyForRoomLights:(NSArray *)lightIDs;
+- (void)sprightlyForRoomLights:(NSArray *)lightIDs brightness:(int)brightness;
 
 - (void)gloomForRoomLights:(NSArray *)lightIDs;
+- (void)gloomForRoomLights:(NSArray *)lightIDs brightness:(int)brightness;
 
 - (void)romanticForRoomLights:(NSArray *)lightIDs;
 

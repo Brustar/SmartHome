@@ -608,6 +608,36 @@
     
 }
 
++ (NSArray *)getUITypeOfLightByRoomID:(int)roomID {
+    NSMutableArray *types = [NSMutableArray new];
+    FMDatabase *db = [self connectdb];
+    if([db open])
+    {
+        NSString *sql = nil;
+        if ([self isWholeHouse:roomID]) {
+            sql = [NSString stringWithFormat:@"SELECT UITypeOfLight FROM Devices WHERE subTypeId = 1 GROUP BY UITypeOfLight ORDER BY UITypeOfLight"];
+        }else{
+            sql = [NSString stringWithFormat:@"SELECT UITypeOfLight FROM Devices WHERE subTypeId = 1 AND rID = '%d' GROUP BY UITypeOfLight ORDER BY UITypeOfLight", roomID];
+        }
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            int UITypeOfLight = [resultSet intForColumn:@"UITypeOfLight"];
+            if (UITypeOfLight == 1) {
+                [types addObject:@"射灯"];
+            }else if (UITypeOfLight == 2) {
+                [types addObject:@"灯带"];
+            }else if (UITypeOfLight == 3) {
+                [types addObject:@"调色灯"];
+            }
+        }
+    }
+    
+    [db closeOpenResultSets];
+    [db close];
+    return types;
+}
+
 + (NSMutableArray *)typeName:(int)typeID byRoom:(int) roomID
 {
     NSMutableArray *subTypes = [NSMutableArray new];
@@ -2094,7 +2124,7 @@
     if(dictionary)
     {
         
-        NSMutableArray *deviceIds=[[NSMutableArray alloc] init];
+        NSMutableArray *deviceIds = [[NSMutableArray alloc] init];
         for (NSDictionary *dic in [dictionary objectForKey:@"devices"])
         {
             int deviceID = 0;

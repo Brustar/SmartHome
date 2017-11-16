@@ -188,6 +188,7 @@
 
 -(IBAction)control:(id)sender
 {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     UIButton *btn =(UIButton *)sender;

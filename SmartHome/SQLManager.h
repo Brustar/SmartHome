@@ -221,4 +221,5 @@
 + (NSString *)getDeviceIDByENumberForC4:(NSInteger)eID airID:(int)airID;
 + (BOOL)updateAirPowerStatus:(int)deviceID power:(int)power airID:(int)airID;//更新空调开关状态
 + (NSArray *)getSourcesByDeviceID:(NSInteger)deviceID;//从数据库中获取所有当前影音设备数据源的信息
++ (NSArray *)getUITypeOfLightByRoomID:(int)roomID;
 @end

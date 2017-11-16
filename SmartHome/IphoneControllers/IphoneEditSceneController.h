@@ -34,5 +34,6 @@
 @property(nonatomic, strong) NSString *repeatition;
 @property(nonatomic, strong) NSMutableString *repeatString;
 @property (nonatomic, assign) NSInteger hostType;//主机类型：0，creston   1, C4
+@property (nonatomic, assign) int currentBrightness;//当前亮度
 
 @end

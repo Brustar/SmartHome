@@ -121,6 +121,7 @@
 }
 
 - (IBAction)controlCmd:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     UIButton *btn =(UIButton *)sender;
     long tag = btn.tag;
     

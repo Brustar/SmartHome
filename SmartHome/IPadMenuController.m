@@ -62,7 +62,11 @@ static NSString *const leftMenuCell = @"leftMenuCell";
 -(NSArray *)lights
 {
     NSMutableArray *types = [[NSMutableArray alloc] init];
-    NSArray *uitypes=@[@"射灯",@"灯带",@"调色灯"];
+    //NSArray *uitypes=@[@"射灯",@"灯带",@"调色灯"];
+    
+    NSMutableArray *uitypes = [NSMutableArray new];
+    [uitypes addObjectsFromArray:[SQLManager getUITypeOfLightByRoomID:self.roomID]];
+    
     int i=0;
     for (NSString *name in uitypes) {
         Device *d=[Device new];

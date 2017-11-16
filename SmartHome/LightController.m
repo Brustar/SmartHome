@@ -136,6 +136,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 灯光",roomName]];
     [self initSwitch];
+    [self showUITypeOfLight];
     Device *device = [SQLManager singleLightByRoom:self.roomID];
     self.deviceid = self.deviceid?self.deviceid:[NSString stringWithFormat:@"%d",device.eID];
     
@@ -156,6 +157,28 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         self.top.constant = 0;
     }
 }
+
+- (void)showUITypeOfLight {
+    self.sLightBtn.hidden = YES;
+    self.ddLightBtn.hidden = YES;
+    self.cLightBtn.hidden = YES;
+    
+    NSMutableArray *uitypes = [NSMutableArray new];
+    [uitypes addObjectsFromArray:[SQLManager getUITypeOfLightByRoomID:self.roomID]];
+    [uitypes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        
+        NSString *typeName = obj;
+        if ([typeName isEqualToString:@"射灯"]) {
+            self.sLightBtn.hidden = NO;
+        }else if([typeName isEqualToString:@"灯带"]) {
+            self.ddLightBtn.hidden = NO;
+        }else if ([typeName isEqualToString:@"调色灯"]) {
+            self.cLightBtn.hidden = NO;
+        }
+        
+    }];
+}
+
 - (NSDictionary *)getRGBDictionaryByColor:(UIColor *)originColor
 {
     CGFloat r=0,g=0,b=0,a=0;

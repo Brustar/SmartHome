@@ -106,9 +106,15 @@
 //验证手机号是否已注册
 - (void)checkPhoneNumberIsExist {
     
+    //手机终端类型：1，手机 2，iPad
+    NSInteger clientType = 1;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        clientType = 2;
+    }
     
     NSDictionary *dict = @{@"mobile":self.phoneNumTextField.text,
-                           @"optype":@(1)
+                           @"optype":@(1),
+                           @"devicetype":@(clientType)
                            };
     
     NSString *url = [NSString stringWithFormat:@"%@login/send_code.aspx",[IOManager httpAddr]];

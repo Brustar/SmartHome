@@ -93,6 +93,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _currentBrightness = 50;
     _hostType = [[UD objectForKey:@"HostType"] integerValue];
     _isGloom = NO;
     _isRomantic = NO;
@@ -275,7 +276,17 @@
         _isSprightly = NO;
         
         if (_lightArray.count >0) {
-            [[SceneManager defaultManager] gloomForRoomLights:_lightArray];
+            if (_currentBrightness <=0) {
+                NSNumber *lightID = _lightArray[0];
+                Device *light = [SQLManager getDeviceWithDeviceID:lightID.intValue];
+                _currentBrightness = (int)light.bright - 5;
+            }else {
+                _currentBrightness -= 5;
+            }
+            if (_currentBrightness < 0) {
+                _currentBrightness = 0;
+            }
+            [[SceneManager defaultManager] gloomForRoomLights:_lightArray brightness:_currentBrightness];
         }
         
         [self.tableView reloadData];
@@ -296,6 +307,7 @@
         _isSprightly = NO;
         
         if (_lightArray.count >0) {
+            _currentBrightness = 50;
             [[SceneManager defaultManager] romanticForRoomLights:_lightArray];
         }
         
@@ -316,7 +328,17 @@
         _isRomantic = NO;
         
         if (_lightArray.count >0) {
-            [[SceneManager defaultManager] sprightlyForRoomLights:_lightArray];
+            if (_currentBrightness <=0) {
+                NSNumber *lightID = _lightArray[0];
+                Device *light = [SQLManager getDeviceWithDeviceID:lightID.intValue];
+                _currentBrightness = (int)light.bright + 5;
+            }else {
+                _currentBrightness += 5;
+            }
+            if (_currentBrightness > 100) {
+                _currentBrightness = 100;
+            }
+            [[SceneManager defaultManager] sprightlyForRoomLights:_lightArray brightness:_currentBrightness];
         }
         
         [self.tableView reloadData];

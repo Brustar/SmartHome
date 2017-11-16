@@ -33,7 +33,7 @@
     //初始化左边视图控制器
     UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
     self.leftVC= [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IpadDeviceTypeVC"];
-    
+    self.leftVC.sceneID = self.sceneID;
     self.leftVC.delegate = self;
     //初始化右边视图控制器
     self.rightVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IpadSceneDetailVC"];
@@ -188,6 +188,23 @@
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
+- (void)IpadDeviceType:(IpadDeviceTypeVC *)centerListVC selected:(NSInteger)row typeName:(NSString *)typeName {
+    self.DevicesArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
+    self.devices = [NSMutableArray array];
+    self.leftVC.roomID = self.roomID;
+    self.leftVC.sceneID = self.sceneID;
+    self.rightVC.sceneID = self.sceneID;
+    
+    for(int i = 0; i < self.DevicesArr.count; i++){
+        
+        NSString *deviceTypeName = [SQLManager getSubTypeNameByDeviceID:[self.DevicesArr[i] intValue]];
+        if ([deviceTypeName isEqualToString:typeName]) {
+            [self.devices addObject:self.DevicesArr[i]];
+        }
+    }
+    [self.rightVC refreshData:self.devices];
+    self.leftVC.DevicesArr = self.devices;
+}
 
 -(void)IpadDeviceType:(IpadDeviceTypeVC *)centerListVC selected:(NSInteger)row
 {

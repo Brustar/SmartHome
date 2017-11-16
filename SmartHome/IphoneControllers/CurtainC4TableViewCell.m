@@ -35,6 +35,7 @@
     
     
     if ([sender isEqual:self.switchBtn]) {
+        [[DeviceInfo defaultManager] playVibrate];
         if (ON_IPAD) {
             [self.addBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
         }else{
@@ -106,18 +107,21 @@
 }
 
 - (IBAction)closeBtnClicked:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data = [[DeviceInfo defaultManager] close:self.deviceid];
     SocketManager *sock = [SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (IBAction)stopBtnClicked:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data = [[DeviceInfo defaultManager] stopCurtainByDeviceID:self.deviceid];
     SocketManager *sock = [SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (IBAction)openBtnClicked:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data = [[DeviceInfo defaultManager] open:self.deviceid];
     SocketManager *sock = [SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];

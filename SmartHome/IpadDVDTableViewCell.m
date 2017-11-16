@@ -53,6 +53,7 @@
     DVD *device=[[DVD alloc] init];
    
     if (sender == self.DVDSwitchBtn) {
+        [[DeviceInfo defaultManager] playVibrate];
          [self.AddDvdBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
         self.AddDvdBtn.selected = YES;
         NSData *data=nil;
@@ -113,6 +114,7 @@
 }
 //上一曲
 - (IBAction)Previous:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     data=[[DeviceInfo defaultManager] previous:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
@@ -121,6 +123,7 @@
 }
 //下一曲
 - (IBAction)nextBtn:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     data=[[DeviceInfo defaultManager] next:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
@@ -128,6 +131,7 @@
 }
 //暂停
 - (IBAction)stopBtn:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     self.stopBtn.selected = !self.stopBtn.selected;
     if (self.stopBtn.selected) {
@@ -145,6 +149,7 @@
 }
 //音量减
 - (IBAction)voice_downBtn:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     data=[device volumeDown:self.deviceid];
@@ -154,6 +159,7 @@
 
 //音量加
 - (IBAction)voice_upBtn:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     data=[device volumeUp:self.deviceid];

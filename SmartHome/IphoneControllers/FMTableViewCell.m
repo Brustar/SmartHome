@@ -84,6 +84,7 @@
         Radio *device=[[Radio alloc] init];
     
     if (sender == self.FMSwitchBtn) {
+        [[DeviceInfo defaultManager] playVibrate];
         if (ON_IPAD) {
             [self.AddFmBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
         }else{

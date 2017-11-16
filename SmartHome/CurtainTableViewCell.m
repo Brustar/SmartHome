@@ -78,6 +78,7 @@
     }
     
     if ([sender isEqual:self.open]) {
+        [[DeviceInfo defaultManager] playVibrate];
         if (ON_IPAD) {
             [self.AddcurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
         }else{
