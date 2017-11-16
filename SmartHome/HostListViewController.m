@@ -127,11 +127,18 @@
 
 -(void)loginHost
 {
+    //终端类型：1，手机 2，iPad
+    NSInteger clientType = 1;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        clientType = 2;
+    }
+    
     NSString *url = [NSString stringWithFormat:@"%@login/login_host.aspx",[IOManager httpAddr]];
     
     NSDictionary *dict = @{
                            @"token":[UD objectForKey:@"AuthorToken"],
-                           @"hostid":_selectedHost
+                           @"hostid":_selectedHost,
+                           @"devicetype":@(clientType)
                            };
     
     
