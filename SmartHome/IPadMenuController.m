@@ -67,12 +67,13 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     NSMutableArray *uitypes = [NSMutableArray new];
     [uitypes addObjectsFromArray:[SQLManager getUITypeOfLightByRoomID:self.roomID]];
     
-    int i=0;
+    int i = 0;
     for (NSString *name in uitypes) {
-        Device *d=[Device new];
+        Device *d = [Device new];
         d.typeName = name;
         d.hTypeId = ++i;
         d.rID = d.hTypeId;
+        
         [types addObject:d];
     }
     return types;
@@ -98,7 +99,16 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     
     if (device.hTypeId >0 && device.hTypeId<10) {
         [temp addObjectsFromArray:ts];
-        NSArray *arr = [SQLManager devicesWithCatalogID:device.hTypeId room:self.roomID];
+        
+        long UITypeOfLight = 0;
+        if ([device.typeName isEqualToString:@"射灯"]) {
+            UITypeOfLight = 1;
+        }else if ([device.typeName isEqualToString:@"灯带"]) {
+            UITypeOfLight = 2;
+        }else if ([device.typeName isEqualToString:@"调色灯"]) {
+            UITypeOfLight = 3;
+        }
+        NSArray *arr = [SQLManager devicesWithCatalogID:UITypeOfLight room:self.roomID];
         for (id obj in arr) {
             [temp insertObject:obj atIndex:device.rID];
         }

@@ -365,8 +365,7 @@
 
 #pragma mark - UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    //return _deviceType_count-2;
-    return 5;
+    return 7;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
@@ -379,11 +378,11 @@
         return _multiMediaArray.count;//影音
     }else if (section == 4){
         return _intelligentArray.count;//智能单品
-    }/*else if (section == 5){
+    }else if (section == 5){
         return _securityArray.count;//安防
     }else if (section == 6){
         return _sensorArray.count;//感应器
-    }*/
+    }
     return 0;
 }
 
@@ -519,7 +518,7 @@
                 dvdCell.backgroundColor =[UIColor clearColor];
                 dvdCell.selectionStyle = UITableViewCellSelectionStyleNone;
                 dvdCell.AddDvdBtn.hidden = YES;
-                dvdCell.DVDConstraint.constant = 10;
+                dvdCell.DVDConstraint.constant = 20;
                 dvdCell.DVDNameLabel.text = device.name;
                 dvdCell.DVDSwitchBtn.selected = device.power;//开关
                 dvdCell.DVDSlider.value = device.volume/100.0;//音量
@@ -530,7 +529,7 @@
                 dvdCell.backgroundColor =[UIColor clearColor];
                 dvdCell.selectionStyle = UITableViewCellSelectionStyleNone;
                 dvdCell.AddDvdBtn.hidden = YES;
-                dvdCell.DVDConstraint.constant = 10;
+                dvdCell.DVDConstraint.constant = 30;
                 dvdCell.DVDNameLabel.text = device.name;
                 dvdCell.DVDSwitchBtn.selected = device.power;//开关
                 dvdCell.DVDSlider.value = device.volume/100.0;//音量
@@ -578,7 +577,7 @@
                 tvCell.backgroundColor =[UIColor clearColor];
                 tvCell.selectionStyle = UITableViewCellSelectionStyleNone;
                 tvCell.AddTvDeviceBtn.hidden = YES;
-                tvCell.TVConstraint.constant = 10;
+                tvCell.TVConstraint.constant = 20;
                 tvCell.TVNameLabel.text = device.name;
                 tvCell.TVSwitchBtn.selected = device.power;//开关
                 tvCell.TVSlider.value = device.volume/100.0;//音量
@@ -589,7 +588,7 @@
                 tvCell.backgroundColor =[UIColor clearColor];
                 tvCell.selectionStyle = UITableViewCellSelectionStyleNone;
                 tvCell.AddTvDeviceBtn.hidden = YES;
-                tvCell.TVConstraint.constant = 10;
+                tvCell.TVConstraint.constant = 30;
                 tvCell.TVNameLabel.text = device.name;
                 tvCell.TVSwitchBtn.selected = device.power;//开关
                 tvCell.TVSlider.value = device.volume/100.0;//音量
@@ -637,7 +636,7 @@
         otherCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
         return otherCell;
         
-    }/*else if (indexPath.section == 5) {//安防
+    }else if (indexPath.section == 5) {//安防
         Device *device = [SQLManager getDeviceWithDeviceID:[_securityArray[indexPath.row] intValue]];
         
         if (device.hTypeId == 40) { //智能门锁
@@ -647,9 +646,17 @@
             otherCell.AddOtherBtn.hidden = YES;
             otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
+            otherCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             return otherCell;
         }else if (device.hTypeId == 45) { //摄像头
-            return nil;
+            /*OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.backgroundColor =[UIColor clearColor];
+            otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.AddOtherBtn.hidden = YES;
+            otherCell.OtherConstraint.constant = 10;
+            otherCell.NameLabel.text = device.name;
+            return otherCell;*/
+            return [UITableViewCell new];
         }else {
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
@@ -671,7 +678,7 @@
         otherCell.OtherConstraint.constant = 10;
         otherCell.NameLabel.text = device.name;
         return otherCell;
-    }*/
+    }
     
     return [UITableViewCell new];
 }
@@ -740,12 +747,20 @@
       }
     }
     
-    else if (indexPath.section == 4) { //智能单品
+    else if (indexPath.section == 4) { //智能单品:智能插座
         if (ON_IPAD) {
             return 100;
         }else {
             return 50;
         }
+    }
+    
+    else if (indexPath.section == 5) { //安防：智能门锁；摄像头
+        Device *device = [SQLManager getDeviceWithDeviceID:[_securityArray[indexPath.row] intValue]];
+        if (device.hTypeId == 45) { //摄像头(暂不展示)
+            return 0;
+        }
+        
     }
     
     

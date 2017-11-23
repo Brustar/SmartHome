@@ -270,6 +270,7 @@
         newColourCell.AddColourLightBtn.hidden = YES;
         newColourCell.ColourLightConstraint.constant = 10;
         newColourCell.backgroundColor =[UIColor clearColor];
+        newColourCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
         if(dictionary)
         {
@@ -302,6 +303,7 @@
         newColourCell.addPowerLightBtn.hidden = YES;
         newColourCell.powerBtnConstraint.constant = 10;
         newColourCell.backgroundColor =[UIColor clearColor];
+        newColourCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
         newColourCell.powerLightNameLabel.text = device.name;
         newColourCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
@@ -336,6 +338,7 @@
         aireCell.AddAireBtn.hidden = YES;
         aireCell.AireConstraint.constant = 10;
         aireCell.backgroundColor =[UIColor clearColor];
+        aireCell.selectionStyle = UITableViewCellSelectionStyleNone;
         aireCell.roomID = self.roomID; 
         aireCell.sceneid = self.sceneid;
         Device *device = [SQLManager getDeviceWithDeviceID:[_AirArray[indexPath.row] intValue]];
@@ -374,6 +377,7 @@
         
         CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor = [UIColor clearColor];
+        aireCell.selectionStyle = UITableViewCellSelectionStyleNone;
         aireCell.AddcurtainBtn.hidden = YES;
         aireCell.curtainContraint.constant = 10;
         aireCell.roomID = self.roomID;
@@ -412,6 +416,7 @@
     }else {
         CurtainC4TableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainC4TableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor = [UIColor clearColor];
+        aireCell.selectionStyle = UITableViewCellSelectionStyleNone;
         aireCell.addBtn.hidden = YES;
         aireCell.switchBtnTrailingConstraint.constant = 10;
         aireCell.roomID = self.roomID;
@@ -458,6 +463,7 @@
         TVCell.TVConstraint.constant = 10;
         TVCell.AddTvDeviceBtn.hidden = YES;
         TVCell.backgroundColor =[UIColor clearColor];
+        TVCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
         if(dictionary)
         {
@@ -491,6 +497,7 @@
         DVDCell.AddDvdBtn.hidden = YES;
         DVDCell.DVDConstraint.constant = 10;
         DVDCell.backgroundColor =[UIColor clearColor];
+        DVDCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
         if(dictionary)
         {
@@ -521,6 +528,7 @@
         otherCell.AddOtherBtn.hidden = YES;
         otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor = [UIColor clearColor];
+        otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
         otherCell.deviceid = _ProjectArray[indexPath.row];
@@ -529,6 +537,7 @@
     }if (indexPath.section == 8) {//FM
         FMTableViewCell * FMCell = [tableView dequeueReusableCellWithIdentifier:@"FMTableViewCell" forIndexPath:indexPath];
         FMCell.backgroundColor =[UIColor clearColor];
+        FMCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
         FMCell.FMNameLabel.text = device.name;
         FMCell.deviceid = _FMArray[indexPath.row];
@@ -541,6 +550,7 @@
         otherCell.AddOtherBtn.hidden = YES;
         otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor =[UIColor clearColor];
+        otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_NetVArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
         otherCell.deviceid = _NetVArray[indexPath.row];
@@ -551,6 +561,7 @@
         ScreenCell.AddScreenCurtainBtn.hidden = YES;
         ScreenCell.ScreenCurtainConstraint.constant = 10;
         ScreenCell.backgroundColor =[UIColor clearColor];
+        ScreenCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
         if(dictionary)
         {
@@ -575,6 +586,7 @@
     }if (indexPath.section == 11) {//背景音乐
         BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
         BjMusicCell.backgroundColor = [UIColor clearColor];
+        BjMusicCell.selectionStyle = UITableViewCellSelectionStyleNone;
         BjMusicCell.AddBjmusicBtn.hidden = YES;
         BjMusicCell.BJmusicConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
@@ -605,6 +617,7 @@
         otherCell.AddOtherBtn.hidden = YES;
         otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor = [UIColor clearColor];
+        otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
         otherCell.deviceid = _OtherArray[indexPath.row];
         if (_OtherArray.count) {
             Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];

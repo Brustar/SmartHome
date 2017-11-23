@@ -56,6 +56,18 @@
     if ([dic allKeys].count >0) {
         [self.SubTypeNameArr addObjectsFromArray:[dic allKeys]];
     }
+    
+    //排序(灯排在第一个)
+    [self.SubTypeNameArr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        
+        NSString *deviceTypeName = obj;
+        if ([deviceTypeName isEqualToString:@"灯光"]) {
+            [self.SubTypeNameArr removeObject:obj];
+            [self.SubTypeNameArr insertObject:@"灯光" atIndex:0];
+            *stop = YES;
+        }
+        
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated

@@ -38,6 +38,7 @@
 // 用自定义的按钮和标题替换默认内容
 - (void)setBackBtn:(UIButton *)btn;
 - (void)setLeftBtn:(UIButton *)btn;
+- (void)setLeftButton:(UIButton *)btn;
 - (void)setRightBtn:(UIButton *)btn;
 - (void)setRightBtnForSplitView:(UIButton *)btn;
 - (void)setMiddleBtn:(UIButton *)btn;

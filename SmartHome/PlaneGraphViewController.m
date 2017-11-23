@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self settingFloor];
     [self addNotifications];
     
     [self showNetStateView];
@@ -58,10 +58,24 @@
     
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
+    //安装平面图
     [self setupPlaneGraph];
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+}
+
+- (void)settingFloor {
+    _currentFloor = 1;//默认展示第一层
+    self.floor1Btn.selected = YES;
+    _floorNumber = [[UD objectForKey:@"floor_number"] integerValue];
+    if (_floorNumber == 2) {
+        self.floor1Btn.hidden = NO;
+        self.floor2Btn.hidden = NO;
+    }else {
+        self.floor1Btn.hidden = YES;
+        self.floor2Btn.hidden = YES;
+    }
 }
 
 - (void)getRoomStateInfoByTcp {
@@ -175,11 +189,12 @@
 //获取平面图配置
 - (void)getPlaneGraphConfiguration
 {
+    _floorArray = [NSMutableArray new];
     NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
     
     if (auothorToken.length >0) {
     
-    NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr], @"Cloud/scene_config_list.aspx"];
+    NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr], @"Cloud/plane_config_list.aspx"];
     
     NSDictionary *dic = @{
                           @"token":  auothorToken,
@@ -599,7 +614,7 @@
 - (void)showRoomStatus {
     // 处理接收到的数据
     [self handleData];
-    [self getAllDevicesStatusIcon];
+    [self getAllDevicesStatusIconByFloor:1];
     [self.roomStatusCollectionView reloadData];
 }
 
@@ -660,19 +675,60 @@
             if ([responseObject[@"result"] integerValue] == 0) {
                 NSDictionary *infoDict = responseObject[@"info"];
                 if ([infoDict isKindOfClass:[NSDictionary class]]) {
-                    NSString *bgImgUrl = infoDict[@"imgpath"];//设置平面背景
-                    if (bgImgUrl.length >0) {
-                        [self.planeGraph sd_setImageWithURL:[NSURL URLWithString:bgImgUrl] placeholderImage:[UIImage imageNamed:@"PlaneGraph"] options:SDWebImageRetryFailed];
+                    
+                   NSArray *floorArr =  infoDict[@"config_list"];
+                    if ([floorArr isKindOfClass:[NSArray class]]) {
+                        [floorArr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                            
+                            FloorInfo *info = [[FloorInfo alloc] init];
+                            NSDictionary *dic = obj;
+                            if ([dic isKindOfClass:[NSDictionary class]]) {
+                                info.floor = [dic[@"floor"] integerValue];
+                                info.plistPath = dic[@"plist_path"];
+                                info.imgPath = dic[@"imgpath"];
+                                
+                                [_floorArray addObject:info];
+                            }
+                        }];
+                        
+                        
+                        [_floorArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+                            
+                            FloorInfo *info = obj;
+                            if (info.floor == 1) {
+                                if (info.imgPath.length >0) {
+                                    [self.planeGraph sd_setImageWithURL:[NSURL URLWithString:info.imgPath] placeholderImage:[UIImage imageNamed:@"PlaneGraph"] options:SDWebImageRetryFailed];
+                                }
+                            }
+                                
+                            if (info.plistPath.length >0) {
+                                [self downloadPlist:info.plistPath]; //下载plist
+                            }
+                            
+                            
+                        }];
+                        
                     }
-                    NSString *plistURL = infoDict[@"plist_path"];
-                    if (plistURL.length >0) {
-                        //下载plist
-                        [self downloadPlist:plistURL];
-                    }else {
-                        if (_hostType == 0) {  //Creston
-                            [self fetchRoomDeviceStatus];//Http获取房间设备状态
-                        }
-                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+//                    NSString *bgImgUrl = infoDict[@"imgpath"];//设置平面背景
+//                    if (bgImgUrl.length >0) {
+//                        [self.planeGraph sd_setImageWithURL:[NSURL URLWithString:bgImgUrl] placeholderImage:[UIImage imageNamed:@"PlaneGraph"] options:SDWebImageRetryFailed];
+//                    }
+//                    NSString *plistURL = infoDict[@"plist_path"];
+//                    if (plistURL.length >0) {
+//                        //下载plist
+//                        [self downloadPlist:plistURL];
+//                    }else {
+//                        if (_hostType == 0) {  //Creston
+//                            [self fetchRoomDeviceStatus];//Http获取房间设备状态
+//                        }
+//                    }
                 }else {
                     if (_hostType == 0) {  //Creston
                         [self fetchRoomDeviceStatus];//Http获取房间设备状态
@@ -710,7 +766,7 @@
             
             [self.roomStatusCollectionView reloadData];//左侧房间信息圆盘
             
-            [self getAllDevicesStatusIcon];//平面图房间设备状态icon
+            [self getAllDevicesStatusIconByFloor:1];//平面图房间设备状态icon
         }
     }
 }
@@ -738,11 +794,14 @@
         
         NSString *plistFilePath = [[filePath absoluteString] substringFromIndex:7];
         //保存到UD
-        [UD setObject:plistFilePath forKey:@"Plane_Graph_PlistFile"];
+        NSString *key = [NSString stringWithFormat:@"%@%@", @"Plane", [plistFilePath substringFromIndex:plistFilePath.length-8]];
+        [UD setObject:plistFilePath forKey:key];
         [UD synchronize];
         
-        //获取所有房间的区域信息
-        [self getAllRoomsRectWithPlistFilePath:plistFilePath];
+        if ([key containsString:@"1"]) {
+            //获取所有房间的区域信息(默认获取第一层)
+            [self getAllRoomsRectWithPlistFilePath:plistFilePath];
+        }
         
     }];
     
@@ -753,10 +812,12 @@
 - (void)getAllRoomsRectWithPlistFilePath:(NSString *)plistFilePath {
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:plistFilePath];
     
-    //获取所有房间
-    NSArray *roomArray = [plistDic objectForKey:@"rooms"];
-    if ([roomArray isKindOfClass:[NSArray class]] && roomArray.count >0) {
-        [self.planeGraph addRoom:roomArray];
+    if (plistDic) {
+        //获取所有房间
+        NSArray *roomArray = [plistDic objectForKey:@"rooms"];
+        if ([roomArray isKindOfClass:[NSArray class]] && roomArray.count >0) {
+            [self.planeGraph addRoom:roomArray];
+        }
     }
     
     if (_hostType == 0) {  //Creston
@@ -764,8 +825,9 @@
     }
 }
 
-- (void)getAllDevicesStatusIcon {
-    NSString *plistFilePath = [UD objectForKey:@"Plane_Graph_PlistFile"];
+- (void)getAllDevicesStatusIconByFloor:(int)floor {
+    NSString *key = [NSString stringWithFormat:@"%@%d%@", @"Plane_", floor, @".plist"];
+    NSString *plistFilePath = [UD objectForKey:key];
     if (plistFilePath.length >0) {
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:plistFilePath];
         NSArray *deviceIconPositionArray = [plistDic objectForKey:@"room_positions"];
@@ -863,4 +925,40 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - 设置平面图背景图
+- (void)settingPlaneBgImageByFloor:(NSInteger)floor {
+    if (_floorArray.count > floor-1) {
+        FloorInfo *info = [_floorArray objectAtIndex:floor-1];
+        if (info.imgPath.length >0) {
+            [self.planeGraph sd_setImageWithURL:[NSURL URLWithString:info.imgPath] placeholderImage:[UIImage imageNamed:@"PlaneGraph"] options:SDWebImageRetryFailed];
+        }
+    }
+}
+
+#pragma mark - floorButtonAction
+- (IBAction)floor1BtnClicked:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    if (_currentFloor != btn.tag) {
+        _currentFloor = btn.tag;
+        btn.selected = YES;
+        self.floor2Btn.selected = NO;
+        NSString *plistFilePath = [UD objectForKey:@"Plane_1.plist"];
+        [self getAllRoomsRectWithPlistFilePath:plistFilePath];//在平面图上设置房间区域
+        [self settingPlaneBgImageByFloor:btn.tag];//设置平面图背景图
+        [self getAllDevicesStatusIconByFloor:(int)btn.tag];//设置平面图房间设备状态icon
+    }
+}
+
+- (IBAction)floor2BtnClicked:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    if (_currentFloor != btn.tag) {
+        _currentFloor = btn.tag;
+        btn.selected = YES;
+        self.floor1Btn.selected = NO;
+        NSString *plistFilePath = [UD objectForKey:@"Plane_2.plist"];
+        [self getAllRoomsRectWithPlistFilePath:plistFilePath];//在平面图上设置房间区域
+        [self settingPlaneBgImageByFloor:btn.tag];//设置平面图背景图
+        [self getAllDevicesStatusIconByFloor:(int)btn.tag];//设置平面图房间设备状态icon
+    }
+}
 @end

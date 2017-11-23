@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,20 +26,20 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_voi_high" translatesAutoresizingMaskIntoConstraints="NO" id="68P-ou-Xax">
-                        <rect key="frame" x="23" y="118" width="10" height="10"/>
+                        <rect key="frame" x="31" y="115.5" width="10" height="10"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="10" id="BR9-7B-QLP"/>
                             <constraint firstAttribute="height" constant="10" id="Jlg-F4-LDL"/>
                         </constraints>
                     </imageView>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dKl-4X-Ia9">
-                        <rect key="frame" x="51" y="107" width="268" height="31"/>
+                        <rect key="frame" x="59" y="104.5" width="252" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="4Pq-CM-0dF"/>
                         </constraints>
                     </slider>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_voi_high" translatesAutoresizingMaskIntoConstraints="NO" id="SAb-M2-Mdf">
-                        <rect key="frame" x="337" y="115" width="15" height="15"/>
+                        <rect key="frame" x="329" y="112.5" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="15" id="6Ko-AW-bSw"/>
                             <constraint firstAttribute="height" constant="15" id="JCI-8H-qSg"/>
@@ -62,14 +63,14 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tv_btn_adjust_normal" translatesAutoresizingMaskIntoConstraints="NO" id="7DU-dS-c5S">
-                        <rect key="frame" x="13" y="63.5" width="349" height="33"/>
+                        <rect key="frame" x="21" y="63.5" width="333" height="33"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="33" id="mIa-Tt-dJr"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJq-tW-lxt">
-                        <rect key="frame" x="58" y="67.5" width="20" height="20"/>
+                        <rect key="frame" x="66" y="67.5" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="MYh-Uv-tUw"/>
                             <constraint firstAttribute="height" constant="20" id="wde-DS-9Q4"/>
@@ -89,7 +90,7 @@
                         <state key="normal" image="icon_ch_normal"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iTa-SA-Jqr">
-                        <rect key="frame" x="297" y="67.5" width="20" height="20"/>
+                        <rect key="frame" x="289" y="67.5" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="BEc-qw-GJF"/>
                             <constraint firstAttribute="width" constant="20" id="KC4-9X-YlN"/>
@@ -100,7 +101,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOF-yf-IDB">
-                        <rect key="frame" x="297" y="15" width="18" height="18"/>
+                        <rect key="frame" x="277" y="15" width="18" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="18" id="Dr0-6T-QW2"/>
                             <constraint firstAttribute="height" constant="18" id="NHa-u5-Gxq"/>
@@ -108,7 +109,7 @@
                         <state key="normal" backgroundImage="TV_off"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OYh-IL-rXK">
-                        <rect key="frame" x="327" y="16" width="30" height="30"/>
+                        <rect key="frame" x="319" y="19" width="30" height="30"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="Tu4-va-eH5"/>
@@ -177,7 +178,7 @@
                     <constraint firstItem="r1c-Qd-2y6" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="0iS-Ml-dhy"/>
                     <constraint firstItem="tWF-t6-Y9g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="3Zr-2m-9fM"/>
                     <constraint firstItem="pnd-J7-sYa" firstAttribute="top" secondItem="r1c-Qd-2y6" secondAttribute="bottom" constant="12" id="44f-9H-rsN"/>
-                    <constraint firstAttribute="trailing" secondItem="xOF-yf-IDB" secondAttribute="trailing" constant="60" id="4p4-j9-COc"/>
+                    <constraint firstAttribute="trailing" secondItem="xOF-yf-IDB" secondAttribute="trailing" constant="80" id="4p4-j9-COc"/>
                     <constraint firstAttribute="trailingMargin" secondItem="SAb-M2-Mdf" secondAttribute="trailing" constant="15" id="5Re-G4-k0b"/>
                     <constraint firstAttribute="bottomMargin" secondItem="SAb-M2-Mdf" secondAttribute="bottom" constant="11.5" id="83O-zi-g3E"/>
                     <constraint firstAttribute="trailing" secondItem="pnd-J7-sYa" secondAttribute="trailing" id="BIR-Hn-7t4"/>

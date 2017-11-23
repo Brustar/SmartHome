@@ -326,9 +326,9 @@
         proto.cmd=0x84;
     }
     proto.deviceType=0x00;
-    proto.deviceID=0x00;
+    proto.deviceID= CFSwapInt16BigToHost([[UD objectForKey:@"UserID"] integerValue]);//存用户ID，服务端用来统计用户行为数据
     proto.action.state=0x00;
-    proto.action.RValue=0x00;
+    proto.action.RValue = 0x00;
     proto.action.G=0x00;
     proto.action.B=0x00;
     return dataFromProtocol(proto);

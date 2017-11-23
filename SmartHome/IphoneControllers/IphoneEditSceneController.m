@@ -143,6 +143,12 @@
 
 -(void)rightBtnClicked:(UIButton *)bbi
 {
+    NSInteger userType = [[UD objectForKey:@"UserType"] integerValue];
+    if (userType == 2) { //客人不允许编辑场景
+        [MBProgressHUD showError:@"非主人不允许编辑场景"];
+        return;
+    }
+    
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];

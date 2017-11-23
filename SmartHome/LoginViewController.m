@@ -842,13 +842,15 @@
     }else if(tag == 2) {
         if ([responseObject[@"result"] intValue] == 0)
         {
-            NSDictionary *versioninfo=responseObject[@"version_info"];
+            NSDictionary *versioninfo = responseObject[@"version_info"];
             //执久化配置版本号
             [versioninfo enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                 [IOManager writeUserdefault:obj forKey:key];
             }];
+            //保存楼层信息
+            NSNumber *floor = responseObject[@"home_room_info"][@"floor_number"];
+            [IOManager writeUserdefault:floor forKey:@"floor_number"];
             //写房间配置信息到sql
-            
             [self writeRoomsConfigDataToSQL:responseObject[@"home_room_info"]];
             //写场景配置信息到sql
             [self writeScensConfigDataToSQL:responseObject[@"room_scence_list"]];

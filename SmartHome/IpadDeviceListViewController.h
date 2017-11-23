@@ -12,6 +12,7 @@
 #import "CustomViewController.h"
 #import "NowMusicController.h"
 #import "LoadMaskHelper.h"
+#import "MBProgressHUD+NJ.h"  
 
 @interface IpadDeviceListViewController : CustomViewController<SingleMaskViewDelegate>
 

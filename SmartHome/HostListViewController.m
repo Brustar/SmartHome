@@ -208,7 +208,9 @@
             [versioninfo enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                 [IOManager writeUserdefault:obj forKey:key];
             }];
-            
+            //保存楼层信息
+            NSNumber *floor = responseObject[@"home_room_info"][@"floor_number"];
+            [IOManager writeUserdefault:floor forKey:@"floor_number"];
             //写房间配置信息到sql
             [self writeRoomsConfigDataToSQL:responseObject[@"home_room_info"]];
             //写场景配置信息到sql

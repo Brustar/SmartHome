@@ -584,6 +584,12 @@ static NSString * const CYPhotoId = @"photo";
 //长按cell可以更换场景的图片
 -(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
 {
+    NSInteger userType = [[UD objectForKey:@"UserType"] integerValue];
+    if (userType == 2) { //客人不允许更换场景图片
+        [MBProgressHUD showError:@"非主人不允许更换场景图片"];
+        return;
+    }
+    
     NSIndexPath *indexPath = [self.FirstCollectionView indexPathForItemAtPoint:[lgr locationInView:self.FirstCollectionView]];
     self.currentCell = (CYPhotoCell *)[self.FirstCollectionView cellForItemAtIndexPath:indexPath];
     UIAlertController * alerController;
@@ -669,6 +675,11 @@ static NSString * const CYPhotoId = @"photo";
 {
     //最后一个cell是添加场景的
      if (indexPath.row+1 >= self.scenes.count) {
+         NSInteger userType = [[UD objectForKey:@"UserType"] integerValue];
+         if (userType == 2) { //客人不允许增加自定义场景
+             [MBProgressHUD showError:@"非主人不允许增加自定义场景"];
+             return;
+         }
         
          if (ON_IPAD) {
              AddIpadSceneVC * AddIpadVC = [[AddIpadSceneVC alloc] init];
@@ -732,6 +743,12 @@ static NSString * const CYPhotoId = @"photo";
 //删除场景
 -(void)sceneDeleteAction:(CYPhotoCell *)cell
 {
+    NSInteger userType = [[UD objectForKey:@"UserType"] integerValue];
+    if (userType == 2) { //客人不允许删除自定义场景
+        [MBProgressHUD showError:@"非主人不允许删除自定义场景"];
+        return;
+    }
+    
     self.currentCell = cell;
     self.sceneID = (int)cell.tag;
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.currentCell.SceneName.text] preferredStyle:UIAlertControllerStyleAlert];

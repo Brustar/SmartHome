@@ -207,6 +207,7 @@
 		CD5134371E8D07FD00C2EDAF /* Goods.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5134361E8D07FD00C2EDAF /* Goods.m */; };
 		CD51343A1E8E369700C2EDAF /* WeChatPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5134391E8E369700C2EDAF /* WeChatPayManager.m */; };
 		CD51343F1E92807600C2EDAF /* tipIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD51343E1E92807500C2EDAF /* tipIcon@2x.png */; };
+		CD5B138B1FC2BB4700C73FE8 /* FloorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5B138A1FC2BB4700C73FE8 /* FloorInfo.m */; };
 		CD75CC931F132F9200917D40 /* iPhoneDemo.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD75CC921F132F9200917D40 /* iPhoneDemo.gif */; };
 		CD75CC951F132FA900917D40 /* iPadDemo.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD75CC941F132FA900917D40 /* iPadDemo.gif */; };
 		CD75CC9A1F132FE500917D40 /* LoadMaskHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD75CC961F132FE500917D40 /* LoadMaskHelper.m */; };
@@ -783,6 +784,8 @@
 		CD5134381E8E369700C2EDAF /* WeChatPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatPayManager.h; sourceTree = "<group>"; };
 		CD5134391E8E369700C2EDAF /* WeChatPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatPayManager.m; sourceTree = "<group>"; };
 		CD51343E1E92807500C2EDAF /* tipIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tipIcon@2x.png"; sourceTree = "<group>"; };
+		CD5B13891FC2BB4700C73FE8 /* FloorInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FloorInfo.h; sourceTree = "<group>"; };
+		CD5B138A1FC2BB4700C73FE8 /* FloorInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FloorInfo.m; sourceTree = "<group>"; };
 		CD75CC921F132F9200917D40 /* iPhoneDemo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = iPhoneDemo.gif; sourceTree = "<group>"; };
 		CD75CC941F132FA900917D40 /* iPadDemo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = iPadDemo.gif; sourceTree = "<group>"; };
 		CD75CC961F132FE500917D40 /* LoadMaskHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMaskHelper.m; sourceTree = "<group>"; };
@@ -1081,6 +1084,8 @@
 				0F61C7741F3C087200A8D9A5 /* DeviceSchedule.m */,
 				CD50EEBC1FABF3E80065AF08 /* DeviceSource.h */,
 				CD50EEBD1FABF3E80065AF08 /* DeviceSource.m */,
+				CD5B13891FC2BB4700C73FE8 /* FloorInfo.h */,
+				CD5B138A1FC2BB4700C73FE8 /* FloorInfo.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -2998,6 +3003,7 @@
 				CDEE5EA61EC33DC100A5779D /* CoreTextArcView.m in Sources */,
 				CDF78C551E9CA99D00F8B20C /* CustomNaviBarView.m in Sources */,
 				0FC41BAF1D6DA3DD000D4451 /* VoiceOrderController.m in Sources */,
+				CD5B138B1FC2BB4700C73FE8 /* FloorInfo.m in Sources */,
 				CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */,
 				0FCFB3831CF28FCB00B37DD3 /* Curtain.m in Sources */,
 				CDEE5E9B1EC1DF8300A5779D /* DeviceTimerSettingViewController.m in Sources */,
