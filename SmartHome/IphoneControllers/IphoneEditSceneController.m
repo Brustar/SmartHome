@@ -290,9 +290,11 @@
         }else {
             _currentBrightness -= 5;
         }
-        if (_currentBrightness < 0) {
-            _currentBrightness = 0;
+        
+        if (_currentBrightness <= 20) {
+            _currentBrightness = 20;
         }
+        
         [[SceneManager defaultManager] gloomForRoomLights:_lightArray brightness:_currentBrightness];
     }
   [self.tableView reloadData];
@@ -340,6 +342,7 @@
         }else {
             _currentBrightness += 5;
         }
+        
         if (_currentBrightness > 100) {
             _currentBrightness = 100;
         }
@@ -399,7 +402,7 @@
              [_ColourLightArr addObject:lightArr[i]];
         }else if (_htypeID == 31){//空调
             [_AirArray addObject:lightArr[i]];
-        }else if (_htypeID == 21){//窗帘
+        }else if (_htypeID == 21 || _htypeID == 22){//窗帘:21开合帘；22卷帘
             [_CurtainArray addObject:lightArr[i]];
         }else if (_htypeID == 11){//网路电视
             [_TVArray addObject:lightArr[i]];
@@ -732,13 +735,13 @@
         }
        if (_isGloom) {
            cell.NewLightPowerBtn.selected = YES;//开关状态
-           cell.NewLightSlider.value = 20.0f/100.0f;//亮度状态
+           cell.NewLightSlider.value = _currentBrightness/100.0f;//亮度状态
        }else if (_isRomantic) {
            cell.NewLightPowerBtn.selected = YES;//开关状态
-           cell.NewLightSlider.value = 50.0f/100.0f;//亮度状态
+           cell.NewLightSlider.value = _currentBrightness/100.0f;//亮度状态
        }else if (_isSprightly) {
            cell.NewLightPowerBtn.selected = YES;//开关状态
-           cell.NewLightSlider.value = 90.0f/100.0f;//亮度状态
+           cell.NewLightSlider.value = _currentBrightness/100.0f;//亮度状态
        }
       
         return cell;
@@ -747,6 +750,7 @@
        newColourCell.AddColourLightBtn.hidden = YES;
        newColourCell.ColourLightConstraint.constant = 10;
        newColourCell.backgroundColor =[UIColor clearColor];
+       newColourCell.selectionStyle = UITableViewCellSelectionStyleNone;
 //       newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
        newColourCell.deviceid = _ColourLightArr[indexPath.row];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
@@ -780,6 +784,7 @@
        newColourCell.addPowerLightBtn.hidden = YES;
        newColourCell.powerBtnConstraint.constant = 10;
        newColourCell.backgroundColor =[UIColor clearColor];
+       newColourCell.selectionStyle = UITableViewCellSelectionStyleNone;
        Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
 //       newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
        newColourCell.deviceid = _SwitchLightArr[indexPath.row];
@@ -814,6 +819,7 @@
         aireCell.AddAireBtn.hidden = YES;
         aireCell.AireConstraint.constant = 10;
         aireCell.backgroundColor =[UIColor clearColor];
+        aireCell.selectionStyle = UITableViewCellSelectionStyleNone;
         aireCell.roomID = self.roomID;
         aireCell.sceneid = self.sceneid;
          Device *device = [SQLManager getDeviceWithDeviceID:[_AirArray[indexPath.row] intValue]];
@@ -851,6 +857,7 @@
         
         CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor = [UIColor clearColor];
+        aireCell.selectionStyle = UITableViewCellSelectionStyleNone;
         aireCell.AddcurtainBtn.hidden = YES;
         aireCell.curtainContraint.constant = 10;
         aireCell.roomID = self.roomID;
@@ -891,6 +898,7 @@
     }else {
         CurtainC4TableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainC4TableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor = [UIColor clearColor];
+        aireCell.selectionStyle = UITableViewCellSelectionStyleNone;
         aireCell.addBtn.hidden = YES;
         aireCell.switchBtnTrailingConstraint.constant = 10;
         aireCell.roomID = self.roomID;
@@ -937,6 +945,7 @@
         TVCell.TVConstraint.constant = 10;
         TVCell.AddTvDeviceBtn.hidden = YES;
         TVCell.backgroundColor =[UIColor clearColor];
+        TVCell.selectionStyle = UITableViewCellSelectionStyleNone;
           Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
         if(dictionary)
         {
@@ -973,6 +982,7 @@
         DVDCell.DVDConstraint.constant = 10;
         DVDCell.DVDSlider.continuous = NO;
         DVDCell.backgroundColor =[UIColor clearColor];
+        DVDCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
         if(dictionary)
         {
@@ -1004,6 +1014,7 @@
         otherCell.AddOtherBtn.hidden = YES;
         otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor = [UIColor clearColor];
+        otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
         otherCell.OtherSwitchBtn.selected = device.power;
@@ -1015,6 +1026,7 @@
     }if (indexPath.section == 8) {//FM
         FMTableViewCell * FMCell = [tableView dequeueReusableCellWithIdentifier:@"FMTableViewCell" forIndexPath:indexPath];
         FMCell.backgroundColor =[UIColor clearColor];
+        FMCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
         FMCell.FMNameLabel.text = device.name;
         FMCell.FMSwitchBtn.selected = device.power;
@@ -1029,6 +1041,7 @@
         otherCell.AddOtherBtn.hidden = YES;
         otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor =[UIColor clearColor];
+        otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_NetVArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
@@ -1040,6 +1053,7 @@
         ScreenCell.AddScreenCurtainBtn.hidden = YES;
         ScreenCell.ScreenCurtainConstraint.constant = 10;
         ScreenCell.backgroundColor =[UIColor clearColor];
+        ScreenCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
         if(dictionary)
         {
@@ -1065,6 +1079,7 @@
     }if (indexPath.section == 11) {//背景音乐
         BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
         BjMusicCell.backgroundColor = [UIColor clearColor];
+        BjMusicCell.selectionStyle = UITableViewCellSelectionStyleNone;
         BjMusicCell.AddBjmusicBtn.hidden = YES;
         BjMusicCell.BJmusicConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
@@ -1096,6 +1111,7 @@
         otherCell.AddOtherBtn.hidden = YES;
         otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor = [UIColor clearColor];
+        otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
         otherCell.deviceid = _OtherArray[indexPath.row];
         if (_OtherArray.count) {
             Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
@@ -1128,13 +1144,19 @@
     }
     AddDeviceCell * addDeviceCell = [tableView dequeueReusableCellWithIdentifier:@"AddDeviceCell" forIndexPath:indexPath];
     addDeviceCell.backgroundColor = [UIColor clearColor];
+    addDeviceCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return addDeviceCell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
       [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 13) {
+    if (indexPath.section == 13) { //给场景添加设备
+        NSInteger userType = [[UD objectForKey:@"UserType"] integerValue];
+        if (userType == 2) { //客人不允许给场景添加设备
+            [MBProgressHUD showError:@"非主人不允许给场景添加设备"];
+            return;
+        }
         UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
         IphoneNewAddSceneVC * devicesVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneVC"];
         devicesVC.roomID = self.roomID;

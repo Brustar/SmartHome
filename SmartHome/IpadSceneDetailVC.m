@@ -145,7 +145,7 @@
             [_ColourLightArr addObject:self.deviceIdArr[i]];
         }else if (_htypeID == 31){//空调
             [_AirArray addObject:self.deviceIdArr[i]];
-        }else if (_htypeID == 21){//窗帘
+        }else if (_htypeID == 21 || _htypeID == 22){//窗帘:21开合帘；22卷帘
             [_CurtainArray addObject:self.deviceIdArr[i]];
         }else if (_htypeID == 11){//网路电视
             [_TVArray addObject:self.deviceIdArr[i]];
@@ -255,13 +255,13 @@
         }
         if (_isGloom) {
             cell.NewLightPowerBtn.selected = YES;//开关状态
-            cell.NewLightSlider.value = 20.0f/100.0f;//亮度状态
+            cell.NewLightSlider.value = _currentBrightness/100.0f;//亮度状态
         }else if (_isRomantic) {
             cell.NewLightPowerBtn.selected = YES;//开关状态
-            cell.NewLightSlider.value = 50.0f/100.0f;//亮度状态
+            cell.NewLightSlider.value = _currentBrightness/100.0f;//亮度状态
         }else if (_isSprightly) {
             cell.NewLightPowerBtn.selected = YES;//开关状态
-            cell.NewLightSlider.value = 90.0f/100.0f;//亮度状态
+            cell.NewLightSlider.value = _currentBrightness/100.0f;//亮度状态
         }
         
         return cell;
@@ -708,8 +708,8 @@
         }else {
             _currentBrightness -= 5;
         }
-        if (_currentBrightness < 0) {
-            _currentBrightness = 0;
+        if (_currentBrightness < 20) {
+            _currentBrightness = 20;
         }
         [[SceneManager defaultManager] gloomForRoomLights:_lightArray brightness:_currentBrightness];
     }
@@ -730,6 +730,7 @@
         _isSprightly = NO;
         
         if (_lightArray.count >0) {
+            _currentBrightness = 50;
             [[SceneManager defaultManager] romanticForRoomLights:_lightArray];
         }
         

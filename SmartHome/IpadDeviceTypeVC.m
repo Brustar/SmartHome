@@ -186,8 +186,12 @@
             [self.delegate IpadDeviceType:self selected:indexPath.row typeName:self.SubTypeNameArr[indexPath.row]];
         }
     }
-    if (indexPath.section == 1) {
-       
+    if (indexPath.section == 1) { //给场景添加设备
+        NSInteger userType = [[UD objectForKey:@"UserType"] integerValue];
+        if (userType == 2) { //客人不允许给场景添加设备
+            [MBProgressHUD showError:@"非主人不允许给场景添加设备"];
+            return;
+        }
         AddIpadSceneVC * AddIpadVC = [[AddIpadSceneVC alloc] init];
         AddIpadVC.roomID = self.roomID;
         AddIpadVC.sceneID = self.sceneID;

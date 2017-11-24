@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomViewController.h"
+#import "MBProgressHUD+NJ.h"
 
 @class IpadDeviceTypeVC;
 

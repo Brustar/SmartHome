@@ -81,6 +81,7 @@
     
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
+    [self.deviceTableView registerNib:[UINib nibWithNibName:@"CurtainC4TableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainC4TableViewCell"];//C4窗帘
     
     if (ON_IPAD) {
         [self.deviceTableView registerNib:[UINib nibWithNibName:@"IpadTVCell" bundle:nil] forCellReuseIdentifier:@"IpadTVCell"];//网络电视
@@ -229,6 +230,7 @@
 }
 */
 
+//柔和
 - (IBAction)softBtnClicked:(id)sender {
     UIButton *btn = (UIButton *)sender;
     if (!btn.selected) {
@@ -248,8 +250,9 @@
         }else {
             _currentBrightness -= 5;
         }
-        if (_currentBrightness < 0) {
-            _currentBrightness = 0;
+        
+        if (_currentBrightness <= 20) {
+            _currentBrightness = 20;
         }
         [[SceneManager defaultManager] gloomForRoomLights:_lightArray brightness:_currentBrightness];
     }
@@ -257,6 +260,7 @@
     [self.deviceTableView reloadData];
 }
 
+//正常
 - (IBAction)normalBtnClicked:(id)sender {
     UIButton *btn = (UIButton *)sender;
     if (!btn.selected) {
@@ -276,6 +280,7 @@
     }
 }
 
+//明亮
 - (IBAction)brightBtnClicked:(id)sender {
     UIButton *btn = (UIButton *)sender;
     if (!btn.selected) {
@@ -421,13 +426,13 @@
             cell.NewLightSlider.value = (float)device.bright/100.0f;//亮度状态
             if (_isGloom) {
                 cell.NewLightPowerBtn.selected = YES;//开关状态
-                cell.NewLightSlider.value = 20.0f/100.0f;//亮度状态
+                cell.NewLightSlider.value = _currentBrightness/100.0f;//亮度状态
             }else if (_isRomantic) {
                 cell.NewLightPowerBtn.selected = YES;//开关状态
-                cell.NewLightSlider.value = 50.0f/100.0f;//亮度状态
+                cell.NewLightSlider.value = _currentBrightness/100.0f;//亮度状态
             }else if (_isSprightly) {
                 cell.NewLightPowerBtn.selected = YES;//开关状态
-                cell.NewLightSlider.value = 90.0f/100.0f;//亮度状态
+                cell.NewLightSlider.value = _currentBrightness/100.0f;//亮度状态
             }
             return cell;
         }else if (device.hTypeId == 3) { //调色灯
@@ -453,6 +458,10 @@
         }
         
     }else if (indexPath.section == 1) {//窗帘
+        Device *device = [SQLManager getDeviceWithDeviceID:[_curtainArray[indexPath.row] intValue]];
+        
+        if (_hostType == 0) {  //Crestron
+        
         CurtainTableViewCell *curtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         curtainCell.delegate = self;
         curtainCell.backgroundColor =[UIColor clearColor];
@@ -460,12 +469,28 @@
         curtainCell.AddcurtainBtn.hidden = YES;
         curtainCell.curtainContraint.constant = 10;
         curtainCell.roomID = (int)self.roomID;
-        Device *device = [SQLManager getDeviceWithDeviceID:[_curtainArray[indexPath.row] intValue]];
         curtainCell.label.text = device.name;
         curtainCell.deviceid = _curtainArray[indexPath.row];
         curtainCell.slider.value = (float)device.position/100.0f;//窗帘位置
         curtainCell.open.selected = device.power;//开关状态
         return curtainCell;
+        }
+        
+        else if (_hostType == 1) {   //C4
+            
+            CurtainC4TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CurtainC4TableViewCell" forIndexPath:indexPath];
+            
+            cell.backgroundColor = [UIColor clearColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.name.text = device.name;
+            cell.deviceid = _curtainArray[indexPath.row];
+            cell.tag = [cell.deviceid integerValue];
+            cell.switchBtn.tag = indexPath.row;
+            cell.addBtn.hidden = YES;
+            cell.switchBtnTrailingConstraint.constant = 10;
+            return cell;
+        }
+            
     }else if (indexPath.section == 2) { //环境
         
         Device *device = [SQLManager getDeviceWithDeviceID:[_environmentArray[indexPath.row] intValue]];
@@ -709,6 +734,9 @@
       }
     }else if (indexPath.section == 1) { //窗帘
         if (ON_IPAD) {
+            if (_hostType != 0) { //C4窗帘 100
+                return 100;
+            }
             return 150;
         }else {
             return 100;

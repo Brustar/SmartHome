@@ -32,8 +32,24 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     }else{
         NSArray *ts = [self lights];
         NSMutableArray *temp = [NSMutableArray new];
-        [temp addObjectsFromArray:ts];
-        NSArray *arr = [SQLManager devicesWithCatalogID:1 room:self.roomID];
+        if (ts.count >0) {
+            [temp addObjectsFromArray:ts];
+        }
+        Device *device = nil;
+        if (temp.count >0) {
+            device = temp[0];
+        }
+        
+        long UITypeOfLight = 0;
+        if ([device.typeName isEqualToString:@"射灯"]) {
+            UITypeOfLight = 1;
+        }else if ([device.typeName isEqualToString:@"灯带"]) {
+            UITypeOfLight = 2;
+        }else if ([device.typeName isEqualToString:@"调色灯"]) {
+            UITypeOfLight = 3;
+        }
+        
+        NSArray *arr = [SQLManager devicesWithCatalogID:UITypeOfLight room:self.roomID];
         for (id obj in arr) {
             [temp insertObject:obj atIndex:1];
         }
