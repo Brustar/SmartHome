@@ -32,7 +32,13 @@
     manager.shouldResignOnTouchOutside = YES;
     manager.shouldToolbarUsesTextFieldTintColor = YES;
     manager.enableAutoToolbar = YES;
-    
+}
+
+- (void) init3DTouch
+{
+    if ([[UIDevice currentDevice] systemVersion].floatValue < 9.0) {
+        return;
+    }
     UIApplication *application = [UIApplication sharedApplication];
     //动态加载自定义的ShortcutItem
     if (application.shortcutItems.count == 0) {
@@ -43,6 +49,8 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [self init3DTouch];
     //app未开启时处理推送
     if (launchOptions) {
         //截取apns推送的消息
