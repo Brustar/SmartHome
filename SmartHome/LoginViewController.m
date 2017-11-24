@@ -457,7 +457,6 @@
 {
     result=[result decryptWithDes:DES_KEY];
     
-    
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"registFirstStepVC"];
     
@@ -472,7 +471,6 @@
                 self.hostName = list[1];
                 [vc setValue:self.masterId forKey:@"masterStr"];
                 [vc setValue:self.hostName forKey:@"hostName"];
-            
             }
             else
             {
@@ -493,10 +491,8 @@
                 self.hostName = list[1];
                 [vc setValue:self.masterId forKey:@"masterStr"];
                 [vc setValue:self.hostName forKey:@"hostName"];
-
+                
             }
-            
-            
             else
             {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"非法的二维码" preferredStyle:UIAlertControllerStyleAlert];
@@ -508,9 +504,13 @@
         
     }
     
-    
     [self.navigationController pushViewController:vc animated:YES];
-    
+    reader.delegate = nil;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        reader.delegate = self;
+        
+    });
 }
 
 #pragma mark - UITextFieldDelegate
