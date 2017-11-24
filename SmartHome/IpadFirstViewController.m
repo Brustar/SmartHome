@@ -495,6 +495,15 @@
      _webView.tag = 201;
      [self.view addSubview:_webView];
      [self performSelector:@selector(doOtherAction) withObject:nil afterDelay:ANIMATION_TIME];
+    
+    dap.enabled = false;
+    
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        dap.enabled = true;
+        
+    });
 
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView
