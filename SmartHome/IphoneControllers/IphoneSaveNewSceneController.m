@@ -90,6 +90,7 @@
 }
 -(void)rightBtnClicked:(UIButton *)bbi
 {
+     [_naviRightBtn setEnabled:NO];
     if ([self.sceneName.text isEqualToString:@""]) {
         [MBProgressHUD showError:@"场景名不能为空!"];
         return;
@@ -215,6 +216,7 @@
       
          [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
     }else{
+        
           [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
     }
     _isActive = self.startSceneBtn.selected;
