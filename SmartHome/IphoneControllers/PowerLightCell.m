@@ -22,8 +22,6 @@
 //     [IOManager removeTempFile];
     [self.addPowerLightBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.powerLightBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [self.powerLightBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
-    [self.powerLightBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
     if (ON_IPAD) {
         
         self.powerLightNameLabel.font = [UIFont systemFontOfSize:17];
@@ -63,7 +61,9 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         
-       
+        if (_delegate && [_delegate respondsToSelector:@selector(onPowerLightPowerBtnClicked:deviceID:)]) {
+            [_delegate onPowerLightPowerBtnClicked:self.powerLightBtn deviceID:self.deviceid.intValue];
+        }
         
     }else if (sender == self.addPowerLightBtn){
         self.addPowerLightBtn.selected = !self.addPowerLightBtn.selected;
@@ -91,7 +91,7 @@
     
     [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron:self.powerLightBtn.selected];
-    [device setBrightness:100];
+    [device setBrightness:0]; //开关灯 没有亮度参数,设置为0
     [device setColor:@[]];
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];

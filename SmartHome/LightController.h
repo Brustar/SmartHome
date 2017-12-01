@@ -26,6 +26,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *favorite;
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,assign) BOOL isAddDevice;
+@property (weak, nonatomic) IBOutlet UIButton *sLightBtn;
+@property (weak, nonatomic) IBOutlet UIButton *ddLightBtn;
+@property (weak, nonatomic) IBOutlet UIButton *cLightBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lightTitleBottomConstraint;
 
 -(void)visibleUI:(Device *)device;
 

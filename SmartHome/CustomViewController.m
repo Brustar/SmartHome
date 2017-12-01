@@ -85,12 +85,12 @@
 -(void)naviToDevice
 {
     UIButton *naviBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [naviBtn setImage:[UIImage imageNamed:@"dir_left"] forState:UIControlStateNormal];
+    [naviBtn setImage:[UIImage imageNamed:@"backBtn"] forState:UIControlStateNormal];
     [[naviBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
      subscribeNext:^(id x) {
          [self popToDevice];
      }];
-    [self setNaviBarLeftBtn:naviBtn];
+    [self setNaviBarLeftButton:naviBtn];
 }
 
 - (void)bringNaviBarToTopmost
@@ -137,6 +137,17 @@
 
 //    else{APP_ASSERT_STOP}
 
+}
+
+- (void)setNaviBarLeftButton:(UIButton *)btn
+{
+    if (_viewNaviBar)
+    {
+        [_viewNaviBar setLeftButton:btn]; 
+    }
+    
+    //    else{APP_ASSERT_STOP}
+    
 }
 
 - (void)setNaviBarRightBtn:(UIButton *)btn

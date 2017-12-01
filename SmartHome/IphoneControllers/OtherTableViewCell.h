@@ -15,8 +15,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *OtherSwitchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *AddOtherBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *OtherConstraint;
-@property(nonatomic, strong)NSString * deviceid;
-@property (nonatomic,weak) NSString *sceneid;
+@property(nonatomic, strong) NSString *deviceid;
+@property (nonatomic,assign) NSInteger hTypeId;
+@property (nonatomic,weak)   NSString *sceneid;
 //房间id
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
@@ -29,6 +30,6 @@
 @protocol OtherTableViewCellDelegate <NSObject>
 
 @optional
-- (void)onOtherSwitchBtnClicked:(UIButton *)btn;
+- (void)onOtherSwitchBtnClicked:(UIButton *)btn deviceID:(int)deviceID;         
 
 @end

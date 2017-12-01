@@ -50,6 +50,7 @@ typedef struct Protocol Proto;
 #define PROTOCOL_BACKWARD 0x16
 
 #define PROTOCOL_VOLUME 0xAA
+#define PROTOCOL_SOURCE 0xAB
 #define PROTOCOL_VOLUME_UP 0x02
 #define PROTOCOL_VOLUME_DOWN 0x03
 #define PROTOCOL_MUTE 0x04

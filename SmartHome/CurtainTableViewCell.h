@@ -31,7 +31,7 @@
 @protocol CurtainTableViewCellDelegate <NSObject>
 
 @optional
-- (void)onCurtainOpenBtnClicked:(UIButton *)btn;
-- (void)onCurtainSliderBtnValueChanged:(UISlider *)slider;
+- (void)onCurtainOpenBtnClicked:(UIButton *)btn deviceID:(int)deviceID;
+- (void)onCurtainSliderBtnValueChanged:(UISlider *)slider deviceID:(int)deviceID;
 
 @end

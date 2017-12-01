@@ -202,6 +202,7 @@
 }
 
 - (IBAction)toogle:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     UIButton *btn = (UIButton *)sender;
     NSData *data;
     
@@ -219,30 +220,39 @@
 }
 
 - (IBAction)repeat:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
+    UIButton *button = (UIButton *)sender;
+    button.selected = !button.selected;
     NSData *data=[[DeviceInfo defaultManager] repeat:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (IBAction)shuffle:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
+    UIButton *button = (UIButton *)sender;
+    button.selected = !button.selected;
     NSData *data=[[DeviceInfo defaultManager] shuffle:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (IBAction)nextMusic:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=[[DeviceInfo defaultManager] next:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (IBAction)previousMusic:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=[[DeviceInfo defaultManager] previous:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (IBAction)pauseMusic:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
@@ -272,6 +282,7 @@
 }
 
 - (IBAction)playMusic:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     UIButton *btn = (UIButton *)sender;
     [btn setSelected:!btn.isSelected];
     if (btn.isSelected) {

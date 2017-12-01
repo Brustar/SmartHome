@@ -29,7 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *line;
 @property (weak, nonatomic) IBOutlet UIImageView *base;
 @property (weak, nonatomic) IBOutlet UILabel *second;
-@property (nonatomic,assign) NSTimer *scheculer;
+@property (nonatomic,assign) NSTimer *scheduler;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
 @property (weak, nonatomic) IBOutlet UIButton *btnCmd;
 
@@ -166,25 +166,25 @@
         if (button.isSelected) {
             //selected
             [button setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
-            self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startNow:) userInfo:nil repeats:YES];
+            self.scheduler = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startNow:) userInfo:nil repeats:YES];
         }else{
             //normal
             [button setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
             self.timeLbl.text = @"00:00";
             self.interval = 0;
-            [self.scheculer invalidate];
+            [self.scheduler invalidate];
         }
     }else{
         if (button.isSelected) {
             //selected
             [button setBackgroundImage:[UIImage imageNamed:@"sp_on"] forState:UIControlStateSelected];
             self.interval = [self.SLabel.text intValue];
-            self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timing:) userInfo:nil repeats:YES];
+            self.scheduler = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timing:) userInfo:nil repeats:YES];
         }else{
             //normal
             [button setBackgroundImage:[UIImage imageNamed:@"sp_off"] forState:UIControlStateNormal];
             [button setTitle:@"" forState:UIControlStateNormal];
-            [self.scheculer invalidate];
+            [self.scheduler invalidate];
         }
         self.second.hidden = !button.isSelected;
     }

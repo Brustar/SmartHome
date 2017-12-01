@@ -19,58 +19,14 @@
 #import "IphoneRoomView.h"
 @interface AmplifierController ()<ORBSwitchDelegate,IphoneRoomViewDelegate>
 @property (nonatomic,strong) NSArray *menus;
-@property (nonatomic,strong) NSMutableArray *amplifierNames;
-@property (nonatomic,strong) NSMutableArray *amplifierIDArr;
+
 @property (nonatomic,strong) ORBSwitch *switcher;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
+@property (weak, nonatomic) IBOutlet UIButton *toogle;
 @end
 
 @implementation AmplifierController
-
--(NSMutableArray *)amplifierIDArr
-{
-    if(!_amplifierIDArr)
-    {
-        _amplifierIDArr = [NSMutableArray array];
-        
-        if(self.sceneid > 0 && !self.isAddDevice)
-        {
-            NSArray *amplifiers = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
-            for(int i = 0; i<amplifiers.count; i++)
-            {
-                NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[amplifiers[i] intValue]];
-                if([typeName isEqualToString:@"功放"])
-                {
-                    [_amplifierIDArr addObject:amplifiers[i]];
-                }
-
-            }
-        }else if(self.roomID)
-        {
-            [_amplifierIDArr addObject:[SQLManager singleDeviceWithCatalogID:amplifier byRoom:self.roomID]];
-            
-        }else{
-            [_amplifierIDArr addObject:self.deviceid];
-        }
-        
-    }
-    return _amplifierIDArr;
-}
-
--(NSMutableArray *)amplifierNames
-{
-    if(!_amplifierNames)
-    {
-        _amplifierNames = [NSMutableArray array];
-        for(int i = 0; i < self.amplifierIDArr.count; i++)
-        {
-            int amplifierID = [self.amplifierIDArr[i] intValue];
-            [_amplifierNames addObject:[SQLManager deviceNameByDeviceID:amplifierID]];
-        }
-    }
-    return _amplifierNames;
-}
 
 -(void)setUpRoomScrollerView
 {
@@ -105,8 +61,14 @@
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     self.title = [NSString stringWithFormat:@"%@ - 功放",roomName];
     [self setNaviBarTitle:self.title];
-    self.deviceid = [self.amplifierIDArr firstObject];
-    [self initSwitcher];
+    self.deviceid = [SQLManager singleDeviceWithCatalogID:amplifier byRoom:self.roomID];
+    [self setupProjectSources];// 初始化功放数据源
+    if ([SQLManager isIR:[self.deviceid intValue]]) {
+        self.toogle.hidden = NO;
+    }else{
+        self.toogle.hidden = YES;
+        [self initSwitcher];
+    }
     
     self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     if (self.menus.count<6) {
@@ -117,15 +79,6 @@
     
     [self naviToDevice];
     
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-    if ([self.sceneid intValue]>0) {
-        for(int i=0;i<[_scene.devices count];i++)
-        {
-            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Amplifier class]]) {
-                self.switcher.isOn=((Amplifier *)[_scene.devices objectAtIndex:i]).waiting;
-            }
-        }
-    }
     SocketManager *sock = [SocketManager defaultManager];
     sock.delegate = self;
     //查询设备状态
@@ -136,6 +89,80 @@
         self.menuTop.constant = 0;
         [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
+}
+
+//初始化功放数据源
+- (void)setupProjectSources {
+    _projectSources = [NSMutableArray array];
+    _btnArray = [NSMutableArray array];
+    NSArray *sources = [SQLManager getSourcesByDeviceID: [self.deviceid integerValue]];
+    if (sources.count >0) {
+        [_projectSources addObjectsFromArray:sources];
+    }
+    
+    if (_projectSources.count >0) {
+        //初始化数据源按钮
+        [_projectSources enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+            
+            DeviceSource *info = (DeviceSource *)obj;
+            
+            CGFloat btnWidth = 70;
+            CGFloat btnHeight = 30;
+            UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(10+(btnWidth+15)*idx, 120, btnWidth, btnHeight)];
+            btn.tag = idx;
+            btn.titleLabel.font = [UIFont systemFontOfSize:13];
+            [btn setTitle:info.sourceName forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+            btn.selected = NO;
+            [btn setBackgroundImage:[UIImage imageNamed:@"control_button"] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(btnClickedAction:) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:btn];
+            [_btnArray addObject:btn];
+            
+        }];
+    }
+}
+
+- (void)btnClickedAction:(UIButton *)btn {
+    if (!btn.selected) {
+        btn.selected = !btn.selected;
+        
+        [_btnArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            UIButton *button = (UIButton *)obj;
+            if (btn.tag != button.tag) {
+                button.selected = NO;
+            }
+        }];
+        
+        //发切换数据源的指令
+        uint8_t channelid = 0x01;
+        DeviceSource *info = _projectSources[btn.tag];
+        if ([info.channelID isEqualToString:@"01"]) {
+            channelid = 0x01;
+        }else if ([info.channelID isEqualToString:@"02"]) {
+            channelid = 0x02;
+        }else if ([info.channelID isEqualToString:@"03"]) {
+            channelid = 0x03;
+        }else if ([info.channelID isEqualToString:@"04"]) {
+            channelid = 0x04;
+        }else if ([info.channelID isEqualToString:@"05"]) {
+            channelid = 0x05;
+        }else if ([info.channelID isEqualToString:@"06"]) {
+            channelid = 0x06;
+        }else if ([info.channelID isEqualToString:@"07"]) {
+            channelid = 0x07;
+        }else if ([info.channelID isEqualToString:@"08"]) {
+            channelid = 0x08;
+        }else if ([info.channelID isEqualToString:@"09"]) {
+            channelid = 0x09;
+        }
+        NSData *data = [[DeviceInfo defaultManager] changeSource:channelid deviceID:self.deviceid];
+        SocketManager *sock = [SocketManager defaultManager];
+        sock.delegate = self;
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    
 }
 
 -(void) initSwitcher
@@ -149,24 +176,13 @@
     [self.switcher constraintToCenter:SWITCH_SIZE];
 }
 
--(IBAction)save:(id)sender
+-(IBAction)toogleAction:(id)sender
 {
-    Amplifier *device=[[Amplifier alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setWaiting: self.switchView.isOn];
-    
-    
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-    
+    UIButton *btn = (UIButton *)sender;
+    btn.selected = !btn.selected;
+    NSData *data=[[DeviceInfo defaultManager] toogle:btn.selected deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 #pragma mark - TCP recv delegate
@@ -181,7 +197,7 @@
     if (proto.cmd==0x01 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
         NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
         if ([devID intValue]==[self.deviceid intValue]) {
-            self.switchView.on=proto.action.state;
+            self.switcher.isOn=proto.action.state;
         }
     }
 }

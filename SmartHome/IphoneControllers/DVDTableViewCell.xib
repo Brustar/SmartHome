@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -85,12 +85,12 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-1Y-DcS">
-                        <rect key="frame" x="260" y="7" width="55" height="35"/>
+                        <rect key="frame" x="297" y="16" width="18" height="18"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="35" id="5x2-aQ-nLD"/>
-                            <constraint firstAttribute="width" constant="55" id="Kgt-4n-8iH"/>
+                            <constraint firstAttribute="height" constant="18" id="5x2-aQ-nLD"/>
+                            <constraint firstAttribute="width" constant="18" id="Kgt-4n-8iH"/>
                         </constraints>
-                        <state key="normal" backgroundImage="dvd_btn_switch_off"/>
+                        <state key="normal" backgroundImage="TV_off"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ui6-GU-GbM">
                         <rect key="frame" x="335" y="7" width="30" height="30"/>
@@ -100,7 +100,7 @@
                         </constraints>
                         <state key="normal" image="icon_add_normal"/>
                     </button>
-                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5yW-aq-htO">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5yW-aq-htO">
                         <rect key="frame" x="0.0" y="97" width="375" height="52"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dvd_frm_choice__normal" translatesAutoresizingMaskIntoConstraints="NO" id="Vc1-pZ-4We">
@@ -165,7 +165,7 @@
                     <constraint firstItem="je0-2Y-f1l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="JEE-OA-GAo"/>
                     <constraint firstItem="NYR-NW-O6b" firstAttribute="top" secondItem="F7B-y2-2nU" secondAttribute="bottom" constant="2" id="K8h-9C-4eR"/>
                     <constraint firstItem="5yW-aq-htO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="La4-vm-0pG"/>
-                    <constraint firstItem="wYW-1Y-DcS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="Lj8-Z5-Put"/>
+                    <constraint firstItem="wYW-1Y-DcS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Lj8-Z5-Put"/>
                     <constraint firstItem="aQ4-Nq-8mW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="LpR-Wf-r8M"/>
                     <constraint firstAttribute="trailingMargin" secondItem="UYH-Br-BuW" secondAttribute="trailing" constant="6" id="MAC-pY-5LJ"/>
                     <constraint firstItem="ui6-GU-GbM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="MFG-Rd-lef"/>
@@ -216,9 +216,9 @@
         <image name="DVD_previous" width="10" height="10"/>
         <image name="DVD_toogle" width="14" height="10"/>
         <image name="DVD_toogle_red" width="14" height="10"/>
+        <image name="TV_off" width="12" height="12"/>
         <image name="bd_icon_voi_high" width="11" height="9"/>
         <image name="dvd_btn_adjust_normal" width="91" height="38"/>
-        <image name="dvd_btn_switch_off" width="34" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
         <image name="icon_add_normal" width="15" height="15"/>
         <image name="lv_fm_adjust_normal" width="336" height="47"/>

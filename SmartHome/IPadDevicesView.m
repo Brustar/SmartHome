@@ -40,6 +40,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
 {
     self = [super initWithCoder:coder];
     if (self) {
+        _hostType = [[UD objectForKey:@"HostType"] integerValue];
         self.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2, [[UIScreen mainScreen] bounds].size.height/2+10);
     }
     return self;
@@ -47,6 +48,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
 
 -(void)initData
 {
+    _hostType = [[UD objectForKey:@"HostType"] integerValue];
     self.menus = [SQLManager allTypeinRoom:self.roomID];
     
     self.devices = [SQLManager deviceOfRoom:self.roomID];
@@ -65,6 +67,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     self.content.allowsSelection = NO;
     [self.content registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
     [self.content registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
+    [self.content registerNib:[UINib nibWithNibName:@"CurtainC4TableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainC4TableViewCell"];//窗帘(C4)
     [self.content registerNib:[UINib nibWithNibName:@"IpadTVCell" bundle:nil] forCellReuseIdentifier:@"IpadTVCell"];//网络电视
     [self.content registerNib:[UINib nibWithNibName:@"NewColourCell" bundle:nil] forCellReuseIdentifier:@"NewColourCell"];//调色灯
     [self.content registerNib:[UINib nibWithNibName:@"OtherTableViewCell" bundle:nil] forCellReuseIdentifier:@"OtherTableViewCell"];//其他
@@ -114,7 +117,12 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                     ((AireTableViewCell *)cell).AddAireBtn.hidden = !proto.action.state;
                     break;
                 case blind:
-                    ((CurtainTableViewCell *)cell).AddcurtainBtn.hidden = !proto.action.state;
+                    if (_hostType == 0) { //Crestron
+                        ((CurtainTableViewCell *)cell).AddcurtainBtn.hidden = !proto.action.state;
+                    }else {
+                        ((CurtainC4TableViewCell *)cell).switchBtn.selected = proto.action.state;
+                    }
+                    
                     break;
                 case TVtype:
                     ((IpadTVCell *)cell).AddTvDeviceBtn.hidden = !proto.action.state;
@@ -145,7 +153,12 @@ static NSString *const leftMenuCell = @"leftMenuCell";
         Device *device = [self.devices objectAtIndex:indexPath.row];
         NSInteger type = device.hTypeId;
         if (type == 21 || type== air || type == 2 || type == 3 || type == bgmusic || type == screen) {
-            return 150;
+            
+            if (type == 21 && _hostType == 1) {
+                return 100;
+            }else {
+                return 150;
+            }
         }
         if (type == DVDtype || type == TVtype || type == FM) {
             return 210;
@@ -178,7 +191,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 cell.backgroundColor = [UIColor clearColor];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.AddLightBtn.hidden = YES;
-                cell.LightConstraint.constant = 5;
+                cell.LightConstraint.constant = 15;
                 
                 cell.NewLightNameLabel.text = device.name;
                 cell.NewLightSlider.continuous = NO;
@@ -203,14 +216,15 @@ static NSString *const leftMenuCell = @"leftMenuCell";
             }
             case 1:
             {
-                PowerLightCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"PowerLightCell" forIndexPath:indexPath];
-                newColourCell.addPowerLightBtn.hidden = YES;
-                newColourCell.powerBtnConstraint.constant = 10;
-                newColourCell.backgroundColor =[UIColor clearColor];
-                [newColourCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
-                newColourCell.powerLightNameLabel.text = device.name;
-                newColourCell.tag = device.eID;
-                return newColourCell;
+                PowerLightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PowerLightCell" forIndexPath:indexPath];
+                //cell.addPowerLightBtn.hidden = YES;
+                cell.addPowerLightBtn.alpha = 0;
+                cell.powerBtnConstraint.constant = 20;
+                cell.backgroundColor =[UIColor clearColor];
+                [cell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+                cell.powerLightNameLabel.text = device.name;
+                cell.tag = device.eID;
+                return cell;
             }
             case air:
             {
@@ -225,15 +239,28 @@ static NSString *const leftMenuCell = @"leftMenuCell";
             }
             case 21://curtain:
             {
-                CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
-                aireCell.backgroundColor = [UIColor clearColor];
-                aireCell.AddcurtainBtn.hidden = YES;
-                aireCell.curtainContraint.constant = 10;
-                aireCell.roomID = self.roomID;
-                aireCell.tag = device.eID;
-                aireCell.label.text = device.name;
-                [aireCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:nil];
-                return aireCell;
+                if (_hostType == 0) {  //Crestron
+                    CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
+                    aireCell.backgroundColor = [UIColor clearColor];
+                    aireCell.AddcurtainBtn.hidden = YES;
+                    aireCell.curtainContraint.constant = 10;
+                    aireCell.roomID = self.roomID;
+                    aireCell.tag = device.eID;
+                    aireCell.label.text = device.name;
+                    [aireCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:nil];
+                    return aireCell;
+                }else {
+                    CurtainC4TableViewCell * aireCell = [tableView  dequeueReusableCellWithIdentifier:@"CurtainC4TableViewCell" forIndexPath:indexPath];
+                    aireCell.backgroundColor = [UIColor clearColor];
+                    aireCell.addBtn.hidden = YES;
+                    aireCell.switchBtnTrailingConstraint.constant = 10;
+                    aireCell.roomID = self.roomID;
+                    aireCell.tag = device.eID;
+                    aireCell.name.text = device.name;
+                    [aireCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:nil];
+                    return aireCell;
+                }
+                
             }
             case TVtype:
             {

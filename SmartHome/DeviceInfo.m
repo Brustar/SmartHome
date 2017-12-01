@@ -36,6 +36,19 @@
         case light:
             targetName = @"LightController";
             break;
+            
+        case dimmarLight:
+            targetName = @"LightController";
+            break;
+            
+        case colorLight:
+            targetName = @"LightController";
+            break;
+            
+        case curtain:
+            targetName = @"CurtainController";
+            break;
+            
         case DVDtype:
             targetName = @"DVDController";
             break;
@@ -76,6 +89,13 @@
         case Wetting:
             targetName = @"WettingController";
             break;
+        case air:
+            targetName = @"AirController";
+            break;
+        case newWind:
+            targetName = @"NewWindController";
+            break;
+            
         default:
             break;
     }
@@ -100,6 +120,7 @@
         [UD removeObjectForKey:@"scence_version"];
         [UD removeObjectForKey:@"tv_version"];
         [UD removeObjectForKey:@"fm_version"];
+        [UD removeObjectForKey:@"source_version"];
         [UD synchronize];
         
     }
@@ -109,6 +130,36 @@
     //创建sqlite数据库及结构
     [SQLManager initSQlite];
 }
+
+//获取当前屏幕显示的viewcontroller
+- (UIViewController *)getCurrentVC
+{
+    UIViewController *result = nil;
+    
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal)
+    {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow * tmpWin in windows)
+        {
+            if (tmpWin.windowLevel == UIWindowLevelNormal)
+            {
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    
+    UIView *frontView = [[window subviews] objectAtIndex:0];
+    id nextResponder = [frontView nextResponder];
+    
+    if ([nextResponder isKindOfClass:[UIViewController class]])
+        result = nextResponder;
+    else
+        result = window.rootViewController;
+    
+    return result;
+} 
 
 //取设备机型
 - (void) deviceGenaration
@@ -222,6 +273,34 @@
     return dataFromProtocol(proto);
 }
 
+-(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID roomID:(uint8_t)roomID
+{
+    NSData *data = [self action:action deviceID:deviceID];
+    Proto proto = protocolFromData(data);
+    
+    proto.action.B=roomID;
+    return dataFromProtocol(proto);
+}
+
+-(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID deviceType:(uint8_t)deviceType
+{
+    NSData *data = [self action:action deviceID:deviceID];
+    Proto proto = protocolFromData(data);
+    
+    proto.deviceType=deviceType;
+    return dataFromProtocol(proto);
+}
+
+-(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)value roomID:(uint8_t)roomID
+{
+    NSData *data = [self action:action deviceID:deviceID];
+    Proto proto = protocolFromData(data);
+    
+    proto.action.RValue=value;
+    proto.action.B=roomID;
+    return dataFromProtocol(proto);
+}
+
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue
 {
     NSData *data = [self action:action deviceID:deviceID];
@@ -247,9 +326,9 @@
         proto.cmd=0x84;
     }
     proto.deviceType=0x00;
-    proto.deviceID=0x00;
+    proto.deviceID= CFSwapInt16BigToHost([[UD objectForKey:@"UserID"] integerValue]);//存用户ID，服务端用来统计用户行为数据
     proto.action.state=0x00;
-    proto.action.RValue=0x00;
+    proto.action.RValue = 0x00;
     proto.action.G=0x00;
     proto.action.B=0x00;
     return dataFromProtocol(proto);
@@ -272,16 +351,33 @@
     return dataFromProtocol(proto);
 }
 
+-(NSData *)query:(NSString *)deviceID withRoom:(uint8_t)rid
+{
+    Proto proto=createProto();
+    
+    proto.cmd=0x9A;
+    
+    NSString *enumber=[SQLManager getENumber:[deviceID integerValue]];
+    NSString *eid=[SQLManager getEType:[deviceID integerValue]];
+    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
+    proto.action.state=0x00;
+    proto.action.RValue=0x00;
+    proto.action.G=0x00;
+    proto.action.B=rid;
+    proto.deviceType=[PackManager NSDataToUint8:eid];
+    return dataFromProtocol(proto);
+}
+
 -(NSData *) scheduleScene:(uint8_t)action sceneID:(NSString *)sceneID
 {
-    return [self schedule:action dID:[sceneID intValue] type:0x60];
+    return [self schedule:action dID:[sceneID intValue] type:0x60];//0x60 是指定时器类型为场景定时
 }
 
 -(NSData *) scheduleDevice:(uint8_t)action deviceID:(NSString *)deviceID
 {
     NSString *enumber=[SQLManager getENumber:[deviceID integerValue]];
-    uint16_t dID = CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
-    return [self schedule:action dID:dID type:0x61];
+    uint16_t dID = [PackManager NSDataToUint16:enumber];
+    return [self schedule:action dID:dID type:0x61];//0x61 是指定时器类型为设备定时
 }
 
 -(NSData *) schedule:(uint8_t)action dID:(uint16_t)dID type:(uint8_t)dtype
@@ -364,6 +460,15 @@
         return [self action:PROTOCOL_VOLUME deviceID:deviceID value:percent];
     }else{
         return [self action:PROTOCOL_VOLUME value:percent];
+    }
+}
+
+- (NSData *)changeSource:(uint8_t)channelID deviceID:(NSString *)deviceID
+{
+    if (deviceID) {
+        return [self action:PROTOCOL_SOURCE deviceID:deviceID value:channelID];
+    }else{
+        return [self action:PROTOCOL_SOURCE value:channelID];
     }
 }
 
@@ -530,6 +635,12 @@
     return [self action:0x32 deviceID:deviceID];
 }
 
+//停止C4窗帘
+- (NSData *)stopCurtainByDeviceID:(NSString *)deviceID
+{
+    return [self action:0x32 deviceID:deviceID];
+}
+
 
 #pragma mark - Air
 -(NSData *) toogleAirCon:(uint8_t)toogle deviceID:(NSString *)deviceID
@@ -557,6 +668,45 @@
     return [self action:interval deviceID:deviceID];
 }
 
+-(NSData *) toogleAirCon:(uint8_t)toogle deviceID:(NSString *)deviceID roomID:(uint8_t)roomID
+{
+    return [self action:toogle deviceID:deviceID roomID:roomID];
+}
+-(NSData *) changeTemperature:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)temperature  roomID:(uint8_t)roomID
+{
+    return [self action:action deviceID:deviceID value:temperature roomID:roomID];
+}
+-(NSData *) changeDirect:(uint8_t)direct deviceID:(NSString *)deviceID roomID:(uint8_t)roomID
+{
+    return [self action:direct deviceID:deviceID roomID:roomID];
+}
+-(NSData *) changeSpeed:(uint8_t)speed deviceID:(NSString *)deviceID roomID:(uint8_t)roomID
+{
+    return [self action:speed deviceID:deviceID roomID:roomID];
+}
+-(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID roomID:(uint8_t)roomID
+{
+    return [self action:mode deviceID:deviceID roomID:roomID];
+}
+-(NSData *) changeInterval:(uint8_t)interval deviceID:(NSString *)deviceID roomID:(uint8_t)roomID
+{
+    return [self action:interval deviceID:deviceID roomID:roomID];
+}
+
+#pragma mark - Fresh Air
+-(NSData *) toogleFreshAir:(uint8_t)toogle deviceID:(NSString *)deviceID deviceType:(uint8_t)deviceType
+{
+    return [self action:toogle deviceID:deviceID deviceType:deviceType];
+}
+-(NSData *) changeSpeed:(uint8_t)speed deviceID:(NSString *)deviceID deviceType:(uint8_t)deviceType
+{
+    return [self action:speed deviceID:deviceID deviceType:deviceType];
+}
+-(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID deviceType:(uint8_t)deviceType
+{
+    return [self action:mode deviceID:deviceID deviceType:deviceType];
+}
+
 #pragma mark - bgmusic
 -(NSData *) repeat:(NSString *)deviceID
 {
@@ -567,6 +717,10 @@
 -(NSData *) shuffle:(NSString *)deviceID
 {
     return [self action:0x46 deviceID:deviceID];
+}
+
+- (void)playVibrate {
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 @end

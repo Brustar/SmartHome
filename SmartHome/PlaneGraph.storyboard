@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,9 +34,42 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightFrameBg" translatesAutoresizingMaskIntoConstraints="NO" id="5W7-nq-nol" userLabel="RightFrameBg">
                                         <rect key="frame" x="186" y="74" width="828" height="680"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BorderBg" translatesAutoresizingMaskIntoConstraints="NO" id="wib-Rb-la7" userLabel="BorderBg">
-                                        <rect key="frame" x="220" y="114" width="764" height="510"/>
-                                    </imageView>
+                                    <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="omr-Jw-vdx">
+                                        <rect key="frame" x="420" y="624" width="80" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="Z3v-lO-uxB"/>
+                                            <constraint firstAttribute="height" constant="40" id="zkr-0Z-vd6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="1F" backgroundImage="ipad-btn_choose_nol">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected" backgroundImage="ipad-btn_choose_prd">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="floor1BtnClicked:" destination="7zR-Yf-tSX" eventType="touchUpInside" id="Efu-8G-626"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uua-Wf-Of7">
+                                        <rect key="frame" x="704" y="624" width="80" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="nYt-Kq-3kV"/>
+                                            <constraint firstAttribute="height" constant="40" id="uhg-P5-BL8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="2F" backgroundImage="ipad-btn_choose_nol">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected" backgroundImage="ipad-btn_choose_prd">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="floor2BtnClicked:" destination="7zR-Yf-tSX" eventType="touchUpInside" id="7Dc-OG-lXO"/>
+                                        </connections>
+                                    </button>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaneGraph" translatesAutoresizingMaskIntoConstraints="NO" id="gVv-Nr-DMk" userLabel="PlaneGraph" customClass="TouchImage">
                                         <rect key="frame" x="260" y="144" width="684" height="450"/>
                                     </imageView>
@@ -155,10 +189,15 @@
                                             <outlet property="delegate" destination="7zR-Yf-tSX" id="4xy-j1-wCL"/>
                                         </connections>
                                     </collectionView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BorderBg" translatesAutoresizingMaskIntoConstraints="NO" id="wib-Rb-la7" userLabel="BorderBg">
+                                        <rect key="frame" x="220" y="114" width="764" height="510"/>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Sgh-Ny-ymp" secondAttribute="trailing" constant="824" id="0rK-1h-TsD"/>
                                     <constraint firstItem="wib-Rb-la7" firstAttribute="bottom" secondItem="5W7-nq-nol" secondAttribute="bottom" constant="-130" id="1Ob-PV-I11"/>
+                                    <constraint firstItem="Uua-Wf-Of7" firstAttribute="trailing" secondItem="wib-Rb-la7" secondAttribute="trailing" constant="-200" id="47A-bA-IYq"/>
+                                    <constraint firstItem="omr-Jw-vdx" firstAttribute="bottom" secondItem="wib-Rb-la7" secondAttribute="bottom" constant="40" id="4i2-CO-I3N"/>
                                     <constraint firstItem="U1E-Fh-aZS" firstAttribute="bottom" secondItem="Sgh-Ny-ymp" secondAttribute="bottom" constant="100" id="95t-vT-5Gg"/>
                                     <constraint firstAttribute="trailing" secondItem="U1E-Fh-aZS" secondAttribute="trailing" constant="824" id="HSj-Fh-xsN"/>
                                     <constraint firstItem="Sgh-Ny-ymp" firstAttribute="top" secondItem="ORV-VF-xhN" secondAttribute="top" constant="90" id="JqT-xg-tVl"/>
@@ -171,7 +210,9 @@
                                     <constraint firstAttribute="trailing" secondItem="wib-Rb-la7" secondAttribute="trailing" constant="40" id="hop-7g-mYJ"/>
                                     <constraint firstItem="5W7-nq-nol" firstAttribute="leading" secondItem="ORV-VF-xhN" secondAttribute="leading" constant="186" id="k6O-lF-hqH"/>
                                     <constraint firstItem="5W7-nq-nol" firstAttribute="bottom" secondItem="U1E-Fh-aZS" secondAttribute="bottom" id="lCJ-Qu-nF5"/>
+                                    <constraint firstItem="omr-Jw-vdx" firstAttribute="leading" secondItem="wib-Rb-la7" secondAttribute="leading" constant="200" id="m1V-PQ-Kuf"/>
                                     <constraint firstItem="wib-Rb-la7" firstAttribute="top" secondItem="5W7-nq-nol" secondAttribute="top" constant="40" id="mRK-UD-LKw"/>
+                                    <constraint firstItem="Uua-Wf-Of7" firstAttribute="bottom" secondItem="wib-Rb-la7" secondAttribute="bottom" constant="40" id="oFi-SF-PTC"/>
                                     <constraint firstAttribute="trailing" secondItem="5W7-nq-nol" secondAttribute="trailing" constant="10" id="qMW-XI-530"/>
                                     <constraint firstItem="gVv-Nr-DMk" firstAttribute="bottom" secondItem="wib-Rb-la7" secondAttribute="bottom" constant="-30" id="tEq-pd-0ci"/>
                                     <constraint firstItem="U1E-Fh-aZS" firstAttribute="top" secondItem="ORV-VF-xhN" secondAttribute="top" constant="64" id="wjd-y6-I5G"/>
@@ -189,6 +230,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="floor1Btn" destination="omr-Jw-vdx" id="sxZ-qv-2uw"/>
+                        <outlet property="floor2Btn" destination="Uua-Wf-Of7" id="uVr-39-0Sx"/>
                         <outlet property="floorScrollView" destination="ORV-VF-xhN" id="kZs-K8-fKO"/>
                         <outlet property="planeGraph" destination="gVv-Nr-DMk" id="Tbv-cz-vxt"/>
                         <outlet property="roomStatusCollectionView" destination="Sgh-Ny-ymp" id="Vg5-kN-Lvs"/>
@@ -198,6 +241,66 @@
             </objects>
             <point key="canvasLocation" x="-548.4375" y="73.4375"/>
         </scene>
+        <!--房间平面图-->
+        <scene sceneID="Y1f-KA-19x">
+            <objects>
+                <viewController storyboardIdentifier="RoomPlaneGraphViewController" id="J2b-z5-Or8" userLabel="房间平面图" customClass="RoomPlaneGraphViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7sV-MY-ZCq"/>
+                        <viewControllerLayoutGuide type="bottom" id="bPJ-dq-jkb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XE3-ZJ-zem">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ezy-qB-Sir">
+                                <rect key="frame" x="10" y="64" width="230" height="604"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="230" id="2kR-u1-A2C"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="J2b-z5-Or8" id="SMS-iZ-jqk"/>
+                                    <outlet property="delegate" destination="J2b-z5-Or8" id="lsg-e9-fkB"/>
+                                </connections>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightFrameBg" translatesAutoresizingMaskIntoConstraints="NO" id="F57-ME-RP7" userLabel="planeBg">
+                                <rect key="frame" x="250" y="64" width="764" height="604"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BorderBg" translatesAutoresizingMaskIntoConstraints="NO" id="1uO-Wu-bDJ" userLabel="borderBg">
+                                <rect key="frame" x="265" y="99" width="734" height="534"/>
+                            </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Quh-0v-YPP" userLabel="planeGraph">
+                                <rect key="frame" x="285" y="125" width="694" height="482"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="F57-ME-RP7" secondAttribute="bottom" constant="100" id="3tl-oZ-2Se"/>
+                            <constraint firstAttribute="trailing" secondItem="F57-ME-RP7" secondAttribute="trailing" constant="10" id="6sh-UZ-e3q"/>
+                            <constraint firstAttribute="bottom" secondItem="1uO-Wu-bDJ" secondAttribute="bottom" constant="135" id="N8y-wZ-Sse"/>
+                            <constraint firstItem="ezy-qB-Sir" firstAttribute="leading" secondItem="XE3-ZJ-zem" secondAttribute="leading" constant="10" id="Ol5-qi-THr"/>
+                            <constraint firstItem="F57-ME-RP7" firstAttribute="top" secondItem="XE3-ZJ-zem" secondAttribute="top" constant="64" id="QQN-h5-zGT"/>
+                            <constraint firstItem="1uO-Wu-bDJ" firstAttribute="top" secondItem="XE3-ZJ-zem" secondAttribute="top" constant="99" id="Qns-TC-Ize"/>
+                            <constraint firstAttribute="bottom" secondItem="Quh-0v-YPP" secondAttribute="bottom" constant="161" id="W8V-4L-3lu"/>
+                            <constraint firstItem="Quh-0v-YPP" firstAttribute="top" secondItem="XE3-ZJ-zem" secondAttribute="top" constant="125" id="Z1G-Ae-KxA"/>
+                            <constraint firstItem="ezy-qB-Sir" firstAttribute="top" secondItem="XE3-ZJ-zem" secondAttribute="top" constant="64" id="cX3-ma-2h3"/>
+                            <constraint firstItem="1uO-Wu-bDJ" firstAttribute="leading" secondItem="ezy-qB-Sir" secondAttribute="trailing" constant="25" id="fhH-SH-clY"/>
+                            <constraint firstAttribute="trailing" secondItem="1uO-Wu-bDJ" secondAttribute="trailing" constant="25" id="j4i-BD-fdH"/>
+                            <constraint firstAttribute="bottom" secondItem="ezy-qB-Sir" secondAttribute="bottom" constant="100" id="pPW-F3-EV8"/>
+                            <constraint firstItem="Quh-0v-YPP" firstAttribute="leading" secondItem="ezy-qB-Sir" secondAttribute="trailing" constant="45" id="r6a-Iz-U05"/>
+                            <constraint firstAttribute="trailing" secondItem="Quh-0v-YPP" secondAttribute="trailing" constant="45" id="r8R-uG-jSY"/>
+                            <constraint firstItem="F57-ME-RP7" firstAttribute="leading" secondItem="ezy-qB-Sir" secondAttribute="trailing" constant="10" id="vx6-O8-c1h"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="deviceTableView" destination="ezy-qB-Sir" id="daR-LW-4S5"/>
+                        <outlet property="planeGraph" destination="Quh-0v-YPP" id="2e6-CT-ndP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J5P-4r-aF0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
         <image name="BorderBg" width="323" height="231"/>
@@ -205,6 +308,8 @@
         <image name="PlaneGraph" width="249" height="200"/>
         <image name="RightFrameBg" width="317" height="225"/>
         <image name="familyCircular" width="138" height="139"/>
+        <image name="ipad-btn_choose_nol" width="125" height="30"/>
+        <image name="ipad-btn_choose_prd" width="125" height="29"/>
         <image name="login_line.png" width="1" height="1"/>
     </resources>
 </document>

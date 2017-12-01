@@ -15,6 +15,7 @@
 #import "FMTableViewCell.h"
 #import "AireTableViewCell.h"
 #import "CurtainTableViewCell.h"
+#import "CurtainC4TableViewCell.h"
 #import "TVTableViewCell.h"
 #import "OtherTableViewCell.h"
 #import "ScreenTableViewCell.h"
@@ -42,7 +43,7 @@
 #define minimumLineSpacing 3.0
 
 
-@interface FamilyHomeDetailViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate,UITableViewDataSource, HttpDelegate, SingleMaskViewDelegate, TcpRecvDelegate>
+@interface FamilyHomeDetailViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate,UITableViewDataSource, HttpDelegate, SingleMaskViewDelegate, TcpRecvDelegate, NewLightCellDelegate, PowerLightCellDelegate, NewColourCellDelegate, CurtainTableViewCellDelegate, CurtainC4TableViewCellDelegate,BjMusicTableViewCellDelegate, OtherTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *softButton;
 @property (weak, nonatomic) IBOutlet UIButton *normalButton;
@@ -88,6 +89,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *brightBtnLeading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *brightBtnWidth;
 @property (nonatomic, assign) NSInteger hostType;//主机类型：0，creston   1, C4
+@property (nonatomic, assign) int currentBrightness;//当前亮度
 
 - (IBAction)softBtnClicked:(id)sender;
 - (IBAction)normalBtnClicked:(id)sender;

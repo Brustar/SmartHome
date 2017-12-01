@@ -16,8 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *BjPowerButton;
 @property (weak, nonatomic) IBOutlet UIButton *AddBjmusicBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *BJmusicConstraint;
-@property(nonatomic, strong)NSString * deviceid;
-@property (nonatomic,weak) NSString *sceneid;
+@property(nonatomic, strong) NSString *deviceid;
+@property (nonatomic,weak)   NSString *sceneid;
 //房间id
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
@@ -44,7 +44,7 @@
 @protocol BjMusicTableViewCellDelegate <NSObject>
 
 @optional
-- (void)onBjPowerButtonClicked:(UIButton *)btn;
+- (void)onBjPowerButtonClicked:(UIButton *)btn deviceID:(int)deviceID;   
 - (void)onBjSliderValueChanged:(UISlider *)slider;
 
 @end

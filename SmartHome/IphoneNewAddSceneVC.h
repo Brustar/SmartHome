@@ -15,5 +15,6 @@
 @property (nonatomic,assign) int roomID;
 @property(nonatomic,assign) int sceneID;
 @property (nonatomic,strong) Scene * scene;
+@property (nonatomic, assign) NSInteger hostType;//主机类型：0，creston   1, C4
 
 @end

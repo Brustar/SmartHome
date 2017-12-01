@@ -53,6 +53,8 @@ static NSString *const airCellIdentifier = @"airCell";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rdiskTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ldiskTop;
 
+@property (weak, nonatomic) IBOutlet UIButton *windBtn;//风向按钮
+@property (weak, nonatomic) IBOutlet UIButton *autoBtn;//自动按钮
 
 @end
 
@@ -69,9 +71,11 @@ static NSString *const airCellIdentifier = @"airCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 空调",roomName]];
+    if (ON_IPAD) {
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:[NSString stringWithFormat:@"%@ - 空调",roomName]];
+    }
     self.disk.enabled = NO;
     [self initSwitch];
     self.tempreturePan.transform = CGAffineTransformMakeRotation(MIX_TEMP_ROTATE_DEGREE);
@@ -88,27 +92,87 @@ static NSString *const airCellIdentifier = @"airCell";
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     
-    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:self.roomID];
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid withRoom:device.airID];
     [sock.socket writeData:data withTimeout:1 tag:1];
     
     //  PM2.5
     NSString *pmID = [SQLManager singleDeviceWithCatalogID:55 byRoom:self.roomID];
-    data = [[DeviceInfo defaultManager] query:pmID];
-    [sock.socket writeData:data withTimeout:1 tag:1];
+    if (pmID.length >0) {
+        data = [[DeviceInfo defaultManager] query:pmID];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    
     //  湿度
     NSString *humidityID = [SQLManager singleDeviceWithCatalogID:50 byRoom:self.roomID];
-    data = [[DeviceInfo defaultManager] query:humidityID];
-    [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    if (humidityID.length >0) {
+        data = [[DeviceInfo defaultManager] query:humidityID];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    
     
     if (ON_IPAD) {
         self.menuTop.constant = self.controlBottom.constant = 80;
-        self.menuLeft.constant = self.menuRight.constant =self.controlLeft.constant=self.controlRight.constant = 240;
+        self.menuLeft.constant = self.menuRight.constant =self.controlLeft.constant=self.controlRight.constant = 110;
         self.subControlLeft.constant = 20;
         self.subControlRight.constant = -20;
-        self.diskLeft.constant= self.diskRight.constant = 180;
+        self.diskLeft.constant= self.diskRight.constant = 80;
         self.ldiskTop.constant = self.rdiskTop.constant = 300;
         self.diskTop.constant = -260;
     }
+    
+    NSInteger _hostType = [[UD objectForKey:@"HostType"] integerValue];//主机类型 0:Crestron  1:C4
+    if (_hostType == 1) {
+        self.windBtn.hidden = YES;
+        self.autoBtn.hidden = YES;
+        self.controlLeft.constant=self.controlRight.constant = 310;
+        self.subControlLeft.constant = 22;
+        self.subControlRight.constant = -20;
+        
+        if (ON_IPONE) {
+            self.controlLeft.constant=self.controlRight.constant = 110;
+            self.menuLeft.constant = self.menuRight.constant =self.controlLeft.constant=self.controlRight.constant = 50;
+            self.subControlLeft.constant = 80;
+        }
+       
+    }
+    
+    
+    if (ON_IPONE) {
+        [self setupMenu];
+    }
+}
+
+- (void)setupMenu {
+    self.menus = [SQLManager envDeviceNamesByRoom:self.roomID];
+    if (self.menus.count<6) {
+        [self initMenuContainer:self.menuContainer andArray:self.menus andID:self.deviceid];
+    }else{
+        [self setUpRoomScrollerView];
+    }
+}
+
+-(void)setUpRoomScrollerView
+{
+    NSMutableArray *deviceNames = [NSMutableArray array];
+    int index=0,i=0;
+    for (Device *device in self.menus) {
+        NSString *deviceName = device.typeName;
+        [deviceNames addObject:deviceName];
+        if (device.hTypeId == TVtype) {
+            index = i;
+        }
+        i++;
+    }
+    
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, 40)];
+    
+    menu.dataArray = deviceNames;
+    menu.delegate = self;
+    
+    [menu setSelectButton:index];
+    [self.menuContainer addSubview:menu];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -129,31 +193,48 @@ static NSString *const airCellIdentifier = @"airCell";
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    Proto proto=protocolFromData(data);
+    Proto proto = protocolFromData(data);
     
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
     
-    if (proto.cmd==0x01) {
+    if (proto.cmd == 0x01) {
         
-        if (proto.action.state==0x6A) { //温度
-            self.currentTemp.text = [NSString stringWithFormat:@"Current:%d°C",proto.action.RValue];
-            self.currentDegree = proto.action.RValue;
-            self.tempreturePan.transform = CGAffineTransformMakeRotation(self.currentDegree*MAX_TEMP_ROTATE_DEGREE/30);
-            for (int i=1; i<16; i++) {
-                UIView *viewblue = [self.view viewWithTag:i+100+1];
-                viewblue.hidden = self.currentDegree - i<=16 || self.airMode == 1;
-                UIView *viewred = [self.view viewWithTag:i+200+1];
-                viewred.hidden = self.currentDegree - i<=16 || self.airMode == 0;
+        Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:self.roomID];
+        NSString *devID = [SQLManager getDeviceIDByENumberForC4:CFSwapInt16BigToHost(proto.deviceID) airID:device.airID htypeID:air];
+        if ([devID intValue] == [self.deviceid intValue]) {
+            
+        
+            if (proto.action.state == 0x6B) { //当前室内温度
+                self.currentTemp.text = [NSString stringWithFormat:@"Current:%d°C",proto.action.RValue];
+                self.currentDegree = proto.action.RValue;
+                self.tempreturePan.transform = CGAffineTransformMakeRotation(self.currentDegree*MAX_TEMP_ROTATE_DEGREE/30);
+                for (int i=1; i<16; i++) {
+                    UIView *viewblue = [self.view viewWithTag:i+100+1];
+                    viewblue.hidden = self.currentDegree - i<=16 || self.airMode == 1;
+                    UIView *viewred = [self.view viewWithTag:i+200+1];
+                    viewred.hidden = self.currentDegree - i<=16 || self.airMode == 0;
+                }
+            }
+                
+            if (proto.action.state == 0x6A) { //空调设置温度
+                 self.showTemLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+            }
+            
+        
+            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {  //开关
+                self.switcher.isOn = proto.action.state;
             }
         }
-        if (proto.action.state==0x8A) { // 湿度
+        
+        if (proto.action.state == 0x8A) { // 湿度
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
             self.wetLabel.text = valueString;
             [self.humidity_hand rotate:30+proto.action.RValue*300/100];
         }
-        if (proto.action.state==0x7F) { // PM2.5
+        
+        if (proto.action.state == 0x7F) { // PM2.5
             NSString *valueString = [NSString stringWithFormat:@"%d",proto.action.RValue];
             self.pmLabel.text = valueString;
             
@@ -167,25 +248,19 @@ static NSString *const airCellIdentifier = @"airCell";
             }
             [self.pm_clock_hand rotate:value];
         }
-        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-        if ([devID intValue]==[self.deviceid intValue]) {
-            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
-                self.switcher.isOn = proto.action.state;
-            }
-        }
+        
     }
 }
 
 - (IBAction)changeMode:(id)sender {
     uint8_t cmd=0;
-    NSArray *imgBlue = @[@"cool",@"heat",@"wet",@"wind",@""];
-    NSArray *imgRed = @[@"cool_red",@"heat_red",@"wet_red",@"wind_red",@""];
     UIButton *btn = (UIButton *)sender;
+    btn.selected = YES;
     self.currentMode=(int)btn.tag;
 
     for (UIButton *b in self.visitedBtns) {
         if(b.tag!=self.currentMode){
-            [b setImage:[UIImage imageNamed:[imgBlue objectAtIndex:b.tag]] forState:UIControlStateNormal];
+            b.selected = NO;
             [b setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         }
     }
@@ -205,15 +280,18 @@ static NSString *const airCellIdentifier = @"airCell";
                   inactiveBackgroundImage:[UIImage imageNamed:@"air_control_off"]
                     activeBackgroundImage:[UIImage imageNamed:@"air_control_heat"]];
     }
-    if (self.airMode == 0) {
-        [btn setTitleColor:[UIColor colorWithRed:33/255.0 green:119/255.0 blue:175/255.0 alpha:1.0] forState:UIControlStateNormal];
-    }else{
-        [btn setTitleColor:[UIColor colorWithRed:215/255.0 green:57/255.0 blue:78/255.0 alpha:1.0] forState:UIControlStateNormal];
+    if (self.airMode == 0) { //制冷
+        [btn setTitleColor:[UIColor colorWithRed:33/255.0 green:119/255.0 blue:175/255.0 alpha:1.0] forState:UIControlStateSelected];//蓝色
+    }else{ //制热
         
-        [btn setImage:[UIImage imageNamed:[imgRed objectAtIndex:self.currentMode]] forState:UIControlStateNormal];
+        if (btn.tag == 0) { //制热按钮
+            [btn setTitleColor:[UIColor colorWithRed:215/255.0 green:57/255.0 blue:78/255.0 alpha:1.0] forState:UIControlStateSelected];//红色
+        }else { // 其它按钮
+            [btn setTitleColor:[UIColor colorWithRed:33/255.0 green:119/255.0 blue:175/255.0 alpha:1.0] forState:UIControlStateSelected]; //蓝色
+        }
     }
     
-    if (self.currentMode < 2){
+    if (self.currentMode < 2) {
         for (int i=1; i<16; i++) {
             UIView *viewblue = [self.view viewWithTag:i+100];
             viewblue.hidden = i>self.currentDegree-15 || self.airMode == 1;
@@ -243,6 +321,12 @@ static NSString *const airCellIdentifier = @"airCell";
 -(IBAction)changeButton:(id)sender
 {
     UIButton *btn =(UIButton *)sender;
+    
+    NSInteger _hostType = [[UD objectForKey:@"HostType"] integerValue];//主机类型 0:Crestron  1:C4
+    if (_hostType == 1) {
+        btn.tag = 2;
+    }
+    
     self.currentButton=(int)btn.tag;
     
     if (self.paramView) {
@@ -267,6 +351,11 @@ static NSString *const airCellIdentifier = @"airCell";
         if (ON_IPAD) {
             bottom = -140;
         }
+        
+       /* CGFloat offsetY = 230;
+        if (ON_IPONE) {
+            offsetY = 100;
+        }*/
         [self.paramView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(0,0,bottom,0) animated:YES];
     }
 }
@@ -278,8 +367,8 @@ static NSString *const airCellIdentifier = @"airCell";
 
 -(NSData *)createCmd:(uint8_t) cmd
 {
-    return [[DeviceInfo defaultManager] changeMode:cmd
-                                                  deviceID:self.deviceid];
+    Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:self.roomID];
+    return [[DeviceInfo defaultManager] changeMode:cmd deviceID:self.deviceid roomID:device.airID];
 }
 
 #pragma mark - Navigation
@@ -294,8 +383,8 @@ static NSString *const airCellIdentifier = @"airCell";
 
 - (void)changedCurrentTemperature:(CGFloat)currentValue {
     self.currentDegree = round(currentValue);
-    
-    NSData *data=[[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:self.currentDegree];
+    Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:self.roomID];
+    NSData *data=[[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:self.currentDegree roomID:device.airID];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
@@ -303,9 +392,13 @@ static NSString *const airCellIdentifier = @"airCell";
 #pragma mark - ORBSwitchDelegate
 - (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
     NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
-    NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
+    Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:self.roomID];
+    NSData *data=[[DeviceInfo defaultManager] toogleAirCon:self.switcher.isOn deviceID:self.deviceid roomID:device.airID];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    [SQLManager updateAirPowerStatus:[self.deviceid intValue] power:self.switcher.isOn airID:device.airID];
+    [NC postNotificationName:@"AirControllerStatusChangedNotifications" object:nil];
 }
 
 - (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
@@ -392,17 +485,29 @@ static NSString *const airCellIdentifier = @"airCell";
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (void)tableView:(YALContextMenuTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     uint8_t cmd=0;
-    if (self.currentButton == speed) {
-        cmd = 0x35+(int)indexPath.row;
+    
+    NSInteger _hostType = [[UD objectForKey:@"HostType"] integerValue];//主机类型 0:Crestron  1:C4
+    if (_hostType == 1) {
+        if (self.currentButton == direction) {
+            cmd = 0x35+(int)indexPath.row;
+        }
+        
+    }else {
+        if (self.currentButton == speed) {
+            cmd = 0x35+(int)indexPath.row;
+        }
+        if (self.currentButton == direction) {
+            cmd = 0x43+(int)indexPath.row;
+        }
     }
-    if (self.currentButton == direction) {
-        cmd = 0x43+(int)indexPath.row;
-    }
+    
+   
     NSData *data=[self createCmd:cmd];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
     
     [tableView dismisWithIndexPath:indexPath];
+    self.paramView = nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -410,18 +515,32 @@ static NSString *const airCellIdentifier = @"airCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.params[self.currentButton-1] count];
+    
+    NSInteger _hostType = [[UD objectForKey:@"HostType"] integerValue];//主机类型 0:Crestron  1:C4
+    if (_hostType == 1) {
+        return [self.params[self.currentButton-2] count];
+    }else {
+        return [self.params[self.currentButton-1] count];
+    }
 }
 
 - (UITableViewCell *)tableView:(YALContextMenuTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ContextMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:airCellIdentifier forIndexPath:indexPath];
     
-    //if (cell) {
+    
         cell.backgroundColor = [UIColor clearColor];
+    
+    
+    NSInteger _hostType = [[UD objectForKey:@"HostType"] integerValue];//主机类型 0:Crestron  1:C4
+    if (_hostType == 1) {
+        cell.icon.image = [UIImage imageNamed:[self.params[self.currentButton-2] objectAtIndex:indexPath.row]];
+    }else {
         cell.icon.image = [UIImage imageNamed:[self.params[self.currentButton-1] objectAtIndex:indexPath.row]];
+    }
+    
         [cell setContraint:self.currentButton];
-    //}
+    
     
     return cell;
 }
@@ -442,6 +561,12 @@ static NSString *const airCellIdentifier = @"airCell";
     if (btn.tag == 1) { //制冷
         ;
     }
+}
+
+#pragma mark - IphoneRoomViewDelegate
+- (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
+    Device *device = self.menus[index];
+    [self.navigationController pushViewController:[DeviceInfo calcController:device.hTypeId] animated:NO];
 }
 
 @end

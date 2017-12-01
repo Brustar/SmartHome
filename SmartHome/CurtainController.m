@@ -76,24 +76,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    _hostType = [[UD objectForKey:@"HostType"] integerValue];
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 窗帘",roomName]];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [UIView new];
     
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-    
-    if ([self.sceneid intValue] >0) {
-        for(int i=0;i<[_scene.devices count];i++)
-        {
-            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Curtain class]]) {
-                CurtainTableViewCell *cell = [self.tableView viewWithTag:((Curtain*)[_scene.devices objectAtIndex:i]).deviceID];
-                cell.slider.value=((Curtain*)[_scene.devices objectAtIndex:i]).openvalue/100.0;
-            }
-        }
-    }
+    [self.tableView registerNib:[UINib nibWithNibName:@"CurtainC4TableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainC4TableViewCell"];//C4窗帘
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
@@ -157,54 +147,27 @@
     [sock.socket writeData:data withTimeout:1 tag:2];
 }
 
--(IBAction)save:(id)sender
-{
-    CurtainTableViewCell *cell = [self.tableView viewWithTag:[self.deviceid integerValue]];
-    
-    Curtain *device=[[Curtain alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setOpenvalue:cell.slider.value * 100];
-    
-    if ([sender isEqual:cell.open]) {
-        [device setOpenvalue:100];
-    }
-    
-    if ([sender isEqual:cell.close]) {
-        [device setOpenvalue:0];
-    }
-    
-    
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-    
-}
-
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     Proto proto=protocolFromData(data);
-    int devID=[[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)] intValue];
+    int devID = [[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)] intValue];
     if (![self.curtainIDArr containsObject:@(devID)]) {
         return;
     }
     
-    CurtainTableViewCell *cell = [self.tableView viewWithTag:devID];
-    
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
+    
+    if (_hostType == 0) {  //Crestron
+    
+      CurtainTableViewCell *cell = [self.tableView viewWithTag:devID];
+    
+    
     //同步设备状态
-    if(proto.cmd == 0x01 && proto.action.state == 0x2A){
-        cell.slider.value = proto.action.RValue/100.0;
-        NSString *icon = cell.slider.value == 0 ? @"bd_icon_wd_off": @"bd_icon_wd_on";
-        [cell.open setImage:[UIImage imageNamed: icon] forState:UIControlStateNormal];
+    if(proto.cmd == 0x01){
+         cell.open.selected = proto.action.state == PROTOCOL_ON;
     }
     
     if (tag==0 && (proto.action.state == 0x2A || proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
@@ -216,27 +179,63 @@
             }
         }
     }
+        
+        
+  }
+    
+    else { //C4
+        CurtainC4TableViewCell *cell = [self.tableView viewWithTag:devID];
+        
+        
+        //同步设备状态
+        if(proto.cmd == 0x01){
+            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
+                cell.switchBtn.selected = proto.action.state;
+            }
+            
+        }
+    }
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.curtainIDArr.count;
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CurtainTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
-    cell.slider.continuous = NO;
-
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.label.text = [self.curNames objectAtIndex:indexPath.row];
-    cell.deviceid = [self.curtainIDArr objectAtIndex:indexPath.row];
-    cell.tag = [cell.deviceid integerValue];
-    cell.slider.tag = 100+indexPath.row;
-    cell.open.tag = indexPath.row;
-    cell.AddcurtainBtn.hidden = YES;
-    cell.curtainContraint.constant = 10;
-    return cell;
+    
+    if (_hostType == 0) {  //Crestron
+        CurtainTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
+        cell.slider.continuous = NO;
+        
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.label.text = [self.curNames objectAtIndex:indexPath.row];
+        cell.deviceid = [self.curtainIDArr objectAtIndex:indexPath.row];
+        cell.tag = [cell.deviceid integerValue];
+        cell.slider.tag = 100+indexPath.row;
+        cell.open.tag = indexPath.row;
+        cell.AddcurtainBtn.hidden = YES;
+        cell.curtainContraint.constant = 10;
+        return cell;
+    }else if (_hostType == 1) {   //C4
+        
+        CurtainC4TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CurtainC4TableViewCell" forIndexPath:indexPath];
+        
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.name.text = [self.curNames objectAtIndex:indexPath.row];
+        cell.deviceid = [self.curtainIDArr objectAtIndex:indexPath.row];
+        cell.tag = [cell.deviceid integerValue];
+        cell.switchBtn.tag = indexPath.row;
+        cell.addBtn.hidden = YES;
+        cell.switchBtnTrailingConstraint.constant = 10;
+        return cell;
+    }
+    
+    return nil;
 }
 
 //设置表头高度
@@ -252,11 +251,25 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (ON_IPAD) {
-        return 150.0f;
-    }else{
-        return 100;
+    
+    if (_hostType == 0) {  //Crestron
+        
+        if (ON_IPAD) {
+            return 150.0f;
+        }else{
+            return 100;
+        }
+        
+    }else if (_hostType == 1) {   //C4
+        
+        if (ON_IPAD) {
+            return 100.0f;
+        }else{
+            return 100;
+        }
     }
+    
+    return 44;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -266,6 +279,15 @@
 //    {
 //        [self performSegueWithIdentifier:@"detail" sender:self];
 //    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section;
+{
+    return 100.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [[UIView alloc] init];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

@@ -32,7 +32,7 @@
     [self.slider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.slider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.slider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
-    
+    self.slider.userInteractionEnabled = ![[UD objectForKey:@"HostType"] intValue];
     [self.open setImage:[UIImage imageNamed:@"bd_icon_wd_on"] forState:UIControlStateSelected];
     [self.open setImage:[UIImage imageNamed:@"bd_icon_wd_off"] forState:UIControlStateNormal];
     if (ON_IPAD) {
@@ -51,6 +51,7 @@
     NSData *data = [[DeviceInfo defaultManager] query:deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
+
 -(IBAction)save:(id)sender
 {
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
@@ -71,12 +72,13 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
         
-        if (_delegate && [_delegate respondsToSelector:@selector(onCurtainSliderBtnValueChanged:)]) {
-            [_delegate onCurtainSliderBtnValueChanged:sender];
+        if (_delegate && [_delegate respondsToSelector:@selector(onCurtainSliderBtnValueChanged:deviceID:)]) {
+            [_delegate onCurtainSliderBtnValueChanged:self.slider deviceID:self.deviceid.intValue];
         }
     }
     
     if ([sender isEqual:self.open]) {
+        [[DeviceInfo defaultManager] playVibrate];
         if (ON_IPAD) {
             [self.AddcurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
         }else{
@@ -96,8 +98,8 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
         
-        if (_delegate && [_delegate respondsToSelector:@selector(onCurtainOpenBtnClicked:)]) {
-            [_delegate onCurtainOpenBtnClicked:sender];
+        if (_delegate && [_delegate respondsToSelector:@selector(onCurtainOpenBtnClicked:deviceID:)]) {
+            [_delegate onCurtainOpenBtnClicked:self.open deviceID:self.deviceid.intValue];
         }
     }
   

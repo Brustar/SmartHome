@@ -17,6 +17,8 @@
 #import "Aircon.h"
 #import "BgMusic.h"
 #import "Amplifier.h"
+#import "DeviceTimerInfo.h"
+#import "DeviceSchedule.h"
 
 typedef void(^SaveOK)(BOOL flag);
 
@@ -30,6 +32,8 @@ typedef void(^SaveOK)(BOOL flag);
 - (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive;
 
 - (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive block:(SaveOK )block;
+
+- (void)addDeviceTimer:(DeviceSchedule *)timer  isEdited:(BOOL)isEdited  mode:(int)mode isActive:(NSInteger)isActive block:(SaveOK )block;  
 
 - (void) delScene:(Scene *)scene;
 
@@ -71,8 +75,10 @@ typedef void(^SaveOK)(BOOL flag);
 - (void)dimingRoomLights:(NSArray *)lightIDs brightness:(int)bright;
 
 - (void)sprightlyForRoomLights:(NSArray *)lightIDs;
+- (void)sprightlyForRoomLights:(NSArray *)lightIDs brightness:(int)brightness;
 
 - (void)gloomForRoomLights:(NSArray *)lightIDs;
+- (void)gloomForRoomLights:(NSArray *)lightIDs brightness:(int)brightness;
 
 - (void)romanticForRoomLights:(NSArray *)lightIDs;
 

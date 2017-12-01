@@ -23,10 +23,12 @@
 #import "FamilyHomeCell.h"
 #import "CustomViewController.h"
 #import "FamilyHomeDetailViewController.h"
+#import "RoomPlaneGraphViewController.h"
 #import "NowMusicController.h"
 #import "TouchImage.h"
 #import "UIImageView+WebCache.h"
 #import "LoadMaskHelper.h"
+#import "FloorInfo.h"
 
 #define  CollectionCell_W  self.roomStatusCollectionView.frame.size.width -40
 #define  iPadCollectionCellW  self.roomStatusCollectionView.frame.size.width / 3.0 -40
@@ -48,5 +50,12 @@
 @property (nonatomic, strong) NSMutableArray *deviceArray;
 @property (nonatomic, assign) NSInteger hostType;//主机类型：0，creston   1, C4
 @property (nonatomic, strong) NSDate *startDate;
+@property (nonatomic, strong) NSMutableArray *floorArray;//楼层数组
+@property (nonatomic, assign) NSInteger floorNumber;//楼层数
+@property (nonatomic, assign) NSInteger currentFloor;//当前展示的楼层
+@property (weak, nonatomic) IBOutlet UIButton *floor1Btn;
+@property (weak, nonatomic) IBOutlet UIButton *floor2Btn;
+- (IBAction)floor1BtnClicked:(id)sender;
+- (IBAction)floor2BtnClicked:(id)sender;
 
 @end

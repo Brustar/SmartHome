@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomViewController.h"
+#import "MBProgressHUD+NJ.h"
 
 @class IpadDeviceTypeVC;
 
 @protocol IpadDeviceTypeVCDelegate <NSObject>
 
+@optional
 -(void)IpadDeviceType:(IpadDeviceTypeVC *)centerListVC selected:(NSInteger)row;
+-(void)IpadDeviceType:(IpadDeviceTypeVC *)centerListVC selected:(NSInteger)row typeName:(NSString *)typeName;
 
 @end
 

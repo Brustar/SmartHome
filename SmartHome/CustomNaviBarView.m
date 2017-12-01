@@ -235,6 +235,23 @@
         [self addSubview:_btnLeft];
     }else{}
 }
+
+- (void)setLeftButton:(UIButton *)btn
+{
+    if (_btnLeft)
+    {
+        [_btnLeft removeFromSuperview];
+        _btnLeft = nil;
+    }else{}
+    
+    _btnLeft = btn;
+    if (_btnLeft)
+    {
+        _btnLeft.frame = Rect(-20, 22.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+        [self addSubview:_btnLeft];
+    }else{}
+}
+
 - (void)setMiddleBtn:(UIButton *)btn
 {
     if (_btnMiddle) {

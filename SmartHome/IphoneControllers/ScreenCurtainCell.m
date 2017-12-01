@@ -58,6 +58,8 @@
      _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         Amplifier *device=[[Amplifier alloc] init];
     if (sender == self.ScreenCurtainBtn) {
+        [[DeviceInfo defaultManager] playVibrate];
+        
         if (ON_IPAD) {
             [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
         }else{
@@ -109,7 +111,7 @@
 }
 //升
 - (IBAction)upBtn:(id)sender {
-    
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data = [[DeviceInfo defaultManager] upScreenByDeviceID:self.deviceid];
     SocketManager *sock = [SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];//up
@@ -120,7 +122,7 @@
 }
 //降
 - (IBAction)downBtn:(id)sender {
-    
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data = [[DeviceInfo defaultManager] downScreenByDeviceID:self.deviceid];
     SocketManager *sock = [SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
@@ -131,7 +133,7 @@
 }
 //停
 - (IBAction)stopBtn:(id)sender {
-    
+    [[DeviceInfo defaultManager] playVibrate];
     self.stopBtn.selected = !self.stopBtn.selected;
     if (self.stopBtn.selected) {
         

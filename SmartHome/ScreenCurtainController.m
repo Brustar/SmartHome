@@ -72,18 +72,21 @@
 }
 
 - (IBAction)upBtnAction:(UIButton *)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data = [[DeviceInfo defaultManager] upScreenByDeviceID:self.deviceid];
     SocketManager *sock = [SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (IBAction)stopBtnAction:(UIButton *)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data = [[DeviceInfo defaultManager] stopScreenByDeviceID:self.deviceid];
     SocketManager *sock = [SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (IBAction)downBtnAction:(UIButton *)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data = [[DeviceInfo defaultManager] downScreenByDeviceID:self.deviceid];
     SocketManager *sock = [SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];

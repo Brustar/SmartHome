@@ -14,5 +14,6 @@
 
 - (void)uploadImage:(UIImage *) img url:(NSString *) url dic:(NSDictionary *)dic fileName:(NSString *)fileName completion:(void (^)(id responseObject))completion;
 
-
+//上传设备定时器plist文件
+- (void)uploadDeviceTimer:(NSData *)timerData url:(NSString *) url dic:(NSDictionary *)dic fileName:(NSString *)fileName completion:(void (^)(id responseObject))completion;
 @end

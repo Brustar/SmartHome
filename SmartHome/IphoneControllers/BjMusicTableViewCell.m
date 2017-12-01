@@ -70,6 +70,7 @@
         BgMusic *device=[[BgMusic alloc] init];
     
     if (sender == self.BjPowerButton) {
+        [[DeviceInfo defaultManager] playVibrate];
         if (ON_IPAD) {
             [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
         }else{
@@ -103,8 +104,8 @@
         
         }
         
-        if (_delegate && [_delegate respondsToSelector:@selector(onBjPowerButtonClicked:)]) {
-            [_delegate onBjPowerButtonClicked:sender];
+        if (_delegate && [_delegate respondsToSelector:@selector(onBjPowerButtonClicked:deviceID:)]) {
+            [_delegate onBjPowerButtonClicked:self.BjPowerButton deviceID:self.deviceid.intValue];
         }
         
     }else if (sender == self.AddBjmusicBtn){
@@ -158,6 +159,7 @@
 }
 //音量减
 - (IBAction)voice_downBtn:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     data=[device volumeDown:self.deviceid];
@@ -167,6 +169,7 @@
 
 //音量加
 - (IBAction)voice_upBtn:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     data=[device volumeUp:self.deviceid];

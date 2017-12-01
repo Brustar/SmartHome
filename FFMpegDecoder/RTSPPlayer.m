@@ -82,6 +82,9 @@
     if (usesTcp)
         av_dict_set(&opts, "rtsp_transport", "tcp", 0);
     
+    if ([NSThread isMainThread]) {
+        NSLog(@"initWithVideo:(NSString *)moviePath usesTcp:(BOOL)usesTcp: 当前在主线程");
+    }
     
     if (avformat_open_input(&pFormatCtx, [moviePath UTF8String], NULL, &opts) !=0 ) {
         av_log(NULL, AV_LOG_ERROR, "Couldn't open file\n");

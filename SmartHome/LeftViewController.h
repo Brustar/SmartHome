@@ -28,6 +28,7 @@
 
 @interface LeftViewController : UIViewController<SingleMaskViewDelegate>
 @property(nonatomic, strong) NSArray *itemArray;
+@property(nonatomic, strong) NSArray *iconArray;
 @property(nonatomic, strong) UserInfo *userInfo;
 @property(nonatomic, strong) UIButton *headerBtn;
 @property (nonatomic,strong) UILabel * nickNameLabel;

@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
 #import "Device.h"
+#import "DeviceSource.h"
 #import "Aircon.h"
 #import "UserInfo.h"
+#import "PackManager.h"
 
 #define SWITCHLIGHT_SUB_TYPE @"01"
 #define DIMMER_SUB_TYPE @"02"
@@ -24,7 +26,7 @@
 
 @interface SQLManager : NSObject
 
-+(FMDatabase *)connetdb;
++(FMDatabase *)connectdb;
 //从数据中获取所有设备信息
 +(NSArray *)getAllDevicesInfo;
 //从数据中获取所有设备
@@ -66,7 +68,9 @@
 +(NSArray *)deviceIdsByRoomId:(int)roomID;
 + (NSString *)getRoomNameByDeviceID:(int) deviceId;
 
-+(int) currentDevicesOfRoom:(int)roomID;
++(int) currentDevicesOfRoom:(int)roomID subTypeID:(int)subTypeID;
+//环境UI菜单
++(NSArray *)envDeviceNamesByRoom:(int)roomID;
 //多媒体UI菜单
 +(NSArray *)mediaDeviceNamesByRoom:(int)roomID;
 //智能单品菜单
@@ -99,7 +103,7 @@
 + (NSArray *)getDeviceTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID subTypeName:(NSString *)subTypeName;
 
 //修改场景的打开状态（status： 0表示关闭 1表示打开）
-+ (BOOL)updateSceneStatus:(int)status sceneID:(int)sceneID;
++ (BOOL)updateSceneStatus:(int)status sceneID:(int)sceneID roomID:(int)roomID;
 + (BOOL)updateScenePic:(NSString *)img sceneID:(int)sceneID;
 
 //得到所有设备父类和具体的设备
@@ -108,7 +112,9 @@
 
 +(NSString *)getEType:(NSInteger)eID;
 +(NSString *)getENumber:(NSInteger)eID;
++ (uint16_t)getENumberByDeviceID:(NSInteger)eID;
 +(NSString *)getDeviceIDByENumber:(NSInteger)eID;
++(NSString *)getDeviceIDByENumberForC4:(NSInteger)eID airID:(int)airID htypeID:(int)htypeID;
 +(int)saveMaxSceneId:(Scene *)scene name:name pic:(NSString *)img;
 
 +(NSArray *) fetchScenes:(NSString *)name;
@@ -153,12 +159,15 @@
 
 +(NSArray *)getAllRoomsInfoByName:(NSString *)name;
 +(NSArray *)getAllRoomsInfo;
++(NSArray *)getAllRoomsWhenHasDevices;
+
++(NSArray *)othersWithScene:(NSString *)devices withRoom:(int)rid;
 
 +(int)getRoomIDByBeacon:(int)beacon;
 +(NSString *)getRoomNameByRoomID:(int) rId;
 
-+ (Device *)getDeviceWithDeviceID:(int) deviceID ;
-+ (Device *)getDeviceWithDeviceHtypeID:(int) htypeID ;
++ (Device *)getDeviceWithDeviceID:(int) deviceID;
++ (Device *)getDeviceWithDeviceHtypeID:(int)htypeID roomID:(int)rID;
 
 +(BOOL)updateTotalVisited:(int)roomID;
 
@@ -175,6 +184,7 @@
 
 +(NSArray *)queryChat:(NSString *)userid;
 + (NSArray *)queryAllChat;
++ (void)writeSource:(NSArray *)sources;//影音设备数据源
 + (void) writeDevices:(NSArray *)rooms;
 +(void) writeRooms:(NSArray *)roomList;
 +(NSArray *) writeScenes:(NSArray *)rooms;
@@ -202,4 +212,14 @@
 + (BOOL)updateUserNickNameByID:(int)userID nickName:(NSString *)nickName;
 + (NSArray *)getDeviceIDsBySubTypeId:(int)subTypeId;
 + (NSArray *)getDeviceIDsByRid:(NSInteger)rId;
++ (BOOL)updateDevicePowerStatus:(int)deviceID power:(int)power;
++ (BOOL)updateDeviceBrightStatus:(int)deviceID value:(float)value;
++ (BOOL)updateCurtainPowerStatus:(int)deviceID power:(int)power;
++ (BOOL)updateCurtainPositionStatus:(int)deviceID value:(float)value;
++ (NSArray *)getAllDevicesInfoBySubTypeID:(int)subTypeID;
++ (Device *)getDeviceWithDeviceID:(int) deviceID airID:(int)airID;
++ (NSString *)getDeviceIDByENumberForC4:(NSInteger)eID airID:(int)airID;
++ (BOOL)updateAirPowerStatus:(int)deviceID power:(int)power airID:(int)airID;//更新空调开关状态
++ (NSArray *)getSourcesByDeviceID:(NSInteger)deviceID;//从数据库中获取所有当前影音设备数据源的信息
++ (NSArray *)getUITypeOfLightByRoomID:(int)roomID;
 @end

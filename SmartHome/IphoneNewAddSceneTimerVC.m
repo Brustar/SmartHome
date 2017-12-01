@@ -128,16 +128,25 @@
 }
 -(void)rightBtnClicked:(UIButton *)btn
 {
-    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
-    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
-    _scene = [[Scene alloc] initWhithoutSchedule];
-    if(plistDic)
-    {
-        [_scene setValuesForKeysWithDictionary:plistDic];
-    }
-    if (self.isDeviceTimer) {
+    if (self.isDeviceTimer && _timer) {
+        
+        NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], [SQLManager getENumberByDeviceID:_timer.deviceID]];
+        NSString *timerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:timerFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:timerPath];
+        
+        if(plistDic)
+        {
+            [_timer setValuesForKeysWithDictionary:plistDic];
+        }
+        
+        self.schedule.startTime = self.starTimeLabel.text;
+        self.schedule.endTime = self.endTimeLabel.text;
+        _timer.schedules = @[self.schedule];
+        
+        
+        [[SceneManager defaultManager] addDeviceTimer:_timer isEdited:YES  mode:1 isActive:1 block:nil];
+        
         NSDictionary *dic = @{
                               @"startDay":self.starTimeLabel.text,
                               @"endDay":self.endTimeLabel.text,
@@ -147,8 +156,19 @@
         [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
         
         [self.navigationController popViewControllerAnimated:YES];
+        
     }else {
     
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+        NSString *scenePath = [[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+        
+        _scene = [[Scene alloc] initWhithoutSchedule];
+        
+        if(plistDic)
+        {
+            [_scene setValuesForKeysWithDictionary:plistDic];
+        }
     
     _viewControllerArrs =self.navigationController.viewControllers;
     NSInteger vcCount = _viewControllerArrs.count;
@@ -156,11 +176,15 @@
     UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     IphoneSaveNewSceneController * iphoneSaveNewSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
    
-    if ([lastVC isKindOfClass:[iphoneSaveNewSceneVC class]]) {
+    if ([lastVC isKindOfClass:[iphoneSaveNewSceneVC class]]) {  //新增定时
         self.schedule.startTime = self.starTimeLabel.text;
         self.schedule.endTime = self.endTimeLabel.text;
         _scene.schedules = @[self.schedule];
+        _scene.isplan = 1;
+        _scene.isactive = 1;
+        
         [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+        
         NSDictionary *dic = @{
                               @"startDay":self.starTimeLabel.text,
                               @"endDay":self.endTimeLabel.text,
@@ -169,7 +193,7 @@
                               };
         [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
         
-    }else{
+    }else{  //编辑定时
         _scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
         Schedule *sch = [[Schedule alloc] init];
         sch.startTime = self.starTimeLabel.text;

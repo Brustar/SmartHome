@@ -209,7 +209,7 @@
         return;
     }
     
-    UIAlertController * alerController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController * alerController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:ON_IPAD?UIAlertControllerStyleAlert:UIAlertControllerStyleActionSheet];
     
     [alerController addAction:[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         

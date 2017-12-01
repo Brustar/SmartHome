@@ -20,13 +20,12 @@
     _countryCodeArray = @[@"中国(+86)",@"中国台湾(+886)",@"中国香港(+852)",@"中国澳门(+851)"];
     [self.countryCodeTableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     self.countryCodeTableView.hidden = YES;
-    
-    self.authLabel.text = self.suerTypeStr;
     self.homeLabel.text = self.hostName;
     [self.phoneNumTextField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
     
     self.countryCode = @"86";//默认国家码
     [self adjustIpadUI];
+    [self registIdentityCheck];//用户身份验证(1:主人，2:客人)
 }
 
 - (void)adjustIpadUI {
@@ -150,9 +149,15 @@
 //验证手机号是否已注册
 - (void)checkPhoneNumberIsExist {
     
+    //手机终端类型：1，手机 2，iPad
+    NSInteger clientType = 1;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        clientType = 2;
+    }
     
     NSDictionary *dict = @{@"mobile":self.phoneNumTextField.text,
-                           @"optype":@(1)
+                           @"optype":@(1),
+                           @"devicetype":@(clientType)
                            };
     
     NSString *url = [NSString stringWithFormat:@"%@login/send_code.aspx",[IOManager httpAddr]];
@@ -164,28 +169,61 @@
     //        [self performSegueWithIdentifier:@"registerDetaiSegue" sender:self];
 }
 
+//注册用户的身份检查
+- (void)registIdentityCheck {
+    NSDictionary *dict = @{
+                           @"hostid":@([self.masterStr integerValue])
+                           };
+    NSString *url = [NSString stringWithFormat:@"%@login/regist_identity_check.aspx",[IOManager httpAddr]];
+    HttpManager *http = [HttpManager defaultManager];
+    http.tag = 2;
+    http.delegate = self;
+    [http sendPost:url param:dict];
+}
+
 - (void)httpHandler:(id)responseObject tag:(int)tag
 {
-    if([responseObject[@"result"] intValue] == 0) { //手机号未注册，进行“下一步”操作，进入下一页面
-        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-        UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"registSecondStepVC"];
-        NSString *phoneNumber = [NSString stringWithFormat:@"%@", self.phoneNumTextField.text];
-        
-        if (phoneNumber) {
-            [vc setValue:phoneNumber forKey:@"phoneNum"];
+    if (tag == 1) {
+        if([responseObject[@"result"] intValue] == 0) { //手机号未注册，进行“下一步”操作，进入下一页面
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+            UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"registSecondStepVC"];
+            NSString *phoneNumber = [NSString stringWithFormat:@"%@", self.phoneNumTextField.text];
+            
+            if (phoneNumber) {
+                [vc setValue:phoneNumber forKey:@"phoneNum"];
+            }
+            
+            if (self.suerTypeStr) {
+                [vc setValue:self.suerTypeStr forKey:@"userType"];
+            }
+            
+            if (self.masterStr) {
+                [vc setValue:self.masterStr forKey:@"masterID"];
+            }
+            
+            
+            
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
-        
-        
-        if (self.masterStr) {
-            [vc setValue:self.masterStr forKey:@"masterID"];
+    }else if(tag == 2) { // 验证用户身份（主人，非主人）
+        if ([responseObject[@"result"] intValue] == 0)
+        {
+            
+            int userType =  [responseObject[@"hosttype"] intValue];
+            if (userType == 1) {
+                self.suerTypeStr = @"主人";
+            }else {
+                self.suerTypeStr = @"客人";
+            }
+            
+            self.authLabel.text = self.suerTypeStr;
+            
         }
-        
-        
-        
-        [self.navigationController pushViewController:vc animated:YES];
-    }else{
-        [MBProgressHUD showError:responseObject[@"msg"]];
     }
+    
+    
 }
 
 

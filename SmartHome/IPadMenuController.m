@@ -32,8 +32,24 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     }else{
         NSArray *ts = [self lights];
         NSMutableArray *temp = [NSMutableArray new];
-        [temp addObjectsFromArray:ts];
-        NSArray *arr = [SQLManager devicesWithCatalogID:1 room:self.roomID];
+        if (ts.count >0) {
+            [temp addObjectsFromArray:ts];
+        }
+        Device *device = nil;
+        if (temp.count >0) {
+            device = temp[0];
+        }
+        
+        long UITypeOfLight = 0;
+        if ([device.typeName isEqualToString:@"射灯"]) {
+            UITypeOfLight = 1;
+        }else if ([device.typeName isEqualToString:@"灯带"]) {
+            UITypeOfLight = 2;
+        }else if ([device.typeName isEqualToString:@"调色灯"]) {
+            UITypeOfLight = 3;
+        }
+        
+        NSArray *arr = [SQLManager devicesWithCatalogID:UITypeOfLight room:self.roomID];
         for (id obj in arr) {
             [temp insertObject:obj atIndex:1];
         }
@@ -62,13 +78,18 @@ static NSString *const leftMenuCell = @"leftMenuCell";
 -(NSArray *)lights
 {
     NSMutableArray *types = [[NSMutableArray alloc] init];
-    NSArray *uitypes=@[@"射灯",@"灯带",@"调色灯"];
-    int i=0;
+    //NSArray *uitypes=@[@"射灯",@"灯带",@"调色灯"];
+    
+    NSMutableArray *uitypes = [NSMutableArray new];
+    [uitypes addObjectsFromArray:[SQLManager getUITypeOfLightByRoomID:self.roomID]];
+    
+    int i = 0;
     for (NSString *name in uitypes) {
-        Device *d=[Device new];
+        Device *d = [Device new];
         d.typeName = name;
         d.hTypeId = ++i;
         d.rID = d.hTypeId;
+        
         [types addObject:d];
     }
     return types;
@@ -94,7 +115,16 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     
     if (device.hTypeId >0 && device.hTypeId<10) {
         [temp addObjectsFromArray:ts];
-        NSArray *arr = [SQLManager devicesWithCatalogID:device.hTypeId room:self.roomID];
+        
+        long UITypeOfLight = 0;
+        if ([device.typeName isEqualToString:@"射灯"]) {
+            UITypeOfLight = 1;
+        }else if ([device.typeName isEqualToString:@"灯带"]) {
+            UITypeOfLight = 2;
+        }else if ([device.typeName isEqualToString:@"调色灯"]) {
+            UITypeOfLight = 3;
+        }
+        NSArray *arr = [SQLManager devicesWithCatalogID:UITypeOfLight room:self.roomID];
         for (id obj in arr) {
             [temp insertObject:obj atIndex:device.rID];
         }
@@ -103,6 +133,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     }else if(device.hTypeId>=10){
         //多媒体或智能单品
         [[DeviceInfo defaultManager] setRoomID:self.roomID];
+        [[DeviceInfo defaultManager] setDeviceType:(int)device.hTypeId];
         [self showDetailViewController:[DeviceInfo calcController:device.hTypeId] sender:self];
     }
     
@@ -125,6 +156,13 @@ static NSString *const leftMenuCell = @"leftMenuCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section;
 {
     return 64.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [[UIView alloc] init];
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [[UIView alloc] init];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {

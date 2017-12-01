@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self settingFloor];
     [self addNotifications];
     
     [self showNetStateView];
@@ -58,10 +58,24 @@
     
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
+    //安装平面图
     [self setupPlaneGraph];
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+}
+
+- (void)settingFloor {
+    _currentFloor = 1;//默认展示第一层
+    self.floor1Btn.selected = YES;
+    _floorNumber = [[UD objectForKey:@"floor_number"] integerValue];
+    if (_floorNumber == 2) {
+        self.floor1Btn.hidden = NO;
+        self.floor2Btn.hidden = NO;
+    }else {
+        self.floor1Btn.hidden = YES;
+        self.floor2Btn.hidden = YES;
+    }
 }
 
 - (void)getRoomStateInfoByTcp {
@@ -71,9 +85,9 @@
     
     
     //查询所有房间的设备ID（灯，空调，影音）
-    NSArray *lightIDs = [SQLManager getDeviceIDsBySubTypeId:1];
-    NSArray *airIDs = [SQLManager getDeviceIDsBySubTypeId:2];
-    NSArray *avIDs = [SQLManager getDeviceIDsBySubTypeId:3];
+    NSArray *lightIDs = [SQLManager getAllDevicesInfoBySubTypeID:1];
+    NSArray *airIDs = [SQLManager getAllDevicesInfoBySubTypeID:2];
+    NSArray *avIDs = [SQLManager getAllDevicesInfoBySubTypeID:3];
     
     NSMutableArray *deviceIDs = [[NSMutableArray alloc] init];
     if (lightIDs.count >0) {
@@ -96,8 +110,17 @@
     
     [deviceIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-            NSData *data = [[DeviceInfo defaultManager] query:[obj stringValue]];
+            Device *device = (Device *)obj;
+            NSString *deviceID = [NSString stringWithFormat:@"%d", device.eID];
+        
+        if (device.hTypeId == air) {
+            NSData *data = [[DeviceInfo defaultManager] query:deviceID withRoom:device.airID];
             [sock.socket writeData:data withTimeout:1 tag:1];
+            
+        }else {
+            NSData *data = [[DeviceInfo defaultManager] query:deviceID];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+        }
         
     }];
     
@@ -130,12 +153,26 @@
 - (void)openRoom:(NSNumber *)roomId {
     //鉴权一下
     int roomAuth = [SQLManager getRoomAuthority:roomId.intValue];
+    
     if (roomAuth == 1) {
-        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
-        FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
-        vc.roomID = [roomId integerValue];
-        vc.roomName = [SQLManager getRoomNameByRoomID:[roomId intValue]];
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        if (_hostType == 0) {  //Creston
+            
+            UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
+            FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
+            vc.roomID = [roomId integerValue];
+            vc.roomName = [SQLManager getRoomNameByRoomID:[roomId intValue]];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else {
+            UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"PlaneGraph" bundle:nil];
+            RoomPlaneGraphViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"RoomPlaneGraphViewController"];
+            vc.roomID = [roomId integerValue];
+            vc.roomName = [SQLManager getRoomNameByRoomID:[roomId intValue]];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
+        
     }else {
         [MBProgressHUD showError:@"你无权限打开此房间"];
     }
@@ -152,11 +189,12 @@
 //获取平面图配置
 - (void)getPlaneGraphConfiguration
 {
+    _floorArray = [NSMutableArray new];
     NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
     
     if (auothorToken.length >0) {
     
-    NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr], @"Cloud/scene_config_list.aspx"];
+    NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr], @"Cloud/plane_config_list.aspx"];
     
     NSDictionary *dic = @{
                           @"token":  auothorToken,
@@ -211,43 +249,8 @@
         music_icon = @"Ipad-NowMusic";
     }
     
-    
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:music_icon imgHighlight:music_icon target:self action:@selector(rightBtnClicked:)];
 
-    if (isPlaying) {
-        UIImageView * imageView = _naviRightBtn.imageView ;
-        
-        imageView.animationImages = [NSArray arrayWithObjects:
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red2"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red3"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red4"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red5"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red6"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red7"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red8"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red9"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red10"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red11"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red12"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red13"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red14"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red15"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red16"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red17"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red18"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red19"],
-                                     
-                                     nil];
-        
-        //设置动画总时间
-        imageView.animationDuration = 2.0;
-        //设置重复次数，0表示无限
-        imageView.animationRepeatCount = 0;
-        //开始动画
-        if (! imageView.isAnimating) {
-            [imageView startAnimating];
-        }
-    }
     [self setNaviBarRightBtn:_naviRightBtn];
 }
 
@@ -388,24 +391,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
-    SocketManager *sock = [SocketManager defaultManager];
-    sock.delegate = self;
-    _bgmusicIDS = [[NSMutableArray alloc] init];
-    NSArray * roomArr = [SQLManager getAllRoomsInfo];
-    for (int i = 0; i < roomArr.count; i ++) {
-        Room * roomName = roomArr[i];
-        if (![SQLManager isWholeHouse:roomName.rId]) {
-            self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:roomName.rId];
-        }
-        if (self.deviceid.length != 0) {
-            [_bgmusicIDS addObject:self.deviceid];
-            //查询设备状态
-            NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-            
-        }
-    }
     [super viewWillAppear:animated];
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
@@ -414,6 +399,47 @@
     [LoadMaskHelper showMaskWithType:FamilyHome onView:self.tabBarController.view delay:0.5 delegate:self];
     
     [self setupNaviBar];
+    [self getBgMusicStatus]; //查询背景音乐状态
+}
+
+//查询背景音乐状态
+- (void)getBgMusicStatus {
+    if (_bgmusicIDS == nil) {
+        _bgmusicIDS = [[NSMutableArray alloc] init];
+    }else {
+        [_bgmusicIDS removeAllObjects];
+    }
+    
+    
+    NSArray * roomArr = [SQLManager getAllRoomsInfo];
+    for (int i = 0; i < roomArr.count; i ++) {
+        Room * roomName = roomArr[i];
+        if (![SQLManager isWholeHouse:roomName.rId]) {
+            Device *device = [SQLManager getDeviceWithDeviceHtypeID:bgmusic roomID:roomName.rId];//查询某个房间的背景音乐
+            
+            if (device) {
+                [_bgmusicIDS addObject:device];
+                
+                
+                float delay = 0.1*i;
+                
+                // GCD 延时，非阻塞主线程 延时时间：delay
+                dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
+                
+                dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+                    
+                    NSData *data = [[DeviceInfo defaultManager] query:[NSString stringWithFormat:@"%d", device.eID]];
+                    SocketManager *sock = [SocketManager defaultManager];
+                    sock.delegate = self;
+                    [sock.socket writeData:data withTimeout:1 tag:1];
+                    
+                });
+                
+            }
+            
+        }
+        
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -478,8 +504,9 @@
     //同步设备状态
     if(proto.cmd == 0x01) {
         
-        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-        Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue];
+        NSString *devID=[SQLManager getDeviceIDByENumberForC4:CFSwapInt16BigToHost(proto.deviceID) airID:proto.action.B];
+        
+        Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue airID:proto.action.B];
         
         if (device) {
             device.actionState = proto.action.state;
@@ -487,16 +514,16 @@
             if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
                 device.power = proto.action.state;
                 
-                if (proto.deviceType == 0x14) {
+               /* if (proto.deviceType == 0x14) {
                     NSDate *endDate  =  [NSDate date];
                     NSLog(@"背景音乐 --- 返回时间： %f", [endDate timeIntervalSinceDate:_startDate]);
                     NSLog(@"背景音乐 --- 开关 ---  %d", proto.action.state);
                     
-                }
+                }*/
                 
             }
             
-            else if (proto.action.state == 0x6A) { //温度
+            else if (proto.action.state == 0x6B) { //当前温度
                 device.currTemp  = proto.action.RValue;
                 
             }
@@ -514,39 +541,80 @@
             @synchronized (_deviceArray) {
                 [_deviceArray addObject:device];
             }
-            
         }
         
-    }
-    
-    [self showRoomStatus];
-    
-    for (int i = 0; i <self.bgmusicIDS.count; i ++) {
-        if (proto.cmd==0x01) {
-            NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-            if ([devID intValue]==[self.bgmusicIDS[i] intValue]) {
-                if (proto.action.state == PROTOCOL_VOLUME) {
-                    NSLog(@"有音量");
-                }if (proto.action.state == PROTOCOL_ON) {
-                    NSLog(@"开启状态");
-                    [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
-                    
-                    //                    [_bgmusicIDArr addObject:devID];
-                    
-                }if (proto.action.state == PROTOCOL_OFF) {
-                    NSLog(@"关闭状态");
-                    [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
+        [self showRoomStatus];
+        
+        ///////////////     背景音乐     ////////////////
+        [self.bgmusicIDS enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+            Device *device = (Device *)obj;
+            if (devID.intValue == device.eID) {
+                if (proto.action.state == PROTOCOL_ON) { //背景音乐正在播放
+                    device.power = 1;
+                }else if (proto.action.state == PROTOCOL_OFF) { //背景音乐未播放
+                    device.power = 0;
                 }
             }
-        }
+            
+        }];
+        
+        [self refreshBgMusicIcon];//刷新正在播放图标
     }
-    [self setupNaviBar];
+}
+
+- (void)refreshBgMusicIcon {
+    [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
+    
+    [self.bgmusicIDS enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        Device *device = (Device *)obj;
+        if (device.power == 1) { //有正在播放的背景音乐
+            [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
+            
+            UIImageView *bgImageView = _naviRightBtn.imageView;
+            if (![bgImageView isAnimating]) {
+                bgImageView.animationImages = [NSArray arrayWithObjects:
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red2"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red3"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red4"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red5"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red6"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red7"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red8"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red9"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red10"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red11"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red12"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red13"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red14"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red15"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red16"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red17"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red18"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red19"],
+                                               nil];
+                
+                
+                bgImageView.animationDuration = 2.0; //设置动画总时间
+                bgImageView.animationRepeatCount = 0; //设置重复次数，0表示无限
+                
+                //开始动画
+                [bgImageView startAnimating];
+            }
+            
+        }
+    }];
+    
+    if ([[UD objectForKey:@"IsPlaying"] isEqualToString:@"0"]) {
+        UIImageView *bgImageView = _naviRightBtn.imageView;
+        [bgImageView stopAnimating];
+    }
+    
 }
 
 - (void)showRoomStatus {
     // 处理接收到的数据
     [self handleData];
-    [self getAllDevicesStatusIcon];
+    [self getAllDevicesStatusIconByFloor:1];
     [self.roomStatusCollectionView reloadData];
 }
 
@@ -559,28 +627,40 @@
         [_deviceArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
             Device *device = (Device *)obj;
-            if (device.rID == room.rId) {
-                
-                if (device.actionState == 0x6A) {   //温度
-                    room.tempture = device.currTemp;
-                }else if (device.actionState == 0x8A) {   // 湿度
-                    room.humidity = device.humidity;
-                }else if (device.actionState == 0x7F) {   //PM2.5
-                    room.pm25 = device.pm25;
-                }else if (device.actionState == PROTOCOL_OFF) {  // 关
-                    
-                }else if (device.actionState == PROTOCOL_ON) {   // 开
-                    if (device.subTypeId == 1) {   //灯光
-                        room.lightStatus = 1;
-                    }else if(device.subTypeId == 2) {   //空调
+            
+            
+            if (device.airID >0) { //空调
+                Device *dev = [SQLManager getDeviceWithDeviceHtypeID:air roomID:room.rId];
+                if (dev.airID == device.airID) {
+                    if (device.actionState == 0x6B) {   //温度
+                        room.tempture = device.currTemp;
+                    }else if (device.actionState == PROTOCOL_ON) {   // 开
+                        
                         room.airStatus = 1;
-                    }else if (device.subTypeId == 3) {    //影音
-                        room.avStatus = 1;
+                        
                     }
                 }
-                
-                
+            }else {
+                if (device.rID == room.rId) {
+                    
+                    if (device.actionState == 0x8A) {   // 湿度
+                        room.humidity = device.humidity;
+                    }else if (device.actionState == 0x7F) {   //PM2.5
+                        room.pm25 = device.pm25;
+                    }else if (device.actionState == PROTOCOL_OFF) {  // 关
+                        
+                    }else if (device.actionState == PROTOCOL_ON) {   // 开
+                        if (device.subTypeId == 1) {   //灯光
+                            room.lightStatus = 1;
+                        }else if (device.subTypeId == 3) {    //影音
+                            room.avStatus = 1;
+                        }
+                    }
+                    
+                    
+                }
             }
+        
             
         }];
        }
@@ -595,14 +675,63 @@
             if ([responseObject[@"result"] integerValue] == 0) {
                 NSDictionary *infoDict = responseObject[@"info"];
                 if ([infoDict isKindOfClass:[NSDictionary class]]) {
-                    NSString *bgImgUrl = infoDict[@"imgpath"];//设置平面背景
-                    if (bgImgUrl.length >0) {
-                        [self.planeGraph sd_setImageWithURL:[NSURL URLWithString:bgImgUrl] placeholderImage:[UIImage imageNamed:@"PlaneGraph"] options:SDWebImageRetryFailed];
+                    
+                   NSArray *floorArr =  infoDict[@"config_list"];
+                    if ([floorArr isKindOfClass:[NSArray class]]) {
+                        [floorArr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                            
+                            FloorInfo *info = [[FloorInfo alloc] init];
+                            NSDictionary *dic = obj;
+                            if ([dic isKindOfClass:[NSDictionary class]]) {
+                                info.floor = [dic[@"floor"] integerValue];
+                                info.plistPath = dic[@"plist_path"];
+                                info.imgPath = dic[@"imgpath"];
+                                
+                                [_floorArray addObject:info];
+                            }
+                        }];
+                        
+                        
+                        [_floorArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+                            
+                            FloorInfo *info = obj;
+                            if (info.floor == 1) {
+                                if (info.imgPath.length >0) {
+                                    [self.planeGraph sd_setImageWithURL:[NSURL URLWithString:info.imgPath] placeholderImage:[UIImage imageNamed:@"PlaneGraph"] options:SDWebImageRetryFailed];
+                                }
+                            }
+                                
+                            if (info.plistPath.length >0) {
+                                [self downloadPlist:info.plistPath]; //下载plist
+                            }
+                            
+                            
+                        }];
+                        
                     }
-                    NSString *plistURL = infoDict[@"plist_path"];
-                    if (plistURL.length >0) {
-                        //下载plist
-                        [self downloadPlist:plistURL];
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+//                    NSString *bgImgUrl = infoDict[@"imgpath"];//设置平面背景
+//                    if (bgImgUrl.length >0) {
+//                        [self.planeGraph sd_setImageWithURL:[NSURL URLWithString:bgImgUrl] placeholderImage:[UIImage imageNamed:@"PlaneGraph"] options:SDWebImageRetryFailed];
+//                    }
+//                    NSString *plistURL = infoDict[@"plist_path"];
+//                    if (plistURL.length >0) {
+//                        //下载plist
+//                        [self downloadPlist:plistURL];
+//                    }else {
+//                        if (_hostType == 0) {  //Creston
+//                            [self fetchRoomDeviceStatus];//Http获取房间设备状态
+//                        }
+//                    }
+                }else {
+                    if (_hostType == 0) {  //Creston
+                        [self fetchRoomDeviceStatus];//Http获取房间设备状态
                     }
                 }
             }
@@ -637,7 +766,7 @@
             
             [self.roomStatusCollectionView reloadData];//左侧房间信息圆盘
             
-            [self getAllDevicesStatusIcon];//平面图房间设备状态icon
+            [self getAllDevicesStatusIconByFloor:1];//平面图房间设备状态icon
         }
     }
 }
@@ -665,11 +794,14 @@
         
         NSString *plistFilePath = [[filePath absoluteString] substringFromIndex:7];
         //保存到UD
-        [UD setObject:plistFilePath forKey:@"Plane_Graph_PlistFile"];
+        NSString *key = [NSString stringWithFormat:@"%@%@", @"Plane", [plistFilePath substringFromIndex:plistFilePath.length-8]];
+        [UD setObject:plistFilePath forKey:key];
         [UD synchronize];
         
-        //获取所有房间的区域信息
-        [self getAllRoomsRectWithPlistFilePath:plistFilePath];
+        if ([key containsString:@"1"]) {
+            //获取所有房间的区域信息(默认获取第一层)
+            [self getAllRoomsRectWithPlistFilePath:plistFilePath];
+        }
         
     }];
     
@@ -680,10 +812,12 @@
 - (void)getAllRoomsRectWithPlistFilePath:(NSString *)plistFilePath {
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:plistFilePath];
     
-    //获取所有房间
-    NSArray *roomArray = [plistDic objectForKey:@"rooms"];
-    if ([roomArray isKindOfClass:[NSArray class]] && roomArray.count >0) {
-        [self.planeGraph addRoom:roomArray];
+    if (plistDic) {
+        //获取所有房间
+        NSArray *roomArray = [plistDic objectForKey:@"rooms"];
+        if ([roomArray isKindOfClass:[NSArray class]] && roomArray.count >0) {
+            [self.planeGraph addRoom:roomArray];
+        }
     }
     
     if (_hostType == 0) {  //Creston
@@ -691,8 +825,9 @@
     }
 }
 
-- (void)getAllDevicesStatusIcon {
-    NSString *plistFilePath = [UD objectForKey:@"Plane_Graph_PlistFile"];
+- (void)getAllDevicesStatusIconByFloor:(int)floor {
+    NSString *key = [NSString stringWithFormat:@"%@%d%@", @"Plane_", floor, @".plist"];
+    NSString *plistFilePath = [UD objectForKey:key];
     if (plistFilePath.length >0) {
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:plistFilePath];
         NSArray *deviceIconPositionArray = [plistDic objectForKey:@"room_positions"];
@@ -719,11 +854,6 @@
                         if (roomInfo.lightStatus == 1) {
                             UIButton *lightIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, temp_origin_y, iconWidth, iconHeight)];
                             [lightIcon setBackgroundImage:[UIImage imageNamed:@"planeLightIcon"] forState:UIControlStateNormal];
-                            //lightIcon.backgroundColor = [UIColor orangeColor];
-//                            lightIcon.tag = 777;
-//                            
-//                            UIView *lastIcon = [self.planeGraph viewWithTag:777];
-//                            [lastIcon removeFromSuperview];
                             
                             [self.planeGraph addSubview:lightIcon];
                             
@@ -734,11 +864,6 @@
                             UIButton *airIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, temp_origin_y, iconWidth, iconHeight)];
                             
                             [airIcon setBackgroundImage:[UIImage imageNamed:@"planeAirIcon"] forState:UIControlStateNormal];
-                            //airIcon.backgroundColor = [UIColor blueColor];
-//                            airIcon.tag = 888;
-//                            
-//                            UIView *lastIcon = [self.planeGraph viewWithTag:888];
-//                            [lastIcon removeFromSuperview];
                             
                             [self.planeGraph addSubview:airIcon];
                             
@@ -749,16 +874,9 @@
                             UIButton *mediaIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, temp_origin_y, iconWidth, iconHeight)];
                             
                             [mediaIcon setBackgroundImage:[UIImage imageNamed:@"planeMediaIcon"] forState:UIControlStateNormal];
-                            //mediaIcon.backgroundColor = [UIColor redColor];
-//                            mediaIcon.tag = 999;
-//                            
-//                            
-//                            UIView *lastIcon = [self.planeGraph viewWithTag:999];
-//                            [lastIcon removeFromSuperview];
                             
                             [self.planeGraph addSubview:mediaIcon];
                             
-                            //temp_origin_x += (iconWidth + gap);
                         }
                         
                         break;
@@ -807,4 +925,40 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - 设置平面图背景图
+- (void)settingPlaneBgImageByFloor:(NSInteger)floor {
+    if (_floorArray.count > floor-1) {
+        FloorInfo *info = [_floorArray objectAtIndex:floor-1];
+        if (info.imgPath.length >0) {
+            [self.planeGraph sd_setImageWithURL:[NSURL URLWithString:info.imgPath] placeholderImage:[UIImage imageNamed:@"PlaneGraph"] options:SDWebImageRetryFailed];
+        }
+    }
+}
+
+#pragma mark - floorButtonAction
+- (IBAction)floor1BtnClicked:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    if (_currentFloor != btn.tag) {
+        _currentFloor = btn.tag;
+        btn.selected = YES;
+        self.floor2Btn.selected = NO;
+        NSString *plistFilePath = [UD objectForKey:@"Plane_1.plist"];
+        [self getAllRoomsRectWithPlistFilePath:plistFilePath];//在平面图上设置房间区域
+        [self settingPlaneBgImageByFloor:btn.tag];//设置平面图背景图
+        [self getAllDevicesStatusIconByFloor:(int)btn.tag];//设置平面图房间设备状态icon
+    }
+}
+
+- (IBAction)floor2BtnClicked:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    if (_currentFloor != btn.tag) {
+        _currentFloor = btn.tag;
+        btn.selected = YES;
+        self.floor1Btn.selected = NO;
+        NSString *plistFilePath = [UD objectForKey:@"Plane_2.plist"];
+        [self getAllRoomsRectWithPlistFilePath:plistFilePath];//在平面图上设置房间区域
+        [self settingPlaneBgImageByFloor:btn.tag];//设置平面图背景图
+        [self getAllDevicesStatusIconByFloor:(int)btn.tag];//设置平面图房间设备状态icon
+    }
+}
 @end

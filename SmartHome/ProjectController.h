@@ -15,6 +15,7 @@
 @property (nonatomic,weak) NSString *deviceid;
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,assign) BOOL isAddDevice;
-
 @property (nonatomic,strong) Scene * scene;
+@property (nonatomic, strong) NSMutableArray *btnArray;
+@property (nonatomic, strong) NSMutableArray *projectSources;
 @end

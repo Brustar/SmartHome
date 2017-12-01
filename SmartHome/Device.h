@@ -10,11 +10,12 @@
 
 typedef NS_ENUM(NSUInteger, deviceType) {
     light = 1,
-    curtain = 7,
+    curtain = 21,
     TVtype = 11,
     DVDtype = 13,
     bgmusic = 14,
     FM = 15,
+    newWind = 30,
     air = 31,
     doorclock = 40,
     projector = 16,
@@ -25,7 +26,8 @@ typedef NS_ENUM(NSUInteger, deviceType) {
     windowOpener = 42,
     flowering = 33,
     feeding = 34,
-    Wetting
+    Wetting = 35,
+    Atomizing 
 };
 
 typedef NS_ENUM(NSUInteger, hType) {
@@ -48,6 +50,7 @@ typedef NS_ENUM(NSUInteger, catalog) {
 @interface Device : NSObject
 
 @property (nonatomic,assign) int eID;
+@property (nonatomic,assign) int airID;//空调子ID
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) NSString *sn;
 @property (nonatomic,strong) NSString *birth;
@@ -80,6 +83,7 @@ typedef NS_ENUM(NSUInteger, catalog) {
 @property (nonatomic,strong) NSString *subTypeName;
 @property (nonatomic, assign) uint8_t actionState;
 @property (nonatomic, assign) BOOL isIR;
+@property (nonatomic, assign) NSInteger UITypeOfLight;//灯显示类型： 1，射灯  2，灯带  3，调色灯
 
 + (instancetype)deviceWithDict:(NSDictionary *)dict;
 @end

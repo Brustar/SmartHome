@@ -102,18 +102,6 @@
     }
     [self naviToDevice];
     
-    [self.btnMenu setImage:[UIImage imageNamed:@"TV_menu_red"] forState:UIControlStateHighlighted];
-    [self.btnUP setImage:[UIImage imageNamed:@"dir_up_red"]  forState:UIControlStateHighlighted];
-    [self.btnDown setImage:[UIImage imageNamed:@"dir_down_red"]  forState:UIControlStateHighlighted];
-    [self.btnLeft setImage:[UIImage imageNamed:@"dir_left_red"]  forState:UIControlStateHighlighted];
-    [self.btnRight setImage:[UIImage imageNamed:@"dir_right_red"]  forState:UIControlStateHighlighted];
-    [self.btnOK setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-    [self.btnPop setImage:[UIImage imageNamed:@"DVD_pop_red"] forState:UIControlStateHighlighted];
-    
-    [self.btnPrevoius setImage:[UIImage imageNamed:@"DVD_previous_red"] forState:UIControlStateHighlighted];
-    //[self.btnPlay setImage:[UIImage imageNamed:@"DVD_pause"] forState:UIControlStateSelected];
-    [self.btnNext setImage:[UIImage imageNamed:@"DVD_next_red"] forState:UIControlStateHighlighted];
-    
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
     if ([SQLManager isIR:[self.deviceid intValue]]) {
@@ -168,23 +156,6 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
--(IBAction)save:(id)sender
-{
-    DVD *device=[[DVD alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setDvolume:self.volume.value*100];
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-}
-
-
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
@@ -217,6 +188,7 @@
 
 -(IBAction)control:(id)sender
 {
+    [[DeviceInfo defaultManager] playVibrate];
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     UIButton *btn =(UIButton *)sender;
@@ -232,7 +204,7 @@
             }else{
                 data=[device pause:self.deviceid];
             }
-            [self poweroffAllLighter];
+            //[self poweroffAllLighter];
             break;
         case 2:
             data=[device forward:self.deviceid];
@@ -242,7 +214,7 @@
             break;
         case 4:
             data=[device pause:self.deviceid];
-            [self poweronAllLighter];
+            //[self poweronAllLighter];
             break;
         case 5:
             data=[device next:self.deviceid];
@@ -252,7 +224,7 @@
             break;
         case 7:
             data=[device pop:self.deviceid];
-            [self poweronAllLighter];
+            //[self poweronAllLighter];
             break;
         case 8:
             data=[device home:self.deviceid];
@@ -300,30 +272,6 @@
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
     
-}
-
--(void)poweroffAllLighter
-{
-    SocketManager *sock=[SocketManager defaultManager];
-    DeviceInfo *info=[DeviceInfo defaultManager];
-    for (id device in self.scene.devices) {
-        if ([device isKindOfClass:[Light class]]) {
-            NSData *data = [info toogle:0x00 deviceID:[NSString stringWithFormat:@"%d", ((Light *)device).deviceID]];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-        }
-    }
-}
-
--(void)poweronAllLighter
-{
-    SocketManager *sock=[SocketManager defaultManager];
-    DeviceInfo *info=[DeviceInfo defaultManager];
-    for (id device in self.scene.devices) {
-        if ([device isKindOfClass:[Light class]]) {
-            NSData *data = [info toogle:0x01 deviceID:[NSString stringWithFormat:@"%d", ((Light *)device).deviceID]];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-        }
-    }
 }
 
 -(void) viewWillDisappear:(BOOL)animated

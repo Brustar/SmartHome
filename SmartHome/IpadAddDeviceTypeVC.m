@@ -17,6 +17,7 @@
 #import "NewColourCell.h"
 #import "FMTableViewCell.h"
 #import "CurtainTableViewCell.h"
+#import "CurtainC4TableViewCell.h"
 #import "ScreenCurtainCell.h"
 #import "OtherTableViewCell.h"
 #import "BjMusicTableViewCell.h"
@@ -99,6 +100,7 @@
     _SwitchLightArr = [[NSMutableArray alloc] init];
     [self.tableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
     [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
+    [self.tableView registerNib:[UINib nibWithNibName:@"CurtainC4TableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainC4TableViewCell"];//窗帘(C4)
     [self.tableView registerNib:[UINib nibWithNibName:@"IpadTVCell" bundle:nil] forCellReuseIdentifier:@"IpadTVCell"];//网络电视
     [self.tableView registerNib:[UINib nibWithNibName:@"NewColourCell" bundle:nil] forCellReuseIdentifier:@"NewColourCell"];//调色灯
     [self.tableView registerNib:[UINib nibWithNibName:@"OtherTableViewCell" bundle:nil] forCellReuseIdentifier:@"OtherTableViewCell"];//其他
@@ -268,22 +270,44 @@
         return aireCell;
     }if (indexPath.section == 4) {//窗帘
          [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
-        CurtainTableViewCell * CurtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
-        CurtainCell.backgroundColor = [UIColor clearColor];
-        CurtainCell.roomID = self.roomID;
-        CurtainCell.sceneid = self.sceneid;
-        Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
-        CurtainCell.label.text = device.name;
-        CurtainCell.deviceid = _CurtainArray[indexPath.row];
-        CurtainCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        CurtainCell.deviceid = _CurtainArray[indexPath.row];
-        _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
-         [CurtainCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
-
-        CurtainCell.scene = _scene;
-
         
-        return CurtainCell;
+        if (_hostType == 0) { //crestron
+            CurtainTableViewCell * CurtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
+            CurtainCell.backgroundColor = [UIColor clearColor];
+            CurtainCell.roomID = self.roomID;
+            CurtainCell.sceneid = self.sceneid;
+            Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
+            CurtainCell.label.text = device.name;
+            CurtainCell.deviceid = _CurtainArray[indexPath.row];
+            CurtainCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+            CurtainCell.deviceid = _CurtainArray[indexPath.row];
+            _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+            [CurtainCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+            
+            CurtainCell.scene = _scene;
+            
+            
+            return CurtainCell;
+        }else { //C4
+            CurtainC4TableViewCell * CurtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainC4TableViewCell" forIndexPath:indexPath];
+            CurtainCell.backgroundColor = [UIColor clearColor];
+            CurtainCell.roomID = self.roomID;
+            CurtainCell.sceneid = self.sceneid;
+            Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
+            CurtainCell.name.text = device.name;
+            CurtainCell.deviceid = _CurtainArray[indexPath.row];
+            CurtainCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+            CurtainCell.deviceid = _CurtainArray[indexPath.row];
+            _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+            [CurtainCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+            
+            CurtainCell.scene = _scene;
+            
+            
+            return CurtainCell;
+        }
+        
+        
     }if (indexPath.section == 5) {//TV
          [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
         IpadTVCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"IpadTVCell" forIndexPath:indexPath];
@@ -455,7 +479,14 @@
                     ((AireTableViewCell *)cell).AddAireBtn.hidden = !proto.action.state;
                     break;
                 case curtain:
-                    ((CurtainTableViewCell *)cell).AddcurtainBtn.hidden = !proto.action.state;
+                    
+                    if (_hostType == 0) {  //Crestron
+                        ((CurtainTableViewCell *)cell).open.selected = proto.action.state;
+                        ((CurtainTableViewCell *)cell).AddcurtainBtn.hidden = !proto.action.state;
+                    }else { //C4
+                        ((CurtainC4TableViewCell *)cell).switchBtn.selected = proto.action.state;
+                        ((CurtainC4TableViewCell *)cell).addBtn.hidden = !proto.action.state;
+                    }
                     break;
                 case TVtype:
                     ((IpadTVCell *)cell).AddTvDeviceBtn.hidden = !proto.action.state;

@@ -121,6 +121,7 @@
 }
 
 - (IBAction)controlCmd:(id)sender {
+    [[DeviceInfo defaultManager] playVibrate];
     UIButton *btn =(UIButton *)sender;
     long tag = btn.tag;
     
@@ -235,17 +236,7 @@
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     self.title = [NSString stringWithFormat:@"%@ - 网络电视",roomName];
     [self setNaviBarTitle:self.title];
-    
-    [self.btnMenu setImage:[UIImage imageNamed:@"TV_menu_red"] forState:UIControlStateHighlighted];
-    [self.btnUP setImage:[UIImage imageNamed:@"dir_up_red"]  forState:UIControlStateHighlighted];
-    [self.btnDown setImage:[UIImage imageNamed:@"dir_down_red"]  forState:UIControlStateHighlighted];
-    [self.btnLeft setImage:[UIImage imageNamed:@"dir_left_red"]  forState:UIControlStateHighlighted];
-    [self.btnRight setImage:[UIImage imageNamed:@"dir_right_red"]  forState:UIControlStateHighlighted];
-    //[self.btnPower setImage:[UIImage imageNamed:@"TV_on"] forState:UIControlStateSelected];
-    //[self.btnSwitch setImage:[UIImage imageNamed:@"TV_on"] forState:UIControlStateSelected];
-    [self.btnOK setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-    [self.btnCHUP setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-    [self.btnCHDown setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
@@ -475,7 +466,7 @@
 
 -(void)writeTVChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
 {
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     int cNumber = [self.channeNumber.text intValue];
     if([db open])
     {

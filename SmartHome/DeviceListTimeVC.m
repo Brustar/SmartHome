@@ -156,6 +156,7 @@
             if (timerDict && [timerDict isKindOfClass:[NSDictionary class]]) {
                 DeviceTimerInfo *info = [[DeviceTimerInfo alloc] init];
                 info.timerID = [timerDict[@"schedule_id"] integerValue];
+                info.eID = [timerDict[@"equipment_id"] intValue];
                 info.startTime = timerDict[@"starttime"];
                 info.endTime = timerDict[@"endtime"];
                 info.repetition = timerDict[@"week_value"];
@@ -292,13 +293,21 @@
     if (auothorToken.length >0) {
         NSDictionary *dict = @{@"token":auothorToken,
                                @"optype":@(4),
-                               @"scheduleid":@(timerId),
+                               @"equipmentid":@(timerId),
                                @"isactive":@(active)
                                };
         HttpManager *http = [HttpManager defaultManager];
         http.delegate = self;
         http.tag = 2;
         [http sendPost:url param:dict];
+        
+        
+        //发TCP定时指令给主机
+        NSData *data = [[DeviceInfo defaultManager] scheduleDevice:active deviceID:[NSString stringWithFormat:@"%ld", timerId]];
+        SocketManager *sock = [SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        
     }
 }
 
@@ -338,6 +347,7 @@
     }else if (tag == 2) { //启动，停止定时器
         if ([responseObject[@"result"] intValue] == 0) {
             [MBProgressHUD showSuccess:responseObject[@"msg"]];
+            
         }else {
             [MBProgressHUD showError:responseObject[@"msg"]];
             if (_currentActive == 1) {

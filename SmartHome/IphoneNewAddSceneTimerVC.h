@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomViewController.h"
+#import "DeviceSchedule.h" 
 
 @interface IphoneNewAddSceneTimerVC : CustomViewController
 @property (weak, nonatomic) IBOutlet UILabel *RepetitionLable;//显示重复日期的label
@@ -23,5 +24,6 @@
 @property (nonatomic,assign) int roomid;
 @property (nonatomic, assign) BOOL isShowInSplitView;
 @property (nonatomic, assign) BOOL isDeviceTimer;// YES: 设备定时 NO: 场景定时
+@property (nonatomic,strong) DeviceSchedule *timer;  
 
 @end

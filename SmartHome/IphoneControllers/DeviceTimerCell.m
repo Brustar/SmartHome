@@ -32,7 +32,7 @@
     if (info) {
         self.deviceName.text = info.deviceName;
         self.timeLabel.text = [NSString stringWithFormat:@"%@-%@, %@", info.startTime, info.endTime, [self repeatString:info.repetition]];
-        self.deviceTimeBtn.tag = info.timerID;
+        self.deviceTimeBtn.tag = info.eID;
         self.deviceTimeBtn.selected = info.isActive;//标识是否开启定时器
         
         //启动定时开关按钮

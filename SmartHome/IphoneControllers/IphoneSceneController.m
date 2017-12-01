@@ -42,7 +42,7 @@
 
 #define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)  
 
-@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate>
+@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate, TcpRecvDelegate>
 
 
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -77,6 +77,7 @@ static NSString * const CYPhotoId = @"photo";
 - (void)setupNaviBar {
     
     [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
+    
     _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
     
     NSString *music_icon = nil;
@@ -88,40 +89,7 @@ static NSString * const CYPhotoId = @"photo";
     }
     
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:music_icon imgHighlight:music_icon target:self action:@selector(rightBtnClicked:)];
-    if (isPlaying) {
-        UIImageView * imageView = _naviRightBtn.imageView ;
-        
-        imageView.animationImages = [NSArray arrayWithObjects:
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red2"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red3"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red4"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red5"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red6"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red7"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red8"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red9"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red10"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red11"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red12"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red13"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red14"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red15"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red16"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red17"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red18"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red19"],
-                                     
-                                     nil];
-        
-        //设置动画总时间
-        imageView.animationDuration = 2.0;
-        //设置重复次数，0表示无限
-        imageView.animationRepeatCount = 0;
-        //开始动画
-        if (! imageView.isAnimating) {
-            [imageView startAnimating];
-        }
-    }
+    
     [self setNaviBarLeftBtn:_naviLeftBtn];
     [self setNaviBarRightBtn:_naviRightBtn];
 }
@@ -244,7 +212,7 @@ static NSString * const CYPhotoId = @"photo";
     
     [_afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         
-        [NC postNotificationName:@"NetWorkDidChangedNotification" object:nil];
+       // [NC postNotificationName:@"NetWorkDidChangedNotification" object:nil];
         
         DeviceInfo *info = [DeviceInfo defaultManager];
         if(status == AFNetworkReachabilityStatusReachableViaWWAN) //手机自带网络
@@ -327,18 +295,18 @@ static NSString * const CYPhotoId = @"photo";
   // 创建CollectionView
 -(void)setUI
 {
-    CGFloat collectionW = self.view.frame.size.width;
+    CGFloat collectionW = self.view.frame.size.width-50;
     CGFloat collectionH = self.view.frame.size.height-200;
-    CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
+    CGRect frame = CGRectMake(25, 130, collectionW, collectionH);
     // 创建布局
     CYLineLayout *layout = [[CYLineLayout alloc] init];
     layout.itemS = (int)self.scenes.count;
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device deviceGenaration];
     if (([UIScreen mainScreen].bounds.size.height <= 568.0)) {
-        layout.itemSize = CGSizeMake(collectionW-100, collectionH-20);
+        layout.itemSize = CGSizeMake(collectionW-50, collectionH-20);
     }else{
-        layout.itemSize = CGSizeMake(collectionW-140, collectionH-20);
+        layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
     }
     if (ON_IPAD) {
         layout.itemSize = CGSizeMake(320, 540);
@@ -440,30 +408,57 @@ static NSString * const CYPhotoId = @"photo";
         }
     }
     
-    SocketManager *sock=[SocketManager defaultManager];
-    sock.delegate=self;
-    _bgmusicIDS = [[NSMutableArray alloc] init];
-    NSArray * roomArr = [SQLManager getAllRoomsInfo];
-    for (int i = 0; i < roomArr.count; i ++) {
-        Room * roomName = roomArr[i];
-        if (![SQLManager isWholeHouse:roomName.rId]) {
-            self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:roomName.rId];
-        }
-        if (self.deviceid.length != 0) {
-            [_bgmusicIDS addObject:self.deviceid];
-            //查询设备状态
-            NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-            
-        }
-    }
-     [self setupNaviBar];
+    
+    [self setupNaviBar];//初始化导航栏
+    [self getBgMusicStatus]; //查询背景音乐状态
+    
     NSInteger IsAddSceneVC = [[UD objectForKey:@"IsAddSceneVC"] integerValue];
     if (IsAddSceneVC) {
       [self freshUICollectionViewCell];
       [IOManager writeUserdefault:@"0" forKey:@"IsAddSceneVC"];
     }
 }
+
+//查询背景音乐状态
+- (void)getBgMusicStatus {
+    if (_bgmusicIDS == nil) {
+        _bgmusicIDS = [[NSMutableArray alloc] init];
+    }else {
+        [_bgmusicIDS removeAllObjects];
+    }
+    
+    
+    NSArray * roomArr = [SQLManager getAllRoomsInfo];
+    for (int i = 0; i < roomArr.count; i ++) {
+        Room * roomName = roomArr[i];
+        if (![SQLManager isWholeHouse:roomName.rId]) {
+            Device *device = [SQLManager getDeviceWithDeviceHtypeID:bgmusic roomID:roomName.rId];//查询某个房间的背景音乐
+            
+            if (device) {
+                [_bgmusicIDS addObject:device];
+                
+                
+                float delay = 0.1*i;
+                
+                // GCD 延时，非阻塞主线程 延时时间：delay
+                dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
+                
+                dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+                    
+                    NSData *data = [[DeviceInfo defaultManager] query:[NSString stringWithFormat:@"%d", device.eID]];
+                    SocketManager *sock = [SocketManager defaultManager];
+                    sock.delegate = self;
+                    [sock.socket writeData:data withTimeout:1 tag:1];
+                    
+                });
+                
+            }
+            
+        }
+        
+    }
+}
+
 -(void)freshUICollectionViewCell
 {
     //刷新collectionview
@@ -524,9 +519,9 @@ static NSString * const CYPhotoId = @"photo";
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
+    cell.delegate = self;
     if (indexPath.row+1 >= self.scenes.count) {
-        CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
-        cell.delegate = self;
         cell.imageView.image = [UIImage imageNamed:@"AddScene-ImageView"];
         cell.subImageView.image = [UIImage imageNamed:@"AddSceneBtn"];
         cell.sceneID = 0;
@@ -538,8 +533,6 @@ static NSString * const CYPhotoId = @"photo";
     
         return cell;
     }else{
-        CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
-        cell.delegate = self;
         Scene *scene = self.scenes[indexPath.row];
         cell.sceneID = scene.sceneID;
         cell.roomID = self.selectedRoomID;
@@ -566,42 +559,37 @@ static NSString * const CYPhotoId = @"photo";
         cell.SceneName.text = scene.sceneName;
         self.lgPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
         self.lgPress.delegate = self;
-        [collectionView addGestureRecognizer:self.lgPress];
+        [cell addGestureRecognizer:self.lgPress];
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"PhotoIcon9"]];
         [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
         cell.deleteBtn.hidden = NO;
         cell.powerBtn.hidden = NO;
         //场景是否开启
-        if (scene.status == 0) {
-            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
-        }else if (scene.status == 1) {
-            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
-        }
+        cell.powerBtn.selected = scene.status == 1;
+
         //场景定时是否启动
-        if (scene.isactive == 0) {
-            [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
-        }else if (scene.isactive == 1){
-             [cell.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateNormal];
-        }
+        cell.seleteSendPowBtn.selected = scene.isactive == 1;
+
         //是否是系统场景：是的话不允许删除场景，按钮为禁止状态
         if([SQLManager sceneBySceneID:cell.sceneID].readonly == YES)
         {
             [cell.deleteBtn setEnabled:NO];
-//            cell.deleteBtn.hidden = YES;
-            
         }else{
-            
             [cell.deleteBtn setEnabled:YES];
-//            cell.deleteBtn.hidden = NO;
         }
         return cell;
-       
     }
     
 }
 //长按cell可以更换场景的图片
 -(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
 {
+    NSInteger userType = [[UD objectForKey:@"UserType"] integerValue];
+    if (userType == 2) { //客人不允许更换场景图片
+        [MBProgressHUD showError:@"非主人不允许更换场景图片"];
+        return;
+    }
+    
     NSIndexPath *indexPath = [self.FirstCollectionView indexPathForItemAtPoint:[lgr locationInView:self.FirstCollectionView]];
     self.currentCell = (CYPhotoCell *)[self.FirstCollectionView cellForItemAtIndexPath:indexPath];
     UIAlertController * alerController;
@@ -653,7 +641,7 @@ static NSString * const CYPhotoId = @"photo";
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
-    self.selectSceneImg = info[UIImagePickerControllerOriginalImage];
+    self.selectSceneImg = info[UIImagePickerControllerEditedImage];
     
     //场景ID不变
     Scene *scene = [[SceneManager defaultManager] readSceneByID:self.currentCell.sceneID];
@@ -687,6 +675,11 @@ static NSString * const CYPhotoId = @"photo";
 {
     //最后一个cell是添加场景的
      if (indexPath.row+1 >= self.scenes.count) {
+         NSInteger userType = [[UD objectForKey:@"UserType"] integerValue];
+         if (userType == 2) { //客人不允许增加自定义场景
+             [MBProgressHUD showError:@"非主人不允许增加自定义场景"];
+             return;
+         }
         
          if (ON_IPAD) {
              AddIpadSceneVC * AddIpadVC = [[AddIpadSceneVC alloc] init];
@@ -712,7 +705,7 @@ static NSString * const CYPhotoId = @"photo";
             if (scene.status == 0) {
                  [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
                  [[SceneManager defaultManager] startScene:scene.sceneID];
-                 [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+                 [SQLManager updateSceneStatus:1 sceneID:scene.sceneID roomID:scene.roomID];
              }
          }
          if (ON_IPAD) {
@@ -750,6 +743,12 @@ static NSString * const CYPhotoId = @"photo";
 //删除场景
 -(void)sceneDeleteAction:(CYPhotoCell *)cell
 {
+    NSInteger userType = [[UD objectForKey:@"UserType"] integerValue];
+    if (userType == 2) { //客人不允许删除自定义场景
+        [MBProgressHUD showError:@"非主人不允许删除自定义场景"];
+        return;
+    }
+    
     self.currentCell = cell;
     self.sceneID = (int)cell.tag;
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.currentCell.SceneName.text] preferredStyle:UIAlertControllerStyleAlert];
@@ -852,7 +851,7 @@ static NSString * const CYPhotoId = @"photo";
     }
 }
 
-#pragma mark - CYPhotoCellDelegate
+#pragma mark - CYPhotoCellDelegate 场景定时
 - (void)onTimingBtnClicked:(UIButton *)sender sceneID:(int)sceneID {
     
     Scene * scene = [SQLManager sceneBySceneID:sceneID];
@@ -864,26 +863,15 @@ static NSString * const CYPhotoId = @"photo";
         sender.selected = NO;
     }
       _timeSceneID = sceneID;
+    
+    //发TCP定时指令给主机
     NSData *data=[[DeviceInfo defaultManager] scheduleScene:sender.selected sceneID:[NSString stringWithFormat:@"%d",_timeSceneID]];
     SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate = self;
     [sock.socket writeData:data withTimeout:1 tag:1];
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
-    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
-    
-    if (auothorToken.length >0) {
-        NSDictionary *dict = @{@"token":auothorToken,
-                               @"optype":@(8),
-                               @"sceneid":@(sceneID),
-                               @"isactive":_isActive
-                               };
-        HttpManager *http = [HttpManager defaultManager];
-        http.delegate = self;
-        http.tag = 2;
-        [http sendPost:url param:dict];
-    }
 }
 
-#pragma mark -- lazy load
+#pragma mark - lazy load
 -(NSMutableArray *)scenes{
     if (!_scenes) {
         _scenes = [NSMutableArray new];
@@ -896,36 +884,85 @@ static NSString * const CYPhotoId = @"photo";
 - (void)dealloc {
     [self removeNotifications];
 }
+
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    
-    Proto proto=protocolFromData(data);
+    Proto proto = protocolFromData(data);
     
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
-    for (int i = 0; i <self.bgmusicIDS.count; i ++) {
-        if (proto.cmd==0x01) {
-            NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-            if ([devID intValue]==[self.bgmusicIDS[i] intValue]) {
-                if (proto.action.state == PROTOCOL_VOLUME) {
-                    NSLog(@"有音量");
-                }if (proto.action.state == PROTOCOL_ON) {
-                    NSLog(@"开启状态");
-                    [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
-                    
-//                    [_bgmusicIDArr addObject:devID];
-                    
-                }if (proto.action.state == PROTOCOL_OFF) {
-                    NSLog(@"关闭状态");
-                    [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
+    
+    if (proto.cmd == 0x01) {
+        
+        NSString *devID = [SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        
+        [self.bgmusicIDS enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+            Device *device = (Device *)obj;
+            if (devID.intValue == device.eID) {
+                if (proto.action.state == PROTOCOL_ON) { //背景音乐正在播放
+                    device.power = 1;
+                }else if (proto.action.state == PROTOCOL_OFF) { //背景音乐未播放
+                    device.power = 0;
                 }
             }
-        }
+            
+        }];
+        
+        [self refreshBgMusicIcon];//刷新正在播放图标
     }
-      [self setupNaviBar];
 }
+
+- (void)refreshBgMusicIcon {
+    [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
+    
+    [self.bgmusicIDS enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        Device *device = (Device *)obj;
+        if (device.power == 1) { //有正在播放的背景音乐
+            [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
+            
+            UIImageView *bgImageView = _naviRightBtn.imageView;
+            if (![bgImageView isAnimating]) {
+                bgImageView.animationImages = [NSArray arrayWithObjects:
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red2"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red3"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red4"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red5"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red6"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red7"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red8"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red9"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red10"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red11"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red12"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red13"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red14"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red15"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red16"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red17"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red18"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red19"],
+                                               nil];
+                
+                
+                bgImageView.animationDuration = 2.0; //设置动画总时间
+                bgImageView.animationRepeatCount = 0; //设置重复次数，0表示无限
+                
+                //开始动画
+                [bgImageView startAnimating];
+            }
+            
+        }
+    }];
+    
+    if ([[UD objectForKey:@"IsPlaying"] isEqualToString:@"0"]) {
+        UIImageView *bgImageView = _naviRightBtn.imageView;
+        [bgImageView stopAnimating];
+    }
+    
+}
+
 #pragma mark - SingleMaskViewDelegate
 - (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
     
@@ -941,7 +978,7 @@ static NSString * const CYPhotoId = @"photo";
         if (scene.status == 0) {
             [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
             [[SceneManager defaultManager] startScene:scene.sceneID];
-            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID roomID:scene.roomID];
         }
         
         if (ON_IPAD) {
@@ -991,7 +1028,7 @@ static NSString * const CYPhotoId = @"photo";
         if (scene.status == 0) {
             [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
             [[SceneManager defaultManager] startScene:scene.sceneID];
-            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID roomID:scene.roomID];
         }
         
         if (ON_IPAD) {

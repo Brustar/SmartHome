@@ -109,7 +109,7 @@
         
         [MBProgressHUD showError:@"真实用户才可以操作"];
         
-    }else{
+    }else {
         
         [[SceneManager defaultManager] addScene:_scene withName:self.sceneName.text withImage:self.selectSceneImg withiSactive:_isActive block:^(BOOL flag) {
             dispatch_async(dispatch_get_main_queue(), ^{

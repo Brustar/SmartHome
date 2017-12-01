@@ -41,7 +41,7 @@
     return sharedInstance;
 }
 
-- (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive
+- (void)addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive
 {
     if (name.length >0) {
         
@@ -117,7 +117,7 @@
                     NSString *roomName = [SQLManager getRoomNameByRoomID:(int)scene.roomID];
                     
                     //插入数据库
-                    FMDatabase *db = [SQLManager connetdb];
+                    FMDatabase *db = [SQLManager connectdb];
                     if([db open])
                     {
                          NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,'%ld','%d','%d','%ld')",scene.sceneID,name,roomName,[sceneDict objectForKey:@"image_url"],(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID],0,isplan,isactive];
@@ -157,7 +157,8 @@
   }
     
 }
-- (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive block:(SaveOK )block{
+
+- (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive block:(SaveOK )block {
     self.block = block;
     
     if (name.length >0) {
@@ -229,15 +230,17 @@
                 if ([sceneDict isKindOfClass:[NSDictionary class]] && sceneDict.count >0) {
                     scene.sceneID = [[sceneDict objectForKey:@"scence_id"] intValue];
                     scene.sceneName = name;
+                    scene.isplan = isplan;
+                    scene.isactive = (int)isactive;
                     
                     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID]  scene:scene];
                     NSString *roomName = [SQLManager getRoomNameByRoomID:(int)scene.roomID];
                     
                     //插入数据库
-                    FMDatabase *db = [SQLManager connetdb];
+                    FMDatabase *db = [SQLManager connectdb];
                     if([db open])
                     {
-                        NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,'%ld','%d','%d','%ld')",scene.sceneID,name,roomName,[sceneDict objectForKey:@"image_url"],(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID],0,isplan,isactive];
+                        NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,'%ld','%d','%d','%ld')",scene.sceneID,name,roomName,[sceneDict objectForKey:@"image_url"],(long)scene.roomID,0,@"0",0,[[DeviceInfo defaultManager] masterID],0,isplan, isactive];
                         BOOL result = [db executeUpdate:sql];
                         if(result)
                         {   [MBProgressHUD showSuccess:@"新增成功"];
@@ -246,6 +249,16 @@
                                 self.block(YES);
                             }
                             [IOManager removeTempFile];
+                            
+                            //判断是否有定时，并且定时是否已开启，好发送8A指令通知C4主机下载plist文件
+                            if (isplan == 1 && isactive == 1) {
+                                //发TCP定时指令给主机
+                                NSData *data = [[DeviceInfo defaultManager] scheduleScene:isactive sceneID:[NSString stringWithFormat:@"%d",scene.sceneID]];
+                                SocketManager *sock = [SocketManager defaultManager];
+                                [sock.socket writeData:data withTimeout:1 tag:1];
+                            }
+                            
+                            
                         }else {
                             [MBProgressHUD showSuccess:@"新增失败"];
                             NSLog(@"新增场景，入库失败！");
@@ -275,6 +288,76 @@
     }
     
 }
+
+- (void)addDeviceTimer:(DeviceSchedule *)timer  isEdited:(BOOL)isEdited  mode:(int)mode isActive:(NSInteger)isActive block:(SaveOK )block {
+    self.block = block;
+    
+    if (!isEdited) {
+        
+        //同步云端
+        NSString *deviceTimerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], [SQLManager getENumberByDeviceID:timer.deviceID]];
+        NSString *deviceTimerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:deviceTimerFile];
+        
+        NSString *URL = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+        
+        NSString *fileName = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], [SQLManager getENumberByDeviceID:timer.deviceID]];
+        NSDictionary *parameter;
+        
+        NSMutableArray *schedulesTemp = [NSMutableArray array];
+        
+        for (NSDictionary *dict in timer.schedules) {
+            Schedule *schedule = [[Schedule alloc] initWhithoutSchedule];
+            
+            [schedule setValuesForKeysWithDictionary:dict];
+            
+            [schedulesTemp addObject:schedule];
+        }
+        
+        timer.schedules = [schedulesTemp copy];
+        if(timer.schedules.count >0)
+        {
+            parameter = @{
+                          @"token":[UD objectForKey:@"AuthorToken"],
+                          @"optype":@(mode),
+                          @"scencefile":deviceTimerPath,
+                          @"isactive":@(1)
+                          };
+        }
+        
+        
+        NSData *fileData = [NSData dataWithContentsOfFile:deviceTimerPath];
+        
+        [[UploadManager defaultManager] uploadDeviceTimer:fileData url:URL dic:parameter fileName:fileName completion:^(id responseObject) {
+            
+            NSNumber *result = [responseObject objectForKey:@"result"];
+            //NSString *msg = [responseObject objectForKey:@"msg"];
+            
+            if(result.integerValue == 0) { //成功
+                
+                //[MBProgressHUD showSuccess:@"新增成功"];
+                
+                if (self.block) {
+                    self.block(YES);
+                }
+                
+            }else { //失败
+                //[MBProgressHUD showError:@"新增失败"];
+                if (self.block) {
+                    self.block(NO);
+                }
+            }
+            
+            
+        }];
+        
+    }else {
+        //编辑设备定时时，修改本地plist文件
+        [IOManager writeDeviceTimer:[NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], [SQLManager getENumberByDeviceID:timer.deviceID]] timer:timer]; 
+    }
+    
+}
+
+
 
 //另存为(保存为一个新的场景）
 - (void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(UIImage *)image
@@ -344,7 +427,7 @@
                       NSString *roomName = [SQLManager getRoomNameByRoomID:(int)scene.roomID];
                       
                       //插入数据库
-                      FMDatabase *db = [SQLManager connetdb];
+                      FMDatabase *db = [SQLManager connectdb];
                       if([db open])
                       {
                           NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,null,'%ld')",scene.sceneID,name,roomName,imgUrl,(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID]];
@@ -417,10 +500,15 @@
 - (void)editSceneTimer:(Scene *)newScene
 {
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, newScene.sceneID ] scene:newScene];
+    
     //同步云端
     NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,newScene.sceneID];
-    newScene.sceneName = [SQLManager getSceneName:newScene.sceneID];
-    newScene.isplan =  [SQLManager sceneBySceneID:newScene.sceneID].isplan;
+    
+    Scene *tempScene =  [SQLManager sceneBySceneID:newScene.sceneID];
+    newScene.sceneName = tempScene.sceneName;
+    newScene.isplan =  tempScene.isplan;
+    newScene.isactive = tempScene.isactive;
+    
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:fileName];
     NSDictionary *parameter;
     if (newScene.isplan == 0) {
@@ -454,13 +542,26 @@
     NSString *URL = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
     [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:nil imgFileName:@"" completion:^(id responseObject) {
         
-        NSLog(@"scene_edit --- responseObject: %@", responseObject);
+        NSLog(@"修改场景定时 --- responseObject: %@", responseObject);
         
         NSNumber *result = [responseObject objectForKey:@"result"];
         NSString *msg = [responseObject objectForKey:@"msg"];
         
         if(result.integerValue == 0) { //成功
-            [MBProgressHUD showSuccess:@"保存成功"];
+            [MBProgressHUD showSuccess:@"修改定时成功"];
+            
+            //先发取消定时指令给主机
+            NSData *data = [[DeviceInfo defaultManager] scheduleScene:0 sceneID:[NSString stringWithFormat:@"%d",newScene.sceneID]];
+            SocketManager *sock = [SocketManager defaultManager];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            
+            
+            //再发8A指令，通知主机启动新的定时
+            data = [[DeviceInfo defaultManager] scheduleScene:newScene.isactive sceneID:[NSString stringWithFormat:@"%d",newScene.sceneID]];
+            
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            
+            
             
         }else { //失败
             [MBProgressHUD showError:msg];
@@ -576,7 +677,7 @@
 - (BOOL)favoriteScene:(Scene *)newScene
 {
        // 写sqlite更新场景表的isFavorite字段
-        FMDatabase *db = [SQLManager connetdb];
+        FMDatabase *db = [SQLManager connectdb];
         if (![db open]) {
             NSLog(@"Could not open db.");
             return NO;
@@ -596,7 +697,7 @@
     if(ret)
     {
         // 写sqlite更新场景文件名
-        FMDatabase *db = [SQLManager connetdb];
+        FMDatabase *db = [SQLManager connectdb];
         if (![db open]) {
             NSLog(@"Could not open db.");
             return ;
@@ -824,8 +925,16 @@
     [self dimingRoomLights:lightIDs brightness:90];
 }
 
+- (void)sprightlyForRoomLights:(NSArray *)lightIDs brightness:(int)brightness {
+    [self dimingRoomLights:lightIDs brightness:brightness];
+}
+
 - (void)gloomForRoomLights:(NSArray *)lightIDs {
     [self dimingRoomLights:lightIDs brightness:20];
+}
+
+- (void)gloomForRoomLights:(NSArray *)lightIDs brightness:(int)brightness {
+    [self dimingRoomLights:lightIDs brightness:brightness];
 }
 
 - (void)romanticForRoomLights:(NSArray *)lightIDs {
@@ -1016,7 +1125,8 @@
         if ([device isKindOfClass:[Aircon class]]) {
             Aircon *aircon=(Aircon *)device;
             NSString *deviceid=[NSString stringWithFormat:@"%d", aircon.deviceID];
-            data=[[DeviceInfo defaultManager] toogleAirCon:YES deviceID:deviceid];
+            Device *device = [SQLManager getDeviceWithDeviceHtypeID:air roomID:scene.roomID];
+            data=[[DeviceInfo defaultManager] toogleAirCon:YES deviceID:deviceid roomID:device.airID];
             [sock.socket writeData:data withTimeout:1 tag:1];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 if (aircon.mode>=0) {
@@ -1037,6 +1147,26 @@
                 }
             });
         }
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_USEC)), dispatch_get_main_queue(), ^{
+        [self interlockScene:sceneid withRoom:scene.roomID];
+    });
+}
+
+
+-(void) interlockScene:(int)sceneid withRoom:(int)rid
+{
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, sceneid]];
+    NSString *content = [NSString stringWithContentsOfFile:scenePath encoding:NSUTF8StringEncoding error:nil];
+    NSString *idstring = [[content componentsMatchedByRegex:@"<key>deviceID</key>\\s+<integer>(\\d+)</integer>" capture:1L] componentsJoinedByString:@","];
+    NSArray *ids = [SQLManager othersWithScene:idstring withRoom:rid];
+    NSData *data=nil;
+    SocketManager *sock=[SocketManager defaultManager];
+    for(NSString *did in ids)
+    {
+        data = [[DeviceInfo defaultManager] toogle:0x00 deviceID:did];
+        [sock.socket writeData:data withTimeout:1 tag:1];
     }
 }
 

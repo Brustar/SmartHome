@@ -154,12 +154,13 @@
         
         // NOTE: 如果跳转失败，则跳转itune下载支付宝App
         if (!bSucc) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                           message:@"未检测到支付宝客户端，请用网页版支付。"
-                                                          delegate:self
-                                                 cancelButtonTitle:@"确定"
-                                                 otherButtonTitles:nil];
-            [alert show];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"未检测到支付宝客户端，请用网页版支付。" preferredStyle:ON_IPAD?UIAlertControllerStyleAlert:UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                NSString* urlStr = @"https://itunes.apple.com/cn/app/zhi-fu-bao-qian-bao-yu-e-bao/id333206289?mt=8";
+                NSURL *downloadUrl = [NSURL URLWithString:urlStr];
+                [[UIApplication sharedApplication] openURL:downloadUrl];
+            }]];
+            [self presentViewController:alert animated:YES completion:nil];
         }
         return NO;
     }
@@ -216,14 +217,6 @@
     }
     
     return YES;
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    // NOTE: 跳转itune下载支付宝App
-    //NSString* urlStr = @"https://itunes.apple.com/cn/app/zhi-fu-bao-qian-bao-yu-e-bao/id333206289?mt=8";
-    //NSURL *downloadUrl = [NSURL URLWithString:urlStr];
-    //[[UIApplication sharedApplication] openURL:downloadUrl];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView

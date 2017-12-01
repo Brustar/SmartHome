@@ -43,17 +43,9 @@
 }
 
 - (void)editDeviceTimer {
-    if (_startTime.length <=0 || _endTime.length <=0) {
-        [MBProgressHUD showError:@"请选择时段"];
-        return;
-    }
     
-    if (_repeatition.length <= 0 && self.repeatString.length <= 0) {
-        [MBProgressHUD showError:@"请选择重复选项"];
-        return;
-    }
     
-    if (_device.hTypeId == 1 || _device.hTypeId == 2 || _device.hTypeId == 3) { //灯光
+    /*if (_device.hTypeId == 1 || _device.hTypeId == 2 || _device.hTypeId == 3) { //灯光
         if (_switchBtnString.length <= 0 ) {
             _switchBtnString = @"01000000";  //默认开灯
             if (self.power == 1) {
@@ -204,42 +196,59 @@
         
         _startValue = [NSMutableString string];
         [_startValue appendString:_switchBtnString];
-    }
+    }*/
     
-    
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
-    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
-    
-    if (auothorToken.length >0) {
-        NSDictionary *dict = @{@"token":auothorToken,
-                               @"optype":@(2),
-                               @"isactive":@(_isActive),
-                               @"starttime":_startTime,
-                               @"endtime":_endTime,
-                               @"weekvalue":_repeatString,
-                               @"startvalue":_startValue,
-                               @"scheduleid":@(self.scheduleId)
-                               };
-        HttpManager *http = [HttpManager defaultManager];
-        http.delegate = self;
-        http.tag = 2;
-        [http sendPost:url param:dict];
-    }
-}
-
-- (void)addDeviceTimer {
     
     if (_startTime.length <=0 || _endTime.length <=0) {
         [MBProgressHUD showError:@"请选择时段"];
         return;
     }
     
-    if (_repeatition.length <= 0) {
+    if (_repeatition.length <= 0 && self.repeatString.length <= 0) {
         [MBProgressHUD showError:@"请选择重复选项"];
         return;
     }
     
-    if (_device.hTypeId == 1 || _device.hTypeId == 2 || _device.hTypeId == 3) { //灯光
+    
+    NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], [SQLManager getENumberByDeviceID:self.device.eID]];
+    NSString *timerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:timerFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:timerPath];
+    
+    DeviceSchedule *_timer = [[DeviceSchedule alloc] initWithoutScheduleByDeviceID:self.device.eID];
+    if(plistDic)
+    {
+        [_timer setValuesForKeysWithDictionary:plistDic];
+    }
+    
+    
+    //开始设备定时
+    [[SceneManager defaultManager] addDeviceTimer:_timer isEdited:NO  mode:2 isActive:1 block:^(BOOL flag) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (flag == YES) {
+                [MBProgressHUD showSuccess:@"修改定时成功"];
+                [NC postNotificationName:@"AddDeviceTimerSucceedNotification" object:nil];
+                
+                //启动定时
+                //发送8A指令通知C4主机下载plist文件
+                
+                //发TCP定时指令给主机
+                NSData *data = [[DeviceInfo defaultManager] scheduleDevice:1 deviceID:[NSString stringWithFormat:@"%d", _timer.deviceID]];
+                SocketManager *sock = [SocketManager defaultManager];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            }else {
+                [MBProgressHUD showError:@"修改定时失败"];
+            }
+            
+        });
+    }];
+}
+
+- (void)addDeviceTimer {
+    
+    /*if (_device.hTypeId == 1 || _device.hTypeId == 2 || _device.hTypeId == 3) { //灯光
         if (_switchBtnString.length <= 0 ) {
             _switchBtnString = @"01000000";  //默认开灯
         }
@@ -322,27 +331,59 @@
         
         _startValue = [NSMutableString string];
         [_startValue appendString:_switchBtnString];
+    }*/
+    
+    
+    if (_startTime.length <=0 || _endTime.length <=0) {
+        [MBProgressHUD showError:@"请选择时段"];
+        return;
+    }
+    
+    if (_repeatition.length <= 0) {
+        [MBProgressHUD showError:@"请选择重复选项"];
+        return;
     }
     
     
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
-    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+    NSString *timerFile = [NSString stringWithFormat:@"%@_%ld_%d.plist",DEVICE_TIMER_FILE_NAME, [[DeviceInfo defaultManager] masterID], [SQLManager getENumberByDeviceID:self.device.eID]];
+    NSString *timerPath = [[IOManager deviceTimerPath] stringByAppendingPathComponent:timerFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:timerPath];
     
-    if (auothorToken.length >0) {
-        NSDictionary *dict = @{@"token":auothorToken,
-                               @"optype":@(1),
-                               @"isactive":@(_isActive),
-                               @"starttime":_startTime,
-                               @"endtime":_endTime,
-                               @"weekvalue":_repeatString,
-                               @"equipmentid":@(_device.eID),
-                               @"startvalue":_startValue
-                               };
-        HttpManager *http = [HttpManager defaultManager];
-        http.delegate = self;
-        http.tag = 1;
-        [http sendPost:url param:dict];
+    DeviceSchedule *_timer = [[DeviceSchedule alloc] initWithoutScheduleByDeviceID:self.device.eID];
+    if(plistDic)
+    {
+        [_timer setValuesForKeysWithDictionary:plistDic];  
     }
+
+    
+    //开始设备定时
+    [[SceneManager defaultManager] addDeviceTimer:_timer isEdited:NO mode:1 isActive:1 block:^(BOOL flag) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (flag == YES) {
+                [MBProgressHUD showSuccess:@"添加成功"];
+                [NC postNotificationName:@"AddDeviceTimerSucceedNotification" object:nil];
+                
+                //启动定时
+                //发送8A指令通知C4主机下载plist文件
+                
+                    //发TCP定时指令给主机
+                    NSData *data = [[DeviceInfo defaultManager] scheduleDevice:1 deviceID:[NSString stringWithFormat:@"%d", _timer.deviceID]];
+                    SocketManager *sock = [SocketManager defaultManager];
+                    [sock.socket writeData:data withTimeout:1 tag:1];
+                
+                
+                for (UIViewController *vc in self.navigationController.viewControllers) {
+                    if ([vc isKindOfClass:[DeviceListTimeVC class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                        break;
+                    }
+                }
+            }else {
+                [MBProgressHUD showError:@"添加失败"];
+            }
+            
+        });
+    }];
 }
 
 #pragma mark - Http callback
@@ -428,7 +469,7 @@
 
 #pragma mark - UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -440,12 +481,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
-    if (section == 2) {
-        return 0.5f;
-    }
-    
-    return 0;
+    return 0.5f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -456,60 +492,61 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section == 2) {
+    
         UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 0.5)];
         footer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login_line"]];
         
         return footer;
-    }
-    return nil;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {  //设备cell
         
-        if(self.device.hTypeId == 1) { //开关灯
-            if (ON_IPAD) {
-                return 80;
-            }else {
-                return 80;
-            }
-        }else if (self.device.hTypeId == 2 || self.device.hTypeId == 3 || self.device.subTypeId == 7 || self.device.subTypeId == 2 || self.device.hTypeId == 14 || self.device.hTypeId == 17) { //2.调光灯，3.调色灯  窗帘(7)  空调(2) 背景音乐(14)，幕布(17)
-            if (ON_IPAD) {
-                return 150;
-            }else {
-                return 100;
-            }
-        }else if (self.device.hTypeId == 16) { //投影仪
-            if (ON_IPAD) {
-                return 80;
-            }else {
-                return 50;
-            }
-        }else if (self.device.hTypeId == 11 || self.device.hTypeId == 13 || self.device.hTypeId == 15) { //TV,  DVD , FM
-            
-            if (ON_IPAD) {
-                return 210;
-            }else {
-                return 150;
-            }
-        }else { //功放, 智能单品等，只有开关按钮
-            if (ON_IPAD) {
-                return 100;
-            }else {
-                return 50;
-            }
-        }
+        return 60.0f;
+        
+//        if(self.device.hTypeId == 1) { //开关灯
+//            if (ON_IPAD) {
+//                return 80;
+//            }else {
+//                return 80;
+//            }
+//        }else if (self.device.hTypeId == 2 || self.device.hTypeId == 3 || self.device.subTypeId == 7 || self.device.subTypeId == 2 || self.device.hTypeId == 14 || self.device.hTypeId == 17) { //2.调光灯，3.调色灯  窗帘(7)  空调(2) 背景音乐(14)，幕布(17)
+//            if (ON_IPAD) {
+//                return 150;
+//            }else {
+//                return 100;
+//            }
+//        }else if (self.device.hTypeId == 16) { //投影仪
+//            if (ON_IPAD) {
+//                return 80;
+//            }else {
+//                return 50;
+//            }
+//        }else if (self.device.hTypeId == 11 || self.device.hTypeId == 13 || self.device.hTypeId == 15) { //TV,  DVD , FM
+//
+//            if (ON_IPAD) {
+//                return 210;
+//            }else {
+//                return 150;
+//            }
+//        }else { //功放, 智能单品等，只有开关按钮
+//            if (ON_IPAD) {
+//                return 100;
+//            }else {
+//                return 50;
+//            }
+//        }
         
     }else if (indexPath.section == 1) {
         return 60.0f;
     }
     
-    return 44.0f;
+    return 60.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == 2) {
         if (self.device.subTypeId == 1) { //灯光
             if (self.device.hTypeId == 1) { //开关灯
                 PowerLightCell * powerCell = [tableView dequeueReusableCellWithIdentifier:@"PowerLightCell" forIndexPath:indexPath];
@@ -716,7 +753,7 @@
             return otherCell;
         }
         
-    }else if (indexPath.section == 1) {
+    }else if (indexPath.section == 0) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -755,7 +792,7 @@
         [cell.contentView addSubview:timeLabel];
         
         return cell;
-    }else if (indexPath.section == 2) {
+    }else if (indexPath.section == 1) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -795,10 +832,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    if (indexPath.section == 1) {
+    if (indexPath.section == 0) {
         UIStoryboard * sceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
         IphoneNewAddSceneTimerVC * timerVC = [sceneStoryBoard  instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
         timerVC.isDeviceTimer = YES;
+        timerVC.timer = [[DeviceSchedule alloc] initWithoutScheduleByDeviceID:self.device.eID];
         if (_repeatition.length >0) {
             timerVC.repeatitionStr = _repeatition;
         }else {
@@ -858,7 +896,7 @@
 
 
 #pragma mark - NewLightCellDelegate
-- (void)onLightPowerBtnClicked:(UIButton *)btn {
+- (void)onLightPowerBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
     
     if (btn.selected) {
         _switchBtnString = @"01000000";//开
@@ -868,7 +906,7 @@
 }
 
 #pragma mark - ColorLightCellDelegate
-- (void)onColourSwitchBtnClicked:(UIButton *)btn {
+- (void)onColourSwitchBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
     if (btn.selected) {
         _switchBtnString = @"01000000";//开
     }else {
@@ -877,7 +915,7 @@
 }
 
 #pragma mark - CurtainCellDelegate
-- (void)onCurtainOpenBtnClicked:(UIButton *)btn {
+- (void)onCurtainOpenBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
     
     if (btn.selected) {
         _switchBtnString = @"01000000";//开
@@ -886,7 +924,7 @@
     }
 }
 
-- (void)onCurtainSliderBtnValueChanged:(UISlider *)slider {
+- (void)onCurtainSliderBtnValueChanged:(UISlider *)slider deviceID:(int)deviceID {
     
     NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", (int)slider.value*100]];
     if (hexString.length == 2) {
@@ -951,7 +989,7 @@
 }
 
 #pragma mark - BjMusicTableViewCellDelegate
-- (void)onBjPowerButtonClicked:(UIButton *)btn {
+- (void)onBjPowerButtonClicked:(UIButton *)btn deviceID:(int)deviceID {
     if (btn.selected) {
         _switchBtnString = @"01000000";//开
     }else {
@@ -1013,7 +1051,7 @@
 }
 
 #pragma mark - OtherTableViewCellDelegate
-- (void)onOtherSwitchBtnClicked:(UIButton *)btn {
+- (void)onOtherSwitchBtnClicked:(UIButton *)btn deviceID:(int)deviceID {
     if (btn.selected) {
         _switchBtnString = @"01000000";//开
     }else {

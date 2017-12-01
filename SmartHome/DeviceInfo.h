@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 enum{
     offLine,  //离线
@@ -79,8 +80,9 @@ enum{
 
 //主机ID
 @property (nonatomic) long masterID;
-//主机ID
+//房间ID
 @property (nonatomic) long roomID;
+@property (nonatomic) int deviceType;
 //主机ip
 @property (nonatomic, strong) NSString *masterIP;
 //主机端口
@@ -92,7 +94,7 @@ enum{
 @property (nonatomic, assign) BOOL isPhotoLibrary;
 
 + (instancetype) defaultManager;
-
+- (UIViewController *)getCurrentVC;
 - (void) deviceGenaration;
 - (void) initConfig;
 +(UIViewController *)calcController:(NSUInteger)uid;
@@ -101,6 +103,7 @@ enum{
 
 -(NSData *)startScenenAtMaster:(int)sceneid;
 -(NSData *)query:(NSString *)deviceID;
+-(NSData *)query:(NSString *)deviceID withRoom:(uint8_t)rid;
 
 //TV,DVD,NETV,BGMusic
 -(NSData *) previous:(NSString *)deviceID;
@@ -172,6 +175,18 @@ enum{
 -(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID;
 -(NSData *) changeInterval:(uint8_t)interval deviceID:(NSString *)deviceID;
 
+-(NSData *) toogleAirCon:(uint8_t)toogle deviceID:(NSString *)deviceID roomID:(uint8_t)roomID; //开:1,关:0
+-(NSData *) changeTemperature:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)temperature roomID:(uint8_t)roomID;
+-(NSData *) changeDirect:(uint8_t)direct deviceID:(NSString *)deviceID roomID:(uint8_t)roomID;
+-(NSData *) changeSpeed:(uint8_t)speed deviceID:(NSString *)deviceID roomID:(uint8_t)roomID;
+-(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID roomID:(uint8_t)roomID;
+-(NSData *) changeInterval:(uint8_t)interval deviceID:(NSString *)deviceID roomID:(uint8_t)roomID;
+
+#pragma mark - Fresh Air
+-(NSData *) toogleFreshAir:(uint8_t)toogle deviceID:(NSString *)deviceID deviceType:(uint8_t)devicetype; //开:1,关:0
+-(NSData *) changeSpeed:(uint8_t)speed deviceID:(NSString *)deviceID deviceType:(uint8_t)deviceType;
+-(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID deviceType:(uint8_t)deviceType;
+
 #pragma mark - BGMusic CALL PUBLIC
 -(NSData *) repeat:(NSString *)deviceID;
 -(NSData *) shuffle:(NSString *)deviceID;
@@ -179,5 +194,13 @@ enum{
 #pragma mark - Scheduler CALL PUBLIC
 -(NSData *) scheduleScene:(uint8_t)action sceneID:(NSString *)sceneID;
 -(NSData *) scheduleDevice:(uint8_t)action deviceID:(NSString *)deviceID;
+
+#pragma mark - ChangeSource   切换数据源
+- (NSData *)changeSource:(uint8_t)channelID deviceID:(NSString *)deviceID;
+
+- (NSData *)stopCurtainByDeviceID:(NSString *)deviceID;
+
+//震动
+- (void)playVibrate;
 
 @end

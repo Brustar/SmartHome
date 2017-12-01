@@ -63,9 +63,19 @@
 {
     self.deviceid = deviceid;
     SocketManager *sock=[SocketManager defaultManager];
-    //sock.delegate=self;
+    
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+-(void) query:(NSString *)deviceid withRomm:(uint8_t)rid
+{
+    self.deviceid = deviceid;
+    SocketManager *sock=[SocketManager defaultManager];
+    
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:deviceid withRoom:rid];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
@@ -74,6 +84,7 @@
         Radio *device=[[Radio alloc] init];
     
     if (sender == self.FMSwitchBtn) {
+        [[DeviceInfo defaultManager] playVibrate];
         if (ON_IPAD) {
             [self.AddFmBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
         }else{

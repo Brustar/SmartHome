@@ -32,7 +32,13 @@
     manager.shouldResignOnTouchOutside = YES;
     manager.shouldToolbarUsesTextFieldTintColor = YES;
     manager.enableAutoToolbar = YES;
-    
+}
+
+- (void) init3DTouch
+{
+    if ([[UIDevice currentDevice] systemVersion].floatValue < 9.0) {
+        return;
+    }
     UIApplication *application = [UIApplication sharedApplication];
     //动态加载自定义的ShortcutItem
     if (application.shortcutItems.count == 0) {
@@ -43,6 +49,8 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [self init3DTouch];
     //app未开启时处理推送
     if (launchOptions) {
         //截取apns推送的消息
@@ -202,7 +210,7 @@
     DeviceInfo *info=[DeviceInfo defaultManager];
     if (!info.pushToken)   //如果没有注册到令牌 则重新发送注册请求
     {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             if([[[UIDevice currentDevice]systemVersion]floatValue] >=8.0)
             {
                 [[UIApplication sharedApplication]registerUserNotificationSettings:[UIUserNotificationSettings
@@ -214,7 +222,7 @@
     }
     
     //将远程通知的数量置零
-    dispatch_async(dispatch_get_global_queue(0,0), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         //1 hide the local badge
         if ([[UIApplication sharedApplication] applicationIconBadgeNumber] == 0) {
             return;
@@ -230,7 +238,7 @@
         return UIInterfaceOrientationMaskAll;
     }else {
         if (ON_IPAD) {
-                return UIInterfaceOrientationMaskLandscape;
+            return UIInterfaceOrientationMaskLandscape;
         }else{
             return UIInterfaceOrientationMaskPortrait;
         }

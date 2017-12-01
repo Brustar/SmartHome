@@ -20,9 +20,8 @@
 
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
-@property (nonatomic,strong) PluginCell *cell;
-@property (nonatomic,strong) NSMutableArray *plugNames;
-@property (nonatomic,strong) NSMutableArray *plugDeviceIds;
+//@property (nonatomic,strong) PluginCell *cell;
+
 @property (nonatomic,strong) ORBSwitch *switcher;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 
@@ -30,62 +29,19 @@
 
 @implementation PluginViewController
 
-
--(NSMutableArray *)plugDeviceIds
-{
-   if(!_plugDeviceIds)
-   {
-       _plugDeviceIds = [NSMutableArray array];
-       if(self.sceneid > 0 && !self.isAddDevice)
-       {
-           NSArray *plugArr = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
-           for(int i = 0; i < plugArr.count; i++)
-           {
-               NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[plugArr[i] intValue]];
-               if([typeName isEqualToString:DEVICE_TYPE])
-               {
-                   if (plugArr[i]) {
-                           [_plugDeviceIds addObject:plugArr[i]];
-                   }
-               
-               }
-               
-           }
-       }else if(self.roomID > 0)
-       {
-           [_plugDeviceIds addObject:[SQLManager singleDeviceWithCatalogID:plugin byRoom:self.roomID]];
-       }else{
-           if (self.deviceid) {
-            [_plugDeviceIds addObject:self.deviceid];
-           }
-         
-       }
-   }
-    return _plugDeviceIds;
-}
--(NSMutableArray *)plugNames
-{
-    if(!_plugNames)
-    {
-        _plugNames = [NSMutableArray array];
-        for(int i = 0; i < self.plugDeviceIds.count; i++)
-        {
-            int plugId = [self.plugDeviceIds[i] intValue];
-            NSString *name = [SQLManager deviceNameByDeviceID:plugId];
-            [_plugNames addObject:name];
-        }
-    }
-    return _plugNames;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSArray *menus = [SQLManager singleProductByRoom:self.roomID];
+    self.deviceid = [SQLManager singleDeviceWithCatalogID:[[DeviceInfo defaultManager] deviceType] byRoom:self.roomID];
     [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
     [self naviToDevice];
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    self.title = [NSString stringWithFormat:@"%@ - 智能插座",roomName];
+    NSString *deviceName = [SQLManager deviceNameByDeviceID:[self.deviceid intValue]];
+    if ([deviceName isEqualToString:@""]) {
+        deviceName = @"智能插座";
+    }
+    self.title = [NSString stringWithFormat:@"%@ - %@",roomName,deviceName];
     [self setNaviBarTitle:self.title];
     if (ON_IPAD) {
         [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
@@ -93,7 +49,7 @@
     
     [self initSwitcher];
 
-    [self setupSegment];
+    //[self setupSegment];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     
@@ -114,22 +70,6 @@
     
     [self.view addSubview:self.switcher];
     [self.switcher constraintToCenter:SWITCH_SIZE];
-}
-
--(void)setupSegment
-{
-    if(self.plugNames == nil || self.plugNames.count == 0)
-    {
-        return;
-    }
-    [self.segment removeAllSegments];
-    for(int i = 0; i < self.plugNames.count; i++)
-    {
-        [self.segment insertSegmentWithTitle:self.plugNames[i] atIndex:i animated:NO];
-    }
-    self.segment.selectedSegmentIndex = 0;
-    self.deviceid = [self.plugDeviceIds objectAtIndex:self.segment.selectedSegmentIndex];
-    
 }
 
 /*
@@ -288,15 +228,6 @@
         }
     }
     
-}
-
-- (IBAction)selectedSingProduct:(UISegmentedControl *)sender {
-    
-     UISegmentedControl *segment = (UISegmentedControl*)sender;
-    self.cell.label.text = self.plugNames[segment.selectedSegmentIndex];
-    self.deviceid = [self.plugDeviceIds objectAtIndex: self.segment.selectedSegmentIndex];
-    //[self.tableView reloadData];
-
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

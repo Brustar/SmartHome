@@ -18,14 +18,6 @@
     [super viewDidLoad];
     [self addNotifications];
     [self initUI];
-    
-//    if (_video == nil) {
-//        _video = [[RTSPPlayer alloc] initWithVideo:self.cameraURL usesTcp:YES];
-//        _video.outputWidth =  Video_Output_Width;
-//        _video.outputHeight = Video_Output_Height;
-//    }
-//    
-     [self setupTimer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -37,11 +29,21 @@
     [super viewDidAppear:animated];
     
     if (_video == nil) {
-        _video  = [[RTSPPlayer alloc] initWithVideo:self.cameraURL usesTcp:YES];
+        
+        NSString *rtspTimeoutSetting = @"";//ffmpeg -stimeout 5000000 -rtsp_transport tcp -i
+        NSString *videoURL = [NSString stringWithFormat:@"%@%@", rtspTimeoutSetting, self.cameraURL];
+        
+        _video = [[RTSPPlayer alloc] initWithVideo:videoURL usesTcp:YES];
         _video.outputWidth =  Video_Output_Width;
         _video.outputHeight = Video_Output_Height;
         
-        [self setupTimer];
+       if (_video == nil) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:@"无法打开视频，请稍后再试"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            [self setupTimer];
+        }
     }else {
         [self startTimer];
     }
@@ -64,6 +66,33 @@
 
 - (void)removeNotifications {
     [NC removeObserver:self];
+}
+
+//检查视频超时的定时器
+- (void)initTimerForVideoTimeOut {
+    _startDate = [NSDate date];
+    _videoTimeoutTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                         target:self
+                                                       selector:@selector(videoTimeoutTimerAction:)
+                                                       userInfo:nil
+                                                        repeats:YES];
+   //[_videoTimeoutTimer setFireDate:[NSDate distantPast]];//启动定时器
+    
+    //放到子线程
+   // [[NSRunLoop mainRunLoop] addTimer:_videoTimeoutTimer forMode:NSRunLoopCommonModes];
+
+}
+
+- (void)videoTimeoutTimerAction:(NSTimer *)timer {
+    NSDate *_eDate = [NSDate date];
+    NSTimeInterval seconds = [_eDate timeIntervalSinceDate:_startDate]; 
+    if (_video == nil && seconds >30) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"视频请求超时，请稍后再试"];
+        [timer setFireDate:[NSDate distantFuture]];//暂停
+        [timer invalidate];//失效
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)setupTimer {

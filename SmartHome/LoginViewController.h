@@ -63,7 +63,7 @@
 @property (nonatomic,strong) NSMutableArray * room_user_listArr;
 @property (nonatomic, assign) BOOL isTheSameUser;//判断是不是同一个用户登录
 @property(nonatomic,assign) NSInteger userType;
-@property(nonatomic,assign) NSInteger UserType;//判断是否为主人
+
 @property(nonatomic,strong) NSString *masterId;
 @property (nonatomic, strong) NSString *hostName;//主机名称（家庭名称）
 @property(nonatomic,strong) NSString *role;
@@ -80,7 +80,6 @@
 @property (nonatomic, strong) AVPlayerViewController *avPlayerVC;
 @property (nonatomic,strong)  NSMutableArray * titleArray;
 @property (nonatomic,strong)  NSMutableArray * detailArray;
-
 
 - (IBAction)forgetPwdBtnClicked:(id)sender;
 - (IBAction)tryBtnClicked:(id)sender;

@@ -16,6 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (@available(iOS 11.0, *)) {
+        self.hostTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;//UIScrollView也适用
+    }else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
     [self setNaviBarTitle:@"切换家庭账号"];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self adjustNaviBarFrameForSplitView];
@@ -120,11 +127,18 @@
 
 -(void)loginHost
 {
+    //终端类型：1，手机 2，iPad
+    NSInteger clientType = 1;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        clientType = 2;
+    }
+    
     NSString *url = [NSString stringWithFormat:@"%@login/login_host.aspx",[IOManager httpAddr]];
     
     NSDictionary *dict = @{
                            @"token":[UD objectForKey:@"AuthorToken"],
-                           @"hostid":_selectedHost
+                           @"hostid":_selectedHost,
+                           @"devicetype":@(clientType)
                            };
     
     
@@ -157,12 +171,14 @@
                 [UD removeObjectForKey:@"scence_version"];
                 [UD removeObjectForKey:@"tv_version"];
                 [UD removeObjectForKey:@"fm_version"];
+                [UD removeObjectForKey:@"source_version"];
+                [UD synchronize];
             
             
             //更新token
             [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];
             
-            //更新主机类型（0:Creston   1:C4）
+            //更新主机类型（0:Crestron   1:C4）
             [IOManager writeUserdefault:responseObject[@"hosttype"] forKey:@"HostType"];
             
             //更新家庭名
@@ -192,13 +208,17 @@
             [versioninfo enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                 [IOManager writeUserdefault:obj forKey:key];
             }];
-            
+            //保存楼层信息
+            NSNumber *floor = responseObject[@"home_room_info"][@"floor_number"];
+            [IOManager writeUserdefault:floor forKey:@"floor_number"];
             //写房间配置信息到sql
             [self writeRoomsConfigDataToSQL:responseObject[@"home_room_info"]];
             //写场景配置信息到sql
             [self writeScensConfigDataToSQL:responseObject[@"room_scence_list"]];
             //写设备配置信息到sql
             [self writDevicesConfigDatesToSQL:responseObject[@"room_equipment_list"]];
+            //写影音设备数据源配置信息到sql
+            [self writSourcesConfigDatesToSQL:responseObject[@"equipment_source_list"]];
             //写TV频道信息到sql
             [self writeChannelsConfigDataToSQL:responseObject[@"tv_store_list"] withParent:@"tv"];
             
@@ -215,6 +235,9 @@
             //发通知刷新设备首页，场景首页,app首页
             [NC postNotificationName:@"ChangeHostRefreshUINotification" object:nil];
             
+            //发通知刷新左侧菜单选项
+            [NC postNotificationName:@"RefreshMenuItemsNotification" object:nil];
+            
             //重连UDP
             [self reconnectUDP];
             
@@ -222,6 +245,16 @@
             [MBProgressHUD showError:@"切换失败"];
         }
     }
+}
+
+//写影音设备数据源配置信息到sql
+- (void)writSourcesConfigDatesToSQL:(NSArray *)sources
+{
+    if(sources.count == 0 || sources == nil)
+    {
+        return;
+    }
+    [SQLManager writeSource:sources];
 }
 
 //写设备配置信息到sql
@@ -260,8 +293,7 @@
 }
 
 //下载场景plist文件到本地
--(void)downloadPlsit:(NSString *)urlPlist
-
+- (void)downloadPlsit:(NSString *)urlPlist
 {
     AFHTTPSessionManager *session=[AFHTTPSessionManager manager];
     
@@ -305,6 +337,10 @@
     NSString * hostbrand = responseObject[@"hostbrand"];
     NSString * host_brand_number = responseObject[@"host_brand_number"];
     NSString * homename = responseObject[@"homename"];
+    NSString * city = responseObject[@"city"];
+    [IOManager writeUserdefault:city forKey:@"host_city"];//家庭主机所在城市
+    
+    
     if (homename == nil) {
         [self.home_room_infoArr addObject:@" "];
     }else{
@@ -369,6 +405,7 @@
                 @"scence_ver":[UD objectForKey:@"scence_version"],
                 @"tv_ver":[UD objectForKey:@"tv_version"],
                 @"fm_ver":[UD objectForKey:@"fm_version"],
+                @"source_ver":[UD objectForKey:@"source_version"],
                 //@"chat_ver":[UD objectForKey:@"chat_version"],
                 @"md5Json":md5Json,
                 @"change_host":@(1)//是否是切换家庭 0:否  1:是

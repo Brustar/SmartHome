@@ -19,10 +19,10 @@
  */
 + (void)show:(NSString *)text icon:(NSString *)icon view:(UIView *)view
 {
-    if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
+    if (view == nil) view = [[[DeviceInfo defaultManager] getCurrentVC] view];//[[UIApplication sharedApplication].windows firstObject];
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.labelText = text;
+    hud.label.text = text;
     // 设置图片
     hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:icon]];
     // 再设置模式
@@ -32,7 +32,7 @@
     hud.removeFromSuperViewOnHide = YES;
     
     // 2秒之后再消失
-    [hud hide:YES afterDelay:2.0];
+    [hud hideAnimated:YES afterDelay:2.0];
 }
 
 /**
@@ -96,14 +96,18 @@
  *  @return 直接返回一个MBProgressHUD，需要手动关闭
  */
 + (MBProgressHUD *)showMessage:(NSString *)message toView:(UIView *)view {
-    if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
+    if (view == nil) view = [[[DeviceInfo defaultManager] getCurrentVC] view];//[[UIApplication sharedApplication].windows firstObject];
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.labelText = message;
+    hud.label.text = message;
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     // YES代表需要蒙版效果
-    hud.dimBackground = YES;
+    //hud.dimBackground = YES;
+    
+    hud.backgroundView.style = MBProgressHUDBackgroundStyleSolidColor;
+    hud.backgroundView.color = [UIColor colorWithWhite:0.f alpha:.2f];
+    
     return hud;
 }
 
@@ -122,7 +126,7 @@
  */
 + (void)hideHUDForView:(UIView *)view
 {
-    if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
+    if (view == nil) view = [[[DeviceInfo defaultManager] getCurrentVC] view];//[[UIApplication sharedApplication].windows firstObject];
     [self hideHUDForView:view animated:YES];
 }
 

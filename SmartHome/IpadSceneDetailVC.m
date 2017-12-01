@@ -16,6 +16,7 @@
 #import "NewColourCell.h"
 #import "FMTableViewCell.h"
 #import "CurtainTableViewCell.h"
+#import "CurtainC4TableViewCell.h"
 #import "ScreenCurtainCell.h"
 #import "OtherTableViewCell.h"
 #import "BjMusicTableViewCell.h"
@@ -65,8 +66,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+    _hostType = [[UD objectForKey:@"HostType"] integerValue];
+    _currentBrightness = 50;
       self.tableView.tableFooterView = [UIView new];
     _isGloom = NO;
     _isRomantic = NO;
@@ -119,6 +120,7 @@
     _SwitchLightArr = [[NSMutableArray alloc] init];
     [self.tableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
     [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
+    [self.tableView registerNib:[UINib nibWithNibName:@"CurtainC4TableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainC4TableViewCell"];//窗帘(C4)
     [self.tableView registerNib:[UINib nibWithNibName:@"IpadTVCell" bundle:nil] forCellReuseIdentifier:@"IpadTVCell"];//网络电视
     [self.tableView registerNib:[UINib nibWithNibName:@"NewColourCell" bundle:nil] forCellReuseIdentifier:@"NewColourCell"];//调色灯
     [self.tableView registerNib:[UINib nibWithNibName:@"OtherTableViewCell" bundle:nil] forCellReuseIdentifier:@"OtherTableViewCell"];//其他
@@ -143,7 +145,7 @@
             [_ColourLightArr addObject:self.deviceIdArr[i]];
         }else if (_htypeID == 31){//空调
             [_AirArray addObject:self.deviceIdArr[i]];
-        }else if (_htypeID == 21){//窗帘
+        }else if (_htypeID == 21 || _htypeID == 22){//窗帘:21开合帘；22卷帘
             [_CurtainArray addObject:self.deviceIdArr[i]];
         }else if (_htypeID == 11){//网路电视
             [_TVArray addObject:self.deviceIdArr[i]];
@@ -253,13 +255,13 @@
         }
         if (_isGloom) {
             cell.NewLightPowerBtn.selected = YES;//开关状态
-            cell.NewLightSlider.value = 20.0f/100.0f;//亮度状态
+            cell.NewLightSlider.value = _currentBrightness/100.0f;//亮度状态
         }else if (_isRomantic) {
             cell.NewLightPowerBtn.selected = YES;//开关状态
-            cell.NewLightSlider.value = 50.0f/100.0f;//亮度状态
+            cell.NewLightSlider.value = _currentBrightness/100.0f;//亮度状态
         }else if (_isSprightly) {
             cell.NewLightPowerBtn.selected = YES;//开关状态
-            cell.NewLightSlider.value = 90.0f/100.0f;//亮度状态
+            cell.NewLightSlider.value = _currentBrightness/100.0f;//亮度状态
         }
         
         return cell;
@@ -268,6 +270,7 @@
         newColourCell.AddColourLightBtn.hidden = YES;
         newColourCell.ColourLightConstraint.constant = 10;
         newColourCell.backgroundColor =[UIColor clearColor];
+        newColourCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
         if(dictionary)
         {
@@ -300,8 +303,10 @@
         newColourCell.addPowerLightBtn.hidden = YES;
         newColourCell.powerBtnConstraint.constant = 10;
         newColourCell.backgroundColor =[UIColor clearColor];
+        newColourCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
         newColourCell.powerLightNameLabel.text = device.name;
+        newColourCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         
         if(dictionary)
@@ -333,6 +338,7 @@
         aireCell.AddAireBtn.hidden = YES;
         aireCell.AireConstraint.constant = 10;
         aireCell.backgroundColor =[UIColor clearColor];
+        aireCell.selectionStyle = UITableViewCellSelectionStyleNone;
         aireCell.roomID = self.roomID; 
         aireCell.sceneid = self.sceneid;
         Device *device = [SQLManager getDeviceWithDeviceID:[_AirArray[indexPath.row] intValue]];
@@ -366,8 +372,12 @@
         
         return aireCell;
     }if (indexPath.section == 4) {//窗帘
+        
+    if (_hostType == 0) {  //Crestron
+        
         CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor = [UIColor clearColor];
+        aireCell.selectionStyle = UITableViewCellSelectionStyleNone;
         aireCell.AddcurtainBtn.hidden = YES;
         aireCell.curtainContraint.constant = 10;
         aireCell.roomID = self.roomID;
@@ -403,11 +413,57 @@
         
         
         return aireCell;
-    }if (indexPath.section == 5) {//TV
+    }else {
+        CurtainC4TableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainC4TableViewCell" forIndexPath:indexPath];
+        aireCell.backgroundColor = [UIColor clearColor];
+        aireCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        aireCell.addBtn.hidden = YES;
+        aireCell.switchBtnTrailingConstraint.constant = 10;
+        aireCell.roomID = self.roomID;
+        aireCell.sceneid = self.sceneid;
+        Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
+        if(dictionary)
+        {
+            int openvalue;
+            for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                
+                if([dic objectForKey:@"deviceID"])
+                {
+                    deviceID = [dic[@"deviceID"] intValue];
+                    
+                }
+                if (deviceID == [_CurtainArray[indexPath.row] intValue]) {
+                    
+                    openvalue = [dic[@"openvalue"] intValue];
+                    
+                    if ((float)openvalue/100.0f > 0) {
+                        aireCell.switchBtn.selected = YES;
+                    }if ((float)openvalue/100.0f == 0) {
+                        aireCell.switchBtn.selected = NO;
+                    }
+                    
+                }
+                
+            }
+        }
+        
+        aireCell.deviceid = _CurtainArray[indexPath.row];
+        aireCell.name.text = device.name;
+        
+        
+        return aireCell;
+    }
+}
+    
+    
+    
+    
+    if (indexPath.section == 5) {//TV
         IpadTVCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"IpadTVCell" forIndexPath:indexPath];
         TVCell.TVConstraint.constant = 10;
         TVCell.AddTvDeviceBtn.hidden = YES;
         TVCell.backgroundColor =[UIColor clearColor];
+        TVCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
         if(dictionary)
         {
@@ -441,6 +497,7 @@
         DVDCell.AddDvdBtn.hidden = YES;
         DVDCell.DVDConstraint.constant = 10;
         DVDCell.backgroundColor =[UIColor clearColor];
+        DVDCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
         if(dictionary)
         {
@@ -471,6 +528,7 @@
         otherCell.AddOtherBtn.hidden = YES;
         otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor = [UIColor clearColor];
+        otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
         otherCell.deviceid = _ProjectArray[indexPath.row];
@@ -479,6 +537,7 @@
     }if (indexPath.section == 8) {//FM
         FMTableViewCell * FMCell = [tableView dequeueReusableCellWithIdentifier:@"FMTableViewCell" forIndexPath:indexPath];
         FMCell.backgroundColor =[UIColor clearColor];
+        FMCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
         FMCell.FMNameLabel.text = device.name;
         FMCell.deviceid = _FMArray[indexPath.row];
@@ -491,6 +550,7 @@
         otherCell.AddOtherBtn.hidden = YES;
         otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor =[UIColor clearColor];
+        otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_NetVArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
         otherCell.deviceid = _NetVArray[indexPath.row];
@@ -501,6 +561,7 @@
         ScreenCell.AddScreenCurtainBtn.hidden = YES;
         ScreenCell.ScreenCurtainConstraint.constant = 10;
         ScreenCell.backgroundColor =[UIColor clearColor];
+        ScreenCell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
         if(dictionary)
         {
@@ -525,6 +586,7 @@
     }if (indexPath.section == 11) {//背景音乐
         BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
         BjMusicCell.backgroundColor = [UIColor clearColor];
+        BjMusicCell.selectionStyle = UITableViewCellSelectionStyleNone;
         BjMusicCell.AddBjmusicBtn.hidden = YES;
         BjMusicCell.BJmusicConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
@@ -555,6 +617,7 @@
         otherCell.AddOtherBtn.hidden = YES;
         otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor = [UIColor clearColor];
+        otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
         otherCell.deviceid = _OtherArray[indexPath.row];
         if (_OtherArray.count) {
             Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
@@ -608,6 +671,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( indexPath.section == 0 || indexPath.section == 3 || indexPath.section == 10 || indexPath.section == 11 || indexPath.section == 1 || indexPath.section == 4) {
+        
+        if (indexPath.section == 4 && _hostType != 0) {
+            return 100;
+        }
+        
         return 150;
     }
     if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12 || indexPath.section == 2) {
@@ -630,13 +698,22 @@
         self.brightBtn.selected = NO;
         _isRomantic = NO;
         _isSprightly = NO;
-        
-        if (_lightArray.count >0) {
-            [[SceneManager defaultManager] gloomForRoomLights:_lightArray];
-        }
-        
-        [self.tableView reloadData];
     }
+    
+    if (_lightArray.count >0) {
+        if (_currentBrightness <=0) {
+            NSNumber *lightID = _lightArray[0];
+            Device *light = [SQLManager getDeviceWithDeviceID:lightID.intValue];
+            _currentBrightness = (int)light.bright - 5;
+        }else {
+            _currentBrightness -= 5;
+        }
+        if (_currentBrightness < 20) {
+            _currentBrightness = 20;
+        }
+        [[SceneManager defaultManager] gloomForRoomLights:_lightArray brightness:_currentBrightness];
+    }
+    [self.tableView reloadData];
     
 }
 
@@ -653,6 +730,7 @@
         _isSprightly = NO;
         
         if (_lightArray.count >0) {
+            _currentBrightness = 50;
             [[SceneManager defaultManager] romanticForRoomLights:_lightArray];
         }
         
@@ -671,13 +749,23 @@
         self.normalBtn.selected = NO;
         _isGloom = NO;
         _isRomantic = NO;
-        
-        if (_lightArray.count >0) {
-            [[SceneManager defaultManager] sprightlyForRoomLights:_lightArray];
-        }
-        
-        [self.tableView reloadData];
     }
+    
+    if (_lightArray.count >0) {
+        if (_currentBrightness <=0) {
+            NSNumber *lightID = _lightArray[0];
+            Device *light = [SQLManager getDeviceWithDeviceID:lightID.intValue];
+            _currentBrightness = (int)light.bright + 5;
+        }else {
+            _currentBrightness += 5;
+        }
+        if (_currentBrightness > 100) {
+            _currentBrightness = 100;
+        }
+        [[SceneManager defaultManager] sprightlyForRoomLights:_lightArray brightness:_currentBrightness];
+    }
+    
+    [self.tableView reloadData];
 }
 
 

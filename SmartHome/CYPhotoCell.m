@@ -41,11 +41,11 @@
     }else{
        if (self.sceneStatus == 0) { //点击前，场景是关闭状态，需打开场景
                 [[SceneManager defaultManager] startScene:self.sceneID];//打开场景
-                [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
+                [SQLManager updateSceneStatus:1 sceneID:self.sceneID roomID:self.roomID];//更新数据库
             
         }else if (self.sceneStatus == 1) { //点击前，场景是打开状态，需关闭场景
             [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];//关闭场景
-            [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
+            [SQLManager updateSceneStatus:0 sceneID:self.sceneID roomID:self.roomID];//更新数据库
         }
         if (_delegate && [_delegate respondsToSelector:@selector(refreshTableView:)]) {
             [self.delegate refreshTableView:self];

@@ -8,6 +8,9 @@
 
 #import "LoginViewController.h"
 
+#import "UIView+Popup.h"
+#import "STColorPicker.h"
+
 @interface LoginViewController ()
 
 @end
@@ -15,7 +18,6 @@
 @implementation LoginViewController
 
 @synthesize userType;
-@synthesize UserType;
 
 -(NSMutableArray *)hostIDS
 {
@@ -59,7 +61,6 @@
     self.nameTextField.delegate = self;
     self.pwdTextField.delegate = self;
     userType = [[UD objectForKey:@"Type"] intValue];
-    UserType =[[UD objectForKey:@"UserType"] intValue];
     
     if ([[UD objectForKey:@"Account"] isEqualToString:@"DemoUser"]) {
         self.nameTextField.text = @"";
@@ -384,16 +385,10 @@
 
 - (IBAction)registBtnClicked:(id)sender {
     
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"扫描二维码注册", @"体验账号注册", nil];
-    [sheet showInView:self.view];
-}
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:ON_IPAD?UIAlertControllerStyleAlert:UIAlertControllerStyleActionSheet];
+    alert.popoverPresentationController.barButtonItem = self.navigationItem.leftBarButtonItem;
 
-#pragma mark - UIActionSheet Delegate 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString *btnTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-    if ([btnTitle isEqualToString:@"扫描二维码注册"]) {
-        
-        
+    [alert addAction:[UIAlertAction actionWithTitle:@"扫描二维码注册" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         if ([QRCodeReader supportsMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]]) {
             static QRCodeReaderViewController *vc = nil;
             static dispatch_once_t onceToken;
@@ -423,28 +418,29 @@
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
             [alert addAction:okAction];
         }
-        
-    }else if ([btnTitle isEqualToString:@"体验账号注册"]) {
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"体验账号注册" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
         UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"registFirstStepForPhoneVC"];
         [self.navigationController pushViewController:vc animated:YES];
-    }
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)writeQRCodeStringToFile:(NSString *)string{
-    NSArray *paths;
-    NSString  *arrayPath;
-paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                             NSUserDomainMask, YES);//搜索沙盒路径下的document文件夹。
-arrayPath = [[paths objectAtIndex:0]
+    NSString  *arrayPath = [[paths objectAtIndex:0]
              stringByAppendingPathComponent:@"QRCodeString.plist"];//在此文件夹下创建文件，相当于你的xxx.txt
 
-NSArray *array = [NSArray arrayWithObjects:
+    NSArray *array = [NSArray arrayWithObjects:
                   string, nil];//将你的数据放入数组中
 
-[array writeToFile:arrayPath atomically:YES];//将数组中的数据写入document下xxx.txt。
-
-    
+    [array writeToFile:arrayPath atomically:YES];//将数组中的数据写入document下xxx.txt。
 }
 
 #pragma mark - QRCode Delegate
@@ -461,7 +457,6 @@ NSArray *array = [NSArray arrayWithObjects:
 {
     result=[result decryptWithDes:DES_KEY];
     
-    
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"registFirstStepVC"];
     
@@ -476,13 +471,6 @@ NSArray *array = [NSArray arrayWithObjects:
                 self.hostName = list[1];
                 [vc setValue:self.masterId forKey:@"masterStr"];
                 [vc setValue:self.hostName forKey:@"hostName"];
-                
-                if ([@"1" isEqualToString:list[2]]) {
-                    self.role=@"主人";
-                }else{
-                    self.role=@"客人";
-                }
-                [vc setValue:self.role forKey:@"suerTypeStr"];
             }
             else
             {
@@ -504,16 +492,7 @@ NSArray *array = [NSArray arrayWithObjects:
                 [vc setValue:self.masterId forKey:@"masterStr"];
                 [vc setValue:self.hostName forKey:@"hostName"];
                 
-                
-                if ([@"1" isEqualToString:list[2]]) {
-                    self.role=@"主人";
-                }else{
-                    self.role=@"客人";
-                }
-                [vc setValue:self.role forKey:@"suerTypeStr"];
             }
-            
-            
             else
             {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"非法的二维码" preferredStyle:UIAlertControllerStyleAlert];
@@ -525,9 +504,13 @@ NSArray *array = [NSArray arrayWithObjects:
         
     }
     
-    
     [self.navigationController pushViewController:vc animated:YES];
-    
+    reader.delegate = nil;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        reader.delegate = self;
+        
+    });
 }
 
 #pragma mark - UITextFieldDelegate
@@ -573,6 +556,7 @@ NSArray *array = [NSArray arrayWithObjects:
                 @"scence_ver":[UD objectForKey:@"scence_version"],
                 @"tv_ver":[UD objectForKey:@"tv_version"],
                 @"fm_ver":[UD objectForKey:@"fm_version"],
+                @"source_ver":[UD objectForKey:@"source_version"],
                 //@"chat_ver":[UD objectForKey:@"chat_version"],
                 @"md5Json":md5Json,
                 @"change_host":@(0)//是否是切换家庭 0:否  1:是
@@ -592,6 +576,16 @@ NSArray *array = [NSArray arrayWithObjects:
         return;
     }
     [SQLManager writeDevices:rooms];
+}
+
+//写影音设备数据源配置信息到sql
+-(void)writSourcesConfigDatesToSQL:(NSArray *)sources
+{
+    if(sources.count == 0 || sources == nil)
+    {
+        return;
+    }
+    [SQLManager writeSource:sources];
 }
 
 //写房间配置信息到SQL
@@ -667,6 +661,9 @@ NSArray *array = [NSArray arrayWithObjects:
     NSString * hostbrand = responseObject[@"hostbrand"];
     NSString * host_brand_number = responseObject[@"host_brand_number"];
     NSString * homename = responseObject[@"homename"];
+    NSString * city = responseObject[@"city"];
+    [IOManager writeUserdefault:city forKey:@"host_city"];//家庭主机所在城市
+    
     if (homename == nil) {
         [self.home_room_infoArr addObject:@" "];
     }else{
@@ -825,6 +822,7 @@ NSArray *array = [NSArray arrayWithObjects:
                     [UD removeObjectForKey:@"scence_version"];
                     [UD removeObjectForKey:@"tv_version"];
                     [UD removeObjectForKey:@"fm_version"];
+                    [UD removeObjectForKey:@"source_version"];
                     [UD synchronize];
                 }
             //更新UD的@"HostID"， 更新DeviceInfo的 masterID
@@ -844,18 +842,22 @@ NSArray *array = [NSArray arrayWithObjects:
     }else if(tag == 2) {
         if ([responseObject[@"result"] intValue] == 0)
         {
-            NSDictionary *versioninfo=responseObject[@"version_info"];
+            NSDictionary *versioninfo = responseObject[@"version_info"];
             //执久化配置版本号
             [versioninfo enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                 [IOManager writeUserdefault:obj forKey:key];
             }];
+            //保存楼层信息
+            NSNumber *floor = responseObject[@"home_room_info"][@"floor_number"];
+            [IOManager writeUserdefault:floor forKey:@"floor_number"];
             //写房间配置信息到sql
-            
             [self writeRoomsConfigDataToSQL:responseObject[@"home_room_info"]];
             //写场景配置信息到sql
             [self writeScensConfigDataToSQL:responseObject[@"room_scence_list"]];
             //写设备配置信息到sql
             [self writDevicesConfigDatesToSQL:responseObject[@"room_equipment_list"]];
+            //写影音设备数据源配置信息到sql
+            [self writSourcesConfigDatesToSQL:responseObject[@"equipment_source_list"]];
             //写TV频道信息到sql
             [self writeChannelsConfigDataToSQL:responseObject[@"tv_store_list"] withParent:@"tv"];
             

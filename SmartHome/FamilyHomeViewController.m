@@ -27,40 +27,7 @@
     }
     
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:music_icon imgHighlight:music_icon target:self action:@selector(rightBtnClicked:)];
-    if (isPlaying) {
-        UIImageView * imageView = _naviRightBtn.imageView ;
-        
-        imageView.animationImages = [NSArray arrayWithObjects:
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red2"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red3"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red4"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red5"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red6"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red7"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red8"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red9"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red10"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red11"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red12"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red13"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red14"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red15"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red16"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red17"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red18"],
-                                     [UIImage imageNamed:@"Ipad-NowMusic-red19"],
-                                     
-                                     nil];
-        
-        //设置动画总时间
-        imageView.animationDuration = 2.0;
-        //设置重复次数，0表示无限
-        imageView.animationRepeatCount = 0;
-        //开始动画
-        if (! imageView.isAnimating) {
-            [imageView startAnimating];
-        }
-    }
+    
     [self setNaviBarRightBtn:_naviRightBtn];
 }
 
@@ -151,11 +118,11 @@
     
     
     //查询所有房间的设备ID（灯，空调，影音）
-    NSArray *lightIDs = [SQLManager getDeviceIDsBySubTypeId:1];
-    NSArray *airIDs = [SQLManager getDeviceIDsBySubTypeId:2];
-    NSArray *avIDs = [SQLManager getDeviceIDsBySubTypeId:3];
+    NSArray *lightIDs = [SQLManager getAllDevicesInfoBySubTypeID:1];
+    NSArray *airIDs = [SQLManager getAllDevicesInfoBySubTypeID:2];
+    NSArray *avIDs = [SQLManager getAllDevicesInfoBySubTypeID:3];
     
-    NSMutableArray *deviceIDs = [[NSMutableArray alloc] init];
+    /*NSMutableArray *deviceIDs = [[NSMutableArray alloc] init];
     if (lightIDs.count >0) {
         [deviceIDs addObjectsFromArray:lightIDs];
     }
@@ -166,7 +133,10 @@
     
     if (avIDs.count >0) {
         [deviceIDs addObjectsFromArray:avIDs];
-    }
+    }*/
+    
+    
+    
     
     
     SocketManager *sock = [SocketManager defaultManager];
@@ -174,10 +144,80 @@
     
     _startDate = [NSDate date];
     
-    [deviceIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSData *data = [[DeviceInfo defaultManager] query:[obj stringValue]];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-    }];
+    
+    //灯
+    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC));
+    
+    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+        
+        [lightIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            Device *device = (Device *)obj;
+            NSString *deviceID = [NSString stringWithFormat:@"%d", device.eID];
+            
+            if (device.hTypeId == air) {
+                NSData *data = [[DeviceInfo defaultManager] query:deviceID withRoom:device.airID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+                
+            }else {
+                NSData *data = [[DeviceInfo defaultManager] query:deviceID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+            
+        }];
+        
+    });
+    
+    
+    
+    //空调
+    delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC));
+    
+    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+        
+        [airIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            Device *device = (Device *)obj;
+            NSString *deviceID = [NSString stringWithFormat:@"%d", device.eID];
+            
+            if (device.hTypeId == air) {
+                NSData *data = [[DeviceInfo defaultManager] query:deviceID withRoom:device.airID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+                
+            }else {
+                NSData *data = [[DeviceInfo defaultManager] query:deviceID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+            
+        }];
+        
+    });
+    
+    
+    //影音
+    delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.1 * NSEC_PER_SEC));
+    
+    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+        
+        [avIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            Device *device = (Device *)obj;
+            NSString *deviceID = [NSString stringWithFormat:@"%d", device.eID];
+            
+            if (device.hTypeId == air) {
+                NSData *data = [[DeviceInfo defaultManager] query:deviceID withRoom:device.airID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+                
+            }else {
+                NSData *data = [[DeviceInfo defaultManager] query:deviceID];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+            
+        }];
+        
+    });
+    
+    
     
     
     
@@ -202,6 +242,10 @@
         
     }];
     
+    
+}
+
+- (void)sendLights {
     
 }
 
@@ -312,25 +356,51 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    SocketManager *sock = [SocketManager defaultManager];
-    sock.delegate = self;
-    _bgmusicIDS = [[NSMutableArray alloc] init];
+    [super viewWillAppear:animated];
+    
+    [self getBgMusicStatus]; //查询背景音乐状态
+    
+    [LoadMaskHelper showMaskWithType:FamilyHome onView:self.tabBarController.view delay:0.5 delegate:self];
+}
+
+//查询背景音乐状态
+- (void)getBgMusicStatus {
+    if (_bgmusicIDS == nil) {
+        _bgmusicIDS = [[NSMutableArray alloc] init];
+    }else {
+        [_bgmusicIDS removeAllObjects];
+    }
+    
+    
     NSArray * roomArr = [SQLManager getAllRoomsInfo];
     for (int i = 0; i < roomArr.count; i ++) {
         Room * roomName = roomArr[i];
         if (![SQLManager isWholeHouse:roomName.rId]) {
-            self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:roomName.rId];
-        }
-        if (self.deviceid.length != 0) {
-            [_bgmusicIDS addObject:self.deviceid];
-            //查询设备状态
-            NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
-            [sock.socket writeData:data withTimeout:1 tag:1];
+            Device *device = [SQLManager getDeviceWithDeviceHtypeID:bgmusic roomID:roomName.rId];//查询某个房间的背景音乐
+            
+            if (device) {
+                [_bgmusicIDS addObject:device];
+                
+                
+                float delay = 0.1*i;
+                
+                // GCD 延时，非阻塞主线程 延时时间：delay
+                dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
+                
+                dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+                    
+                    NSData *data = [[DeviceInfo defaultManager] query:[NSString stringWithFormat:@"%d", device.eID]];
+                    SocketManager *sock = [SocketManager defaultManager];
+                    sock.delegate = self;
+                    [sock.socket writeData:data withTimeout:1 tag:1];
+                    
+                });
+                
+            }
             
         }
+        
     }
-    [super viewWillAppear:animated];
-    [LoadMaskHelper showMaskWithType:FamilyHome onView:self.tabBarController.view delay:0.5 delegate:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -460,8 +530,8 @@
         //同步设备状态
         if(proto.cmd == 0x01) {
             
-            NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-            Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue];
+            NSString *devID = [SQLManager getDeviceIDByENumberForC4:CFSwapInt16BigToHost(proto.deviceID) airID:proto.action.B];
+            Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue airID:proto.action.B];
             
             if (device) {
                 device.actionState = proto.action.state;
@@ -469,12 +539,12 @@
                 if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
                     device.power = proto.action.state;
                     
-                    if (proto.deviceType == 0x14) {
+                    /*if (proto.deviceType == 0x14) {
                         NSDate *endDate  =  [NSDate date];
                         NSLog(@"背景音乐  时间： %f", [endDate timeIntervalSinceDate:_startDate]);
                         NSLog(@"背景音乐---开关---  %d", proto.action.state);
                         
-                   }
+                   }*/
                     
                     /*if (proto.deviceType == 0x11) {
                         NSDate *endDate  =  [NSDate date];
@@ -496,8 +566,9 @@
                     
                 }
                 
-                else if (proto.action.state==0x6A) { //温度
+                else if (proto.action.state==0x6B) { //温度
                     device.currTemp  = proto.action.RValue;
+                    NSLog(@"当前温度：%d", device.currTemp);    
                     
                 }
                 
@@ -517,30 +588,76 @@
                  }
             }
             
-        }
+        
     
-    [self showRoomStatus];
-    
-    for (int i = 0; i <self.bgmusicIDS.count; i ++) {
-        if (proto.cmd==0x01) {
-            NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-            if ([devID intValue]==[self.bgmusicIDS[i] intValue]) {
-                if (proto.action.state == PROTOCOL_VOLUME) {
-                    NSLog(@"有音量");
-                }if (proto.action.state == PROTOCOL_ON) {
-                    NSLog(@"开启状态");
-                    [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
-                    
-//                    [_bgmusicIDArr addObject:devID];
-                    
-                }if (proto.action.state == PROTOCOL_OFF) {
-                    NSLog(@"关闭状态");
-                    [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
+            [self showRoomStatus];
+            
+            
+            ///////////////     背景音乐     ////////////////
+            [self.bgmusicIDS enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+                Device *device = (Device *)obj;
+                if (devID.intValue == device.eID) {
+                    if (proto.action.state == PROTOCOL_ON) { //背景音乐正在播放
+                        device.power = 1;
+                    }else if (proto.action.state == PROTOCOL_OFF) { //背景音乐未播放
+                        device.power = 0;
+                    }
                 }
-            }
+                
+            }];
+            
+            [self refreshBgMusicIcon];//刷新正在播放图标
+            
         }
+}
+
+- (void)refreshBgMusicIcon {
+    [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
+    
+    [self.bgmusicIDS enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        Device *device = (Device *)obj;
+        if (device.power == 1) { //有正在播放的背景音乐
+            [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
+            
+            UIImageView *bgImageView = _naviRightBtn.imageView;
+            if (![bgImageView isAnimating]) {
+                bgImageView.animationImages = [NSArray arrayWithObjects:
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red2"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red3"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red4"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red5"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red6"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red7"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red8"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red9"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red10"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red11"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red12"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red13"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red14"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red15"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red16"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red17"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red18"],
+                                               [UIImage imageNamed:@"Ipad-NowMusic-red19"],
+                                               nil];
+                
+                
+                bgImageView.animationDuration = 2.0; //设置动画总时间
+                bgImageView.animationRepeatCount = 0; //设置重复次数，0表示无限
+                
+                //开始动画
+                [bgImageView startAnimating];
+            }
+            
+        }
+    }];
+    
+    if ([[UD objectForKey:@"IsPlaying"] isEqualToString:@"0"]) {
+        UIImageView *bgImageView = _naviRightBtn.imageView;
+        [bgImageView stopAnimating];
     }
-    [self setupNaviBar];
+    
 }
 
 - (void)showRoomStatus {
@@ -557,28 +674,40 @@
             [_deviceArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
                 
                 Device *device = (Device *)obj;
-                if (device.rID == room.rId) {
+                
+                if (device.airID >0) { //空调
+                    Device *dev = [SQLManager getDeviceWithDeviceHtypeID:air roomID:room.rId];
+                    if (dev.airID == device.airID) {
+                        if (device.actionState == 0x6B) {   //温度
+                            room.tempture = device.currTemp;
+                        }else if (device.actionState == PROTOCOL_ON) {   // 开
+                            
+                                room.airStatus = 1;
                     
-                    if (device.actionState == 0x6A) {   //温度
-                        room.tempture = device.currTemp;
-                    }else if (device.actionState == 0x8A) {   // 湿度
-                        room.humidity = device.humidity;
-                    }else if (device.actionState == 0x7F) {   //PM2.5
-                        room.pm25 = device.pm25;
-                    }else if (device.actionState == PROTOCOL_OFF) {  // 关
-                        
-                    }else if (device.actionState == PROTOCOL_ON) {   // 开
-                        if (device.subTypeId == 1) {   //灯光
-                            room.lightStatus = 1;
-                        }else if(device.subTypeId == 2) {   //空调
-                            room.airStatus = 1;
-                        }else if (device.subTypeId == 3) {    //影音
-                            room.avStatus = 1;
                         }
                     }
-                    
-                    
+                }else {
+                    if (device.rID == room.rId) {
+                        
+                        if (device.actionState == 0x8A) {   // 湿度
+                            room.humidity = device.humidity;
+                        }else if (device.actionState == 0x7F) {   //PM2.5
+                            room.pm25 = device.pm25;
+                        }else if (device.actionState == PROTOCOL_OFF) {  // 关
+                            
+                        }else if (device.actionState == PROTOCOL_ON) {   // 开
+                            if (device.subTypeId == 1) {   //灯光
+                                room.lightStatus = 1;
+                            }else if (device.subTypeId == 3) {    //影音
+                                room.avStatus = 1;
+                            }
+                        }
+                        
+                        
+                    }
                 }
+                
+                
                 
             }];
         }

@@ -15,6 +15,7 @@
 + (NSString *)realScenePath;
 + (NSString *)planeScenePath;
 + (NSString *) scenesPath;
++ (NSString *)deviceTimerPath;
 + (NSString *) favoritePath;
 + (NSString *) sqlitePath;
 + (NSString *) httpAddr;
@@ -27,6 +28,7 @@
 + (id)getUserDefaultForKey:(NSString *)key;
 
 + (void) writeScene:(NSString *)sceneFile string:(NSString *)sceneData;
++ (void) writeDeviceTimer:(NSString *)timerFile timer:(id)timerData;
 + (void) writeScene:(NSString *)sceneFile dictionary:(NSDictionary *)sceneData;
 + (void) writeScene:(NSString *)sceneFile scene:(id)sceneData;
 + (void) writeJpg:(UIImage *)jpg path:(NSString *)jpgPath;

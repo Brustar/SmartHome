@@ -136,6 +136,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 灯光",roomName]];
     [self initSwitch];
+    [self showUITypeOfLight];
     Device *device = [SQLManager singleLightByRoom:self.roomID];
     self.deviceid = self.deviceid?self.deviceid:[NSString stringWithFormat:@"%d",device.eID];
     
@@ -156,6 +157,28 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         self.top.constant = 0;
     }
 }
+
+- (void)showUITypeOfLight {
+    self.sLightBtn.hidden = YES;
+    self.ddLightBtn.hidden = YES;
+    self.cLightBtn.hidden = YES;
+    
+    NSMutableArray *uitypes = [NSMutableArray new];
+    [uitypes addObjectsFromArray:[SQLManager getUITypeOfLightByRoomID:self.roomID]];
+    [uitypes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        
+        NSString *typeName = obj;
+        if ([typeName isEqualToString:@"射灯"]) {
+            self.sLightBtn.hidden = NO;
+        }else if([typeName isEqualToString:@"灯带"]) {
+            self.ddLightBtn.hidden = NO;
+        }else if ([typeName isEqualToString:@"调色灯"]) {
+            self.cLightBtn.hidden = NO;
+        }
+        
+    }];
+}
+
 - (NSDictionary *)getRGBDictionaryByColor:(UIColor *)originColor
 {
     CGFloat r=0,g=0,b=0,a=0;
@@ -176,37 +199,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
              @"A":@(a)};
 }
 
--(IBAction)save:(id)sender
-{
-    NSString *etype = [SQLManager getEType:[self.deviceid intValue]];
-    
-    Light *device=[[Light alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setIsPoweron: self.switcher.isOn];
-    NSArray *colors=[self changeUIColorToRGB:self.base.backgroundColor];
-    if (colors) {
-        if ([etype isEqualToString:@"03"]) {
-            [device setColor:colors];  
-        }
-        [device setColor:@[]];
-    }
-    
-    if (![etype isEqualToString:@"01"])
-    {
-        [device setBrightness:(int)self.tranformView.tag];
-    }
-    
-    Scene *scene = [Scene new];
-    [scene setSceneID:[self.sceneid intValue]];
-    [scene setRoomID:self.roomID];
-    [scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    
-    [scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
-    [scene setDevices:devices];
-    [[SceneManager defaultManager] addScene:scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-}
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
@@ -231,33 +223,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         }
     }
 
-}
-
-//将UIColor转换为RGB值
-- (NSArray *) changeUIColorToRGB:(UIColor *)color
-{
-    NSMutableArray *RGBStrValueArr = [[NSMutableArray alloc] init];
-    NSString *RGBStr = nil;
-    //获得RGB值描述
-    NSString *RGBValue = [NSString stringWithFormat:@"%@",color];
-    //将RGB值描述分隔成字符串
-    NSArray *RGBArr = [RGBValue componentsSeparatedByString:@" "];
-    if ([RGBArr count]>3) {
-        //获取红色值
-        int r = [[NSString stringWithFormat:@"%@",[RGBArr objectAtIndex:1]] floatValue] * 255;
-        RGBStr = [NSString stringWithFormat:@"%d",r];
-        [RGBStrValueArr addObject:RGBStr];
-        //获取绿色值
-        int g = [[NSString stringWithFormat:@"%@",[RGBArr objectAtIndex:2] ] floatValue] * 255;
-        RGBStr = [NSString stringWithFormat:@"%d",g];
-        [RGBStrValueArr addObject:RGBStr];
-        //获取蓝色值
-        int b = [[NSString stringWithFormat:@"%@",[RGBArr objectAtIndex:3]] floatValue] * 255;
-        RGBStr = [NSString stringWithFormat:@"%d",b];
-        [RGBStrValueArr addObject:RGBStr];
-    }
-    //返回保存RGB值的数组
-    return RGBStrValueArr;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -290,10 +255,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     [[SceneManager defaultManager] romantic:[self.sceneid intValue]];
 }
 - (IBAction)LightSlider:(id)sender {
-    
     [[SceneManager defaultManager] dimingScene:[self.sceneid intValue] brightness:[self.deviceid intValue]];
-    //[self.lightSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -407,7 +369,12 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 }
 
 - (IBAction)loadCatalog:(id)sender {
-    self.lightCatalog = ((UIButton *)sender).tag;
+    UIButton *btn = (UIButton *)sender;
+    btn.enabled = NO;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(50 * [self.lights count] * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
+        btn.enabled = YES;
+    });
+    self.lightCatalog = btn.tag;
     int htype = [[SQLManager getEType:[self.deviceid integerValue]] intValue];
     self.base.hidden = self.btnPen.hidden = (htype == 3?NO:YES);
     self.tranformView.hidden=(htype == 2?NO:YES);
@@ -418,20 +385,21 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         [self.contextMenuTableView dismisWithIndexPath:0];
         self.contextMenuTableView = nil;
     }else{
-        self.contextMenuTableView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
-        self.contextMenuTableView.animationDuration = 0.05;
-        //optional - implement custom YALContextMenuTableView custom protocol
-        self.contextMenuTableView.yalDelegate = self;
-        //optional - implement menu items layout
-        self.contextMenuTableView.menuItemsSide = Left;
-        self.contextMenuTableView.menuItemsAppearanceDirection = FromTopToBottom;
-        
-        //register nib
-        UINib *cellNib = [UINib nibWithNibName:@"MenuCell" bundle:nil];
-        [self.contextMenuTableView registerNib:cellNib forCellReuseIdentifier:menuCellIdentifier];
-    
-        // it is better to use this method only for proper animation
         if ([self.lights count]>0) {
+            self.contextMenuTableView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
+            self.contextMenuTableView.animationDuration = 0.05;
+            //optional - implement custom YALContextMenuTableView custom protocol
+            self.contextMenuTableView.yalDelegate = self;
+            //optional - implement menu items layout
+            self.contextMenuTableView.menuItemsSide = Left;
+            self.contextMenuTableView.menuItemsAppearanceDirection = FromTopToBottom;
+            
+            //register nib
+            UINib *cellNib = [UINib nibWithNibName:@"MenuCell" bundle:nil];
+            [self.contextMenuTableView registerNib:cellNib forCellReuseIdentifier:menuCellIdentifier];
+        
+            // it is better to use this method only for proper animation
+            
             [self.contextMenuTableView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(80+22,0,0,0) animated:YES];
         }
     }

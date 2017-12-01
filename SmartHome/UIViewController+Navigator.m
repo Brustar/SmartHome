@@ -51,6 +51,7 @@
 
 -(void) jumpUI:(NSInteger)uid
 {
+    [[DeviceInfo defaultManager] setDeviceType:(int)uid];
     [self.navigationController pushViewController:[DeviceInfo calcController:uid] animated:NO];
 }
 

@@ -33,10 +33,11 @@
     //初始化左边视图控制器
     UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
     self.leftVC= [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IpadDeviceTypeVC"];
-    
+    self.leftVC.sceneID = self.sceneID;
     self.leftVC.delegate = self;
     //初始化右边视图控制器
     self.rightVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IpadSceneDetailVC"];
+    self.rightVC.roomID = self.roomID;
     
     
     // 设置分割面板的 2 个视图控制器
@@ -64,14 +65,19 @@
     NSString * roomName =[SQLManager getRoomNameByRoomID:self.roomID];
     self.title = [SQLManager getSceneName:self.sceneID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@-%@",roomName,self.title]]; //设置标题
-    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"编辑" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
     
     [self setNaviBarRightBtn:_naviRightBtn];
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
    
-    //     [self performSegueWithIdentifier:@"storeNewScene" sender:self];
+    NSInteger userType = [[UD objectForKey:@"UserType"] integerValue];
+    if (userType == 2) { //客人不允许编辑场景
+        [MBProgressHUD showError:@"非主人不允许编辑场景"];
+        return;
+    }
+    
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //场景ID不变
@@ -94,7 +100,14 @@
         
         [[SceneManager defaultManager] editScene:scene];
     }];
-    [alertVC addAction:saveAction];
+    
+    //判断场景的　stype
+    int stype = [SQLManager getReadOnly:self.sceneID];
+    if (stype == 0) { // 自定义场景
+        [alertVC addAction:saveAction];
+    }
+    
+    
     UIAlertAction *saveNewAction = [UIAlertAction actionWithTitle:@"另存为新场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //另存为场景，新的场景ID
         
@@ -180,6 +193,23 @@
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
+- (void)IpadDeviceType:(IpadDeviceTypeVC *)centerListVC selected:(NSInteger)row typeName:(NSString *)typeName {
+    self.DevicesArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
+    self.devices = [NSMutableArray array];
+    self.leftVC.roomID = self.roomID;
+    self.leftVC.sceneID = self.sceneID;
+    self.rightVC.sceneID = self.sceneID;
+    
+    for(int i = 0; i < self.DevicesArr.count; i++){
+        
+        NSString *deviceTypeName = [SQLManager getSubTypeNameByDeviceID:[self.DevicesArr[i] intValue]];
+        if ([deviceTypeName isEqualToString:typeName]) {
+            [self.devices addObject:self.DevicesArr[i]];
+        }
+    }
+    [self.rightVC refreshData:self.devices];
+    self.leftVC.DevicesArr = self.devices;
+}
 
 -(void)IpadDeviceType:(IpadDeviceTypeVC *)centerListVC selected:(NSInteger)row
 {

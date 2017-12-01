@@ -445,7 +445,7 @@
 {
     BOOL result = NO;
     
-    FMDatabase *db = [SQLManager connetdb];
+    FMDatabase *db = [SQLManager connectdb];
     if([db open])
     {
         int cNumber = [self.numberOfChannel.text intValue];

@@ -196,10 +196,17 @@
             });
             dispatch_resume(self._timer);
         }
+        
+        //手机终端类型：1，手机 2，iPad
+        NSInteger clientType = 1;
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            clientType = 2;
+        }
         //点击验证码发送请求
         NSDictionary *dict = @{
                                @"mobile":self.phoneNum,
-                               @"optype":@(0)
+                               @"optype":@(0),
+                               @"devicetype":@(clientType)
                                };
         
         HttpManager *http = [HttpManager defaultManager];
@@ -255,7 +262,7 @@
                            @"mobile":self.phoneNum,
                            @"usertype":@(self.cType),
                            @"authcode":self.checkCodeTextField.text,
-                           @"pushtoken":info.pushToken,
+                           @"pushtoken":info.pushToken?info.pushToken:@"",
                            @"devicetype":@(clientType)
                            };
     NSString *url = [NSString stringWithFormat:@"%@login/regist.aspx",[IOManager httpAddr]];
