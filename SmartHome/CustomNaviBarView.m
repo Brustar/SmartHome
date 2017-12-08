@@ -43,11 +43,22 @@
 
 + (CGRect)rightBtnFrame
 {
-    return Rect(UI_SCREEN_WIDTH-[[self class] barBtnSize].width, 22.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+    if (Is_iPhoneX) {
+         return Rect(UI_SCREEN_WIDTH-[[self class] barBtnSize].width, 46.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+    }else{
+       return Rect(UI_SCREEN_WIDTH-[[self class] barBtnSize].width, 22.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+    }
+    
 }
 
 + (CGRect)rightBtnFrameForSplitView {
-    return Rect(UI_SCREEN_WIDTH*3/4-[[self class] barBtnSize].width, 22.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+    
+//    if (Is_iPhoneX) {
+//    return Rect(UI_SCREEN_WIDTH-[[self class] barBtnSize].width, 46.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+//    }else{
+        return Rect(UI_SCREEN_WIDTH*3/4-[[self class] barBtnSize].width, 22.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+//    }
+   
 }
 
 + (CGSize)barBtnSize
@@ -57,25 +68,53 @@
 
 + (CGSize)barSize
 {
-    return Size(UI_SCREEN_WIDTH, 64.0f);
+    if (Is_iPhoneX) {
+     return Size(UI_SCREEN_WIDTH, 88.0f);
+    }else{
+       return Size(UI_SCREEN_WIDTH, 64.0f);
+    }
+    
 }
 
 + (CGSize)barSizeForSplitView {
-    return Size(UI_SCREEN_WIDTH*3/4, 64.0f);
+    
+//    if (Is_iPhoneX) {
+//        return Size(UI_SCREEN_WIDTH*3/4, 88.0f);
+//    }else{
+        
+        return Size(UI_SCREEN_WIDTH*3/4, 64.0f);
+//    }
+   
 }
 
 + (CGRect)titleViewFrame
 {
-    return Rect((UI_SCREEN_WIDTH-190.0f)/2, 22.0f, 190.0f, 40.0f);
+    if (Is_iPhoneX) {
+        return Rect((UI_SCREEN_WIDTH-190.0f)/2, 46.0f, 190.0f, 40.0f);
+    }else{
+        return Rect((UI_SCREEN_WIDTH-190.0f)/2, 22.0f, 190.0f, 40.0f);
+    }
+   
 }
 
 + (CGRect)titleViewFrameForNet
 {
-    return Rect((UI_SCREEN_WIDTH-190.0f)/2, 15.0f, 190.0f, 40.0f);
+    if (Is_iPhoneX) {
+        return Rect((UI_SCREEN_WIDTH-190.0f)/2, 37.0f, 190.0f, 40.0f);
+    }else{
+           return Rect((UI_SCREEN_WIDTH-190.0f)/2, 15.0f, 190.0f, 40.0f);
+    }
+ 
 }
 
 + (CGRect)titleViewFrameForSplitView {
-    return Rect((UI_SCREEN_WIDTH*3/4-190.0f)/2, 22.0f, 190.0f, 40.0f);
+//    if (Is_iPhoneX) {
+//        return Rect((UI_SCREEN_WIDTH-190.0f)/2, 46.0f, 190.0f, 40.0f);
+//    }
+//    else{
+        return Rect((UI_SCREEN_WIDTH*3/4-190.0f)/2, 22.0f, 190.0f, 40.0f);
+//    }
+    
 }
 
 // 创建一个导航条按钮：使用默认的按钮图片。
@@ -215,7 +254,12 @@
     _btnLeft = btn;
     if (_btnLeft)
     {
-        _btnLeft.frame = Rect(-16, 22.0f, 80.0, 40.0);
+        if (Is_iPhoneX) {
+            _btnLeft.frame = Rect(-16, 48.0f, 80.0, 40.0);
+        }else{
+            _btnLeft.frame = Rect(-16, 22.0f, 80.0, 40.0);
+        }
+       
         [self addSubview:_btnLeft];
     }else{}
 }
@@ -231,7 +275,12 @@
     _btnLeft = btn;
     if (_btnLeft)
     {
-        _btnLeft.frame = Rect(0, 22.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+        if (Is_iPhoneX) {
+            _btnLeft.frame = Rect(0, 46.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+        }else{
+           _btnLeft.frame = Rect(0, 22.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+        }
+        
         [self addSubview:_btnLeft];
     }else{}
 }
@@ -247,7 +296,12 @@
     _btnLeft = btn;
     if (_btnLeft)
     {
-        _btnLeft.frame = Rect(-20, 22.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+        if (Is_iPhoneX) {
+            _btnLeft.frame = Rect(-20, 46.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+        }else{
+            _btnLeft.frame = Rect(-20, 22.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+        }
+       
         [self addSubview:_btnLeft];
     }else{}
 }
@@ -311,7 +365,11 @@
 
 - (void)showNetStateView {
     _labelTitle.frame = [[self class] titleViewFrameForNet];
-    _netStateView = [[UIButton alloc] initWithFrame:CGRectMake((UI_SCREEN_WIDTH-190)/2, 45, 190, 14)];
+    if (Is_iPhoneX) {
+         _netStateView = [[UIButton alloc] initWithFrame:CGRectMake((UI_SCREEN_WIDTH-190)/2, 68, 190, 14)];
+    }else{
+        _netStateView = [[UIButton alloc] initWithFrame:CGRectMake((UI_SCREEN_WIDTH-190)/2, 45, 190, 14)];
+    }
     _netStateView.titleLabel.font = [UIFont systemFontOfSize:12];
     _netStateView.titleLabel.textAlignment = NSTextAlignmentCenter;
     _netStateView.titleLabel.textColor = [UIColor whiteColor];
@@ -417,12 +475,5 @@
         _labelTitle.hidden = bIsHide;
     }else{}
 }
-
-
-
-
-
-
-
 
 @end

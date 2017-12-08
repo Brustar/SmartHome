@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -239,7 +240,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NameLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gU2-MU-hpr">
-                                                    <rect key="frame" x="18" y="15" width="85" height="21"/>
+                                                    <rect key="frame" x="25" y="15" width="85" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="2Ad-5e-oq6"/>
                                                         <constraint firstAttribute="width" constant="85" id="6la-jm-GsM"/>
@@ -249,7 +250,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0kw.h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3A-Um-eOh">
-                                                    <rect key="frame" x="151" y="15" width="40" height="21"/>
+                                                    <rect key="frame" x="144" y="15" width="40" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="YSW-L8-kwQ"/>
                                                         <constraint firstAttribute="width" constant="40" id="z3O-wB-o9E"/>
@@ -259,7 +260,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0kw.h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBc-iw-HXw">
-                                                    <rect key="frame" x="211" y="15" width="60" height="21"/>
+                                                    <rect key="frame" x="204" y="15" width="60" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="6ob-2e-QFi"/>
                                                         <constraint firstAttribute="width" constant="60" id="owt-RE-FCr"/>
@@ -269,7 +270,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0kw.h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFy-D4-cgx">
-                                                    <rect key="frame" x="291" y="15" width="60" height="21"/>
+                                                    <rect key="frame" x="284" y="15" width="60" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="HNa-nf-KsO"/>
                                                         <constraint firstAttribute="height" constant="21" id="QNm-x0-c5V"/>
@@ -624,7 +625,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Iff-hf-Iwe">
-                                <rect key="frame" x="0.0" y="44" width="375" height="599"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="579"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addressCell" rowHeight="120" id="cry-yw-dIF" customClass="DeliveryAddressCell">
@@ -802,13 +803,16 @@
                             <constraint firstAttribute="trailing" secondItem="rhw-9d-Par" secondAttribute="trailing" id="5ky-AZ-x0h"/>
                             <constraint firstItem="Iff-hf-Iwe" firstAttribute="leading" secondItem="hJc-v1-Zlh" secondAttribute="leading" id="M64-Kr-9au"/>
                             <constraint firstItem="rhw-9d-Par" firstAttribute="leading" secondItem="hJc-v1-Zlh" secondAttribute="leading" id="M79-RX-LHh"/>
-                            <constraint firstItem="Iff-hf-Iwe" firstAttribute="top" secondItem="hJc-v1-Zlh" secondAttribute="top" constant="44" id="WQZ-JJ-mBJ"/>
+                            <constraint firstItem="Iff-hf-Iwe" firstAttribute="top" secondItem="hJc-v1-Zlh" secondAttribute="top" constant="64" id="WQZ-JJ-mBJ"/>
                             <constraint firstAttribute="trailing" secondItem="Iff-hf-Iwe" secondAttribute="trailing" id="mia-gb-VAq"/>
                             <constraint firstAttribute="bottom" secondItem="Iff-hf-Iwe" secondAttribute="bottom" constant="24" id="uCC-cT-IvH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="AddressButtonConstraint" destination="3tR-Gz-TQZ" id="FL9-kY-yoE"/>
+                        <outlet property="AddressTableViewBottom" destination="uCC-cT-IvH" id="r0E-6m-S0q"/>
                         <outlet property="addressTableView" destination="Iff-hf-Iwe" id="f1i-1k-kYy"/>
+                        <outlet property="addressTableViewConstraint" destination="WQZ-JJ-mBJ" id="4Yv-oe-ISu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uuc-px-gC4" userLabel="First Responder" sceneMemberID="firstResponder"/>

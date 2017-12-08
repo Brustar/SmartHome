@@ -16,6 +16,7 @@
 #import "UIView+Popup.h"
 #import "PackManager.h"
 #import "IphoneRoomView.h"
+
 @interface ProjectController ()<ORBSwitchDelegate,IphoneRoomViewDelegate>
 
 @property (nonatomic,strong) NSMutableArray *projectNames;
@@ -45,8 +46,14 @@
             
             CGFloat btnWidth = 70;
             CGFloat btnHeight = 30;
-            UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(10+(btnWidth+15)*idx, 120, btnWidth, btnHeight)];
-               btn.tag = idx;
+            UIButton *btn;
+            if (Is_iPhoneX) {
+            btn = [[UIButton alloc] initWithFrame:CGRectMake(10+(btnWidth+15)*idx, 144, btnWidth, btnHeight)];
+            }else{
+            btn = [[UIButton alloc] initWithFrame:CGRectMake(10+(btnWidth+15)*idx, 120, btnWidth, btnHeight)];
+            }
+           
+            btn.tag = idx;
             btn.titleLabel.font = [UIFont systemFontOfSize:13];
             [btn setTitle:info.sourceName forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

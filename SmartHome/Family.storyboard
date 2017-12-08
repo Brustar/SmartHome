@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -246,6 +247,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="RoomCollectionViewTop" destination="oej-EP-4ql" id="UYx-j0-yAD"/>
                         <outlet property="airIcon" destination="KLK-WX-jeP" id="y8H-oQ-tOO"/>
                         <outlet property="avIcon" destination="0g9-zO-cmx" id="Ipx-0X-Xkd"/>
                         <outlet property="lightIcon" destination="htq-lm-XIR" id="XTX-uO-IE7"/>
@@ -388,6 +390,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="BrightButtonConstraint" destination="uMv-0N-BBD" id="ruC-WP-JQR"/>
+                        <outlet property="NormalButtonConstraint" destination="f9q-ay-oC7" id="Hpy-YW-gSU"/>
+                        <outlet property="SoftButtonConstraint" destination="90w-zd-awm" id="c4w-4g-WqI"/>
                         <outlet property="brightBtnLeading" destination="S7g-IK-jJB" id="OS0-9a-9ny"/>
                         <outlet property="brightBtnWidth" destination="X9e-Qa-Pob" id="33D-bZ-aqV"/>
                         <outlet property="brightButton" destination="kjd-Y2-RNt" id="RIZ-dK-Rc5"/>

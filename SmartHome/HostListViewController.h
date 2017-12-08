@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *hostTableView;
 @property (nonatomic,strong) NSMutableArray *home_room_infoArr;
 @property (weak, nonatomic) IBOutlet UIButton *okBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *HostTableViewTop;
 
 - (IBAction)OkBtnClicked:(id)sender;
 

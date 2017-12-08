@@ -8,6 +8,7 @@
 
 #import "FamilyHomeDetailViewController.h"
 
+
 @interface FamilyHomeDetailViewController ()
 
 @end
@@ -19,7 +20,12 @@
     _currentBrightness = 50;
     [self addNotifications];
     _hostType = [[UD objectForKey:@"HostType"] integerValue];//主机类型 0:Creston  1:C4
-    
+    if (Is_iPhoneX) {
+        self.SoftButtonConstraint.constant = 94;
+        self.NormalButtonConstraint.constant = 94;
+        self.BrightButtonConstraint.constant = 94;
+        self.collectionViewTop.constant = 154;
+    }
     [self initUI];
     [self getAllScenes];//获取所有场景
     [self getAllDevices];//获取所有设备
@@ -126,10 +132,6 @@
         
         centerGap = 80;
         btnWidth = (UI_SCREEN_WIDTH*3/4-leadingGap-trailingGap-centerGap*2)/3;
-        
-        
-        
-        
         self.tableViewLeading.constant = UI_SCREEN_WIDTH/4 + 20;
         self.tableViewTop.constant = 130;
         self.tableViewBottom.constant = 80;

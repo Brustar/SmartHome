@@ -888,7 +888,6 @@
             }
         }
       
-       
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         aireCell.deviceid = _CurtainArray[indexPath.row];
         aireCell.label.text = device.name;

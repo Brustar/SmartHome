@@ -181,6 +181,17 @@
     if ([deviceString isEqualToString:@"iPhone7,2"])    self.genaration = iPhone6;
     if ([deviceString isEqualToString:@"iPhone8,1"])    self.genaration = iPhone6S;
     if ([deviceString isEqualToString:@"iPhone8,2"])    self.genaration = iPhone6SPlus;
+    // 日行两款手机型号均为日本独占，可能使用索尼FeliCa支付方案而不是苹果支付
+    if ([deviceString isEqualToString:@"iPhone9,1"])   self.genaration = iPhone7;
+    if ([deviceString isEqualToString:@"iPhone9,2"])   self.genaration = iPhone7Plus;
+    if ([deviceString isEqualToString:@"iPhone9,3"])   self.genaration = iPhone7;
+    if ([deviceString isEqualToString:@"iPhone9,4"])   self.genaration = iPhone7Plus;
+    if ([deviceString isEqualToString:@"iPhone10,1"])  self.genaration = iPhone8;
+    if ([deviceString isEqualToString:@"iPhone10,4"])  self.genaration = iPhone8Plus;
+    if ([deviceString isEqualToString:@"iPhone10,2"])  self.genaration = iPhone8;
+    if ([deviceString isEqualToString:@"iPhone10,5"])  self.genaration = iPhone8Plus;
+    if ([deviceString isEqualToString:@"iPhone10,3"])  self.genaration = iPhoneX;
+    if ([deviceString isEqualToString:@"iPhone10,6"])  self.genaration = iPhoneX;
     
     if ([deviceString isEqualToString:@"iPod1,1"])      self.genaration = iPod;
     if ([deviceString isEqualToString:@"iPod2,1"])      self.genaration = iPod2;

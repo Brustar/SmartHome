@@ -44,6 +44,7 @@ typedef NS_ENUM(NSUInteger,wind)
 
 @property (nonatomic,assign) BOOL isAddDevice;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuContainerTopConstraint;
 @property (nonatomic,strong) NSArray *menus;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *control_bannerConstraint;
 @property (weak, nonatomic) IBOutlet UIImageView *control_banner;

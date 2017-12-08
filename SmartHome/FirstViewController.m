@@ -444,8 +444,13 @@
         _calenderDayLabel.font = [UIFont systemFontOfSize:70];
     }if (([UIScreen mainScreen].bounds.size.height == 667.0)) {
         _calenderDayLabel.font = [UIFont systemFontOfSize:113];
+        
     }
     _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",(long)day];
+    if (Is_iPhoneX) {
+        _calenderDayLabel.font = [UIFont systemFontOfSize:120];
+        self.SupViewTopConstraint.constant = 155;
+    }
 
 }
 

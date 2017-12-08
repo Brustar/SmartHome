@@ -39,6 +39,12 @@ enum{
     iPhone6S,
     iPhone6Plus,
     iPhone6SPlus,
+    iPhone7,
+    iPhone7Plus,
+    iPhone8,
+    iPhone8Plus,
+    iPhoneX,
+   
     
     iPod,
     iPod2,
@@ -62,6 +68,7 @@ enum{
 
 #define KICK_OUT @"kicking"
 
+#define Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 #define ON_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 #define ON_IPONE ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 #define SWITCH_SIZE 290

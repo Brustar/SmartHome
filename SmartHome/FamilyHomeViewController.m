@@ -60,7 +60,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if (Is_iPhoneX) {
+        self.RoomCollectionViewTop.constant = 88;
+    }
     _hostType = [[UD objectForKey:@"HostType"] integerValue];
     [self addNotifications];
     [self setupNaviBar];

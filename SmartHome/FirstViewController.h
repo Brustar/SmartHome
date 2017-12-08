@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *threeBtnLeadingConstraint;
 @property (nonatomic, strong) UserInfo *userInfomation;
 @property (nonatomic, strong) NowMusicController * nowMusicController;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *SupViewTopConstraint;
 @property (nonatomic, strong) HostIDSController *hostListViewController;//主机列表
 @property (weak, nonatomic) IBOutlet UIView *CoverView;
 @property (nonatomic,strong) Scene * info1;

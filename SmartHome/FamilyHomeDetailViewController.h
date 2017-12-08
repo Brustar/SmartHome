@@ -46,10 +46,14 @@
 @interface FamilyHomeDetailViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate,UITableViewDataSource, HttpDelegate, SingleMaskViewDelegate, TcpRecvDelegate, NewLightCellDelegate, PowerLightCellDelegate, NewColourCellDelegate, CurtainTableViewCellDelegate, CurtainC4TableViewCellDelegate,BjMusicTableViewCellDelegate, OtherTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *softButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *SoftButtonConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *normalButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *NormalButtonConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *brightButton;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *sceneListCollectionView;
 @property (weak, nonatomic) IBOutlet UITableView *deviceTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *BrightButtonConstraint;
 
 @property (nonatomic, assign) NSInteger roomID;
 @property (nonatomic, strong) NSString *roomName;

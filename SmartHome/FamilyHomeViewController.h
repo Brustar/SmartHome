@@ -34,6 +34,8 @@
 @interface FamilyHomeViewController : CustomViewController<UICollectionViewDataSource,UICollectionViewDelegate, HttpDelegate, TcpRecvDelegate, NowMusicControllerDelegate, SingleMaskViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *roomCollectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *RoomCollectionViewTop;
+
 @property (nonatomic, strong) NSMutableArray *roomArray;
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
 @property (weak, nonatomic) IBOutlet UIImageView *lightIcon;

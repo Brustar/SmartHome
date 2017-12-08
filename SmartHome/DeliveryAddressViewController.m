@@ -21,6 +21,11 @@
         [self adjustNaviBarFrameForSplitView];
         [self adjustTitleFrameForSplitView];
     }
+    if (Is_iPhoneX) {
+        self.addressTableViewConstraint.constant = 88;
+        self.AddressButtonConstraint.constant = 30;
+        self.AddressTableViewBottom.constant = 60;
+    }
     _addressArray = [NSMutableArray array];
     self.addressTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
     self.addressTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];

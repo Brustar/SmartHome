@@ -37,7 +37,6 @@
 }
 -(NSMutableArray *)detailArray
 {
-
     if (!_detailArray) {
         _detailArray = [NSMutableArray array];
     }

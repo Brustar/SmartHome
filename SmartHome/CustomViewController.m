@@ -11,6 +11,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "UIViewController+Navigator.h"
 
+
 @interface CustomViewController ()
 
 @end
@@ -32,6 +33,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

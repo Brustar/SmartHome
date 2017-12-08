@@ -16,6 +16,7 @@
 @interface DetailMSGViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewConstraint;
 
 @property (nonatomic,strong) NSMutableArray * msgArr;
 @property (nonatomic,strong) UIButton * leftBtn;
@@ -42,7 +43,9 @@
          [self setupNaviBar];
          [self sendRequestForDetailMsgWithItemId:_itemID];
     }
-    
+    if (Is_iPhoneX) {
+        self.tableViewConstraint.constant = 88;
+    }
     [self createImage];
 }
 

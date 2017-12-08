@@ -9,7 +9,6 @@
 #import "WebManager.h"
 //#import "RegisterPhoneNumController.h"
 
-
 @implementation WebManager
 
 + (void)show:(NSString *)aUrl
@@ -57,9 +56,14 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
     [super loadView];
-    CGRect rect = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44);
+    CGRect rect;
+    if (Is_iPhoneX) {
+        rect = CGRectMake(0, 88, self.view.frame.size.width, self.view.frame.size.height-88);
+    }else{
+        rect = CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64);
+    }
     if (ON_IPAD && _isShowInSplitView) {
-        rect = CGRectMake(0, 44, UI_SCREEN_WIDTH*3/4, self.view.frame.size.height+4);
+        rect = CGRectMake(0, 64, UI_SCREEN_WIDTH*3/4, self.view.frame.size.height-64);
     }
     self.webView = [[UIWebView alloc] initWithFrame:rect];
     self.webView.delegate = self;

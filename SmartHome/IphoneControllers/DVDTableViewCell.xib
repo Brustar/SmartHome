@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,7 +26,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客厅DVD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="je0-2Y-f1l">
-                        <rect key="frame" x="5" y="0.0" width="100" height="52"/>
+                        <rect key="frame" x="5" y="0.0" width="100" height="49.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="cg5-aX-qGa"/>
                         </constraints>
@@ -34,34 +35,34 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_voi_high" translatesAutoresizingMaskIntoConstraints="NO" id="ZRr-fE-u93">
-                        <rect key="frame" x="18" y="115" width="10" height="10"/>
+                        <rect key="frame" x="26" y="112.5" width="10" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="n2W-cb-0Ii"/>
                             <constraint firstAttribute="width" constant="10" id="yqh-A5-WRL"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_voi_high" translatesAutoresizingMaskIntoConstraints="NO" id="RxL-mC-ARL">
-                        <rect key="frame" x="342" y="113" width="15" height="15"/>
+                        <rect key="frame" x="334" y="110.5" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="MUc-jh-RqR"/>
                             <constraint firstAttribute="width" constant="15" id="ugu-xS-X5k"/>
                         </constraints>
                     </imageView>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="NYR-NW-O6b">
-                        <rect key="frame" x="36" y="104" width="298" height="31"/>
+                        <rect key="frame" x="44" y="101.5" width="282" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="Q0h-1a-MNG"/>
                         </constraints>
                     </slider>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dvd_frm_choice__normal" translatesAutoresizingMaskIntoConstraints="NO" id="F7B-y2-2nU">
-                        <rect key="frame" x="1" y="52" width="373" height="50"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="50"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="ZE6-sO-ZC5"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQ4-Nq-8mW">
-                        <rect key="frame" x="14" y="57" width="102.5" height="43.5"/>
+                        <rect key="frame" x="22" y="60" width="97" height="40.5"/>
                         <state key="normal" image="DVD_previous" backgroundImage="dvd_btn_adjust_normal">
                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -70,14 +71,14 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYH-Br-BuW">
-                        <rect key="frame" x="258.5" y="57" width="102.5" height="43.5"/>
+                        <rect key="frame" x="256" y="60" width="97" height="40.5"/>
                         <state key="normal" image="DVD_next" backgroundImage="dvd_btn_adjust_normal"/>
                         <connections>
                             <action selector="nextBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ebs-xB-i98"/>
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75B-Ud-NQ6">
-                        <rect key="frame" x="136.5" y="57" width="102" height="43.5"/>
+                        <rect key="frame" x="139" y="60" width="97" height="40.5"/>
                         <state key="normal" image="DVD_toogle" backgroundImage="dvd_btn_adjust_normal"/>
                         <state key="highlighted" image="DVD_toogle_red"/>
                         <connections>
@@ -158,9 +159,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="5yW-aq-htO" secondAttribute="trailing" id="6s3-h8-XwX"/>
+                    <constraint firstAttribute="trailing" secondItem="F7B-y2-2nU" secondAttribute="trailing" id="9op-8H-5xI"/>
                     <constraint firstAttribute="trailing" secondItem="M28-8e-zHA" secondAttribute="trailing" id="9zL-Me-m6e"/>
                     <constraint firstItem="F7B-y2-2nU" firstAttribute="centerX" secondItem="M28-8e-zHA" secondAttribute="centerX" id="Dkt-2h-gDx"/>
-                    <constraint firstItem="F7B-y2-2nU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-7" id="Gww-il-19j"/>
                     <constraint firstItem="UYH-Br-BuW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="49" id="IVS-ad-rDR"/>
                     <constraint firstItem="je0-2Y-f1l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="JEE-OA-GAo"/>
                     <constraint firstItem="NYR-NW-O6b" firstAttribute="top" secondItem="F7B-y2-2nU" secondAttribute="bottom" constant="2" id="K8h-9C-4eR"/>
@@ -175,6 +176,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="RxL-mC-ARL" secondAttribute="trailing" constant="10" id="Pnh-Qf-adm"/>
                     <constraint firstItem="75B-Ud-NQ6" firstAttribute="leading" secondItem="aQ4-Nq-8mW" secondAttribute="trailing" constant="20" id="QUU-h6-CbJ"/>
                     <constraint firstItem="M28-8e-zHA" firstAttribute="top" secondItem="75B-Ud-NQ6" secondAttribute="bottom" constant="-3" id="SgQ-Uf-RbA"/>
+                    <constraint firstItem="F7B-y2-2nU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Twj-50-6PS"/>
                     <constraint firstItem="RxL-mC-ARL" firstAttribute="leading" secondItem="NYR-NW-O6b" secondAttribute="trailing" constant="10" id="WUF-1O-RVO"/>
                     <constraint firstAttribute="bottomMargin" secondItem="RxL-mC-ARL" secondAttribute="bottom" constant="11.5" id="XYO-TN-HKd"/>
                     <constraint firstItem="M28-8e-zHA" firstAttribute="top" secondItem="UYH-Br-BuW" secondAttribute="bottom" constant="-3" id="YhI-bQ-9h8"/>

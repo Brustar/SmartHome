@@ -710,12 +710,6 @@
                         
                     }
                     
-                    
-                    
-                    
-                    
-                    
-                    
 //                    NSString *bgImgUrl = infoDict[@"imgpath"];//设置平面背景
 //                    if (bgImgUrl.length >0) {
 //                        [self.planeGraph sd_setImageWithURL:[NSURL URLWithString:bgImgUrl] placeholderImage:[UIImage imageNamed:@"PlaneGraph"] options:SDWebImageRetryFailed];

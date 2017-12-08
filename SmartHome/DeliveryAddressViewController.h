@@ -15,6 +15,9 @@
 @interface DeliveryAddressViewController : CustomViewController<HttpDelegate, UITableViewDelegate, UITableViewDataSource,  DeliveryAddressCellDelegate>
 @property(nonatomic, strong) NSMutableArray *addressArray;
 @property (weak, nonatomic) IBOutlet UITableView *addressTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressTableViewConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *AddressButtonConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *AddressTableViewBottom;
 
 - (IBAction)addBtnClicked:(id)sender;
 @end

@@ -8,6 +8,7 @@
 
 #import "HostListViewController.h"
 
+
 @interface HostListViewController ()
 
 @end
@@ -16,7 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if (Is_iPhoneX) {
+        self.HostTableViewTop.constant = 88;
+    }
     if (@available(iOS 11.0, *)) {
         self.hostTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;//UIScrollView也适用
     }else {
@@ -54,7 +57,11 @@
     }
     
     _hostTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-    _hostTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    _hostTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    UIView *view = [UIView new];
+    view.backgroundColor = [UIColor clearColor];
+    [_hostTableView setTableFooterView:view];
     [_hostTableView reloadData];
 }
 
@@ -124,7 +131,16 @@
         [self.okBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     }
 }
-
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+}
 -(void)loginHost
 {
     //终端类型：1，手机 2，iPad

@@ -20,7 +20,6 @@
 #define MAX_TEMP_ROTATE_DEGREE 330
 #define MIX_TEMP_ROTATE_DEGREE 120
 
-
 static NSString *const airCellIdentifier = @"airCell";
 @interface AirController ()<UITableViewDataSource,UITableViewDelegate,ORBSwitchDelegate,YALContextMenuTableViewDelegate>
 
@@ -75,6 +74,9 @@ static NSString *const airCellIdentifier = @"airCell";
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     if (ON_IPAD) {
         [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:[NSString stringWithFormat:@"%@ - 空调",roomName]];
+    }
+    if (Is_iPhoneX) {
+        self.menuContainerTopConstraint.constant = 88;
     }
     self.disk.enabled = NO;
     [self initSwitch];
