@@ -130,6 +130,8 @@
 		2E03E3001ECAD57E00487319 /* ECMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2FF1ECAD57E00487319 /* ECMessage.m */; };
 		2E04198E1EB8A370004D70B9 /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E04198D1EB8A370004D70B9 /* MyInfo.storyboard */; };
 		2E08EFC41EBC668A007F9FE1 /* PhotoGraphViewConteoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E08EFC21EBC668A007F9FE1 /* PhotoGraphViewConteoller.m */; };
+		2E0C55D11FE2284200BEBFD5 /* UnlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0C55D01FE2284200BEBFD5 /* UnlockViewController.m */; };
+		2E0C55D41FE248A800BEBFD5 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0C55D31FE248A800BEBFD5 /* UnlockView.m */; };
 		2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0C1E7F5E3000C7D006 /* CYLineLayout.m */; };
 		2E12CC111E7F5E3000C7D006 /* CYPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0E1E7F5E3000C7D006 /* CYPhotoCell.m */; };
 		2E12CC121E7F5E3000C7D006 /* CYPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */; };
@@ -655,6 +657,10 @@
 		2E04198D1EB8A370004D70B9 /* MyInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
 		2E08EFC11EBC668A007F9FE1 /* PhotoGraphViewConteoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoGraphViewConteoller.h; sourceTree = "<group>"; };
 		2E08EFC21EBC668A007F9FE1 /* PhotoGraphViewConteoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoGraphViewConteoller.m; sourceTree = "<group>"; };
+		2E0C55CF1FE2284200BEBFD5 /* UnlockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnlockViewController.h; sourceTree = "<group>"; };
+		2E0C55D01FE2284200BEBFD5 /* UnlockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnlockViewController.m; sourceTree = "<group>"; };
+		2E0C55D21FE248A800BEBFD5 /* UnlockView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnlockView.h; sourceTree = "<group>"; };
+		2E0C55D31FE248A800BEBFD5 /* UnlockView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnlockView.m; sourceTree = "<group>"; };
 		2E12CC0B1E7F5E3000C7D006 /* CYLineLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLineLayout.h; sourceTree = "<group>"; };
 		2E12CC0C1E7F5E3000C7D006 /* CYLineLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLineLayout.m; sourceTree = "<group>"; };
 		2E12CC0D1E7F5E3000C7D006 /* CYPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYPhotoCell.h; sourceTree = "<group>"; };
@@ -1487,6 +1493,7 @@
 		0F6ADFDA1E71343600BFF67F /* OtherVC */ = {
 			isa = PBXGroup;
 			children = (
+				2E0C55CE1FE2281900BEBFD5 /* Unlock */,
 				CD8CFCCC1ED6829A00B49712 /* PlaneGraph */,
 				CDEE5E9E1EC2A7DD00A5779D /* LaunchingViewController */,
 				CDEC868F1E9A1CBB009EC245 /* FamilyViewController */,
@@ -1659,6 +1666,17 @@
 				0F5F909D1EEA723700BACC3E /* IPadDevicesView.m */,
 			);
 			name = Devices;
+			sourceTree = "<group>";
+		};
+		2E0C55CE1FE2281900BEBFD5 /* Unlock */ = {
+			isa = PBXGroup;
+			children = (
+				2E0C55CF1FE2284200BEBFD5 /* UnlockViewController.h */,
+				2E0C55D01FE2284200BEBFD5 /* UnlockViewController.m */,
+				2E0C55D21FE248A800BEBFD5 /* UnlockView.h */,
+				2E0C55D31FE248A800BEBFD5 /* UnlockView.m */,
+			);
+			path = Unlock;
 			sourceTree = "<group>";
 		};
 		2E20EBB21E8A325900891828 /* My */ = {
@@ -2888,6 +2906,7 @@
 				2E6A065B1EA743B50022B681 /* NewColourCell.m in Sources */,
 				CDB8B8531EB1D550003AA894 /* SceneShortcutsViewController.m in Sources */,
 				CD5134371E8D07FD00C2EDAF /* Goods.m in Sources */,
+				2E0C55D11FE2284200BEBFD5 /* UnlockViewController.m in Sources */,
 				CD93E3AA1E8077F1003CCAA9 /* LoginViewController.m in Sources */,
 				2E9F4BDD1EDFA57C0039BFE9 /* IpadAddDeviceVC.m in Sources */,
 				F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */,
@@ -2947,6 +2966,7 @@
 				0FF92B661D9224640098DD54 /* TVChannel.m in Sources */,
 				0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */,
 				CDBEFF531EA616CD00258B1E /* FamilyHomeDetailSceneCell.m in Sources */,
+				2E0C55D41FE248A800BEBFD5 /* UnlockView.m in Sources */,
 				F630C3621D38C3E5008880BB /* AreaSettingCell.m in Sources */,
 				CDF1573A1E7AAD4C00499AC5 /* BaseNavController.m in Sources */,
 				0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */,

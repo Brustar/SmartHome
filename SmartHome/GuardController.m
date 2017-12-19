@@ -13,6 +13,8 @@
 #import "SocketManager.h"
 #import "SQLManager.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import <LocalAuthentication/LocalAuthentication.h>
+#import "UnlockViewController.h"
 
 #define guardType @"智能门锁"
 
@@ -71,7 +73,18 @@
     }
     return _guardNames;
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    [super viewWillAppear:animated];
+    //iOS8.0后才支持指纹识别接口
+    if ([UIDevice currentDevice].systemVersion.floatValue < 8.0) {
+        return;
+    }else{
+        
+        [self evaluateAuthenticate];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -95,7 +108,149 @@
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
+- (void)evaluateAuthenticate
+{
+    //创建LAContext
+    LAContext* context = [[LAContext alloc] init];
+    NSError* error = nil;
+    NSString* result = @"请验证已有指纹";
+        context.localizedFallbackTitle = @"";
+    //    context.localizedCancelTitle = @"6666";
+    
+    //首先使用canEvaluatePolicy 判断设备支持状态
+    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+        //支持指纹验证
+        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:result reply:^(BOOL success, NSError *error) {
+            if (success) {
+                //验证成功，主线程处理UI
+                
+            }
+            
+            else if (error)
+            {
+                if (error.code == -2) {//点击了取消按钮
+                    NSLog(@"点击了取消按钮");
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                        
+                    });
+                }else if (error.code == -3){//点输入密码按钮
+                    NSLog(@"点输入密码按钮");
+                    dispatch_async(dispatch_get_main_queue(), ^{
 
+                        UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+                        UnlockViewController * unlockVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"UnlockViewController"];
+                       [self.navigationController pushViewController:unlockVC animated:YES];
+
+                    });
+                    
+                  
+                    
+                }else if (error.code == -1){//连续三次指纹识别错误
+                    NSLog(@"连续三次指纹识别错误");
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                        
+                    });
+                    
+                }else if (error.code == -4){//按下电源键
+                    NSLog(@"按下电源键");
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                        
+                    });
+                }else if (error.code == -8){//Touch ID功能被锁定，下一次需要输入系统密码
+                    NSLog(@"Touch ID功能被锁定，下一次需要输入系统密码");
+
+                    [context evaluatePolicy:LAPolicyDeviceOwnerAuthentication localizedReason:@"通过Home键验证已有手机指纹" reply:^(BOOL success, NSError * _Nullable error) {
+                        
+                    }];
+                }
+                
+            }
+            else
+            {
+                NSLog(@"error.localizedDescription:%@",error.localizedDescription);
+                switch (error.code) {
+                    case LAErrorSystemCancel:
+                    {
+                        //系统取消授权，如其他APP切入
+                        break;
+                    }
+                    case LAErrorUserCancel:
+                    {
+                        //用户取消验证Touch ID
+                        break;
+                    }
+                    case LAErrorAuthenticationFailed:
+                    {
+                        //授权失败
+                        break;
+                    }
+                    case LAErrorPasscodeNotSet:
+                    {
+                        //系统未设置密码
+                        break;
+                    }
+                    case LAErrorTouchIDNotAvailable:
+                    {
+                        //设备Touch ID不可用，例如未打开
+                        break;
+                    }
+                    case LAErrorTouchIDNotEnrolled:
+                    {
+                        //设备Touch ID不可用，用户未录入
+                        break;
+                    }
+                    case LAErrorUserFallback:
+                    {
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                            //用户选择输入密码，切换主线程处理
+                            
+                        }];
+                        break;
+                    }
+                    default:
+                    {
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                            //其他情况，切换主线程处理
+                        }];
+                        break;
+                    }
+                }
+            }
+        }];
+    }
+    else
+    {
+        //不支持指纹识别，LOG出错误详情
+        NSLog(@"不支持指纹识别");
+        
+        switch (error.code) {
+            case LAErrorTouchIDNotEnrolled:
+            {
+                NSLog(@"TouchID is not enrolled");
+                break;
+            }
+            case LAErrorPasscodeNotSet:
+            {
+                NSLog(@"A passcode has not been set");
+                break;
+            }
+            default:
+            {
+                NSLog(@"TouchID not available");
+                break;
+            }
+        }
+        
+        NSLog(@"%@",error.localizedDescription);
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

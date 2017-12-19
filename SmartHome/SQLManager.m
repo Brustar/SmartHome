@@ -2680,7 +2680,7 @@
     return rName;
 }
 
-+ (BOOL)updateSceneIsActive:(NSInteger)isActive sceneID:(int)sceneID
++ (BOOL)updateSceneIsActive:(NSInteger)isActive sceneID:(int)sceneID roomID:(int)roomID
 {
     FMDatabase *db = [SQLManager connectdb];
     
@@ -2689,8 +2689,11 @@
     {
         long masterID =  [[DeviceInfo defaultManager] masterID];
         
-        NSString *sql = [NSString stringWithFormat:@"update Scenes set isactive = %ld where ID = %d and masterID = '%ld'",isActive,sceneID, masterID];
+//        NSString *sql = [NSString stringWithFormat:@"update Scenes set isactive = %ld where ID = %d and masterID = '%ld'",isActive,sceneID, masterID];
+         NSString *sql = [NSString stringWithFormat:@"update Scenes set isactive = %d where isactive = %d and masterID = '%ld' and rId = %d",0,1, masterID, roomID];
+        [db executeUpdate:sql];
         
+        sql = [NSString stringWithFormat:@"update Scenes set status = %ld where ID = %d and masterID = '%ld' and rId = %d",isActive,sceneID, masterID, roomID];
         ret = [db executeUpdate:sql];
         
     }

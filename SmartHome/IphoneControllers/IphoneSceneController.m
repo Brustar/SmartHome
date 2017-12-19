@@ -776,7 +776,6 @@ static NSString * const CYPhotoId = @"photo";
 
 -(void)refreshTableView:(CYPhotoCell *)cell
 {
-
     NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
     [self.scenes removeAllObjects];
     [self.scenes addObjectsFromArray:tmpArr];
@@ -815,7 +814,8 @@ static NSString * const CYPhotoId = @"photo";
         }
     }else if (tag == 2) { //启动／停止 场景定时
         if([responseObject[@"result"] intValue] == 0) {
-          BOOL success = [SQLManager updateSceneIsActive:_isActive.integerValue sceneID:_timeSceneID];
+//          BOOL success = [SQLManager updateSceneIsActive:_isActive.integerValue sceneID:_timeSceneID];
+            BOOL success = [SQLManager updateSceneIsActive:_isActive.integerValue sceneID:_timeSceneID roomID:self.roomID];
             if (success) {
                 [MBProgressHUD showSuccess:responseObject[@"msg"]];
                 [self freshUICollectionViewCell];
@@ -862,6 +862,7 @@ static NSString * const CYPhotoId = @"photo";
         _isActive = [NSNumber numberWithInt:0];
         sender.selected = NO;
     }
+    
       _timeSceneID = sceneID;
     
     //发TCP定时指令给主机

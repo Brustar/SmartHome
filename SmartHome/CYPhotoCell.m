@@ -63,12 +63,15 @@
     }else{
         if (scene.isactive == 0) {
             [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateNormal];
+//             [SQLManager updateSceneIsActive:1 sceneID:self.sceneID roomID:self.roomID];
         }else if (scene.isactive == 1) {
             [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
+//            [SQLManager updateSceneIsActive:0 sceneID:self.sceneID roomID:self.roomID];
         }
         if (_delegate && [_delegate respondsToSelector:@selector(onTimingBtnClicked:sceneID:)]) {
             [_delegate onTimingBtnClicked:sender sceneID:self.sceneID];
         }
+       
     }
 }
 
